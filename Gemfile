@@ -75,3 +75,5 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
 end
+
+gem "ffi", "< 1.17.0"
