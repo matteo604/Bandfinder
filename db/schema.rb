@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_25_182451) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_25_195400) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -22,18 +22,18 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_25_182451) do
     t.text "description"
     t.float "latitude"
     t.float "longitude"
-    t.bigint "user_id", null: false
+    t.bigint "leader_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_bands_on_user_id"
+    t.index ["leader_id"], name: "index_bands_on_leader_id"
   end
 
   create_table "chats", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.bigint "band_id", null: false
+    t.bigint "band_leader_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["band_id"], name: "index_chats_on_band_id"
+    t.index ["band_leader_id"], name: "index_chats_on_band_leader_id"
     t.index ["user_id"], name: "index_chats_on_user_id"
   end
 
@@ -82,8 +82,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_25_182451) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "bands", "users"
-  add_foreign_key "chats", "bands"
+  add_foreign_key "bands", "users", column: "leader_id"
+  add_foreign_key "chats", "bands", column: "band_leader_id"
   add_foreign_key "chats", "users"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
