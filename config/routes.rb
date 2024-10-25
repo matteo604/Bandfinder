@@ -1,12 +1,30 @@
 Rails.application.routes.draw do
+  # root route (home page)
+  root to: 'bands#index'
+
+  # devise routes for user authentication
   devise_for :users
-  root to: "pages#home"
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
-  get "up" => "rails/health#show", as: :rails_health_check
+  # users rotes
+  resources :users, only: [:index, :show, :edit, :update] do
+    resources :bands, only: [:new, :create]
+    get 'account', on: :collection # Custom route for account view
+    get 'my_band', to: "bands#my_band"
+  end
 
-  # Defines the root path route ("/")
-  # root "posts#index"
+  # bands routes
+  resources :bands, except: [:new, :create] do
+    resources :chats, only: [:new, :create]
+    resources :reviews, only: [:new, :create]
+  end
+
+  # chats messages ??
+  resources :chats, only: [:index, :show] do
+    resources :messages, only: [:create]
+  end
+
+  resources :messages, only: [:destroy]
+
+  # Routes for Reviews
+  resources :reviews, only: [:destroy]
 end
