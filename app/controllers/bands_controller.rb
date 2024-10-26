@@ -2,7 +2,11 @@ class BandsController < ApplicationController
 
   def index
     @current_user_band = current_user.band
-    @bands = Band.where.not(id: current_user_band.id)
+    if current_user.band
+      @bands = Band.where.not(id: @current_user_band.id)
+    else
+      @bands = Band.all
+    end
   end
 
   def new
@@ -14,12 +18,13 @@ class BandsController < ApplicationController
   end
 
   def create
-    @band = Band.new(band_params)
-    @band.leader_id = current_user.id
-    if @band.save
-      redirect_to band_path(@band), notice "Booking was successfully created."
+    @band = Band.find(params[:id])
+    @booking = Booking.new(booking_params)
+
+    if @booking.save
+      redirect_to band_path(@band), notice: "Booking was successfully created."
     else
-      render 'bands/show', status :unprocessable_entity
+      render 'bands/show', status: :unprocessable_entity
     end
   end
 

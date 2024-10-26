@@ -1,9 +1,73 @@
-# This file should ensure the existence of records required to run the application in every environment (production,
-# development, test). The code here should be idempotent so that it can be executed at any point in every environment.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Example:
-#
-#   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
-#     MovieGenre.find_or_create_by!(name: genre_name)
-#   end
+require "uri"
+
+puts 'Creating users...'
+
+john = User.new(
+  email: 'john.doe@example.com',
+  password: 'SecurePassword123',
+  password_confirmation: 'SecurePassword123',
+  first_name: 'John',
+  last_name: 'Doe',
+  address: '789 Melody Ln, Harmony City, HC 10112',
+  telephone_number: '5551234567',
+  instruments: ['Guitar', 'Piano'].to_json
+)
+if john.save
+  puts "Created John as a user!"
+else
+  puts "Failed to create John: #{john.errors.full_messages.join(", ")}"
+end
+
+jane = User.new(
+  email: 'jane.smith@example.com',
+  password: 'AnotherSecurePassword123',
+  password_confirmation: 'AnotherSecurePassword123',
+  first_name: 'Jane',
+  last_name: 'Smith',
+  address: '101 Rhythm Rd, Beat Town, BT 23456',
+  telephone_number: '5557654321',
+  instruments: ['Saxophone', 'Vocals'].to_json
+)
+if jane.save
+  puts "Created Jane as a user!"
+else
+  puts "Failed to create Jane: #{jane.errors.full_messages.join(", ")}"
+end
+
+# Check if users are created successfully
+
+puts 'Creating bands...'
+
+if john.persisted? && jane.persisted?
+  band1 = Band.new(
+    title: 'The Echoes',
+    description: 'A rock band known for their energetic performances and catchy tunes.',
+    address: '123 Rock St, Music City, MC 12345',
+    genre: 'Rock',
+    leader_id: jane.id
+  )
+
+  if band1.save
+    puts "Created band: #{band1.title}"
+  else
+    puts "Failed to create band: #{band1.errors.full_messages.join(", ")}"
+  end
+
+  band2 = Band.new(
+    title: 'Jazz Vibes',
+    description: 'A smooth jazz ensemble with a blend of contemporary and classic styles.',
+    address: '456 Jazz Ave, Groove Town, GT 67890',
+    genre: 'Jazz',
+    leader_id: john.id
+  )
+
+  if band2.save
+    puts "Created band: #{band2.title}"
+  else
+    puts "Failed to create band: #{band2.errors.full_messages.join(", ")}"
+  end
+else
+  puts "Cannot create bands because one or both users were not created successfully."
+end
+
+puts 'Seeding completed!'
