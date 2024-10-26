@@ -1,4 +1,4 @@
-class SessionController < ApplicationController
+class SessionsController < ApplicationController
   before_action :set_session, only: %i[show edit update]
 
   def index
