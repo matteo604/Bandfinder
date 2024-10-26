@@ -10,9 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_25_195400) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_26_091044) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "applications", force: :cascade do |t|
+    t.bigint "session_id", null: false
+    t.bigint "band_id", null: false
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.index ["band_id"], name: "index_applications_on_band_id"
+    t.index ["session_id"], name: "index_applications_on_session_id"
+    t.index ["user_id"], name: "index_applications_on_user_id"
+  end
 
   create_table "bands", force: :cascade do |t|
     t.string "title", null: false
@@ -52,11 +64,27 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_25_195400) do
     t.text "content"
     t.bigint "user_id", null: false
     t.bigint "band_id", null: false
-    t.integer "events_id"
+    t.integer "session_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["band_id"], name: "index_reviews_on_band_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "address"
+    t.float "latitude"
+    t.float "longitude"
+    t.bigint "creator_id", null: false
+    t.bigint "band_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["band_id"], name: "index_sessions_on_band_id"
+    t.index ["creator_id"], name: "index_sessions_on_creator_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -82,6 +110,9 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_25_195400) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "applications", "bands"
+  add_foreign_key "applications", "sessions"
+  add_foreign_key "applications", "users"
   add_foreign_key "bands", "users", column: "leader_id"
   add_foreign_key "chats", "bands", column: "band_leader_id"
   add_foreign_key "chats", "users"
@@ -89,10 +120,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_25_195400) do
   add_foreign_key "messages", "users"
   add_foreign_key "reviews", "bands"
   add_foreign_key "reviews", "users"
+  add_foreign_key "sessions", "bands"
+  add_foreign_key "sessions", "users", column: "creator_id"
   add_foreign_key "users", "bands"
 end
-
-# rename events_id into session_id from review and make it optional
-# connect sessions table
-# connect applications table
-# create models (session belongs to a band, has many application..... application belongs to a session and to a user)
