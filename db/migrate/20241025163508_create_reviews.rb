@@ -5,7 +5,7 @@ class CreateReviews < ActiveRecord::Migration[7.1]
       t.text :content
       t.references :user, null: false, foreign_key: true
       t.references :band, null: false, foreign_key: true
-      t.integer :events_id
+      t.integer :session_id
 
       t.timestamps
     end

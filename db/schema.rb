@@ -91,3 +91,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_25_195400) do
   add_foreign_key "reviews", "users"
   add_foreign_key "users", "bands"
 end
+
+# rename events_id into session_id from review and make it optional
+# connect sessions table
+# connect applications table
+# create models (session belongs to a band, has many application..... application belongs to a session and to a user)
