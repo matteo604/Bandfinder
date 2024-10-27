@@ -18,12 +18,14 @@ Rails.application.routes.draw do
   end
 
   resources :sessions, only: [:show]  do
-    resources :applications
+    resources :applications, except: [:destroy]
   end
   # chats messages ??
   resources :chats, only: [:index, :show] do
     resources :messages, only: [:create]
   end
+
+  resources :applications, only: [:destroy]
 
   resources :messages, only: [:destroy]
 
