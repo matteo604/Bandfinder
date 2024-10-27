@@ -14,8 +14,12 @@ Rails.application.routes.draw do
   resources :bands  do
     resources :chats, only: [:new, :create]
     resources :reviews, only: [:new, :create, :index]
+    resources :sessions, only: [:index, :new, :create, :edit, :update]
   end
 
+  resources :sessions, only: [:show]  do
+    resources :applications
+  end
   # chats messages ??
   resources :chats, only: [:index, :show] do
     resources :messages, only: [:create]
@@ -24,4 +28,5 @@ Rails.application.routes.draw do
   resources :messages, only: [:destroy]
 
   resources :reviews, only: [:destroy]
+
 end
