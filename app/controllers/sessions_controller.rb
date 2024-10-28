@@ -1,24 +1,24 @@
-class SessionsController < ApplicationController
-  before_action :set_session, only: %i[show edit update]
+class Bandband_sessionsController < ApplicationController
+  before_action :set_band_session, only: %i[show edit update]
 
   def index
-    @sessions = Session.all
+    @band_sessions = BandSession.all
   end
 
   def show
   end
 
   def new
-    @session = Session.new
+    @band_session = band_session.new
   end
 
   def create
-    @session = Session.new(session_params)
+    @band_session = BandSession.new(band_session_params)
     @band = Band.find(params[:band_id])
-    @session.band_id = @band.id
-    @session.creator_id = currest_user.id
-    if @session.save
-      redirect_to @session, notice: 'Session was successfully created.'
+    @band_session.band_id = @band.id
+    @band_session.creator_id = currest_user.id
+    if @band_session.save
+      redirect_to @band_session, notice: 'session was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end
@@ -28,8 +28,8 @@ class SessionsController < ApplicationController
   end
 
   def update
-    if @session.update(session_params)
-      redirect_to @session, notice: 'Session was successfully updated.'
+    if @band_session.update(band_session_params)
+      redirect_to @band_session, notice: 'session was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -37,12 +37,12 @@ class SessionsController < ApplicationController
 
   private
 
-  def set_session
-    @session = Session.find(params[:id])
+  def set_band_session
+    @band_session = BandSession.find(params[:id])
   end
 
-  def session_params
-    params.require(:session).permit(:title, :description, :address, :start_date, :end_date)
+  def band_session_params
+    params.require(:band_session).permit(:title, :description, :address, :start_date, :end_date)
   end
 
 end

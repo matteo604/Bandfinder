@@ -77,3 +77,4 @@ group :test do
 end
 
 gem "ffi", "< 1.17.0"
+gem "cloudinary"
