@@ -3,6 +3,7 @@ class User < ApplicationRecord
    has_many :chats
    has_many :messages
    has_many :reviews
+   has_one_attached :photo
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
