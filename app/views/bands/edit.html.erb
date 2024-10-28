@@ -1,0 +1,47 @@
+<h1>Edit your Band</h1>
+
+<%= form_with(model: @band) do |form| %>
+  <p>
+    <%= form.label :title, "Band Title" %><br>
+    <%= form.text_field :title %>
+  </p>
+
+  <p>
+    <%= form.label :address, "Address" %><br>
+    <%= form.text_field :address %>
+  </p>
+
+  <p>
+    <%= form.label :genre, "Genre" %><br>
+    <%= form.text_field :genre %>
+  </p>
+
+  <p>
+    <%= form.label :min_member, "Minimum Members" %><br>
+    <%= form.number_field :min_member %>
+  </p>
+
+  <p>
+    <%= form.label :description, "Description" %><br>
+    <%= form.text_area :description %>
+  </p>
+
+  <%# i am not sure about this forms with latitude and longitude %>
+  <p>
+    <%= form.label :latitude, "Latitude" %><br>
+    <%= form.number_field :latitude, step: 0.000001 %>
+  </p>
+
+  <p>
+    <%= form.label :longitude, "Longitude" %><br>
+    <%= form.number_field :longitude, step: 0.000001 %>
+  </p>
+
+  <p>
+    <%= form.submit "Save Changes" %>
+  </p>
+<% end %>
+
+<p>
+  <%= link_to 'Back to Bands List', bands_path %>
+</p>
