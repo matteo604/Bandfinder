@@ -1,0 +1,24 @@
+<h1>Bands List</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @bands.each do |band| %>
+      <tr>
+        <td><%= band.name %></td>
+        <td>
+          <%= link_to 'Show', bands_path(band) %>
+          <%= link_to 'Edit', edit_band_path(band) %>
+          <%= link_to 'Delete', band, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p><%= link_to 'Create New Band', new_band_path %></p>
