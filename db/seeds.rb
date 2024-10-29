@@ -1,5 +1,8 @@
 require "uri"
 
+User.destroy_all
+Band.destroy_all
+
 puts 'Creating users...'
 
 john = User.new(
