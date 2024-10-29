@@ -1,5 +1,6 @@
+<h1 class="text-center">BANDFINDER</h1>
+<div class="container">
 <h1>Bands List</h1>
-
 <table>
   <thead>
     <tr>
@@ -10,11 +11,11 @@
   <tbody>
     <% @bands.each do |band| %>
       <tr>
-        <td><%= band.name %></td>
+        <td><%= band.title %></td>
         <td>
-          <%= link_to 'Show', bands_path(band) %>
+          <%= link_to 'Show', band_path(band) %>
           <%= link_to 'Edit', edit_band_path(band) %>
-          <%= link_to 'Delete', band, method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to 'Delete', band, data: { turbo_method: :delte, turbo_confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>
@@ -22,3 +23,7 @@
 </table>
 
 <p><%= link_to 'Create New Band', new_band_path %></p>
+<div class="footer">
+  <%= render "shared/footer" %></body>
+</div>
+</div>

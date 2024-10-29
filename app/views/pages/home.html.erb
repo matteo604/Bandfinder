@@ -1,3 +1,104 @@
-<div class="container">
-  <p class="my-text">Hello, must be green</p>
+<div class="photo-container align-item: center">
+<h1 class ="text-center">BandFinder</h1>
 </div>
+<div class="container">
+  <div class="row">
+    <h2 class="text-center mt-3">Discover all the bands</h2>
+    <div class="switch-container mt-3">
+      <span class="label-left">Musician looking for a band</span>
+      <label class="switch">
+      <input type="checkbox" id="toggle-switch">
+      <span class="slider round"></span>
+      </label>
+      <span class="label-right">Band looking for a musician</span>
+    </div>
+    <div id="hidden-area">
+      <div class="filter-container">
+        <input type="text" id="address-filter" placeholder="Location" class="filter-input">
+        <input type="text" id="genre-filter" placeholder="Genres" class="filter-input">
+        <input type="text" id="instrument-filter" placeholder="Instruments needed" class="filter-input">
+
+        <button class="filter-button">Search</button>
+      </div>
+      <div class="band-cards-container">
+        <% @bands.each do |band| %>
+          <div class="band-card">
+            <div class="card-body">
+              <h5><%= band.title %></h5>
+              <p><%= band.genre %></p>
+              <p><%= band.description %></p>
+              <p>Address: <%= band.address %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+  const toggleSwitch = document.getElementById("toggle-switch");
+  const hiddenArea = document.getElementById("hidden-area");
+
+  toggleSwitch.addEventListener("change", function() {
+    if (toggleSwitch.checked) {
+      hiddenArea.innerHTML = `
+      <div class="filter-container">
+        <input type="text" id="address-filter" placeholder="First Name" class="filter-input form-control">
+        <input type="text" id="genre-filter" placeholder="Last Name" class="filter-input form-control">
+        <input type="text" id="location-filter" placeholder="Location" class="filter-input form-control">
+        <input type="text" id="instrument-filter" placeholder="Instruments" class="filter-input form-control">
+        <select id="status-filter" class="filter-input form-control">
+          <option value="" disabled selected>Select your status</option>
+          <option value="solo">Solo</option>
+          <option value="searching">Searching for a band</option>
+        </select>
+        <button class="filter-button btn btn-primary">Search</button>
+      </div>
+        <div class="user-cards-container">
+  <% @users.each do |user| %>
+    <div class="user-card">
+      <div class="card-body">
+        <h5><%= user.first_name %> <%= user.last_name %></h5>
+        <p>
+          <% instruments = user.instruments
+          begin
+            formatted_instruments = JSON.parse(instruments).map(&:downcase).join(", ")
+          rescue JSON::ParserError
+            formatted_instruments = instruments
+          end %>
+          <%= formatted_instruments %>
+        </p>
+        <p>Address: <%= user.address %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+      `;
+    } else {
+      hiddenArea.innerHTML = `
+      <div class="filter-container">
+        <input type="text" id="address-filter" placeholder="Location" class="filter-input">
+        <input type="text" id="genre-filter" placeholder="Genres" class="filter-input">
+        <input type="text" id="instrument-filter" placeholder="Instruments" class="filter-input">
+        <button class="filter-button">Search</button>
+      </div>
+      <div class="band-cards-container">
+  <% @bands.each do |band| %>
+    <div class="band-card">
+      <div class="card-body">
+        <h5><%= band.title %></h5>
+        <p><%= band.genre %></p>
+        <p><%= band.description %></p>
+        <p>Address: <%= band.address %></p>
+      </div>
+    </div>
+  <% end %>
+</div>
+`;
+    }
+  });
+</script>

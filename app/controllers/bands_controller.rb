@@ -18,11 +18,12 @@ class BandsController < ApplicationController
   end
 
   def create
-    @band = Band.find(params[:id])
-    @booking = Booking.new(booking_params)
+    @band = Band.new(band_params)
+    @band.leader_id = current_user.id
 
-    if @booking.save
-      redirect_to band_path(@band), notice: "Booking was successfully created."
+    if @band.save
+      redirect_to band_path(@band), notice: "Band was successfully created."
+      current_user.leader = true
     else
       render 'bands/show', status: :unprocessable_entity
     end
