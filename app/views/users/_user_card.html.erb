@@ -1,0 +1,23 @@
+<div class="user-card">
+
+  <%= image_tag 'fake-profile-image.jpg', alt: 'profile-image', class: 'rounded-circle card-img-top p-2' %>
+
+  <div class="card-body m-3">
+    <h5 class="text-center"><%= user.first_name %> <%= user.last_name %></h5>
+    <div>
+      <i class="fa-solid fa-drum fs-3 m-2"></i>
+      <% instruments = user.instruments
+      begin
+        formatted_instruments = JSON.parse(instruments).map(&:downcase).join(", ")
+      rescue JSON::ParserError
+        formatted_instruments = instruments
+      end %>
+      <%= formatted_instruments %>
+    </div>
+    <div>
+      <i class="fa-solid fa-location-dot fs-3 m-2"></i>
+      <%= user.address %>
+    </div>
+  </div>
+
+</div>
