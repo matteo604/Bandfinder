@@ -59,21 +59,7 @@
       </div>
         <div class="user-cards-container">
   <% @users.each do |user| %>
-    <div class="user-card">
-      <div class="card-body">
-        <h5><%= user.first_name %> <%= user.last_name %></h5>
-        <p>
-          <% instruments = user.instruments
-          begin
-            formatted_instruments = JSON.parse(instruments).map(&:downcase).join(", ")
-          rescue JSON::ParserError
-            formatted_instruments = instruments
-          end %>
-          <%= formatted_instruments %>
-        </p>
-        <p>Address: <%= user.address %></p>
-      </div>
-    </div>
+    <%= render partial: "users/user_card", locals: {user: user} %>
   <% end %>
 </div>
 
