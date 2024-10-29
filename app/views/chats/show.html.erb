@@ -1,0 +1,19 @@
+<h1>chat with band leader id: <%= @chat.band_leader_id %></h1>
+
+<!-- display messages in the chat -->
+<h2>messages</h2>
+<% if @chat.messages.any? %>
+  <% @chat.messages.each do |message| %>
+    <p><strong><%= message.user.first_name %>:</strong> <%= message.content %></p>
+  <% end %>
+<% else %>
+  <p>no messages yet.</p>
+<% end %>
+
+<!-- form to send a new message -->
+<h3>send a message</h3>
+<%= form_with(model: [@chat, @chat.messages.build]) do |form| %>
+  <%= form.hidden_field :user_id, value: current_user.id %>
+  <%= form.text_area :content, placeholder: "type your message here" %>
+  <%= form.submit "send" %>
+<% end %>
