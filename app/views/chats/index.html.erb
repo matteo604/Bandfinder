@@ -1,14 +1,15 @@
-<h1>all chats</h1>
+<div class="chats-container">
+  <h1 class="chats-title">All Chats</h1>
 
-<% if @chats.any? %>
-  <% @chats.each do |chat| %>
-    <div>
-      <p><strong>user id:</strong> <%= chat.user_id %></p>
-      <p><strong>band leader id:</strong> <%= chat.band_leader_id %></p>
-      <%= link_to 'view chat', chat_path(chat) %> <!-- link to individual chat view -->
-    </div>
-    <hr>
+  <% if @chats.any? %>
+    <% @chats.each do |chat| %>
+      <div class="chat-card">
+        <p><strong>User ID:</strong> <%= chat.user_id %></p>
+        <p><strong>Band Leader ID:</strong> <%= chat.band_leader_id %></p>
+        <%= link_to 'View Chat', chat_path(chat), class: "chat-link" %>
+      </div>
+    <% end %>
+  <% else %>
+    <p class="no-chats">No chats available.</p>
   <% end %>
-<% else %>
-  <p>no chats available.</p>
-<% end %>
+</div>
