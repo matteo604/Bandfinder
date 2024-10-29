@@ -1,4 +1,37 @@
 // Specific CSS for your home-page
-.container{
-  background-color: black;
+
+body{
+ height: 100%;
+ margin: 0;
+ background-color: rgb(240, 159, 8);
+ color: white;
+}
+.photo-container {
+  height: 480px;
+  background-image: url(asset_path('male-band-playing-on-outdoor-600nw-2504988701.webp'));
+  background-size: cover;
+  background-position: center 20%;
+  background-repeat: no-repeat;
+  padding: 20px;
+  color: white;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-blend-mode: overlay;
+  background-color: rgba(0, 0, 0, 0.3);
+  filter: brightness(0.8) contrast(1.2);
+}
+
+.photo-container h1 {
+  font-size: 2.5em;
+  font-weight: bold;
+  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+
+.footer_item{
+  font-size: 2rem;
+  margin: 1rem;
 }
