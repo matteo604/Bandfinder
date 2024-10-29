@@ -1,0 +1,22 @@
+<h1>start a new chat</h1>
+
+<%= form_with(model: @chat) do |form| %>
+  <!-- user selection -->
+  <p>
+    <%= form.label :user_id, "select user" %><br>
+    <%= form.collection_select :user_id, User.all, :id, :first_name, prompt: "choose a user" %>
+  </p>
+
+  <!-- band leader selection -->
+  <p>
+    <%= form.label :band_leader_id, "select band leader" %><br>
+    <%= form.collection_select :band_leader_id, User.all, :id, :first_name, prompt: "choose a band leader" %>
+  </p>
+
+  <!-- submit button to create the chat -->
+  <%= form.submit "create chat" %>
+<% end %>
+
+<p>
+  <%= link_to 'back to chats list', chats_path %>
+</p>
