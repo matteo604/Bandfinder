@@ -1,11 +1,11 @@
 class ApplicationsController < ApplicationController
   before_action :set_application, only: [:destroy]
-  before_action :set_session, only: [:create]
+  before_action :set_band_session, only: [:create]
 
   def create
     @application = Application.new
-    @application.band.session_id = @session.id
-    @application.band_id = @session.band_id
+    @application.band.session_id = @band_session.id
+    @application.band_id = @band_session.band_id
     @application.user_id = current_user.id
     @application.status = "pending"
 
@@ -20,7 +20,7 @@ class ApplicationsController < ApplicationController
     if @application.destroy
       redirect_to band_session_path(@application.band_session), notice: 'Application was successfully deleted.'
     else
-      redirect_to band_session_path(@application.session), alert: 'Failed to delete application.'
+      redirect_to band_session_path(@application.band_session), alert: 'Failed to delete application.'
     end
   end
 
@@ -30,7 +30,7 @@ class ApplicationsController < ApplicationController
     @application = Application.find(params[:id])
   end
 
-  def set_session
-    @session = Session.find(params[:session_id])
+  def set_band_session
+    @band_session = BandSession.find(params[:session_id])
   end
 end
