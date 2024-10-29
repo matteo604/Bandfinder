@@ -1,4 +1,4 @@
-class Bandband_sessionsController < ApplicationController
+class BandSessionsController < ApplicationController
   before_action :set_band_session, only: %i[show edit update]
 
   def index
