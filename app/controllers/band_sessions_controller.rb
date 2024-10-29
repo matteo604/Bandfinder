@@ -9,7 +9,7 @@ class Bandband_sessionsController < ApplicationController
   end
 
   def new
-    @band_session = band_session.new
+    @band_session = BandSession.new
   end
 
   def create
