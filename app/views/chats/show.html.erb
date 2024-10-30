@@ -1,19 +1,42 @@
-<h1>chat with band leader id: <%= @chat.band_leader_id %></h1>
+<div class="chat-container" data-controller="chat">
+  <h1 class="chat-title">Chat with Band Leader</h1>
 
-<!-- display messages in the chat -->
-<h2>messages</h2>
-<% if @chat.messages.any? %>
-  <% @chat.messages.each do |message| %>
-    <p><strong><%= message.user.first_name %>:</strong> <%= message.content %></p>
-  <% end %>
-<% else %>
-  <p>no messages yet.</p>
-<% end %>
+  <!-- messages section -->
+  <div class="messages-section">
+    <h2 class="messages-title">Messages</h2>
+    <div class="messages-container">
+      <% if @chat.messages.any? %>
+        <% @chat.messages.each do |message| %>
+          <div class="message-card <%= message.user_id == current_user.id ? 'current-user' : 'other-user' %>">
+            <p class="message-content">
+              <strong><%= message.user.first_name %>:</strong> <%= message.content %>
+            </p>
+            <div class="message-timestamp">
+              <% if message.created_at > 24.hours.ago %>
+                <%= time_ago_in_words(message.created_at) %> ago
+              <% else %>
+                <%= message.created_at.strftime("%Y-%m-%d %H:%M") %>
+              <% end %>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <p class="no-messages">No messages yet.</p>
+      <% end %>
+    </div>
+  </div>
 
-<!-- form to send a new message -->
-<h3>send a message</h3>
-<%= form_with(model: [@chat, @chat.messages.build]) do |form| %>
-  <%= form.hidden_field :user_id, value: current_user.id %>
-  <%= form.text_area :content, placeholder: "type your message here" %>
-  <%= form.submit "send" %>
-<% end %>
+  <!-- form to send a new message -->
+  <div class="send-message-section">
+    <h3 class="send-message-title">Send a Message</h3>
+    <%= form_with(model: [@chat, @chat.messages.build], class: "message-form") do |form| %>
+      <div class="form-group">
+        <%= form.text_area :content, placeholder: "Type your message here", class: "message-input" %>
+      </div>
+      <div class="form-group form-submit">
+        <%= form.hidden_field :user_id, value: current_user.id %>
+        <%= form.submit "Send", class: "send-button" %>
+      </div>
+    <% end %>
+  </div>
+</div>

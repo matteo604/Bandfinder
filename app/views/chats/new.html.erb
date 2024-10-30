@@ -1,22 +1,22 @@
-<h1>start a new chat</h1>
+<div class="chats-container">
+  <h1 class="chats-title">Start a New Chat</h1>
 
-<%= form_with(model: @chat) do |form| %>
-  <!-- user selection -->
-  <p>
-    <%= form.label :user_id, "select user" %><br>
-    <%= form.collection_select :user_id, User.all, :id, :first_name, prompt: "choose a user" %>
-  </p>
+  <div class="chat-form-container">
+    <%= form_with(model: @chat, url: chats_path, local: true, class: "chat-form") do |form| %>
+      <div class="form-group">
+        <%= form.label :user_id, "User" %>
+        <%= form.collection_select :user_id, User.all, :id, :first_name, prompt: "Select a user", class: "form-control" %>
+      </div>
 
-  <!-- band leader selection -->
-  <p>
-    <%= form.label :band_leader_id, "select band leader" %><br>
-    <%= form.collection_select :band_leader_id, User.all, :id, :first_name, prompt: "choose a band leader" %>
-  </p>
+      <div class="form-group">
+        <%= form.label :band_leader_id, "Band Leader" %>
+        <%= form.collection_select :band_leader_id, Band.all, :leader_id, :title, prompt: "Select a band leader", class: "form-control" %>
+      </div>
 
-  <!-- submit button to create the chat -->
-  <%= form.submit "create chat" %>
-<% end %>
-
-<p>
-  <%= link_to 'back to chats list', chats_path %>
-</p>
+      <!-- Updated button styling -->
+      <div class="form-submit">
+        <%= form.submit "Create Chat", class: "chat-submit-button" %>
+      </div>
+    <% end %>
+  </div>
+</div>
