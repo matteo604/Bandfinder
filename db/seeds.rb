@@ -1,7 +1,7 @@
 require "uri"
 
-User.destroy_all
 Band.destroy_all
+User.destroy_all
 
 puts 'Creating users...'
 
@@ -11,7 +11,7 @@ john = User.new(
   password_confirmation: 'SecurePassword123',
   first_name: 'John',
   last_name: 'Doe',
-  address: '789 Melody Ln, Harmony City, HC 10112',
+  address: 'New York',
   telephone_number: '5551234567',
   instruments: ['Guitar', 'Piano'].to_json
 )
@@ -27,7 +27,7 @@ jane = User.new(
   password_confirmation: 'AnotherSecurePassword123',
   first_name: 'Jane',
   last_name: 'Smith',
-  address: '101 Rhythm Rd, Beat Town, BT 23456',
+  address: 'Hauptstrasse, Berlin',
   telephone_number: '5557654321',
   instruments: ['Saxophone', 'Vocals'].to_json
 )
@@ -45,7 +45,7 @@ if john.persisted? && jane.persisted?
   band1 = Band.new(
     title: 'The Echoes',
     description: 'A rock band known for their energetic performances and catchy tunes.',
-    address: '123 Rock St, Music City, MC 12345',
+    address: 'Madrid',
     genre: 'Rock',
     leader_id: jane.id
   )
@@ -59,7 +59,7 @@ if john.persisted? && jane.persisted?
   band2 = Band.new(
     title: 'Jazz Vibes',
     description: 'A smooth jazz ensemble with a blend of contemporary and classic styles.',
-    address: '456 Jazz Ave, Groove Town, GT 67890',
+    address: 'Paris',
     genre: 'Jazz',
     leader_id: john.id
   )

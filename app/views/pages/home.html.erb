@@ -1,104 +1,82 @@
 <div class="photo-container align-item: center">
-<h1 class ="text-center">BandFinder</h1>
+  <h1 class="text-center">BandFinder</h1>
 </div>
-<div class="container">
-  <div class="row">
-    <h2 class="text-center mt-3">Discover all the bands</h2>
-    <div class="switch-container mt-3">
-      <span class="label-left">Musician looking for a band</span>
-      <label class="switch">
-      <input type="checkbox" id="toggle-switch">
-      <span class="slider round"></span>
-      </label>
-      <span class="label-right">Band looking for a musician</span>
-    </div>
-    <div id="hidden-area">
-      <div class="filter-container">
-        <input type="text" id="address-filter" placeholder="Location" class="filter-input">
-        <input type="text" id="genre-filter" placeholder="Genres" class="filter-input">
-        <input type="text" id="instrument-filter" placeholder="Instruments needed" class="filter-input">
 
-        <button class="filter-button">Search</button>
-      </div>
-      <div class="band-cards-container">
-        <% @bands.each do |band| %>
-          <div class="band-card">
-            <div class="card-body">
-              <h5><%= band.title %></h5>
-              <p><%= band.genre %></p>
-              <p><%= band.description %></p>
-              <p>Address: <%= band.address %></p>
+<div class="container" data-controller="toggleswitch">
+  <h2 class="text-center mt-3">Discover all the bands</h2>
+
+  <div class="switch-container mt-3">
+    <span class="label-left">Musician looking for a band</span>
+    <label class="switch">
+      <input type="checkbox" data-toggleswitch-target="toggleSwitch" data-action="change->toggleswitch#toggleContent">
+      <span class="slider round"></span>
+    </label>
+    <span class="label-right">Band looking for a musician</span>
+  </div>
+
+  <div class="row mt-4" data-toggleswitch-target="hiddenArea">
+    <!-- Filter section -->
+    <div class="filter-container mb-4">
+        <div class ="band-form" data-toggleswitch-target="bandForm">
+          <input type="text" id="address-filter" placeholder="Location" class="filter-input">
+          <input type="text" id="genre-filter" placeholder="Genres" class="filter-input">
+          <input type="text" id="instrument-filter" placeholder="Instruments needed" class="filter-input">
+          <button class="filter-button">Search</button>
+        </div>
+        <div class="user-form d-none" data-toggleswitch-target="userForm" style="display: flex; gap: 10px; align-items: center;">
+          <input type="text" id="first-name-filter" placeholder="First Name" class="filter-input">
+          <input type="text" id="last-name-filter" placeholder="Last Name" class="filter-input">
+          <input type="text" id="location-filter" placeholder="Location" class="filter-input">
+          <input type="text" id="instrument-filter" placeholder="Instruments" class="filter-input">
+          <select id="status-filter" class="filter-input">
+              <option value="" disabled selected>Select your status</option>
+              <option value="solo">Solo</option>
+              <option value="searching">Searching for a band</option>
+          </select>
+          <button class="filter-button btn btn-primary">Search</button>
+         </div>
+     </div>
+     <div class="col-8">
+       <div class="cards-container">
+         <!-- Band Cards -->
+         <div data-toggleswitch-target="bandCard" class="card-group">
+           <% @bands.each do |band| %>
+             <div class="band-card">
+               <div class="card-body">
+                 <h5><%= band.title %></h5>
+                 <p><%= band.genre %></p>
+                 <p>Address: <%= band.address %></p>
+               </div>
+             </div>
+           <% end %>
+         </div>
+
+        <!-- User Cards -->
+        <div data-toggleswitch-target="userCard" class="card-group d-none">
+          <% @users.each do |user| %>
+            <div class="user-card">
+              <div class="card-body">
+                <h5><%= user.first_name %> <%= user.last_name %></h5>
+                <p><%= user.instruments %></p>
+                <p><%= user.address %></p>
+              </div>
             </div>
-          </div>
-        <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <!-- Map Section -->
+    <div class="col-4" data-toggleswitch-target="myMarker">
+      <div style="width: 100%; height:480px; border-radius:5px"
+           data-controller="map"
+           data-toggleswitch-target="mapContainer"
+           data-map-bandmarkers-value="<%= @band_markers.to_json %>"
+           data-map-usermarkers-value="<%= @user_markers.to_json %>"
+           data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+          <button data-action="click->map#toggleMarkers" data-toggleswitch-target="toggleMarkers">
+            Toggle Markers
+          </button>
       </div>
     </div>
   </div>
 </div>
-
-
-
-<script>
-  const toggleSwitch = document.getElementById("toggle-switch");
-  const hiddenArea = document.getElementById("hidden-area");
-
-  toggleSwitch.addEventListener("change", function() {
-    if (toggleSwitch.checked) {
-      hiddenArea.innerHTML = `
-      <div class="filter-container">
-        <input type="text" id="address-filter" placeholder="First Name" class="filter-input form-control">
-        <input type="text" id="genre-filter" placeholder="Last Name" class="filter-input form-control">
-        <input type="text" id="location-filter" placeholder="Location" class="filter-input form-control">
-        <input type="text" id="instrument-filter" placeholder="Instruments" class="filter-input form-control">
-        <select id="status-filter" class="filter-input form-control">
-          <option value="" disabled selected>Select your status</option>
-          <option value="solo">Solo</option>
-          <option value="searching">Searching for a band</option>
-        </select>
-        <button class="filter-button btn btn-primary">Search</button>
-      </div>
-        <div class="user-cards-container">
-  <% @users.each do |user| %>
-    <div class="user-card">
-      <div class="card-body">
-        <h5><%= user.first_name %> <%= user.last_name %></h5>
-        <p>
-          <% instruments = user.instruments
-          begin
-            formatted_instruments = JSON.parse(instruments).map(&:downcase).join(", ")
-          rescue JSON::ParserError
-            formatted_instruments = instruments
-          end %>
-          <%= formatted_instruments %>
-        </p>
-        <p>Address: <%= user.address %></p>
-      </div>
-    </div>
-  <% end %>
-</div>
-
-      `;
-    } else {
-      hiddenArea.innerHTML = `
-      <div class="filter-container">
-        <input type="text" id="address-filter" placeholder="Location" class="filter-input">
-        <input type="text" id="genre-filter" placeholder="Genres" class="filter-input">
-        <input type="text" id="instrument-filter" placeholder="Instruments" class="filter-input">
-        <button class="filter-button">Search</button>
-      </div>
-      <div class="band-cards-container">
-  <% @bands.each do |band| %>
-    <div class="band-card">
-      <div class="card-body">
-        <h5><%= band.title %></h5>
-        <p><%= band.genre %></p>
-        <p><%= band.description %></p>
-        <p>Address: <%= band.address %></p>
-      </div>
-    </div>
-  <% end %>
-</div>
-`;
-    }
-  });
-</script>
