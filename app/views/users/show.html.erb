@@ -1,3 +1,2 @@
-<div class="container122">
-  <%= @user.first_name %> <%= @user.last_name %>
-</div>
+
+<%= render partial: "user_card", locals: {user: @user} %>

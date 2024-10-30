@@ -1,7 +1,10 @@
 require "uri"
 
+
 Band.destroy_all
 User.destroy_all
+# BandSession.destroy_all
+
 
 puts 'Creating users...'
 
@@ -74,3 +77,41 @@ else
 end
 
 puts 'Seeding completed!'
+
+band_session = BandSession.create!(
+  title: 'The Echoes first session',
+  description: 'A rock band known for their energetic performances and catchy tunes.',
+  address: '17 Lydden Rd, London SW18 4LT',
+  start_date: Date.today,
+  end_date: Date.today + 30.days,
+  creator_id: john.id,
+  band_id: band1.id
+)
+
+band_session.save
+
+band_session1 = BandSession.create!(
+  title: 'The Echoes first session',
+  description: 'A rock band known for their energetic performances and catchy tunes.',
+  address: '17 Lydden Rd, London SW18 4LT',
+  start_date: Date.today,
+  end_date: Date.today + 30.days,
+  creator_id: john.id,
+  band_id: band2.id
+)
+
+band_session1.save
+
+band_session2 = BandSession.create!(
+  title: 'The Echoes first session',
+  description: 'A rock band known for their energetic performances and catchy tunes.',
+  address: '17 Lydden Rd, London SW18 4LT',
+  start_date: Date.today,
+  end_date: Date.today + 30.days,
+  creator_id: jane.id,
+  band_id: band1.id
+)
+
+band_session2.save
+
+puts 'Band session created!'
