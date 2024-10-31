@@ -1,41 +1,50 @@
 <div class="chat-container" data-controller="chat">
-  <h1 class="chat-title">Chat with Band Leader</h1>
+  <h1 class="chat-title"><i class="fas fa-comments"></i> Chat with Band Leader</h1>
 
   <!-- messages section -->
   <div class="messages-section">
-    <h2 class="messages-title">Messages</h2>
+    <h2 class="messages-title"><i class="fas fa-envelope"></i></h2>
     <div class="messages-container">
       <% if @chat.messages.any? %>
         <% @chat.messages.each do |message| %>
           <div class="message-card <%= message.user_id == current_user.id ? 'current-user' : 'other-user' %>">
             <p class="message-content">
-              <strong><%= message.user.first_name %>:</strong> <%= message.content %>
+              <strong><i class="fas fa-user"></i> <%= message.user.first_name %>:</strong> <%= message.content %>
             </p>
             <div class="message-timestamp">
+              <i class="far fa-clock"></i>
               <% if message.created_at > 24.hours.ago %>
-                <%= time_ago_in_words(message.created_at) %> ago
+                <%= time_ago_in_words(message.created_at.in_time_zone('Berlin')) %> ago
               <% else %>
-                <%= message.created_at.strftime("%Y-%m-%d %H:%M") %>
+                <%= message.created_at.in_time_zone('Berlin').strftime("%Y-%m-%d %H:%M") %>
               <% end %>
             </div>
           </div>
         <% end %>
       <% else %>
-        <p class="no-messages">No messages yet.</p>
+        <p class="no-messages"><i class="fas fa-info-circle"></i> No messages yet.</p>
       <% end %>
     </div>
   </div>
 
   <!-- form to send a new message -->
-  <div class="send-message-section">
-    <h3 class="send-message-title">Send a Message</h3>
-    <%= form_with(model: [@chat, @chat.messages.build], class: "message-form") do |form| %>
+  <div class="send-message-section" data-controller="chat">
+    <h3 class="send-message-title"><i class="fas fa-paper-plane"></i></h3>
+    <%= form_with(model: [@chat, @chat.messages.build], class: "message-form", data: { action: "submit->chat#preventEmptySubmit" }) do |form| %>
+      <!-- txtarea input field -->
       <div class="form-group">
-        <%= form.text_area :content, placeholder: "Type your message here", class: "message-input" %>
+        <%= form.text_area :content, placeholder: "Type your message here", class: "message-input", data: { chat_target: "content" } %>
       </div>
-      <div class="form-group form-submit">
-        <%= form.hidden_field :user_id, value: current_user.id %>
-        <%= form.submit "Send", class: "send-button" %>
+      <!-- bttons in the same line -->
+      <div class="d-flex justify-content-between align-items-center mt-3">
+        <!-- Back to All Chats button with Font Awesome icon -->
+        <%= link_to chats_path, class: 'btn btn-secondary' do %>
+          <i class="fas fa-arrow-left"></i> Back to chats
+        <% end %>
+        <!-- send button with fontawsome icon -->
+        <button type="submit" class="send-button">
+          <i class="fas fa-paper-plane"></i> Send
+        </button>
       </div>
     <% end %>
   </div>

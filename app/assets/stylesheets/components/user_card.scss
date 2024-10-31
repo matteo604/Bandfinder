@@ -1,5 +1,4 @@
-
-.user-card{
+.user-card {
   background-color: #f0f0f0;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -10,7 +9,13 @@
   color: black;
 }
 
+.user-card img {
+  max-width: 150px;
+  max-height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+}
 
-.user-card:hover{
+.user-card:hover {
   transform: scale(1.05);
 }

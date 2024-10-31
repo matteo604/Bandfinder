@@ -14,3 +14,32 @@
 #navbarSupportedContent, .navbar-lewagon{
   background-color: rgb(240, 159, 8);
 }
+
+.message-icon-container {
+  position: relative;
+  display: inline-block;
+}
+
+.icon-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.unread-count-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 0.8em; /* Schriftgröße für Badge */
+  font-weight: bold;
+  padding: 3px 5px; /* Anpassung für gleichmäßige Rundung */
+  background-color: red; /* Farbe des Badges */
+  color: #fff; /* Textfarbe */
+  border-radius: 50%; /* 50% für einen perfekten Kreis */
+  transform: translate(50%, -50%);
+  margin-right: 20px;
+}
+
+.envelope-icon {
+  font-size: 1.8rem; /* Größe des Icons */
+  margin-right: 20px; /* Abstand von anderen Elementen */
+}
