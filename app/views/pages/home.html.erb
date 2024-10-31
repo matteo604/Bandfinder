@@ -51,10 +51,10 @@
            <% end %>
          </div>
         <!-- User Cards -->
-        <div data-toggleswitch-target="userCard" class="card-group d-none container border solid">
+        <div data-toggleswitch-target="userCard" class="card-group d-none container">
           <div class="row">
             <% @users.each do |user| %>
-              <div class="col-5">
+              <div class="col-5 p-4">
                 <%= render partial: "users/user_card", locals: {user: user} %>
               </div>
             <% end %>

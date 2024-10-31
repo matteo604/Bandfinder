@@ -1,2 +1,53 @@
 
-<%= render partial: "user_card", locals: {user: @user} %>
+<%# <%= render partial: "user_card", locals: {user: @user} %>
+
+<div class="container">
+  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(<%= asset_path 'male-band-playing-on-outdoor-600nw-2504988701.webp' %>)">
+    <div class="container m-4">
+      <h1 class="text-center">My profile</h1>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-12 border solid">
+
+      <%= image_tag 'fake-profile-image.jpg', alt: 'profile-image', class: 'profile_image' %>
+      <div class="card-body">
+        <h2 class="text-left">hello</h2>
+      </div>
+    </div>
+  </div>
+
+  <div class="row mt-2 border solid">
+
+    <div class="col-4 border solid p-3 m-2">
+
+      <h3>Member since</h3>
+      <%= @user.created_at %>
+
+      <h3>Email</h3>
+      <%= @user.email %>
+
+      <h3>Address</h3>
+      <%= @user.address %>
+
+      <h3>Phone</h3>
+      <%= @user.telephone_number %>
+
+    </div>
+
+    <div class="col-3 border solid p-3">
+
+    </div>
+
+  </div>
+
+
+
+
+
+
+
+
+</div>
