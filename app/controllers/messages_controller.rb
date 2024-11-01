@@ -37,7 +37,7 @@ class MessagesController < ApplicationController
       @message.destroy
       redirect_to chat_messages_path(@chat), notice: 'Message was successfully deleted.'
     else
-       redirect_to chat_messages_path(@chat), alert: 'You are not able to delete this message.'
+      redirect_to chat_messages_path(@chat), alert: 'You are not able to delete this message.'
     end
   end
 

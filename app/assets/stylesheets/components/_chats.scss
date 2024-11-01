@@ -65,8 +65,9 @@
 }
 
 .messages-title {
-  font-size: 1.5em;
+  font-size: 1.2em;
   margin-bottom: 10px;
+  margin-top: 10px;
   color: #000000;
 }
 
@@ -128,9 +129,9 @@
 }
 
 .send-message-title {
-  font-size: 1.5em;
+  font-size: 1.2em;
   color: #000000;
-  margin-bottom: 10px;
+  margin-top: 50px
 }
 
 .message-form {
@@ -146,7 +147,7 @@
       resize: vertical;
       min-height: 60px;
       box-shadow: #000000 2px 3px 10px;
-      margin-top: 10px;
+      margin-top: 0px;
     }
   }
 
@@ -219,4 +220,55 @@
       background-color: #0056b3;
     }
   }
+}
+
+.unread-badge {
+  background-color: #ffcccc;
+  color: #cc0000;
+}
+
+.read-badge {
+  background-color: #ccffcc;
+  color: #006600;
+}
+
+.chat-band-info {
+  color: #000;
+  font-size: 1.1em;
+  margin-bottom: 10px;
+}
+
+.create-chat-button, .continue-chat-button {
+  padding: 10px 15px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+  font-size: 1em;
+
+  &:hover {
+      background-color: #0056b3;
+  }
+}
+
+.chat-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chat-info {
+  flex-grow: 1;
+}
+
+.chat-partner-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-left: 15px;
 }

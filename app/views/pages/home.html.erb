@@ -92,25 +92,14 @@
            <% end %>
          </div>
         <!-- User Cards -->
-        <div data-toggleswitch-target="userCard" class="card-group <%= "d-none" if !@button_state %>">
-          <% @users.each do |user| %>
-            <div class="user-card">
-              <div class="card-body">
-                <h5><%= user.first_name %> <%= user.last_name %></h5>
-              <p><%=
-                if user.instruments.is_a?(String)
-                  instruments_array = JSON.parse(user.instruments) rescue user.instruments
-                  instruments_array.is_a?(Array) ? instruments_array.join(', ') : instruments_array
-                elsif user.instruments.is_a?(Array)
-                  user.instruments.join(', ')
-                else
-                  user.instruments.to_s
-                end
-                %></p>
-                <p><%= user.address %></p>
+        <div data-toggleswitch-target="userCard" class="card-group container <%= "d-none" if !@button_state %>">>
+          <div class="row">
+            <% @users.each do |user| %>
+              <div class="col-5 p-4">
+                <%= render partial: "users/user_card", locals: {user: user} %>
               </div>
-            </div>
-          <% end %>
+            <% end %>
+          </div>
         </div>
       </div>
     </div>

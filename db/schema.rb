@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_10_28_211919) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_31_025547) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -99,6 +99,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_28_211919) do
     t.bigint "chat_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "read", default: false
     t.index ["chat_id"], name: "index_messages_on_chat_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
   end
@@ -146,8 +147,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_10_28_211919) do
   add_foreign_key "band_sessions", "bands"
   add_foreign_key "band_sessions", "users", column: "creator_id"
   add_foreign_key "bands", "users", column: "leader_id"
-  add_foreign_key "chats", "bands", column: "band_leader_id"
   add_foreign_key "chats", "users"
+  add_foreign_key "chats", "users", column: "band_leader_id"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
   add_foreign_key "reviews", "bands"

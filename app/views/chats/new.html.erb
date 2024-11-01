@@ -2,21 +2,33 @@
   <h1 class="chats-title">Start a New Chat</h1>
 
   <div class="chat-form-container">
-    <%= form_with(model: @chat, url: chats_path, local: true, class: "chat-form") do |form| %>
-      <div class="form-group">
-        <%= form.label :user_id, "User" %>
-        <%= form.collection_select :user_id, User.all, :id, :first_name, prompt: "Select a user", class: "form-control" %>
-      </div>
+    <!-- display band and leader information -->
+    <p class="chat-band-info" style="color: black;"><strong>Band:</strong> <%= @band.title %></p>
+    <p class="chat-band-info" style="color: black;"><strong>Band Leader:</strong> <%= @band.leader.first_name %> <%= @band.leader.last_name %></p>
 
-      <div class="form-group">
-        <%= form.label :band_leader_id, "Band Leader" %>
-        <%= form.collection_select :band_leader_id, Band.all, :leader_id, :title, prompt: "Select a band leader", class: "form-control" %>
-      </div>
+    <!-- check if a chat already exists between the current user and the band leader -->
+    <% existing_chat = Chat.find_by(user_id: current_user.id, band_leader_id: @band.leader.id) %>
 
-      <!-- Updated button styling -->
-      <div class="form-submit">
-        <%= form.submit "Create Chat", class: "chat-submit-button" %>
-      </div>
+    <% if existing_chat %>
+      <!-- display the timestamp of the last message -->
+      <p class="chat-band-info" style="color: black;"><strong>Last Chat:</strong> <%= existing_chat.messages.any? ? existing_chat.messages.last.created_at.strftime("%d %b %Y %H:%M") : existing_chat.updated_at.strftime("%d %b %Y %H:%M") %></p>
+
+      <!-- button to continue the existing chat -->
+      <%= link_to 'Continue Chat', chat_path(existing_chat), class: 'continue-chat-button' %>
+    <% else %>
+      <!-- form to create a new chat -->
+      <%= form_with(model: @chat, url: band_chats_path(@band), local: true, class: "chat-form") do |form| %>
+        <!-- hidden field for the current user (current_user) -->
+        <%= form.hidden_field :user_id, value: current_user.id %>
+
+        <!-- hidden field for the band leader (leader of the current band) -->
+        <%= form.hidden_field :band_leader_id, value: @band.leader.id %>
+
+        <!-- submit button for creating a new chat -->
+        <div class="form-submit">
+          <%= form.submit "Create Chat", class: "create-chat-button" %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 </div>

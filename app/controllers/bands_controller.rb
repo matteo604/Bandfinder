@@ -19,13 +19,17 @@ class BandsController < ApplicationController
 
   def create
     @band = Band.new(band_params)
-    @band.leader_id = current_user.id
+
+    # Set the current user as the leader of the band
+    @band.leader = current_user
 
     if @band.save
+      # Set the current user as a member of the band
+      current_user.update(band: @band)
+
       redirect_to band_path(@band), notice: "Band was successfully created."
-      current_user.leader = true
     else
-      render 'bands/show', status: :unprocessable_entity
+      render 'bands/new', status: :unprocessable_entity
     end
   end
 
