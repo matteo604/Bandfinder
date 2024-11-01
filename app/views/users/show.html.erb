@@ -1,14 +1,60 @@
-<%= render partial: "user_card", locals: { user: @user } %>
+<div class="container">
+  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(<%= asset_path('profile-banner.jpg') %>);"></div>
+
+  <div>
+
+    <div class="container profile_banner">
+      <div class="mb-3">
+        <!-- Optional: Check if there's a photo attached to the user, and only display if available -->
+        <% if @user.photo.attached? %>
+          <%= image_tag @user.photo, alt: "#{@user.first_name} #{@user.last_name}", class:"profile_image" %>
+        <% else %>
+          <%= image_tag "fake-profile-image.jpg", alt: "default profile image", class:"profile_image" %>
+        <% end %>
+      </div>
+
+      <div class="row border solid">
+        <div class="col-3">
+          <h2 class="m-3"><%= @user.first_name %> <%= @user.last_name %></h2>
+        </div>
+
+        <div class="col-9 text-end">
+          <h4 class="m-3"> Member since : <%= @user.created_at.strftime("%b %d, %Y") %></h4>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="row mt-4">
+
+      <div class="col-5 gap-5">
+        <div class="user_details_card fs-4">
+
+          <h2>Personal Details</h2>
+          <ul class="fs-4 mt-2">
+            <li>Phone : <%= @user.telephone_number %></li>
+            <li>Address : <%= @user.address %></li></li>
+            <li>Band leader : <%= @user.leader %></li>
+            <li>Email : <%= @user.email %></li>
+          </ul>
+
+          <div class="edit-icon">
+            <i class="fa-solid fa-pencil fs-4"></i>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+
 
 <div class="user-info">
-  <p><strong>Name:</strong> <%= @user.first_name %> <%= @user.last_name %></p>
-
-  <!-- Optional: Check if there's a photo attached to the user, and only display if available -->
-  <% if @user.photo.attached? %>
-    <div class="user-photo">
-      <%= image_tag @user.photo, alt: "#{@user.first_name} #{@user.last_name}" %>
-    </div>
-  <% end %>
 
   <!-- Add a button to start or continue a chat with the user -->
   <% if @user.id != current_user.id %>
