@@ -5,4 +5,3 @@ class BandSession < ApplicationRecord
   validates :title, :description, :address, presence: true
   validates :start_date, :end_date, presence: true
 end
-
