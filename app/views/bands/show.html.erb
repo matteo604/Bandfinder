@@ -1,4 +1,9 @@
-<div class ="container">
-  <%= @band.title %> <br>
-  <%= @band.description %>
+<div class="container">
+  <h1><%= @band.title %></h1>
+  <p><%= @band.description %></p>
+
+  <!-- Button to message the band leader, only shown if current user is not the band leader -->
+  <% if current_user != @band.leader %>
+    <%= link_to 'Message the Band Leader', new_band_chat_path(@band), class: 'btn btn-primary mt-3' %>
+  <% end %>
 </div>

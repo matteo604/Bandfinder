@@ -2,10 +2,8 @@
   <p>You are currently logged in as <%= current_user.first_name %> </p>
   <h5>These are all the other users</h5>
   <ul>
-
     <% @users.each do |user| %>
-      <li><%= user.first_name %></li>
+      <li><%= link_to user.first_name, user_path(user), class: "user-link" %></li>
     <% end %>
   </ul>
-
 </div>
