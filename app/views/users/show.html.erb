@@ -1,2 +1,32 @@
+<%= render partial: "user_card", locals: { user: @user } %>
 
-<%= render partial: "user_card", locals: {user: @user} %>
+<div class="user-info">
+  <p><strong>Name:</strong> <%= @user.first_name %> <%= @user.last_name %></p>
+
+  <!-- Optional: Check if there's a photo attached to the user, and only display if available -->
+  <% if @user.photo.attached? %>
+    <div class="user-photo">
+      <%= image_tag @user.photo, alt: "#{@user.first_name} #{@user.last_name}" %>
+    </div>
+  <% end %>
+
+  <!-- Add a button to start or continue a chat with the user -->
+  <% if @user.id != current_user.id %>
+    <% existing_chat = Chat.find_by(user_id: current_user.id, band_leader_id: @user.id) %>
+    <% if existing_chat %>
+      <%= link_to 'Continue Chat', chat_path(existing_chat), class: 'btn btn-primary continue-chat-button' %>
+    <% else %>
+      <!-- Assuming the band ID is accessible -->
+      <% band_id = current_user.band&.id %>
+      <% if band_id %>
+        <%= form_with url: band_chats_path(band_id), method: :post, local: true do %>
+          <%= hidden_field_tag :user_id, current_user.id %>
+          <%= hidden_field_tag :band_leader_id, @user.id %>
+          <%= submit_tag "Start Chat", class: "btn btn-primary create-chat-button" %>
+        <% end %>
+      <% else %>
+        <p>You need to belong to a band to start a chat with this user.</p>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
