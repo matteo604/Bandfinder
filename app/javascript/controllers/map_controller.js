@@ -52,6 +52,5 @@ export default class extends Controller {
       this.markerInstances.forEach(marker => marker.remove());
       this.markerInstances = [];
     }
-    console.log(this.markerInstances)
   }
 }
