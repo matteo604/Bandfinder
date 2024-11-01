@@ -40,7 +40,9 @@
           </ul>
 
           <div class="edit-icon">
-            <i class="fa-solid fa-pencil fs-4"></i>
+            <%= link_to edit_user_path(@user) do %>
+              <i class="fa-solid fa-pencil fs-4"></i>
+            <% end %>
           </div>
 
         </div>
