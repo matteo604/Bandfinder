@@ -2,33 +2,37 @@
   <h1 class="chats-title">Start a New Chat</h1>
 
   <div class="chat-form-container">
-    <!-- display band and leader information -->
-    <p class="chat-band-info" style="color: black;"><strong>Band:</strong> <%= @band.title %></p>
-    <p class="chat-band-info" style="color: black;"><strong>Band Leader:</strong> <%= @band.leader.first_name %> <%= @band.leader.last_name %></p>
+    <% if @band %>
+      <!-- display band and the leader information -->
+      <p class="chat-band-info" style="color: black;"><strong>Band:</strong> <%= @band.title %></p>
+      <p class="chat-band-info" style="color: black;"><strong>Band Leader:</strong> <%= @band.leader.first_name %> <%= @band.leader.last_name %></p>
 
-    <!-- check if a chat already exists between the current user and the band leader -->
-    <% existing_chat = Chat.find_by(user_id: current_user.id, band_leader_id: @band.leader.id) %>
+      <!-- check if a chat already exists between the current user and the band leader -->
+      <% existing_chat = Chat.find_by(user_id: current_user.id, band_leader_id: @band.leader.id) %>
 
-    <% if existing_chat %>
-      <!-- display the timestamp of the last message -->
-      <p class="chat-band-info" style="color: black;"><strong>Last Chat:</strong> <%= existing_chat.messages.any? ? existing_chat.messages.last.created_at.strftime("%d %b %Y %H:%M") : existing_chat.updated_at.strftime("%d %b %Y %H:%M") %></p>
+      <% if existing_chat %>
+        <!-- display the timestamp of the last message -->
+        <p class="chat-band-info" style="color: black;"><strong>Last Chat:</strong> <%= existing_chat.messages.any? ? existing_chat.messages.last.created_at.strftime("%d %b %Y %H:%M") : existing_chat.updated_at.strftime("%d %b %Y %H:%M") %></p>
 
-      <!-- button to continue the existing chat -->
-      <%= link_to 'Continue Chat', chat_path(existing_chat), class: 'continue-chat-button' %>
-    <% else %>
-      <!-- form to create a new chat -->
-      <%= form_with(model: @chat, url: band_chats_path(@band), local: true, class: "chat-form") do |form| %>
-        <!-- hidden field for the current user (current_user) -->
-        <%= form.hidden_field :user_id, value: current_user.id %>
+        <!-- button to continue the existing chat -->
+        <%= link_to 'Continue Chat', chat_path(existing_chat), class: 'continue-chat-button' %>
+      <% else %>
+        <!-- form to create a new chat -->
+        <%= form_with(model: @chat, url: band_chats_path(@band), local: true, class: "chat-form", data: { turbo: false }) do |form| %>
+          <!-- Hidden field for the current user (current_user) -->
+          <%= form.hidden_field :user_id, value: current_user.id %>
 
-        <!-- hidden field for the band leader (leader of the current band) -->
-        <%= form.hidden_field :band_leader_id, value: @band.leader.id %>
+          <!-- hidden field for the band leader (leader of the current band) -->
+          <%= form.hidden_field :band_leader_id, value: @band.leader.id %>
 
-        <!-- submit button for creating a new chat -->
-        <div class="form-submit">
-          <%= form.submit "Create Chat", class: "create-chat-button" %>
-        </div>
+          <!-- submit button for creating a new chat -->
+          <div class="form-submit">
+            <%= form.submit "Create Chat", class: "create-chat-button" %>
+          </div>
+        <% end %>
       <% end %>
+    <% else %>
+      <p class="error-message">Band not found. Please try again.</p>
     <% end %>
   </div>
 </div>

@@ -1,29 +1,37 @@
 <h1 class="text-center">BANDFINDER</h1>
 <div class="container">
-<h1>Bands List</h1>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @bands.each do |band| %>
+  <h1>Bands List</h1>
+  <table>
+    <thead>
       <tr>
-        <td><%= band.title %></td>
-        <td>
-          <%= link_to 'Show', band_path(band) %>
-          <%= link_to 'Edit', edit_band_path(band) %>
-          <%= link_to 'Delete', band, data: { turbo_method: :delte, turbo_confirm: 'Are you sure?' } %>
-        </td>
+        <th>Name</th>
+        <th>Band Leader</th>
+        <th>Actions</th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+    <tbody>
+      <% @bands.each do |band| %>
+        <tr>
+          <td><%= band.title %></td>
+          <td>
+            <% if band.leader.present? %>
+              <%= "#{band.leader.first_name} #{band.leader.last_name}" %>
+            <% else %>
+              <em>No leader assigned</em>
+            <% end %>
+          </td>
+          <td>
+            <%= link_to 'Show', band_path(band) %>
+            <%= link_to 'Edit', edit_band_path(band) %>
+            <%= link_to 'Delete', band, data: { turbo_method: :delete, turbo_confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
 
-<p><%= link_to 'Create New Band', new_band_path %></p>
-<div class="footer">
-  <%= render "shared/footer" %></body>
-</div>
+  <p><%= link_to 'Create New Band', new_band_path %></p>
+  <div class="footer">
+    <%= render "shared/footer" %>
+  </div>
 </div>

@@ -1,7 +1,7 @@
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
   <div class="container-fluid">
     <%= link_to "#", class: "navbar-brand" do %>
-      <%= image_tag "https://raw.githubusercontent.com/lewagon/fullstack-images/master/uikit/logo.png" %>
+      <%= image_tag "logo.png", class: "navbar-logo", alt: "Logo" %>
     <% end %>
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -9,13 +9,20 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto">
-        <li class="nav-item align-item: left">
-          <%= link_to "About us", "#", class: "nav-link" %>
-        </li>
+      <ul class="navbar-nav ms-auto d-flex align-items-center">
         <% if user_signed_in? %>
-          <li class="nav-item active">
+          <!-- Welcome message -->
+          <li class="nav-item me-3">
+            <span class="nav-link navbar-text">
+              <i class="fas fa-user-circle"></i> Welcome&nbsp;<strong><%= current_user.first_name.upcase %></strong>
+            </span>
+          </li>
+          <!-- Navigation Links -->
+          <li class="nav-item">
             <%= link_to "Home", root_path, class: "nav-link" %>
+          </li>
+          <li class="nav-item">
+            <%= link_to "About us", "#", class: "nav-link" %>
           </li>
           <li class="nav-item">
             <%= link_to chats_path, class: "nav-link position-relative message-icon-container" do %>
@@ -30,8 +37,9 @@
               </div>
             <% end %>
           </li>
+          <!-- Avatar and Dropdown -->
           <li class="nav-item dropdown">
-            <a href="#" class="avatar" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a href="#" class="avatar nav-link" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
             </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
