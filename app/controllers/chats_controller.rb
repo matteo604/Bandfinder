@@ -2,7 +2,7 @@ class ChatsController < ApplicationController
   before_action :set_chat, only: [:show, :destroy]
 
   def index
-    # load chats with unread messages first, sorted by most recent message  timestamps
+    # load chats with unread messages first, sorted by most recent message timestamps
     @chats_with_unread_messages = Chat.joins(:messages)
                                       .where("(chats.user_id = :user_id OR chats.band_leader_id = :user_id) AND messages.read = false", user_id: current_user.id)
                                       .order('messages.created_at DESC')
@@ -29,6 +29,10 @@ class ChatsController < ApplicationController
   def new
     if params[:band_id]
       @band = Band.find_by(id: params[:band_id]) # find the band based on the band_id parameter
+      if @band.present? && @band.leader_id == current_user.id
+        redirect_to bands_path, alert: 'You cannot start a chat with your own band.'
+        return
+      end
     elsif params[:user_id]
       @user = User.find_by(id: params[:user_id]) # find the user based on the user_id parameter
     end
@@ -40,6 +44,12 @@ class ChatsController < ApplicationController
       @band_leader = User.find_by(id: params[:chat][:band_leader_id]) # find the band leader as a user based on the band_leader_id parameter
       if @band_leader.nil?
         redirect_to bands_path, alert: 'Band Leader not found. Please try again.'
+        return
+      end
+
+      # prevent band leader from starting a chat with their own band
+      if @band_leader.id == current_user.id
+        redirect_to bands_path, alert: 'You cannot start a chat with your own band.'
         return
       end
 
