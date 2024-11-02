@@ -1,20 +1,3 @@
-.navbar-lewagon {
-  justify-content: space-between;
-  background: white;
-}
-
-.navbar-lewagon .navbar-collapse {
-  flex-grow: 0;
-}
-
-.navbar-lewagon .navbar-brand img {
-  width: 40px;
-}
-
-#navbarSupportedContent, .navbar-lewagon{
-  background-color: rgb(240, 159, 8);
-}
-
 .message-icon-container {
   position: relative;
   display: inline-block;
@@ -29,17 +12,59 @@
   position: absolute;
   top: 0;
   right: 0;
-  font-size: 0.8em; /* Schriftgröße für Badge */
+  font-size: 0.8em;
   font-weight: bold;
-  padding: 3px 5px; /* Anpassung für gleichmäßige Rundung */
-  background-color: red; /* Farbe des Badges */
-  color: #fff; /* Textfarbe */
-  border-radius: 50%; /* 50% für einen perfekten Kreis */
+  padding: 3px 5px;
+  background-color: red;
+  color: #fff;
+  border-radius: 50%;
   transform: translate(50%, -50%);
   margin-right: 20px;
 }
 
 .envelope-icon {
-  font-size: 1.8rem; /* Größe des Icons */
-  margin-right: 20px; /* Abstand von anderen Elementen */
+  font-size: 1.8rem;
+  margin-right: 20px;
+}
+
+.welcome-message {
+  font-size: 1rem;
+  margin-right: 1rem;
+}
+
+.navbar-logo {
+  max-width: 100px;
+  height: auto;
+}
+
+.navbar-user-info {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-nav .nav-link,
+.navbar-user-info .navbar-text {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-left: 1rem;
+  vertical-align: middle;
+  margin-right: 3rem;
+}
+
+.navbar {
+  position: relative;
+}
+
+.navbar-text i {
+  margin-right: 0.5rem;
+}
+
+.navbar-text strong {
+  margin-left: 0.25rem; /* space between "Welcome" and the user's name */
 }
