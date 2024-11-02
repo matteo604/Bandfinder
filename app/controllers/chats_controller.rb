@@ -62,7 +62,7 @@ class ChatsController < ApplicationController
     end
 
     if @chat.save
-      redirect_to @chat, notice: 'Chat was successfully created or continued.'
+      redirect_to @chat
     else
       flash.now[:alert] = @chat.errors.full_messages.join(", ")
       render :new
