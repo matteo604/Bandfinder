@@ -1,121 +1,151 @@
-<div class="photo-container align-item: center">
-  <h1 class="text-center">BandFinder</h1>
+<div class="photo-container text-center">
+  <h1>BandFinder</h1>
 </div>
 
 <div class="container" data-controller="toggleswitch">
   <h2 class="text-center mt-3">Discover all the bands</h2>
 
-  <div class="switch-container mt-3">
-    <span class="label-left">Musician looking for a band</span>
-    <label class="switch">
-      <input type="checkbox" data-toggleswitch-target="toggleSwitch" data-action="change->toggleswitch#toggleContent" <%= @button_state ? "checked" : nil %> >
-      <span class="slider round" data-toggleswitch-target="slider"></span>
-    </label>
-    <span class="label-right">Band looking for a musician</span>
+  <div class="switch-container mt-3 d-flex justify-content-center align-items-center" style="gap: 10px;">
+      <span class="label-left" data-toggleswitch-target="labelLeft">Musician looking for a band</span>
+      <label class="switch">
+          <input type="checkbox" data-toggleswitch-target="toggleSwitch" data-action="change->toggleswitch#toggleContent">
+          <span class="slider round" data-toggleswitch-target="slider"></span>
+      </label>
+      <span class="label-right" data-toggleswitch-target="labelRight">Band looking for a musician</span>
+      <button class="h-25 btn btn-secondary"
+          data-toggleswitch-target="changeViewButton"
+          data-action="click->toggleswitch#changeStatus">
+          List View
+      </button>
   </div>
 
+
   <div class="row mt-4">
-
     <div class="filter-container mb-4">
-      <%= form_with url: band_search_path, method: :get, local: true, class: ["d-flex", "align-items-center", "band-form", ("d-none" if @button_state)].compact.join(" "), data: { toggleswitch_target: "bandForm" } do |form| %>
-        <div class="input-group d-flex align-items-center justify-content-center" style="gap: 10px;">
+      <%= form_with url: search_path, method: :get, local: true, class: "d-flex align-items-center w-100" do |form| %>
+        <% if @button_state %>
+          <%= hidden_field_tag :form_type, "user_search" %>
+        <% else %>
+          <%= hidden_field_tag :form_type, "band_search" %>
+        <% end %>
 
+        <!-- Band Form Section -->
+        <div data-toggleswitch-target="bandForm" class="d-flex align-items-center <%= "d-none" if @button_state %>" style="gap: 10px;">
           <div class="search-input">
-            <input type="text" id="address-filter" name="address" placeholder="Search location" class="form-control filter-input">
+            <input type="text" id="address-filter" name="band_address" placeholder="Search location" class="form-control filter-input">
           </div>
-
           <div class="search-input">
             <input type="text" id="genre-filter" name="genre" placeholder="Genre" class="form-control filter-input">
           </div>
-
           <div class="search-input">
             <input type="text" id="instrument-filter" name="searching_for_instruments" placeholder="Looking for..." class="form-control filter-input">
           </div>
+          <div class="search-input">
+            <button type="submit" class="filter-button btn btn-primary">Search</button>
+          </div>
+        </div>
 
+        <!-- User Form Section -->
+        <div data-toggleswitch-target="userForm" class="d-flex align-items-center <%= "d-none" if !@button_state %>" style="gap: 10px;">
+          <%= hidden_field_tag :state, "#{ @button_state ? "on" : "off" }", data: { toggleswitch_target: "status" } %>
+          <div class="search-input">
+            <input type="text" id="first-name-filter" name="first_name" placeholder="First Name" class="form-control filter-input">
+          </div>
+          <div class="search-input">
+            <input type="text" id="last-name-filter" name="last_name" placeholder="Last Name" class="form-control filter-input">
+          </div>
+          <div class="search-input">
+            <input type="text" id="location-filter" name="address" placeholder="Location" class="form-control filter-input">
+          </div>
+          <div class="search-input">
+            <input type="text" id="instrument-filter" name="instruments" placeholder="Instruments" class="form-control filter-input">
+          </div>
+          <div class="search-input">
+            <select id="status-filter" name="status" class="form-control filter-input">
+              <option value="" disabled selected>Select your status</option>
+              <option value="solo">Solo</option>
+              <option value="searching">Searching for a band</option>
+            </select>
+          </div>
           <div class="search-input">
             <button type="submit" class="filter-button btn btn-primary">Search</button>
           </div>
         </div>
       <% end %>
-
-      <%= form_with url: user_search_path, method: :get, local: true, class: ["d-flex", "align-items-center", "user-form", ("d-none" if !@button_state)].compact.join(" "),
-        data: { toggleswitch_target: "userForm" }, style: 'display: flex; gap: 20px;' do %>
-        <%= hidden_field_tag :state, "#{ @button_state ? "on" : "off"}", data: { toggleswitch_target: "status" } %>
-        <div class="search-input">
-          <label for="first-name-filter" class="visually-hidden">First Name</label>
-          <input type="text" id="first-name-filter" name="first_name" placeholder="First Name" class="form-control filter-input">
-        </div>
-
-        <div class="search-input">
-          <label for="last-name-filter" class="visually-hidden">Last Name</label>
-          <input type="text" id="last-name-filter" name="last_name" placeholder="Last Name" class="form-control filter-input">
-        </div>
-
-        <div class="search-input">
-          <label for="location-filter" class="visually-hidden">Location</label>
-          <input type="text" id="location-filter" name="address" placeholder="Location" class="form-control filter-input">
-        </div>
-
-        <div class="search-input">
-          <label for="instrument-filter" class="visually-hidden">Instruments</label>
-          <input type="text" id="instrument-filter" name="instruments" placeholder="Instruments" class="form-control filter-input">
-        </div>
-
-        <div class="search-input">
-          <label for="status-filter" class="visually-hidden">Status</label>
-          <select id="status-filter" name="status" class="form-control filter-input">
-            <option value="" disabled selected>Select your status</option>
-            <option value="solo">Solo</option>
-            <option value="searching">Searching for a band</option>
-          </select>
-        </div>
-
-        <div class="search-input">
-          <button type="submit" class="filter-button btn btn-primary">Search</button>
-        </div>
-
-      <% end %>
-
     </div>
 
-    <div class="col-8">
-      <div class="cards-container">
-         <!-- Band Cards -->
-        <div data-toggleswitch-target="bandCard" class="card-group <%= "d-none" if @button_state %>">
-          <% @bands.each do |band| %>
-            <div class="band-card">
-              <div class="card-body">
-                <h5><%= band.title %></h5>
-                <p><%= band.genre %></p>
-                <p>Address: <%= band.address %></p>
-              </div>
+    <div data-toggleswitch-target="indexArea" class="d-flex flex-wrap d-none">
+      <div data-toggleswitch-target="bandIndex" class="container">
+        <h2 class="mb-4">Band List</h2>
+        <% @bands.each do |band| %>
+          <div class="card shadow-sm mb-3">
+            <div class="card-body">
+              <h5 class="card-title text-primary"><%= band.title %></h5>
+              <p class="card-text"><%= band.description %></p>
             </div>
-          <% end %>
-        </div>
-        <!-- User Cards -->
-        <div data-toggleswitch-target="userCard" class="card-group container <%= "d-none" if !@button_state %>">
-          <div class="row w-75">
-            <% @users.each do |user| %>
-              <div class="col-5 p-4">
-                <%= render partial: "users/user_card", locals: {user: user} %>
+            <div class="card-footer text-muted">
+              <small>Genre: <%= band.genre %></small>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div data-toggleswitch-target="userIndex" class="d-none container">
+        <h2 class="mb-4">User List</h2>
+        <% @users.each do |user| %>
+          <div class="card shadow-sm mb-3">
+            <div class="card-body">
+              <h5 class="card-title text-primary"><%= user.first_name %> <%= user.last_name %></h5>
+              <p class="card-text">
+                <strong>Address:</strong> <%= user.address %><br>
+                <strong>Instruments:</strong> <%= user.instruments %>
+              </p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div data-toggleswitch-target="changedArea" class="d-flex flex-wrap">
+      <div class="col-8">
+        <div class="cards-container">
+          <!-- Band Cards -->
+          <div data-toggleswitch-target="bandCard" class="card-group <%= "d-none" if @button_state %>">
+            <% @bands.each do |band| %>
+              <div class="band-card">
+                <div class="card-body">
+                  <h5><%= band.title %></h5>
+                  <p><%= band.genre %></p>
+                  <p>Address: <%= band.address %></p>
+                </div>
               </div>
             <% end %>
           </div>
-        </div>
 
+          <!-- User Cards -->
+          <div data-toggleswitch-target="userCard" class="card-group container <%= "d-none" if !@button_state %>">
+            <div class="row w-100">
+              <% @users.each do |user| %>
+                <div class="col-4 p-4">
+                  <%= render partial: "users/user_card", locals: { user: user } %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-    <!-- Map Section -->
-    <div class="col-4" data-toggleswitch-target="myMarker">
-      <div style="width: 100%; height:480px; border-radius:5px"
-           data-controller="map"
-           data-toggleswitch-target="mapContainer"
-           data-map-bandmarkers-value="<%= @button_state ? @user_markers.to_json : @band_markers.to_json  %>"
-           data-map-usermarkers-value="<%= !@button_state ? @user_markers.to_json : @band_markers.to_json  %>"
-           data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
+
+      <!-- Map Section -->
+      <div class="col-4 <%= "d-none" if @button_status == "list-view" %>" data-toggleswitch-target="myMarker">
+        <div style="width: 100%; height: 480px; border-radius: 5px"
+             data-controller="map"
+             data-toggleswitch-target="mapContainer"
+             data-map-markers-value="<%= @markers.to_json %>"
+             data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>">
           <button data-action="click->map#toggleMarkers" data-toggleswitch-target="toggleMarkers">
             Toggle Markers
           </button>
+        </div>
       </div>
     </div>
   </div>
