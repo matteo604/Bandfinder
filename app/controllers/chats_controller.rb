@@ -2,53 +2,77 @@ class ChatsController < ApplicationController
   before_action :set_chat, only: [:show, :destroy]
 
   def index
-    # load chats with unread messages first, sort by the most recent message timestamp
+    # load chats with unread messages first, sorted by most recent message timestamps
     @chats_with_unread_messages = Chat.joins(:messages)
                                       .where("(chats.user_id = :user_id OR chats.band_leader_id = :user_id) AND messages.read = false", user_id: current_user.id)
                                       .order('messages.created_at DESC')
 
-    # looad remaining chats, excluding those with unread messages, sorted by the last activity timestamp
+    # load remaining chats, excluding those with unread messages, sorted by the last activity timestamp
     @chats_without_unread_messages = Chat.where("user_id = :user_id OR band_leader_id = :user_id", user_id: current_user.id)
                                         .where.not(id: @chats_with_unread_messages.select(:id))
                                         .order('updated_at DESC')
 
-    # combne both lists to display chats with unread messages first, followed by the rest
+    # combine both lists to display chats with unread messages first, followed by the rest
     @chats = @chats_with_unread_messages + @chats_without_unread_messages
   end
 
   def show
     @chat = Chat.find(params[:id])
+    # mark messages from the other user as read
     @chat.messages.where(read: false).where.not(user_id: current_user.id).update_all(read: true)
+
+    # find the band leader and the corresponding band
+    @band_leader = @chat.band_leader
+    @band = Band.find_by(leader_id: @band_leader.id) # get the band associated with the band leader
   end
 
   def new
     if params[:band_id]
-      @band = Band.find(params[:band_id]) # find the band based on the band_id parameter
+      @band = Band.find_by(id: params[:band_id]) # find the band based on the band_id parameter
+      if @band.present? && @band.leader_id == current_user.id
+        redirect_to bands_path, alert: 'You cannot start a chat with your own band.'
+        return
+      end
     elsif params[:user_id]
-      @user = User.find(params[:user_id]) # find the user based on the user_id parameter
+      @user = User.find_by(id: params[:user_id]) # find the user based on the user_id parameter
     end
     @chat = Chat.new # initialize a new chat
   end
 
   def create
-    if params[:band_id]
-      @band = Band.find(params[:band_id]) # find the band based on the band_id parameter
-      @band_leader = @band.leader # get the band leader of the band
+    if params[:chat].present? && params[:chat][:band_leader_id].present?
+      @band_leader = User.find_by(id: params[:chat][:band_leader_id]) # find the band leader as a user based on the band_leader_id parameter
+      if @band_leader.nil?
+        redirect_to bands_path, alert: 'Band Leader not found. Please try again.'
+        return
+      end
+
+      # prevent band leader from starting a chat with their own band
+      if @band_leader.id == current_user.id
+        redirect_to bands_path, alert: 'You cannot start a chat with your own band.'
+        return
+      end
 
       # find or initialize a chat between the current user and the band leader
-      @chat = Chat.find_or_initialize_by(user_id: current_user.id, band_leader_id: @band_leader.id)
+      @chat = Chat.find_or_initialize_by(user_id: [current_user.id, @band_leader.id].min, band_leader_id: [current_user.id, @band_leader.id].max)
 
-      # set band_id for the new chat if the chat is new
-      @chat.band_id = @band.id if @chat.new_record?
-    elsif params[:user_id]
-      @user = User.find(params[:user_id]) # find the user based on the user_id parameter
+    elsif params[:chat].present? && params[:chat][:user_id].present?
+      @user = User.find_by(id: params[:chat][:user_id]) # find the user based on the user_id parameter
+      if @user.nil?
+        redirect_to users_path, alert: 'User not found. Please try again.'
+        return
+      end
 
       # find or initialize a chat between the current user and the other user
-      @chat = Chat.find_or_initialize_by(user_id: current_user.id, band_leader_id: @user.id)
+      @chat = Chat.find_or_initialize_by(user_id: [current_user.id, @user.id].min, band_leader_id: [current_user.id, @user.id].max)
+    else
+      # if neither band_leader_id nor user_id is provided
+      redirect_to chats_path, alert: 'Unable to create chat. Missing required parameters.'
+      return
     end
 
     if @chat.save
-      redirect_to @chat, notice: 'Chat was successfully created or continued.'
+      redirect_to @chat
     else
       flash.now[:alert] = @chat.errors.full_messages.join(", ")
       render :new
@@ -56,7 +80,7 @@ class ChatsController < ApplicationController
   end
 
   def destroy
-    if @chat.user_id == current_user.id # corrected condition from = to ==
+    if @chat.user_id == current_user.id # only allow the user who initiated the chat to delete it
       @chat.destroy
       redirect_to chats_path, notice: 'Chat was successfully deleted.'
     else
@@ -68,5 +92,7 @@ class ChatsController < ApplicationController
 
   def set_chat
     @chat = Chat.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to chats_path, alert: 'Chat does not exist.'
   end
 end

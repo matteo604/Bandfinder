@@ -1,16 +1,40 @@
 <div class="chat-container" data-controller="chat">
-  <h1 class="chat-title"><i class="fas fa-comments"></i> Chat with Band Leader</h1>
+  <h1 class="chat-title">
+  <i class="fas fa-comments"></i> Chat with
+  <% if @chat.band_leader == current_user %>
+    <%= @chat.user.first_name %>
+    <% if @chat.user.band.present? %>
+      (<%= @chat.user.band.title %>)
+    <% end %>
+  <% else %>
+    <%= @chat.band_leader.first_name %>
+    <% if @chat.band_leader.band.present? %>
+      (<%= @chat.band_leader.band.title %>)
+    <% end %>
+  <% end %>
+</h1>
 
   <!-- messages section -->
   <div class="messages-section">
     <h2 class="messages-title"><i class="fas fa-envelope"></i></h2>
     <div class="messages-container">
       <% if @chat.messages.any? %>
-        <% @chat.messages.each do |message| %>
+        <% @chat.messages.order(:created_at).each do |message| %>
           <div class="message-card <%= message.user_id == current_user.id ? 'current-user' : 'other-user' %>">
             <p class="message-content">
-              <strong><i class="fas fa-user"></i> <%= message.user.first_name %>:</strong> <%= message.content %>
+              <strong><i class="fas fa-user"></i>
+                <% if message.user_id == current_user.id %>
+                  Me:
+                <% else %>
+                  <%= message.user.first_name %>
+                  <% if message.user.band.present? %>
+                    (<%= message.user.band.title %>)
+                  <% end %>:
+                <% end %>
+              </strong>
+              <%= message.content %>
             </p>
+
             <div class="message-timestamp">
               <i class="far fa-clock"></i>
               <% if message.created_at > 24.hours.ago %>

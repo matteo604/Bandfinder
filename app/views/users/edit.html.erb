@@ -1,1 +1,39 @@
-<% # edit view for user not needed %>
+<div class="container">
+  <div class="d-flex justify-content-center p-5">
+
+    <div class="form-row border solid p-4 edit_card">
+      <%= form_with model: @user do |f| %>
+        <div class="row">
+          <div class="form-group col-md-6">
+            <%= f.label :first_name, class: "col-form-label-lg" %>
+            <%= f.text_field :first_name, class: "form-control" %>
+          </div>
+          <div class="form-group col-md-6">
+            <%= f.label :last_name, class: "col-form-label-lg" %>
+            <%= f.text_field :last_name, class: "form-control" %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :email, class: "col-form-label-lg" %>
+          <%= f.text_field :email, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :telephone_number, class: "col-form-label-lg" %>
+          <%= f.text_field :telephone_number, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :instruments, class: "col-form-label-lg" %>
+          <%= f.text_field :instruments, class: "form-control" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :address, class: "col-form-label-lg"%>
+          <%= f.text_field :address, class: "form-control" %>
+        </div>
+        <div class="form-group justify-content-center mt-3">
+          <%= f.submit "Update my details", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,57 +1,63 @@
 <div class="chats-container">
-  <h1 class="chats-title">All Chats</h1>
+  <h1 class="chats-title">All My Chats</h1>
 
   <% if @chats.any? %>
     <div class="chat-cards-container">
-      <% @chats.each do |chat| %>
-        <div class="chat-card compact-card d-flex justify-content-between align-items-center">
-          <!-- cht information on the left side -->
-          <div class="chat-info">
-            <!-- displaying the band name and band leader name in one line -->
-            <p>
-              <strong>Band:</strong> <%= chat.band.title %>
-              <strong> | Band Leader:</strong> <%= "#{chat.band.leader.first_name} #{chat.band.leader.last_name}" %>
-            </p>
-
-            <!-- displaying the user full name -->
-            <p><strong>User:</strong> <%= "#{chat.user.first_name} #{chat.user.last_name}" %></p>
-
-            <!-- displaying the timestamp of the latest message, or chat creation time if no message -->
-            <p><strong>Last Activity:</strong>
-              <%= chat.messages.any? ? chat.messages.last.created_at.strftime("%d %b %Y %H:%M") : chat.updated_at.strftime("%d %b %Y %H:%M") %>
-            </p>
-
-            <!-- displaying a label for unread messages -->
-            <% unread_messages_count = chat.messages.where(read: false).where.not(user_id: current_user.id).count %>
-            <% if unread_messages_count > 0 %>
-              <p><span class="badge unread-badge">Unread Messages: <%= unread_messages_count %></span></p>
-            <% else %>
-              <p><span class="badge read-badge">All Messages Read</span></p>
-            <% end %>
-
-            <!-- link to view the full chat -->
-            <%= link_to 'View Chat', chat_path(chat), class: "btn btn-primary btn-sm chat-link" %>
-          </div>
-
-          <!-- displaying the chat partner's photo on the right side -->
-          <div class="chat-partner-photo">
-            <% if current_user.id == chat.user_id %>
-              <% # Current user is the user, show band leader or other user %>
-              <% if chat.band.photo.attached? %>
-                <%= image_tag chat.band.photo, alt: chat.band.title, class: "chat-partner-image" %>
+      <% @chats.uniq(&:band_leader_id).each do |chat| %>
+        <% if chat.messages.any? %>
+          <div class="chat-card compact-card d-flex justify-content-between align-items-center">
+            <!-- chat information on the left side -->
+            <div class="chat-info">
+              <!-- displaying the bands name -->
+              <% if chat.band_leader.band.present? %>
+                <p><strong>Band:</strong> <%= chat.band_leader.band.title %></p>
               <% else %>
-                <%= image_tag "placeholder_band.png", alt: "Placeholder Band", class: "chat-partner-image" %>
+                <p><strong>Band:</strong> Not available</p>
               <% end %>
-            <% else %>
-              <% # current user is the band leader, show the other user %>
-              <% if chat.user.photo.attached? %>
-                <%= image_tag chat.user.photo, alt: "#{chat.user.first_name} #{chat.user.last_name}", class: "chat-partner-image" %>
+
+              <!-- displaying the band leaders name -->
+              <p>
+                <strong>Band Leader:</strong> <%= "#{chat.band_leader.first_name} #{chat.band_leader.last_name}" %>
+              </p>
+
+              <!-- displaying the timestamp of the latest message, or chat creation time if no message -->
+              <p><strong>Last Activity:</strong>
+                <%= chat.messages.order(:created_at).last.created_at.strftime("%d %b %Y %H:%M") %>
+              </p>
+
+              <!-- displaying a label for unread messages -->
+              <% unread_messages_count = chat.messages.where(read: false).where.not(user_id: current_user.id).count %>
+              <% if unread_messages_count > 0 %>
+                <p><span class="badge unread-badge">Unread Messages: <%= unread_messages_count %></span></p>
               <% else %>
-                <%= image_tag "placeholder_user.png", alt: "Placeholder User", class: "chat-partner-image" %>
+                <p><span class="badge read-badge">All Messages Read</span></p>
               <% end %>
-            <% end %>
+
+              <!-- link to view the full chat -->
+              <%= link_to 'View Chat', chat_path(chat), class: "btn btn-primary btn-sm chat-link" %>
+            </div>
+
+            <!-- displaying the chat partner's photo on the right side -->
+            <div class="chat-partner-photo">
+              <% if current_user.id == chat.user_id %>
+                <% # current user is the user, show band leader or another user %>
+                <% if chat.band_leader.photo.attached? %>
+                  <%= image_tag chat.band_leader.photo, alt: "#{chat.band_leader.first_name} #{chat.band_leader.last_name}", class: "chat-partner-image" %>
+                <% else %>
+                  <%= image_tag "placeholder_user.png", alt: "Placeholder User", class: "chat-partner-image" %>
+                <% end %>
+              <% else %>
+                <% # ccurrent user is the band leader, show the other user %>
+                <% if chat.user.photo.attached? %>
+                  <%= image_tag chat.user.photo, alt: "#{chat.user.first_name} #{chat.user.last_name}", class: "chat-partner-image" %>
+                <% else %>
+                  <%= image_tag "placeholder_user.png", alt: "Placeholder User", class: "chat-partner-image" %>
+                <% end %>
+              <% end %>
+            </div>
+
           </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
   <% else %>

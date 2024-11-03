@@ -15,7 +15,7 @@ class MessagesController < ApplicationController
     @message.user_id = current_user.id
 
     if @message.save
-      redirect_to chat_messages_path(@chat), notice: 'Message was successfully sent.'
+      redirect_to chat_messages_path(@chat)
     else
       render :new
     end
