@@ -10,13 +10,14 @@ class BandSessionsController < ApplicationController
 
   def new
     @band_session = BandSession.new
+    @band = Band.find(params[:band_id])
   end
 
   def create
     @band_session = BandSession.new(band_session_params)
     @band = Band.find(params[:band_id])
     @band_session.band_id = @band.id
-    @band_session.creator_id = currest_user.id
+    @band_session.creator_id = current_user.id
     if @band_session.save
       redirect_to @band_session, notice: 'session was successfully created.'
     else
