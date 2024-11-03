@@ -14,13 +14,11 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body" style="background: red;">
-        [...]
         <%= simple_form_for [@band, @band_session], data: { controller: 'datepicker' } do |f| %>
           <%= f.input :start_date, as: :string, input_html: { data: { datepicker_target: "startDate"  } } %>
           <%= f.input :end_date, as: :string, input_html: { data: { datepicker_target: "endDate"  } } %>
           <%= f.submit 'Schedule your band session' %>
         <% end %>
-        [...]
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
 
