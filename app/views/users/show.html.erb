@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(<%= asset_path('profile-banner.jpg') %>);"></div>
+  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(<%= asset_path('profile-banner-3.jpg') %>);"></div>
 
   <div>
 
@@ -9,7 +9,7 @@
         <% if @user.photo.attached? %>
           <%= image_tag @user.photo, alt: "#{@user.first_name} #{@user.last_name}", class:"profile_image" %>
         <% else %>
-          <%= image_tag "fake-profile-image.jpg", alt: "default profile image", class:"profile_image" %>
+          <%= image_tag "default-profile-image.jpg", alt: "default profile image", class:"profile_image" %>
         <% end %>
       </div>
 
