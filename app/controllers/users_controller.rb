@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   end
 
   def show
-
+    @band = Band.all
   end
 
   def edit
