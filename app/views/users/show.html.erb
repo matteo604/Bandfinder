@@ -1,5 +1,5 @@
 <div class="container">
-  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(<%= asset_path('profile-banner.jpg') %>);"></div>
+  <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(<%= asset_path('profile-banner-3.jpg') %>);"></div>
 
   <div>
 
@@ -9,7 +9,7 @@
         <% if @user.photo.attached? %>
           <%= image_tag @user.photo, alt: "#{@user.first_name} #{@user.last_name}", class:"profile_image" %>
         <% else %>
-          <%= image_tag "fake-profile-image.jpg", alt: "default profile image", class:"profile_image" %>
+          <%= image_tag "default-profile-image.jpg", alt: "default profile image", class:"profile_image" %>
         <% end %>
       </div>
 
@@ -29,15 +29,24 @@
     <div class="row mt-4">
 
       <div class="col-5 gap-5">
-        <div class="user_details_card fs-4">
+        <div class="user_details_card fs-4 d-flex flex-column">
 
-          <h2>Personal Details</h2>
-          <ul class="fs-4 mt-2">
-            <li>Phone : <%= @user.telephone_number %></li>
-            <li>Address : <%= @user.address %></li></li>
-            <li>Band leader : <%= @user.leader %></li>
-            <li>Email : <%= @user.email %></li>
-          </ul>
+          <h2>My Details</h2>
+
+          <div class="p-2 border-top"><i class="fa-solid fa-phone"></i> <%= @user.telephone_number %></div>
+          <div class="p-2"><i class="fa-solid fa-location-dot"></i> <%= @user.address %></div>
+          <div class="p-2"><i class="fa-regular fa-envelope"></i> <%= @user.email %></div>
+          <div class="p-2 border-bottom">
+            <i class="fa-solid fa-drum fs-3"></i>
+            <% instruments = @user.instruments
+            begin
+              formatted_instruments = JSON.parse(instruments).map(&:downcase).join(", ")
+            rescue JSON::ParserError
+              formatted_instruments = instruments
+            end %>
+            <%= formatted_instruments %>
+          </div>
+
 
           <div class="edit-icon">
             <%= link_to edit_user_path(@user) do %>

@@ -18,6 +18,7 @@ john = User.new(
   telephone_number: '5551234567',
   instruments: ['Guitar', 'Piano'].to_json
 )
+
 if john.save
   puts "Created John as a user!"
 else
