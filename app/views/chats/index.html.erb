@@ -47,7 +47,7 @@
                   <%= image_tag "placeholder_user.png", alt: "Placeholder User", class: "chat-partner-image" %>
                 <% end %>
               <% else %>
-                <% # ccurrent user is the band leader, show the other user %>
+                <% # current user is the band leader, show the other user %>
                 <% if chat.user.photo.attached? %>
                   <%= image_tag chat.user.photo, alt: "#{chat.user.first_name} #{chat.user.last_name}", class: "chat-partner-image" %>
                 <% else %>
@@ -60,6 +60,14 @@
         <% end %>
       <% end %>
     </div>
+
+    <!-- Button to go back to the Band page (moved here to be under the cards) -->
+    <% if @band.present? %>
+      <div class="back-to-band">
+        <%= link_to 'Back to My Band Page', band_path(@band), class: "btn btn-secondary back-to-band-button" %>
+      </div>
+    <% end %>
+
   <% else %>
     <p class="no-chats">No chats available.</p>
   <% end %>

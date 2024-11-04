@@ -1,18 +1,18 @@
-<div class="chat-container" data-controller="chat">
+<div class="chat-container" data-controller="chat" data-chat-id="<%= @chat.id %>">
   <h1 class="chat-title">
-  <i class="fas fa-comments"></i> Chat with
-  <% if @chat.band_leader == current_user %>
-    <%= @chat.user.first_name %>
-    <% if @chat.user.band.present? %>
-      (<%= @chat.user.band.title %>)
+    <i class="fas fa-comments"></i> Chat with
+    <% if @chat.band_leader == current_user %>
+      <%= @chat.user.first_name %> <!-- Display chat partner's first name -->
+      <% if @chat.user.band.present? %>
+        (<%= @chat.user.band.title %>) <!-- Display band name if available -->
+      <% end %>
+    <% else %>
+      <%= @chat.band_leader.first_name %> <!-- Display chat partner's first name -->
+      <% if @chat.band_leader.band.present? %>
+        (<%= @chat.band_leader.band.title %>) <!-- Display band name if available -->
+      <% end %>
     <% end %>
-  <% else %>
-    <%= @chat.band_leader.first_name %>
-    <% if @chat.band_leader.band.present? %>
-      (<%= @chat.band_leader.band.title %>)
-    <% end %>
-  <% end %>
-</h1>
+  </h1>
 
   <!-- messages section -->
   <div class="messages-section">
@@ -26,22 +26,49 @@
                 <% if message.user_id == current_user.id %>
                   Me:
                 <% else %>
-                  <%= message.user.first_name %>
+                  <%= message.user.first_name %> <!-- Display sender's first name -->
                   <% if message.user.band.present? %>
-                    (<%= message.user.band.title %>)
+                    (<%= message.user.band.title %>) <!-- Display band title if available -->
                   <% end %>:
                 <% end %>
               </strong>
-              <%= message.content %>
+
+              <!-- Message content display -->
+              <span class="message-text" data-message-id="<%= message.id %>">
+                <%= message.content %> <!-- Display message content -->
+              </span>
+
+              <!-- Edited indicator in smaller font size and in parentheses, only if message not deleted -->
+              <% if message.updated_at != message.created_at && message.content != "This message was deleted by the author." %>
+                <span class="edited-indicator" style="font-size: smaller; color: gray;">
+                  (message has been edited)
+                </span>
+              <% end %>
             </p>
 
-            <div class="message-timestamp">
-              <i class="far fa-clock"></i>
-              <% if message.created_at > 24.hours.ago %>
-                <%= time_ago_in_words(message.created_at.in_time_zone('Berlin')) %> ago
-              <% else %>
-                <%= message.created_at.in_time_zone('Berlin').strftime("%Y-%m-%d %H:%M") %>
+            <!-- Message actions section (Edit/Delete buttons) -->
+            <div class="message-footer">
+              <!-- Only show Edit and Delete buttons if the message is not deleted -->
+              <% if message.user_id == current_user.id && message.content != "This message was deleted by the author." %>
+                <div class="message-actions">
+                  <a href="#" class="edit-message" data-message-id="<%= message.id %>" data-action="click->chat#editMessage" title="Edit">
+                    <i class="fas fa-edit"></i>
+                  </a>
+                  <%= link_to chat_message_path(@chat, message), method: :delete, remote: true, class: "delete-message", data: { action: "click->chat#deleteMessage", message_id: message.id }, title: "Delete" do %>
+                    <i class="fas fa-trash-alt"></i>
+                  <% end %>
+                </div>
               <% end %>
+
+              <!-- Timestamp -->
+              <div class="message-timestamp">
+                <i class="far fa-clock"></i>
+                <% if message.created_at > 24.hours.ago %>
+                  <%= time_ago_in_words(message.created_at.in_time_zone('Berlin')) %> ago
+                <% else %>
+                  <%= message.created_at.in_time_zone('Berlin').strftime("%Y-%m-%d %H:%M") %>
+                <% end %>
+              </div>
             </div>
           </div>
         <% end %>
@@ -54,18 +81,14 @@
   <!-- form to send a new message -->
   <div class="send-message-section" data-controller="chat">
     <h3 class="send-message-title"><i class="fas fa-paper-plane"></i></h3>
-    <%= form_with(model: [@chat, @chat.messages.build], class: "message-form", data: { action: "submit->chat#preventEmptySubmit" }) do |form| %>
-      <!-- txtarea input field -->
+    <%= form_with(model: [@chat, Message.new], url: chat_messages_path(@chat), method: :post, class: "message-form", remote: true, data: { action: "submit->chat#preventEmptySubmit", turbo: false }) do |form| %>
       <div class="form-group">
         <%= form.text_area :content, placeholder: "Type your message here", class: "message-input", data: { chat_target: "content" } %>
       </div>
-      <!-- bttons in the same line -->
       <div class="d-flex justify-content-between align-items-center mt-3">
-        <!-- Back to All Chats button with Font Awesome icon -->
         <%= link_to chats_path, class: 'btn btn-secondary' do %>
           <i class="fas fa-arrow-left"></i> Back to chats
         <% end %>
-        <!-- send button with fontawsome icon -->
         <button type="submit" class="send-button">
           <i class="fas fa-paper-plane"></i> Send
         </button>

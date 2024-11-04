@@ -4,6 +4,6 @@
 
   <!-- Button to message the band leader, only shown if current user is not the band leader -->
   <% if current_user != @band.leader %>
-    <%= link_to 'Message the Band Leader', new_band_chat_path(@band), class: 'btn btn-primary mt-3' %>
+    <%= button_to 'Message Band Leader', chats_path(chat: { band_leader_id: @band.leader.id }), method: :post, class: "btn btn-primary" %>
   <% end %>
 </div>

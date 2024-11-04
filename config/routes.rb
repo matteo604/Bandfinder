@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   end
   # chats messages ??
   resources :chats, only: [:index, :show, :create] do
-    resources :messages, only: [:create]
+    resources :messages, only: [:create, :edit, :update, :destroy]
   end
 
   resources :applications, only: [:destroy]
@@ -31,7 +31,6 @@ Rails.application.routes.draw do
 
   resources :reviews, only: [:destroy]
 
-  get "user_search", to: 'pages#user_search'
-  get 'band_search', to: 'pages#band_search'
+  get "search", to: 'pages#search'
 
 end

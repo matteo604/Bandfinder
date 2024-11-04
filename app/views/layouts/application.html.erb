@@ -12,5 +12,18 @@
   <body><%= render "shared/navbar" %>
     <%= render "shared/flashes" %>
     <%= yield %>
+    <!-- JavaScript to remove alerts after 10 seconds -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        setTimeout(function() {
+          const alert = document.querySelector('.alert');
+          if (alert) {
+            alert.style.transition = 'opacity 0.5s ease-out';
+            alert.style.opacity = '0';
+            setTimeout(() => alert.remove(), 500);
+          }
+        }, 5000); // 5000 ms = 5 seconds
+      });
+    </script>
   </body>
 </html>
