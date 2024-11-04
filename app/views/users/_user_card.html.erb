@@ -2,8 +2,6 @@
   <%= link_to user_path(user) do %>
 
     <div>
-     <%# <%= image_tag 'default-profile-image.jpg', alt: 'profile-image', class: 'rounded-circle card-img-top p-2' %>
-      <!-- Optional: Check if there's a photo attached to the user, and only display if available -->
       <% if user.photo.attached? %>
         <%= image_tag @user.photo, alt: "#{user.first_name} #{user.last_name}", class:"rounded-circle card-img-top p-2" %>
       <% else %>
