@@ -18,12 +18,45 @@ User.create!(id: 76, email: 'jane.smith@example.com', password: 'AnotherSecurePa
              address: 'Hauptstrasse, Berlin', telephone_number: '5557654321',
              instruments: ['Saxophone', 'Vocals'].to_json) unless existing_users.include?(76)
 
-User.create!(id: 77, email: 'bob.johnson@example.com', password: 'YetAnotherSecurePassword123',
-             password_confirmation: 'YetAnotherSecurePassword123', first_name: 'Bob', last_name: 'Johnson',
-             address: 'Los Angeles', telephone_number: '5559876543',
-             instruments: ['Drums', 'Bass'].to_json) unless existing_users.include?(77)
 
-puts 'Users created successfully!'
+john.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "john-doe.jpg")),
+  filename: "john-doe.jpg",
+  content_type: "image/jpg"
+)
+
+if john.save
+  puts "Created John as a user!"
+else
+  puts "Failed to create John: #{john.errors.full_messages.join(", ")}"
+end
+
+jane = User.new(
+  email: 'jane.smith@example.com',
+  password: 'AnotherSecurePassword123',
+  password_confirmation: 'AnotherSecurePassword123',
+  first_name: 'Jane',
+  last_name: 'Smith',
+  address: 'Hauptstrasse, Berlin',
+  telephone_number: '5557654321',
+  instruments: ['Saxophone', 'Vocals'].to_json
+)
+
+jane.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "jane-smith.jpg")),
+  filename: "jane-smith.jpg",
+  content_type: "image/jpg"
+)
+
+
+
+if jane.save
+  puts "Created Jane as a user!"
+else
+  puts "Failed to create Jane: #{jane.errors.full_messages.join(", ")}"
+end
+
+# Check if users are created successfully
 
 # Create Band records
 puts 'Creating bands...'
@@ -112,12 +145,55 @@ Band.create!([
 
 puts 'Bands created successfully!'
 
+<<<<<<< HEAD
 # Create band sessions (adjust band IDs if needed)
 puts 'Creating band sessions...'
 band1 = Band.find_by(title: "The Rockers")
 band2 = Band.find_by(title: "Jazz Collective")
 
 BandSession.create!(
+=======
+  band1.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "bandfinder.jpg")),
+  filename: "bandfinder.jpg",
+  content_type: "image/jpg"
+  )
+
+
+  if band1.save
+    puts "Created band: #{band1.title}"
+  else
+    puts "Failed to create band: #{band1.errors.full_messages.join(", ")}"
+  end
+
+  band2 = Band.new(
+    title: 'Jazz Vibes',
+    description: 'A smooth jazz ensemble with a blend of contemporary and classic styles.',
+    address: 'Paris',
+    genre: 'Jazz',
+    leader_id: john.id
+  )
+
+  band2.photo.attach(
+    io: File.open(Rails.root.join("app", "assets", "images", "jazz-band.jpg")),
+    filename: "jazz-band.jpg",
+    content_type: "image/jpg"
+  )
+
+
+  if band2.save
+    puts "Created band: #{band2.title}"
+  else
+    puts "Failed to create band: #{band2.errors.full_messages.join(", ")}"
+  end
+else
+  puts "Cannot create bands because one or both users were not created successfully."
+end
+
+puts 'Seeding completed!'
+
+band_session = BandSession.create!(
+>>>>>>> 441d90878c164ea9dda678924011ce9c458ffdec
   title: 'The Echoes first session',
   description: 'A rock band known for their energetic performances and catchy tunes.',
   address: '17 Lydden Rd, London SW18 4LT',

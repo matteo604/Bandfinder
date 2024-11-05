@@ -313,13 +313,7 @@
           <!-- Band Cards -->
           <div data-toggleswitch-target="bandCard" class="card-group <%= "d-none" if @button_state %>">
             <% @bands.each do |band| %>
-              <div class="band-card">
-                <div class="card-body">
-                  <h5><%= band.title %></h5>
-                  <p><%= band.genre %></p>
-                  <p>Address: <%= band.address %></p>
-                </div>
-              </div>
+              <%= render partial: "bands/band_card", locals: { band: band } %>
             <% end %>
           </div>
 
