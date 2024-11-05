@@ -42,6 +42,15 @@ jane = User.new(
   telephone_number: '5557654321',
   instruments: ['Saxophone', 'Vocals'].to_json
 )
+
+jane.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "jane-smith.jpg")),
+  filename: "jane-smith.jpg",
+  content_type: "image/jpg"
+)
+
+
+
 if jane.save
   puts "Created Jane as a user!"
 else
