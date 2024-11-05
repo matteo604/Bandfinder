@@ -57,9 +57,123 @@
           <div class="search-input">
             <input type="text" id="location-filter" name="address" placeholder="Location" class="form-control filter-input">
           </div>
-          <div class="search-input">
-            <input type="text" id="instrument-filter" name="instruments" placeholder="Instruments" class="form-control filter-input">
-          </div>
+         <div class="search-input">
+          <select id="instrument-filter" name="searching_for_instruments" class="form-control filter-input">
+            <option value="" disabled selected>Select an instrument</option>
+            <!-- String instruments -->
+            <option value="Guitar">Guitar</option>
+            <option value="Bass">Bass</option>
+            <option value="Violin">Violin</option>
+            <option value="Viola">Viola</option>
+            <option value="Cello">Cello</option>
+            <option value="Double Bass">Double Bass</option>
+            <option value="Harp">Harp</option>
+            <option value="Mandolin">Mandolin</option>
+            <option value="Banjo">Banjo</option>
+            <option value="Ukulele">Ukulele</option>
+
+            <!-- Woodwind instruments -->
+            <option value="Flute">Flute</option>
+            <option value="Clarinet">Clarinet</option>
+            <option value="Oboe">Oboe</option>
+            <option value="Bassoon">Bassoon</option>
+            <option value="Piccolo">Piccolo</option>
+            <option value="English Horn">English Horn</option>
+            <option value="Saxophone (Alto)">Saxophone (Alto)</option>
+            <option value="Saxophone (Tenor)">Saxophone (Tenor)</option>
+            <option value="Saxophone (Baritone)">Saxophone (Baritone)</option>
+            <option value="Recorder">Recorder</option>
+            <option value="Bass Clarinet">Bass Clarinet</option>
+
+            <!-- Brass instruments -->
+            <option value="Trumpet">Trumpet</option>
+            <option value="Trombone">Trombone</option>
+            <option value="French Horn">French Horn</option>
+            <option value="Tuba">Tuba</option>
+            <option value="Euphonium">Euphonium</option>
+            <option value="Cornet">Cornet</option>
+            <option value="Baritone Horn">Baritone Horn</option>
+
+            <!-- Percussion instruments -->
+            <option value="Drums">Drums</option>
+            <option value="Snare Drum">Snare Drum</option>
+            <option value="Bass Drum">Bass Drum</option>
+            <option value="Cymbals">Cymbals</option>
+            <option value="Timpani">Timpani</option>
+            <option value="Bongos">Bongos</option>
+            <option value="Conga">Conga</option>
+            <option value="Djembe">Djembe</option>
+            <option value="Marimba">Marimba</option>
+            <option value="Xylophone">Xylophone</option>
+            <option value="Vibraphone">Vibraphone</option>
+            <option value="Glockenspiel">Glockenspiel</option>
+            <option value="Tambourine">Tambourine</option>
+            <option value="Triangle">Triangle</option>
+            <option value="Castanets">Castanets</option>
+
+            <!-- Keyboard instruments -->
+            <option value="Piano">Piano</option>
+            <option value="Electric Keyboard">Electric Keyboard</option>
+            <option value="Synthesizer">Synthesizer</option>
+            <option value="Organ">Organ</option>
+            <option value="Harpsichord">Harpsichord</option>
+            <option value="Accordion">Accordion</option>
+
+            <!-- Electronic instruments -->
+            <option value="Electric Guitar">Electric Guitar</option>
+            <option value="Electric Bass">Electric Bass</option>
+            <option value="Theremin">Theremin</option>
+            <option value="Drum Machine">Drum Machine</option>
+            <option value="Samplers">Samplers</option>
+            <option value="Synthesizer (Analog)">Synthesizer (Analog)</option>
+            <option value="Synthesizer (Digital)">Synthesizer (Digital)</option>
+            <option value="Modular Synthesizer">Modular Synthesizer</option>
+
+            <!-- Vocal types -->
+            <option value="Vocals (Soprano)">Vocals (Soprano)</option>
+            <option value="Vocals (Alto)">Vocals (Alto)</option>
+            <option value="Vocals (Tenor)">Vocals (Tenor)</option>
+            <option value="Vocals (Baritone)">Vocals (Baritone)</option>
+            <option value="Vocals (Bass)">Vocals (Bass)</option>
+
+            <!-- World instruments -->
+            <option value="Sitar">Sitar</option>
+            <option value="Tabla">Tabla</option>
+            <option value="Dhol">Dhol</option>
+            <option value="Didgeridoo">Didgeridoo</option>
+            <option value="Bagpipes">Bagpipes</option>
+            <option value="Shakuhachi">Shakuhachi</option>
+            <option value="Kalimba">Kalimba</option>
+            <option value="Erhu">Erhu</option>
+            <option value="Koto">Koto</option>
+            <option value="Balalaika">Balalaika</option>
+            <option value="Bouzouki">Bouzouki</option>
+            <option value="Steel Drum">Steel Drum</option>
+            <option value="Pan Flute">Pan Flute</option>
+            <option value="Duduk">Duduk</option>
+            <option value="Cimbalom">Cimbalom</option>
+            <option value="Ocarina">Ocarina</option>
+            <option value="Guqin">Guqin</option>
+
+            <!-- Folk instruments -->
+            <option value="Hurdy Gurdy">Hurdy Gurdy</option>
+            <option value="Jew's Harp">Jew's Harp</option>
+            <option value="Zither">Zither</option>
+            <option value="Autoharp">Autoharp</option>
+            <option value="Hammered Dulcimer">Hammered Dulcimer</option>
+            <option value="Mountain Dulcimer">Mountain Dulcimer</option>
+
+            <!-- Miscellaneous -->
+            <option value="Kazoo">Kazoo</option>
+            <option value="Melodica">Melodica</option>
+            <option value="Maracas">Maracas</option>
+            <option value="Claves">Claves</option>
+            <option value="Cowbell">Cowbell</option>
+            <option value="Guiro">Guiro</option>
+            <option value="Agogo">Agogo</option>
+          </select>
+        </div>
+
           <div class="search-input">
             <select id="status-filter" name="status" class="form-control filter-input">
               <option value="" disabled selected>Select your status</option>
