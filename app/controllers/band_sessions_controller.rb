@@ -19,7 +19,7 @@ class BandSessionsController < ApplicationController
     @band_session.band_id = @band.id
     @band_session.creator_id = current_user.id
     if @band_session.save
-      redirect_to @band_session, notice: 'session was successfully created.'
+      redirect_to @band_sessions, notice: 'session was successfully created.'
     else
       render :new, status: :unprocessable_entity
     end

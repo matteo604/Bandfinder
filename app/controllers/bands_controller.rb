@@ -16,6 +16,11 @@ class BandsController < ApplicationController
   def show
     @band = Band.find(params[:id])
     @band_session = BandSession.new
+    if @band_session.save
+      redirect_to @band_sessions, notice: 'session was successfully created.'
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def create

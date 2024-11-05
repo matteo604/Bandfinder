@@ -26,6 +26,10 @@
 
 
 
+
+
+
+
     <div class="row mt-4 d-flex justify-content-center">
 
       <div class="col-5 gap-5">
@@ -49,23 +53,26 @@
       </div>
 
 
-
       <!-- HUGO'S CODE -->
-      <%= if current_user == @band.leader %>
-        <div class="col-5 gap-5">
+      <div class="col-5 gap-5">
+        <% if current_user.id == @band.leader_id %>
           <div class="user_details_card fs-4">
-
             <h2>My Band</h2>
-            <%= @band.each do |band| %>
-              <ul class="fs-4 mt-2">
-                <li>Band name: <%= band.title %></li>
-              </ul>
+            <% @bands.each do |band| %>
+              <% if current_user.id == band.leader_id %>
+                <ul class="fs-4 mt-2">
+                  <li>Band name: <%= link_to @band.title, band_path(@band) %></li>
+                </ul>
+             <% end %>
             <% end %>
-
           </div>
-        </div>
-      <% end %>
-        <!-- END OF HUGO'S CODE -->
+        <% end %>
+      </div>
+      <!-- END OF HUGO'S CODE -->
+
+
+
+
 
     </div>
   </div>
