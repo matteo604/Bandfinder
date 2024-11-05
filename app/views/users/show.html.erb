@@ -60,13 +60,11 @@
 
     </div>
   </div>
-</div>
 
 
 
 
-<div class="user-info">
-
+<div class="user-info mt-3">
   <!-- Add a button to start or continue a chat with the user -->
   <% if @user.id != current_user.id %>
     <% existing_chat = Chat.find_by(user_id: current_user.id, band_leader_id: @user.id) %>
@@ -86,4 +84,5 @@
       <% end %>
     <% end %>
   <% end %>
+</div>
 </div>

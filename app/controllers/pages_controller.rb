@@ -58,13 +58,13 @@ class PagesController < ApplicationController
     first_name = params[:first_name]
     last_name = params[:last_name]
     address = params[:address]
-    instruments = params[:instruments]
+    @instruments = params[:instruments]
     status = params[:status]
 
     @users = @users.where("first_name ILIKE ?", "%#{first_name}%") if first_name.present?
     @users = @users.where("last_name ILIKE ?", "%#{last_name}%") if last_name.present?
     @users = @users.where("address ILIKE ?", "%#{address}%") if address.present?
-    @users = @users.where("instruments ILIKE ?", "%#{instruments}%") if instruments.present?
+    @users = @users.where("instruments @@ ?", "%#{@instruments}%") if @instruments.present?
     @users = @users.where("status ILIKE ?", "%#{status}%") if status.present?
   end
 
@@ -86,10 +86,10 @@ class PagesController < ApplicationController
   def filter_band_search
     address = params[:band_address]
     genre = params[:genre]
-    searching_for_instruments = params[:searching_for_instruments]
+    @search_instruments = params[:search_instruments]
     @bands = @bands.where("address ILIKE ?", "%#{address}%") if address.present?
     @bands = @bands.where("genre ILIKE ?", "%#{genre}%") if genre.present?
-    @bands = @bands.where("searching_for_instruments ILIKE ?", "%#{searching_for_instruments}%") if searching_for_instruments.present?
+    @bands = @bands.where("searching_for_instruments @@ ?", "%#{@search_instruments}%") if @search_instruments.present?
   end
 
 end
