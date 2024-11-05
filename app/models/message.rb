@@ -9,4 +9,9 @@ class Message < ApplicationRecord
   def mark_as_read
     update(read: true)
   end
+
+  # Check if the message has been edited
+  def edited?
+    created_at != updated_at
+  end
 end

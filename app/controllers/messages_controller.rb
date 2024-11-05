@@ -55,7 +55,14 @@ class MessagesController < ApplicationController
     end
   end
 
+  # New method to check for updated messages
+  def check_updates
+    # Find messages updated within the last 10 seconds (or adjust as necessary)
+    @updated_messages = @chat.messages.where('updated_at > ?', 10.seconds.ago)
 
+    # Respond with the updated messages
+    render json: { updated_messages: @updated_messages.as_json(only: [:id, :content], methods: :edited?) }
+  end
 
   private
 

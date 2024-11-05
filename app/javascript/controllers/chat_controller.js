@@ -5,6 +5,7 @@ export default class extends Controller {
 
   connect() {
     this.scrollToBottom();
+    this.startPollingForNewMessages(); // Start polling for new or updated messages
   }
 
   scrollToBottom() {
@@ -51,12 +52,12 @@ export default class extends Controller {
 
     const saveButton = event.currentTarget;
     const messageId = saveButton.dataset.messageId;
-    const chatId = this.element.getAttribute("data-chat-id"); // Get chat ID from the data attribute
+    const chatId = this.element.getAttribute("data-chat-id");
     const textArea = saveButton.previousElementSibling;
     const updatedContent = textArea.value;
 
     // Send AJAX request to update the message
-    fetch(`/chats/${chatId}/messages/${messageId}`, {  // Include chat_id in the URL
+    fetch(`/chats/${chatId}/messages/${messageId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -72,16 +73,28 @@ export default class extends Controller {
         updatedMessage.dataset.messageId = messageId;
         updatedMessage.innerText = updatedContent;
 
-        // Add "edited" indicator if the message was edited
-        if (data.edited) {
-          const editedIndicator = document.createElement("span");
-          editedIndicator.className = "edited-indicator";
-          editedIndicator.innerHTML = " <i class='fas fa-edit'></i> Edited"; // Edited icon
-          updatedMessage.insertAdjacentElement('afterend', editedIndicator);
-        }
+        // Find the message footer (where the timestamp is)
+        const messageFooter = document.querySelector(`.message-timestamp[data-message-id="${messageId}"]`);
 
+        // Remove the textarea and add the updated message
         textArea.replaceWith(updatedMessage);
         saveButton.remove();
+
+        // Add the "edited" indicator in the message footer, next to the timestamp
+        let editedIndicator = messageFooter.querySelector('.edited-indicator');
+
+        // If the edited indicator doesn't exist, create one
+        if (!editedIndicator) {
+          editedIndicator = document.createElement("span");
+          editedIndicator.className = "edited-indicator";
+          editedIndicator.style.fontSize = "smaller";
+          editedIndicator.style.color = "gray";
+          editedIndicator.innerHTML = " (message has been edited)";
+          messageFooter.appendChild(editedIndicator);
+        }
+
+        // Ensure the edited indicator is visible in real-time
+        editedIndicator.style.display = "inline";
       } else {
         alert("There was an error updating the message.");
       }
@@ -123,5 +136,75 @@ export default class extends Controller {
         }
       });
     }
+  }
+
+  // New: Start polling for new or updated messages
+  startPollingForNewMessages() {
+    const chatId = this.element.getAttribute("data-chat-id");
+
+    if (!chatId || chatId === "null") {
+      console.error("Invalid chat ID detected:", chatId);
+      return;
+    }
+
+    setInterval(() => {
+      fetch(`/chats/${chatId}/messages/check_updates`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content
+        }
+      })
+      .then(response => {
+        // Ensure the response is JSON
+        if (!response.ok) {
+          throw new Error(`Server error: ${response.statusText}`);
+        }
+        return response.json();
+      })
+      .then(data => {
+        // Check if there are updated messages
+        if (data.updated_messages && data.updated_messages.length > 0) {
+          this.updateMessages(data.updated_messages);
+        }
+      })
+      .catch(error => {
+        console.error("Error during polling:", error);
+      });
+    }, 5000); // Poll every 5 seconds
+  }
+
+  // New: Update the messages in the DOM
+  updateMessages(updatedMessages) {
+    updatedMessages.forEach(message => {
+      const messageElement = document.querySelector(`.message-text[data-message-id="${message.id}"]`);
+
+      if (messageElement) {
+        // Update the message content
+        messageElement.innerText = message.content;
+
+        // Check if the message was edited and display the "edited" indicator
+        let editedIndicator = document.querySelector(`.edited-indicator[data-message-id="${message.id}"]`);
+
+        if (message.edited) {
+          if (!editedIndicator) {
+            // If there is no indicator, create one
+            editedIndicator = document.createElement("span");
+            editedIndicator.className = "edited-indicator";
+            editedIndicator.style.fontSize = "smaller";
+            editedIndicator.style.color = "gray";
+            editedIndicator.dataset.messageId = message.id;
+            editedIndicator.innerHTML = " (message has been edited)";
+            messageElement.insertAdjacentElement('afterend', editedIndicator);
+          } else {
+            // Ensure the indicator is visible if it already exists
+            editedIndicator.style.display = "inline";
+          }
+        } else if (editedIndicator) {
+          // Hide the edited indicator if the message is not edited anymore
+          editedIndicator.style.display = "none";
+        }
+      }
+    });
   }
 }
