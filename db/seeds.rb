@@ -19,6 +19,13 @@ john = User.new(
   instruments: ['Guitar', 'Piano'].to_json
 )
 
+
+john.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "john-doe.jpg")),
+  filename: "john-doe.jpg",
+  content_type: "image/jpg"
+)
+
 if john.save
   puts "Created John as a user!"
 else
@@ -35,6 +42,15 @@ jane = User.new(
   telephone_number: '5557654321',
   instruments: ['Saxophone', 'Vocals'].to_json
 )
+
+jane.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "jane-smith.jpg")),
+  filename: "jane-smith.jpg",
+  content_type: "image/jpg"
+)
+
+
+
 if jane.save
   puts "Created Jane as a user!"
 else
@@ -54,6 +70,13 @@ if john.persisted? && jane.persisted?
     leader_id: jane.id
   )
 
+  band1.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "bandfinder.jpg")),
+  filename: "bandfinder.jpg",
+  content_type: "image/jpg"
+  )
+
+
   if band1.save
     puts "Created band: #{band1.title}"
   else
@@ -67,6 +90,13 @@ if john.persisted? && jane.persisted?
     genre: 'Jazz',
     leader_id: john.id
   )
+
+  band2.photo.attach(
+    io: File.open(Rails.root.join("app", "assets", "images", "jazz-band.jpg")),
+    filename: "jazz-band.jpg",
+    content_type: "image/jpg"
+  )
+
 
   if band2.save
     puts "Created band: #{band2.title}"

@@ -1,0 +1,28 @@
+<div class="band-card">
+  <%= link_to band_path(band) do %>
+
+    <div class="d-flex justify-content-center">
+      <% if band.photo.attached? %>
+        <%= image_tag band.photo, alt: "#{band.title}", class:"rounded-image" %>
+      <% else %>
+        <%= image_tag "default-profile-image.jpg", alt: "default profile image", class:"rounded-image" %>
+      <% end %>
+    </div>
+
+
+    <div class="card-body mt-3">
+
+      <h5 class="text-center"><%= band.title %></h5>
+      <div>
+        <i class="fa-solid fa-music fs-3 m-2"></i>
+        <%= band.genre %>
+      </div>
+      <div>
+        <i class="fa-solid fa-location-dot fs-3 m-2"></i>
+        <%= band.address %>
+      </div>
+    </div>
+
+  <% end %>
+
+</div>
