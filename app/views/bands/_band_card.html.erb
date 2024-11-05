@@ -3,7 +3,7 @@
 
   <div>
     <% if band.photo.attached? %>
-      <%= image_tag @band.photo, alt: "#{band.title}", class:"rounded-circle card-img-top p-2" %>
+      <%= image_tag band.photo, alt: "#{band.title}", class:"rounded-circle card-img-top p-2" %>
     <% else %>
       <%= image_tag "default-profile-image.jpg", alt: "default profile image", class:"rounded-circle card-img-top p-2" %>
     <% end %>

@@ -54,6 +54,13 @@ if john.persisted? && jane.persisted?
     leader_id: jane.id
   )
 
+  band1.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "bandfinder.jpg")),
+  filename: "bandfinder.jpg",
+  content_type: "image/jpg"
+  )
+
+
   if band1.save
     puts "Created band: #{band1.title}"
   else
