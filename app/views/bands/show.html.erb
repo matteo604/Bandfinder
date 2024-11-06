@@ -6,6 +6,7 @@
   <% if current_user != @band.leader %>
     <%= link_to 'Message the Band Leader', new_band_chat_path(@band), class: 'btn btn-primary mt-3' %>
   <% else %>
+
     <!-- HUGO'S CODE -->
 
     <!-- Button trigger modal -->
@@ -27,7 +28,6 @@
               <%= f.input :end_date, as: :string, input_html: { data: { flatpickr_target: "endDate" }, id: 'check-out' } %>
               <%= f.submit 'Schedule your band session' %>
             <% end %>
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
