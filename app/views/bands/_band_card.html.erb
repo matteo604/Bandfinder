@@ -21,6 +21,19 @@
         <i class="fa-solid fa-location-dot fs-3 m-2"></i>
         <%= band.address %>
       </div>
+      <div>
+        <i class="fa-solid fa-drum fs-3 m-1"></i>
+        Looking for: <br>
+        <div class="text-center">
+          <% instruments = band.searching_for_instruments
+          begin
+            formatted_instruments = JSON.parse(instruments).map(&:downcase).join(", ")
+          rescue JSON::ParserError
+            formatted_instruments = instruments
+          end %>
+          <%= formatted_instruments %>
+        </div>
+      </div>
     </div>
 
   <% end %>
