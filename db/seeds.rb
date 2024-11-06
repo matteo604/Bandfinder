@@ -147,8 +147,10 @@ band1 = Band.create!(
   description: 'A metal band.',
   address: 'Paris',
   genre: 'Metal',
-  leader_id: jane.id
+  leader_id: jane.id,
+  searching_for_instruments: ["guitar", "piano"]
 )
+jane.update(band_id: band1.id)
 
   band1.photo.attach(
   io: File.open(Rails.root.join("app", "assets", "images", "bandfinder.jpg")),
@@ -162,8 +164,11 @@ band1 = Band.create!(
     description: 'A smooth jazz ensemble with a blend of contemporary and classic styles.',
     address: 'Berlin',
     genre: 'Jazz',
-    leader_id: john.id
+    leader_id: john.id,
+    searching_for_instruments: ["saxophone", "drums"]
   )
+
+  john.update(band_id: band2.id)
 
   band2.photo.attach(
     io: File.open(Rails.root.join("app", "assets", "images", "jazz-band.jpg")),
