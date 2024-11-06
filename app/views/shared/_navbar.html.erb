@@ -40,7 +40,11 @@
           <!-- Avatar and Dropdown -->
           <li class="nav-item dropdown">
             <a href="#" class="avatar nav-link" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
+              <% if current_user.photo.attached? %>
+                <%= image_tag current_user.photo, alt: "dropdown menu", class:"avatar" %>
+              <% else %>
+                <%= image_tag "default-profile-image.jpg", alt: "default profile image", class:"rounded-image" %>
+              <% end %>
             </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "My account", user_path(current_user), class: "dropdown-item" %>
