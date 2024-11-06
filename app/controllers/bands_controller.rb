@@ -15,6 +15,7 @@ class BandsController < ApplicationController
 
   def show
     @band = Band.find(params[:id])
+    @band_session = BandSession.new
     @members = @band.members
   end
 

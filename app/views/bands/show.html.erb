@@ -13,7 +13,36 @@
         <div class="col-3">
           <h2 class="m-3"><%= @band.title %></h2>
         </div>
+        
+    <!-- HUGO'S CODE -->
 
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+      Book session
+    </button>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Book session</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" style="background: red;">
+            <%= simple_form_for [@band, @band_session], data: { controller: 'datepicker' } do |f| %>
+              <%= f.input :start_date, as: :string, input_html: { data: { flatpickr_target: "startDate" }, id: 'check-in' } %>
+              <%= f.input :end_date, as: :string, input_html: { data: { flatpickr_target: "endDate" }, id: 'check-out' } %>
+              <%= f.submit 'Schedule your band session' %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- END OF HUGO'S CODE -->
+
+  <% end %>
         <div class="col-9 text-end">
           <h4 class="m-3"> Created : <%= @band.created_at.strftime("%b %d, %Y") %> by <%= @band.leader.first_name %> <%= @band.leader.last_name %></h4>
         </div>

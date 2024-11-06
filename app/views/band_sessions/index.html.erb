@@ -1,0 +1,11 @@
+<div class="container d-flex justify-content-between">
+  <% @band_sessions.each do |band_session| %>
+    <div class="user_details_card fs-4 mx-2">
+          <ul class="fs-4 mt-2">
+            <li>Band session: <%= band_session.start_date %> - <%= band_session.end_date %></li>
+          </ul>
+    </div>
+  <% end %>
+</div>
+
+<%= link_to 'Return to band.', users_path(@user)%>

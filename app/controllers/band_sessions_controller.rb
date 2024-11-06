@@ -6,6 +6,8 @@ class BandSessionsController < ApplicationController
   end
 
   def show
+    @band = Band.find(params[:band_id])
+    @band_session = @band.band_sessions.find(params[:id])
   end
 
   def new
@@ -14,14 +16,16 @@ class BandSessionsController < ApplicationController
   end
 
   def create
-    @band_session = BandSession.new(band_session_params)
     @band = Band.find(params[:band_id])
+    @band_session = BandSession.new(band_session_params)
     @band_session.band_id = @band.id
     @band_session.creator_id = current_user.id
     if @band_session.save
-      redirect_to @band_session, notice: 'session was successfully created.'
+      redirect_to band_band_sessions_path, notice: 'Session was successfully created.'
+      puts "Session valid"
     else
-      render :new, status: :unprocessable_entity
+      render 'bands/show', status: :unprocessable_entity
+      puts @band_session.errors.full_message
     end
   end
 
@@ -30,7 +34,7 @@ class BandSessionsController < ApplicationController
 
   def update
     if @band_session.update(band_session_params)
-      redirect_to @band_session, notice: 'session was successfully updated.'
+      redirect_to @band_session, notice: 'Session was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
