@@ -17,8 +17,14 @@ export default class extends Controller {
       style: "mapbox://styles/pdunleav/cjofefl7u3j3e2sp0ylex3cyb"
     });
     this.markerInstances = [];
-    this.#addMarkersToMap(this.bandmarkersValue);
-    this.mapHasBandMarkers = true;
+    if (window.location.href.includes("user_search")){
+      this.mapHasBandMarkers = false
+    } else if (window.location.href.includes("band_search")) {
+      this.mapHasBandMarkers = true
+    } else {
+      this.mapHasBandMarkers = true
+    }
+    this.#addMarkersToMap(this.mapHasBandMarkers ? this.bandmarkersValue : this.usermarkersValue);
     this.#fitMapToMarkers();
   }
   #addMarkersToMap(markers) {
@@ -36,7 +42,12 @@ export default class extends Controller {
 
   #fitMapToMarkers() {
     const bounds = new mapboxgl.LngLatBounds()
-    this.bandmarkersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]))
+    if (this.mapHasBandMarkers) {
+      this.bandmarkersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]))
+    }
+    else {
+      this.usermarkersValue.forEach(marker => bounds.extend([ marker.lng, marker.lat ]))
+    }
     this.map.fitBounds(bounds, { padding: 70, maxZoom: 15, duration: 0 })
   }
 
@@ -45,6 +56,7 @@ export default class extends Controller {
     const nextMarkers = this.mapHasBandMarkers ? this.usermarkersValue : this.bandmarkersValue;
     this.mapHasBandMarkers = !this.mapHasBandMarkers;
     this.#addMarkersToMap(nextMarkers);
+    this.#fitMapToMarkers();
   }
 
   clearMarkers(){

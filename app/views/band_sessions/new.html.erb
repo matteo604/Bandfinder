@@ -10,16 +10,16 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Book session</h5>
+        <h5 class="modal-title" style="color:black" id="exampleModalLabel">Book session</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body" style="background: red;">
+      <div class="modal-body" style="background: orange;">
         <%= simple_form_for [@band, @band_session], data: { controller: 'datepicker' } do |f| %>
           <%= f.input :start_date, as: :string, input_html: { data: { flatpickr_target: "startDate" }, id: 'check-in' } %>
           <%= f.input :end_date, as: :string, input_html: { data: { flatpickr_target: "endDate" }, id: 'check-out' } %>
           <%= f.submit 'Schedule your band session' %>
         <% end %>
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-secondary mt-3" data-bs-dismiss="modal">Close</button>
       </div>
 
     </div>

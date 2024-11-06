@@ -1,8 +1,8 @@
 class User < ApplicationRecord
   belongs_to :band, optional: true
-  has_many :chats
-  has_many :messages
-  has_many :reviews
+  has_many :chats, dependent: :destroy
+  has_many :messages, dependent: :destroy
+  has_many :reviews, dependent: :destroy
   has_one_attached :photo
 
   devise :database_authenticatable, :registerable,
