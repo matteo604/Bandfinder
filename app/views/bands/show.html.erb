@@ -61,12 +61,10 @@
     </div>
   </div>
   <div class="user-info mt-3">
-    <% if @band.leader_id != current_user.id %>  <!-- Ensure the current user is not the band leader -->
-    <!-- Check if the current user is already a member of the band -->
+    <% if @band.leader_id != current_user.id %>
       <% is_member_of_band = @band.members.exists?(current_user.id) %>
-
-      <% if !is_member_of_band %> <!-- Only show the chat creation option if the user is not a member of the band -->
-        <% existing_chat = Chat.find_by(user_id: current_user.id, band_leader_id: @band.leader_id) %>  <!-- Check if a chat already exists with the band leader -->
+      <% if !is_member_of_band %>
+        <% existing_chat = Chat.find_by(user_id: current_user.id, band_leader_id: @band.leader_id) %>
 
         <% if existing_chat %>
           <%= link_to 'Continue Chat', chat_path(existing_chat), class: 'btn btn-primary continue-chat-button' %>
@@ -75,11 +73,10 @@
           <%= form.hidden_field :user_id, value: current_user.id %>
           <%= form.hidden_field :band_leader_id, value: @band.leader_id %>
           <%= form.submit "Start Chat", class: "btn btn-primary create-chat-button" %>
-          <!-- Submit button to create the chat -->
           <% end %>
         <% end %>
       <% else %>
-        <p>You are already a member of this band and can't start a chat.</p>
+        <p></p>
       <% end %>
     <% else %>
       <p></p>
