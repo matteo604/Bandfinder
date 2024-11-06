@@ -92,4 +92,7 @@ class PagesController < ApplicationController
     @bands = @bands.where("searching_for_instruments @@ ?", "%#{@search_instruments}%") if @search_instruments.present?
   end
 
+  def about
+  end
+
 end

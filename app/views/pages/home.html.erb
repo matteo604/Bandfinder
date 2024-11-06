@@ -267,41 +267,108 @@
 
     <div data-toggleswitch-target="indexArea" class="d-flex flex-wrap d-none">
       <div data-toggleswitch-target="bandIndex" class="container">
-        <h2 class="mb-4">Band List</h2>
+
+        <h2 class=" text-center mb-4">Band List</h2>
         <% @bands.each do |band| %>
-          <div class="card shadow-sm mb-3">
-            <div class="card-body">
-              <h5 class="card-title text-primary"><%= band.title %></h5>
-              <p class="card-text"><%= band.description %></p>
+          <%= link_to band_path(band) do %>
+
+            <div class="row mb-3">
+              <div class="col-2 d-flex">
+                <div class="p-2 justify-content-center">
+                  <% if band.photo.attached? %>
+                    <%= image_tag band.photo, alt: "#{band.title}", class:"rounded-image" %>
+                  <% else %>
+                    <%= image_tag "default-profile-image.jpg", alt: "default profile image", class:"rounded-image" %>
+                  <% end %>
+                </div>
+              </div>
+
+              <div class="col-8 p-3 d-flex ">
+                <div class="card shadow-sm fixed-width-card">
+                  <div class="card-body">
+                    <h5 class="card-title text-primary"><%= band.title %></h5>
+                    <p class="card-text"><%= band.description %></p>
+                  </div>
+                  <div class="card-footer text-muted">
+                    <small>Genre: <%= band.genre %></small>
+                  </div>
+                </div>
+              </div>
             </div>
-            <div class="card-footer text-muted">
-              <small>Genre: <%= band.genre %></small>
-            </div>
-          </div>
+          <% end %>
         <% end %>
       </div>
 
       <div data-toggleswitch-target="userIndex" class="d-none container">
-        <h2 class="mb-4">User List</h2>
+        <h2 class="text-center mb-4">User List</h2>
        <% @users.each do |user| %>
-        <%= link_to user_path(user) do %>
-          <div class="card shadow-sm mb-3">
-            <div class="card-body">
-              <h5 class="card-title text-primary"><%= user.first_name %> <%= user.last_name %></h5>
-              <p class="card-text">
-                <strong>Address:</strong> <%= user.address %><br>
-                <strong>Instruments:</strong>
-                <% instruments = user.instruments
-                  begin
-                    formatted_instruments = JSON.parse(instruments).map(&:downcase).join(", ")
-                  rescue JSON::ParserError
-                    formatted_instruments = instruments
-                  end %>
-                <%= formatted_instruments %>
-              </p>
+          <%= link_to user_path(user) do %>
+
+            <div class="row mb-3">
+              <div class="col-2 d-flex">
+                <div class="p-2 justify-content-center">
+                  <% if user.photo.attached? %>
+                    <%= image_tag user.photo, alt: "#{user.first_name}", class:"rounded-image" %>
+                  <% else %>
+                    <%= image_tag "default-profile-image.jpg", alt: "default profile image", class:"rounded-image" %>
+                  <% end %>
+                </div>
+              </div>
+
+              <div class="col-8 p-3 d-flex ">
+                <div class="card shadow-sm fixed-width-card">
+                  <div class="card-body">
+
+                    <h5 class="card-title text-primary"><%= user.first_name %> <%= user.last_name %></h5>
+                    <p class="card-text">
+                      <strong>Address:</strong> <%= user.address %><br>
+                      <strong>Instruments:</strong>
+                      <% instruments = user.instruments
+                        begin
+                          formatted_instruments = JSON.parse(instruments).map(&:downcase).join(", ")
+                        rescue JSON::ParserError
+                          formatted_instruments = instruments
+                        end %>
+                      <%= formatted_instruments %>
+                    </p>
+
+                  </div>
+
+                </div>
+              </div>
             </div>
-          </div>
-        <% end %>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <% end %>
       <% end %>
 
       </div>
