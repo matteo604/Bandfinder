@@ -2,9 +2,6 @@
   <!-- Banner Section -->
   <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(<%= asset_path('band-banner.jpg') %>);"></div>
   <!-- Button to message the band leader, only shown if current user is not the band leader -->
-  <% if current_user != @band.leader %>
-    <%= button_to 'Message Band Leader', chats_path(chat: { band_leader_id: @band.leader.id }), method: :post, class: "btn btn-primary" %>
-  <% end %>
 
   <div>
     <!-- Profile Banner -->
@@ -55,13 +52,7 @@
           <% @members.each do |member| %>
             <%= link_to user_path(member) do %>
               <%= member.first_name %> <%= member.last_name %>
-              ( <% instruments = member.instruments
-              begin
-                formatted_instruments = JSON.parse(instruments).map(&:downcase).join(", ")
-              rescue JSON::ParserError
-                formatted_instruments = instruments
-              end %>
-              <%= formatted_instruments %> )
+              (<%= member.instruments.join(", ") %> )
             <% end %>
           <% end %>
         </div>
@@ -71,23 +62,9 @@
 
   <!-- User Interaction Section -->
   <div class="user-info mt-3">
-    <% if @band.leader_id != current_user.id %>
-      <% is_member_of_band = @band.members.exists?(current_user.id) %>
-      <% unless is_member_of_band %>
-        <% existing_chat = Chat.find_by(user_id: current_user.id, band_leader_id: @band.leader_id) %>
-
-        <% if existing_chat %>
-          <%= link_to 'Continue Chat', chat_path(existing_chat), class: 'btn btn-primary continue-chat-button' %>
-        <% else %>
-          <%= form_with url: band_chats_path(@band.id), method: :post, local: true do |form| %>
-            <%= form.hidden_field :user_id, value: current_user.id %>
-            <%= form.hidden_field :band_leader_id, value: @band.leader_id %>
-            <%= form.submit "Start Chat", class: "btn btn-primary create-chat-button" %>
-          <% end %>
-        <% end %>
-      <% end %>
-    <% end %>
-
+  <% if current_user != @band.leader %>
+    <%= button_to 'Message Band Leader', chats_path(chat: { band_leader_id: @band.leader.id }), method: :post, class: "btn btn-primary" %>
+  <% end %>
     <!-- Book Session Button and Modal -->
     <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
       Book session
