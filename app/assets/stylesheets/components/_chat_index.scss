@@ -1,0 +1,92 @@
+/* Chats Container */
+.chats-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Chats Title */
+.chats-title {
+  font-size: 2em;
+  text-align: center;
+  margin-bottom: 20px;
+  color: #000; /* Black Text */
+}
+
+/* Chat Card */
+.chat-card {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 15px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 3px 10px rgba(0, 0, 0, 0.1);
+  color: #000; /* Black Text */
+}
+
+/* Chat Link Button */
+.chat-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.chat-link:hover {
+  background-color: #0056b3;
+}
+
+/* Back to Band Button */
+.back-to-band {
+  text-align: center; /* Center the button */
+  margin-top: 20px; /* Add some space above the button */
+  width: 30%;
+}
+
+.back-to-band-button {
+  padding: 8px 12px; /* Adjust padding for smaller button */
+  font-size: 1rem;
+  background-color: #6c757d;
+  color: #fff;
+  border-radius: 5px;
+  text-decoration: none;
+}
+
+.back-to-band-button:hover {
+  background-color: #5a6268;
+}
+
+/* No Chats Placeholder */
+.no-chats {
+  text-align: center;
+  font-size: 1.2em;
+  color: #000; /* Black Text */
+}
+
+/* Chat Partner Image */
+.chat-partner-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-left: 15px;
+}
+
+/* Unread and Read Badge */
+.unread-badge {
+  background-color: #ffcccc;
+  color: #cc0000;
+}
+
+.read-badge {
+  background-color: #ccffcc;
+  color: #006600;
+}
+
+.unread-count-badge {
+  background-color: red !important;
+}

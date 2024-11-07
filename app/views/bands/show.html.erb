@@ -1,6 +1,10 @@
 <div class="container">
   <!-- Banner Section -->
   <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(<%= asset_path('band-banner.jpg') %>);"></div>
+  <!-- Button to message the band leader, only shown if current user is not the band leader -->
+  <% if current_user != @band.leader %>
+    <%= button_to 'Message Band Leader', chats_path(chat: { band_leader_id: @band.leader.id }), method: :post, class: "btn btn-primary" %>
+  <% end %>
 
   <div>
     <!-- Profile Banner -->
