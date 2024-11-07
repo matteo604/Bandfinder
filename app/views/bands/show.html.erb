@@ -3,12 +3,12 @@
   <div>
     <div class="container profile_banner">
         <div class="mb-3">
-        <% if @band.photo.attached? %>
-          <%= image_tag @band.photo, alt: "#{@band.title}", class:"profile_image" %>
-        <% else %>
-          <%= image_tag "default-profile-image.jpg", alt: "default profile image", class:"profile_image" %>
-        <% end %>
-      </div>
+          <% if @band.photo.attached? %>
+            <%= image_tag @band.photo, alt: "#{@band.title}", class:"profile_image" %>
+          <% else %>
+            <%= image_tag "default-profile-image.jpg", alt: "default profile image", class:"profile_image" %>
+          <% end %>
+        </div>
       <div class="row border solid">
         <div class="col-3">
           <h2 class="m-3"><%= @band.title %></h2>
@@ -31,13 +31,13 @@
           <div class="p-2">
             <i class="fa-solid fa-drum fs-3"></i>
             We are looking for:
-            <% instruments = @band.searching_for_instruments
-            begin
-              formatted_instruments = JSON.parse(instruments).map(&:downcase).join(", ")
-            rescue JSON::ParserError
-              formatted_instruments = instruments
+            <% instruments = @band.searching_for_instruments %>
+            <% formatted_instruments = begin
+              JSON.parse(instruments).map(&:downcase).join(", ")
+              rescue JSON::ParserError
+              instruments
             end %>
-            <%= formatted_instruments %>
+            <%= formatted_instruments = instruments %>
           </div>
 
         </div>
@@ -45,15 +45,15 @@
           <h2>Members</h2>
           <% @members.each do |member| %>
             <%= link_to user_path(member) do %>
-            <%= member.first_name %> <%= member.last_name %>
-            (  <% instruments = member.instruments
-               begin
-                formatted_instruments = JSON.parse(instruments).map(&:downcase).join(", ")
-              rescue JSON::ParserError
-                formatted_instruments = instruments
-              end %>
-              <%= formatted_instruments %>
-            )
+              <%= member.first_name %> <%= member.last_name %>
+              ( <% instruments = member.instruments %>
+                <% formatted_instruments = begin
+                  JSON.parse(instruments).map(&:downcase).join(", ")
+                  rescue JSON::ParserError
+                  instruments
+                end %>
+                <%= formatted_instruments = instruments %>
+              )
             <% end %>
           <% end %>
         </div>
