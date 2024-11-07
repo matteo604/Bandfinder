@@ -43,8 +43,6 @@ class MessagesController < ApplicationController
 
   private
 
-  private
-
   def set_chat
     @chat = Chat.find(params[:chat_id])
   end

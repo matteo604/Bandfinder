@@ -1,23 +1,32 @@
-<div class="user-card j-content flex-wrap">
+<div class="user-card"> <%# /user-card j-content flex-wrap %>
+  <%= link_to user_path(user) do %>
 
-  <%= image_tag 'fake-profile-image.jpg', alt: 'profile-image', class: 'rounded-circle card-img-top p-2' %>
-
-  <div class="card-body m-3">
-    <h5 class="text-center"><%= user.first_name %> <%= user.last_name %></h5>
-    <div>
-      <i class="fa-solid fa-drum fs-3 m-2"></i>
-      <% instruments = user.instruments
-      begin
-        formatted_instruments = JSON.parse(instruments).map(&:downcase).join(", ")
-      rescue JSON::ParserError
-        formatted_instruments = instruments
-      end %>
-      <%= formatted_instruments %>
+    <div class="d-flex justify-content-center">
+      <% if user.photo.attached? %>
+        <%= image_tag user.photo, alt: "#{user.first_name} #{user.last_name}", class:"rounded-image" %>
+      <% else %>
+        <%= image_tag "default-profile-image.jpg", alt: "default profile image", class:"rounded-image" %>
+      <% end %>
     </div>
-    <div>
-      <i class="fa-solid fa-location-dot fs-3 m-2"></i>
-      <%= user.address %>
-    </div>
-  </div>
 
+
+    <div class="card-body mt-3">
+
+      <h5 class="text-center"><%= user.first_name %> <%= user.last_name %></h5>
+      <div>
+        <i class="fa-solid fa-drum fs-3 m-2"></i>
+        <% instruments = user.instruments
+        begin
+          formatted_instruments = JSON.parse(instruments).map(&:downcase).join(", ")
+        rescue JSON::ParserError
+          formatted_instruments = instruments
+        end %>
+        <%= formatted_instruments %>
+      </div>
+      <div>
+        <i class="fa-solid fa-location-dot fs-3 m-2"></i>
+        <%= user.address %>
+      </div>
+    </div>
+  <% end %>
 </div>
