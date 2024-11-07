@@ -1,11 +1,13 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  static targets = ["form", "content"]
+
+  static targets = ["form", "content", "unreadCount", "messagesContainer"];
 
   connect() {
     this.scrollToBottom();
-    this.startPollingForNewMessages(); // Start polling for new or updated messages
+    this.startPollingForNewMessages();
+    this.currentUserId = parseInt(this.element.dataset.currentUserId, 10);
   }
 
   scrollToBottom() {
@@ -13,6 +15,24 @@ export default class extends Controller {
     if (messagesContainer) {
       messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
+  }
+
+  markAllMessagesAsRead() {
+    fetch('/chats/mark_all_as_read', {
+      method: "GET",
+      headers: {
+        "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content
+      }
+    })
+    .then(response => response.json())
+    .then(data => {
+      if (data.success) {
+        console.log("All messages marked as read.");
+      }
+    })
+    .catch(error => {
+      console.error("Error marking messages as read:", error);
+    });
   }
 
   preventEmptySubmit(event) {
@@ -25,20 +45,16 @@ export default class extends Controller {
 
   editMessage(event) {
     event.preventDefault();
-
     const editButton = event.currentTarget;
     const messageId = editButton.dataset.messageId;
     const messageText = document.querySelector(`.message-text[data-message-id='${messageId}']`);
 
-    // Create a text area for editing
     const textArea = document.createElement("textarea");
     textArea.className = "message-edit-input";
     textArea.value = messageText.innerText;
 
-    // Replace the message text with the text area
     messageText.replaceWith(textArea);
 
-    // Add a save button with Stimulus action
     const saveButton = document.createElement("button");
     saveButton.innerText = "Save";
     saveButton.className = "btn btn-primary btn-sm save-message-button";
@@ -49,14 +65,12 @@ export default class extends Controller {
 
   saveMessage(event) {
     event.preventDefault();
-
     const saveButton = event.currentTarget;
     const messageId = saveButton.dataset.messageId;
     const chatId = this.element.getAttribute("data-chat-id");
     const textArea = saveButton.previousElementSibling;
     const updatedContent = textArea.value;
 
-    // Send AJAX request to update the message
     fetch(`/chats/${chatId}/messages/${messageId}`, {
       method: "PATCH",
       headers: {
@@ -73,17 +87,11 @@ export default class extends Controller {
         updatedMessage.dataset.messageId = messageId;
         updatedMessage.innerText = updatedContent;
 
-        // Find the message footer (where the timestamp is)
         const messageFooter = document.querySelector(`.message-timestamp[data-message-id="${messageId}"]`);
-
-        // Remove the textarea and add the updated message
         textArea.replaceWith(updatedMessage);
         saveButton.remove();
 
-        // Add the "edited" indicator in the message footer, next to the timestamp
         let editedIndicator = messageFooter.querySelector('.edited-indicator');
-
-        // If the edited indicator doesn't exist, create one
         if (!editedIndicator) {
           editedIndicator = document.createElement("span");
           editedIndicator.className = "edited-indicator";
@@ -92,8 +100,6 @@ export default class extends Controller {
           editedIndicator.innerHTML = " (message has been edited)";
           messageFooter.appendChild(editedIndicator);
         }
-
-        // Ensure the edited indicator is visible in real-time
         editedIndicator.style.display = "inline";
       } else {
         alert("There was an error updating the message.");
@@ -103,7 +109,6 @@ export default class extends Controller {
 
   deleteMessage(event) {
     event.preventDefault();
-
     const deleteButton = event.currentTarget;
     if (confirm("Are you sure you want to delete this message?")) {
       fetch(deleteButton.href, {
@@ -115,21 +120,19 @@ export default class extends Controller {
       .then(response => response.json())
       .then(data => {
         if (data.success) {
-          // Replace message content with deleted notice
           const messageElement = document.querySelector(`.message-text[data-message-id="${data.message_id}"]`);
           if (messageElement) {
             messageElement.innerText = "This message was deleted by the author.";
           }
 
-          // Remove the edit and delete buttons for this message
           const editButtonElement = document.querySelector(`.edit-message[data-message-id="${data.message_id}"]`);
           const deleteButtonElement = document.querySelector(`.delete-message[data-message-id="${data.message_id}"]`);
 
           if (editButtonElement) {
-            editButtonElement.remove(); // Remove the edit button after deletion
+            editButtonElement.remove();
           }
           if (deleteButtonElement) {
-            deleteButtonElement.remove(); // Remove the delete button after deletion
+            deleteButtonElement.remove();
           }
         } else {
           alert("There was an error deleting the message.");
@@ -138,14 +141,14 @@ export default class extends Controller {
     }
   }
 
-  // New: Start polling for new or updated messages
   startPollingForNewMessages() {
     const chatId = this.element.getAttribute("data-chat-id");
-
     if (!chatId || chatId === "null") {
       console.error("Invalid chat ID detected:", chatId);
       return;
     }
+
+    this.lastMessageId = this.lastMessageId || null;
 
     setInterval(() => {
       fetch(`/chats/${chatId}/messages/check_updates`, {
@@ -155,15 +158,16 @@ export default class extends Controller {
           "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content
         }
       })
-      .then(response => {
-        // Ensure the response is JSON
-        if (!response.ok) {
-          throw new Error(`Server error: ${response.statusText}`);
-        }
-        return response.json();
-      })
+      .then(response => response.json())
       .then(data => {
-        // Check if there are updated messages
+        if (data.new_messages && data.new_messages.length > 0) {
+          data.new_messages.forEach(message => {
+            if (message.user_id !== this.currentUserId && message.id !== this.lastMessageId) {
+              this.addMessageToContainer(message);
+              this.lastMessageId = message.id;
+            }
+          });
+        }
         if (data.updated_messages && data.updated_messages.length > 0) {
           this.updateMessages(data.updated_messages);
         }
@@ -171,40 +175,52 @@ export default class extends Controller {
       .catch(error => {
         console.error("Error during polling:", error);
       });
-    }, 5000); // Poll every 5 seconds
+    }, 5000);
   }
 
-  // New: Update the messages in the DOM
   updateMessages(updatedMessages) {
     updatedMessages.forEach(message => {
-      const messageElement = document.querySelector(`.message-text[data-message-id="${message.id}"]`);
+        const messageElement = document.querySelector(`.message-text[data-message-id="${message.id}"]`);
 
-      if (messageElement) {
-        // Update the message content
-        messageElement.innerText = message.content;
+        if (messageElement) {
+            console.log("Updating message content for message ID:", message.id);
+            messageElement.innerText = message.content;
 
-        // Check if the message was edited and display the "edited" indicator
-        let editedIndicator = document.querySelector(`.edited-indicator[data-message-id="${message.id}"]`);
-
-        if (message.edited) {
-          if (!editedIndicator) {
-            // If there is no indicator, create one
-            editedIndicator = document.createElement("span");
-            editedIndicator.className = "edited-indicator";
-            editedIndicator.style.fontSize = "smaller";
-            editedIndicator.style.color = "gray";
-            editedIndicator.dataset.messageId = message.id;
-            editedIndicator.innerHTML = " (message has been edited)";
-            messageElement.insertAdjacentElement('afterend', editedIndicator);
-          } else {
-            // Ensure the indicator is visible if it already exists
-            editedIndicator.style.display = "inline";
-          }
-        } else if (editedIndicator) {
-          // Hide the edited indicator if the message is not edited anymore
-          editedIndicator.style.display = "none";
+            let editedIndicator = document.querySelector(`.edited-indicator[data-message-id="${message.id}"]`);
+            if (message.edited) {
+                if (!editedIndicator) {
+                    editedIndicator = document.createElement("span");
+                    editedIndicator.className = "edited-indicator";
+                    editedIndicator.style.fontSize = "smaller";
+                    editedIndicator.style.color = "gray";
+                    editedIndicator.dataset.messageId = message.id;
+                    editedIndicator.innerHTML = " (message has been edited)";
+                    messageElement.insertAdjacentElement('afterend', editedIndicator);
+                } else {
+                    editedIndicator.style.display = "inline";
+                }
+            } else if (editedIndicator) {
+                editedIndicator.style.display = "none";
+            }
+        } else {
+            console.log("No message element found for ID:", message.id);
         }
-      }
     });
+  }
+
+  addMessageToContainer(message) {
+    if (document.querySelector(`.message-card[data-message-id="${message.id}"]`)) {
+      return;
+    }
+
+    const messageElement = document.createElement("div");
+    messageElement.className = `message-card ${message.user_id === this.currentUserId ? 'current-user' : 'other-user'}`;
+    messageElement.dataset.messageId = message.id;
+    messageElement.innerHTML = `
+      <p class="message-content"><strong>${message.user_name}:</strong> ${message.content}</p>
+      <div class="message-timestamp">${new Date(message.created_at).toLocaleString()}</div>
+    `;
+    this.messagesContainerTarget.appendChild(messageElement);
+    this.scrollToBottom();
   }
 }

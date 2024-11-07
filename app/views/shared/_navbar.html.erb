@@ -11,13 +11,12 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav ms-auto d-flex align-items-center">
         <% if user_signed_in? %>
-          <!-- Welcome message -->
           <li class="nav-item me-3">
             <span class="nav-link navbar-text">
               <i class="fas fa-user-circle"></i> Welcome&nbsp;<strong><%= current_user.first_name.upcase %></strong>
             </span>
           </li>
-          <!-- Navigation Links -->
+
           <li class="nav-item">
             <%= link_to "Home", root_path, class: "nav-link" %>
           </li>
@@ -28,23 +27,18 @@
             <%= link_to chats_path, class: "nav-link position-relative message-icon-container" do %>
               <div class="icon-wrapper">
                 <i class="fas fa-envelope envelope-icon"></i>
-                <% unread_count = Chat.joins(:messages).where("(chats.user_id = :user_id OR chats.band_leader_id = :user_id) AND messages.read = false AND messages.user_id != :user_id", user_id: current_user.id).count %>
-                <% if unread_count > 0 %>
-                  <span class="unread-count-badge">
-                    <%= unread_count %>
-                  </span>
-                <% end %>
+                <span class="unread-count-badge" style="display: none;">0</span>
               </div>
             <% end %>
           </li>
-          <!-- Avatar and Dropdown -->
+
           <li class="nav-item dropdown">
             <a href="#" class="avatar nav-link" id="navbarDropdown" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <%= image_tag "https://kitt.lewagon.com/placeholder/users/ssaunier", class: "avatar", alt: "dropdown menu" %>
             </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "My account", user_path(current_user), class: "dropdown-item" %>
-              <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
+              <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %>
             </div>
           </li>
         <% else %>
@@ -56,3 +50,34 @@
     </div>
   </div>
 </div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    function updateUnreadCount() {
+      fetch('/chats/unread_count', {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-CSRF-Token": document.querySelector("meta[name='csrf-token']").content
+        }
+      })
+      .then(response => response.json())
+      .then(data => {
+        const unreadCountElement = document.querySelector('.unread-count-badge');
+        if (data.unread_count > 0) {
+          unreadCountElement.innerText = data.unread_count;
+          unreadCountElement.style.display = "inline";
+        } else {
+          unreadCountElement.style.display = "none";
+        }
+      })
+      .catch(error => {
+        console.error("Error fetching total unread count:", error);
+      });
+    }
+
+    // start polling every 5 seconds
+    setInterval(updateUnreadCount, 5000);
+    updateUnreadCount(); // snitial call to set the count on page load
+  });
+</script>

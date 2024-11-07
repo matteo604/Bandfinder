@@ -1,4 +1,4 @@
-<div class="chat-container" data-controller="chat" data-chat-id="<%= @chat.id %>">
+<div class="chat-container" data-controller="chat" data-chat-id="<%= @chat.id %>" data-action="chat#markAllMessagesAsRead" data-current-user-id="<%= current_user.id %>">
   <h1 class="chat-title">
     <i class="fas fa-comments"></i> Chat with
     <% if @chat.band_leader == current_user %>
@@ -14,10 +14,10 @@
     <% end %>
   </h1>
 
-  <!-- messages section -->
+  <!-- messsages section -->
   <div class="messages-section">
     <h2 class="messages-title"><i class="fas fa-envelope"></i></h2>
-    <div class="messages-container">
+    <div class="messages-container" data-chat-target="messagesContainer">
       <% if @chat.messages.any? %>
         <% @chat.messages.order(:created_at).each do |message| %>
           <div class="message-card <%= message.user_id == current_user.id ? 'current-user' : 'other-user' %>">

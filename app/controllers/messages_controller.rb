@@ -25,7 +25,6 @@ class MessagesController < ApplicationController
 
   def update
     if @message.update(message_params)
-      # Hier prüfen wir, ob die Nachricht bearbeitet wurde (updated_at != created_at)
       respond_to do |format|
         format.json { render json: { success: true, content: @message.content, edited: @message.updated_at != @message.created_at } }
         format.html { redirect_to chat_path(@chat), notice: 'Message was successfully updated.' }
@@ -40,9 +39,7 @@ class MessagesController < ApplicationController
 
   def destroy
     if @message.user_id == current_user.id
-      # Update the message content instead of deleting the record
       @message.update(content: "This message was deleted by the author.")
-
       respond_to do |format|
         format.json { render json: { success: true, message_id: @message.id, content: @message.content, deleted: true } }
         format.html { redirect_to chat_path(@chat), notice: 'Message was successfully deleted.' }
@@ -55,14 +52,15 @@ class MessagesController < ApplicationController
     end
   end
 
-  # New method to check for updated messages
   def check_updates
-    # Find messages updated within the last 10 seconds (or adjust as necessary)
+    @new_messages = @chat.messages.where('created_at > ?', 10.seconds.ago)
     @updated_messages = @chat.messages.where('updated_at > ?', 10.seconds.ago)
-
-    # Respond with the updated messages
-    render json: { updated_messages: @updated_messages.as_json(only: [:id, :content], methods: :edited?) }
+    render json: {
+      new_messages: @new_messages.as_json(only: [:id, :content, :created_at, :user_id], methods: :user_name),
+      updated_messages: @updated_messages.as_json(only: [:id, :content], methods: :edited?)
+    }
   end
+
 
   private
 

@@ -24,9 +24,11 @@ Rails.application.routes.draw do
   # chats messages with the new check_updates route
   resources :chats, only: [:index, :show, :create] do
     resources :messages, only: [:create, :edit, :update, :destroy] do
-      # New route for checking updated messages (Polling)
       get 'check_updates', on: :collection
     end
+    get 'unread_count', on: :collection    # For total unread count (navbar)
+    get 'unread_count_per_chat', on: :collection # For unread counts per chat (index)
+    get 'mark_all_as_read', on: :collection # Route to mark all messages as read in index view
   end
 
   resources :applications, only: [:destroy]
