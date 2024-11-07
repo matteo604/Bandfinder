@@ -1,7 +1,11 @@
 # db/seeds.rb
 BandSession.destroy_all
 Chat.destroy_all
-Band.delete_all
+
+# Remove the band reference from users before destroying
+User.update_all(band_id: nil)
+
+Band.destroy_all
 User.destroy_all
 
 puts 'Creating new users...'
@@ -14,7 +18,7 @@ john = User.new(
   last_name: 'Doe',
   address: 'Madrid',
   telephone_number: '5557654321',
-  instruments: ['Guitar', 'Piano'].to_json
+  instruments: ['Guitar', 'Piano']
 )
 
 john.photo.attach(
@@ -37,7 +41,7 @@ jane = User.new(
   last_name: 'Smith',
   address: 'Hauptstrasse, Berlin',
   telephone_number: '5557654321',
-  instruments: ['Saxophone', 'Vocals'].to_json
+  instruments: ['Saxophone', 'Vocals']
 )
 
 jane.photo.attach(
@@ -52,94 +56,8 @@ else
   puts "Failed to create Jane: #{jane.errors.full_messages.join(',')}"
 end
 
-# Check if users are created successfully
-
-# Create Band records
 puts 'Creating bands...'
-# Band.create!([
-#   {
-#     title: "The Rockers",
-#     address: "Music City, NY",
-#     genre: "Rock",
-#     description: "A high-energy rock band that plays classic and modern rock hits.",
-#     searching_for_instruments: "Lead Guitar, Drums",
-#     leader_id: john.id
-#   },
-#   {
-#     title: "Jazz Collective",
-#     address: "New Orleans, LA",
-#     genre: "Jazz",
-#     description: "A smooth jazz ensemble featuring talented musicians.",
-#     searching_for_instruments: "Saxophone, Piano",
-#     leader_id: john.id
-#   },
-#   {
-#     title: "Pop Sensations",
-#     address: "Los Angeles, CA",
-#     genre: "Pop",
-#     description: "A pop band known for catchy tunes and energetic performances.",
-#     searching_for_instruments: "Backup Vocals",
-#     leader_id: john.id
-#   },
-#   {
-#     title: "Metal Warriors",
-#     address: "Austin, TX",
-#     genre: "Metal",
-#     description: "Heavy metal band with powerful riffs and intense performances.",
-#     searching_for_instruments: "Bass Guitar, Drums",
-#     leader_id: john.id
-#   },
-#   {
-#     title: "Classical Harmony",
-#     address: "Vienna, VA",
-#     genre: "Classical",
-#     description: "An orchestra that performs classical masterpieces.",
-#     searching_for_instruments: "Violin, Cello",
-#     leader_id: john.id
-#   },
-#   {
-#     title: "Indie Vibes",
-#     address: "Seattle, WA",
-#     genre: "Indie",
-#     description: "An indie band with a unique sound and style.",
-#     searching_for_instruments: "Keyboard, Bass Guitar",
-#     leader_id: jane.id
-#   },
-#   {
-#     title: "Folk Tales",
-#     address: "Nashville, TN",
-#     genre: "Folk",
-#     description: "A folk band that tells stories through music.",
-#     searching_for_instruments: "Banjo, Harmonica",
-#     leader_id: jane.id
-#   },
-#   {
-#     title: "Hip Hop Legends",
-#     address: "Atlanta, GA",
-#     genre: "Hip Hop",
-#     description: "A hip hop group known for their lyrical prowess.",
-#     searching_for_instruments: "DJ, Beat Maker",
-#     leader_id: jane.id
-#   },
-#   {
-#     title: "Reggae Roots",
-#     address: "Kingston, Jamaica",
-#     genre: "Reggae",
-#     description: "A reggae band promoting peace and love through music.",
-#     searching_for_instruments: "Guitar, Percussion",
-#     leader_id: jane.id
-#   },
-#   {
-#     title: "Blues Brothers",
-#     address: "Chicago, IL",
-#     genre: "Blues",
-#     description: "A blues band with a rich history of soulful performances.",
-#     searching_for_instruments: "Harmonica, Guitar",
-#     leader_id: jane.id
-#   }
-# ])
 
-puts 'Bands created successfully!'
 band1 = Band.create!(
   title: 'Metal Band',
   description: 'A metal band.',
@@ -150,30 +68,30 @@ band1 = Band.create!(
 )
 jane.update(band_id: band1.id)
 
-  band1.photo.attach(
+band1.photo.attach(
   io: File.open(Rails.root.join("app", "assets", "images", "bandfinder.jpg")),
   filename: "bandfinder.jpg",
   content_type: "image/jpg"
-  )
+)
 
-  band2 = Band.create!(
-    title: 'Jazz Vibes',
-    description: 'A smooth jazz ensemble with a blend of contemporary and classic styles.',
-    address: 'Berlin',
-    genre: 'Jazz',
-    leader_id: john.id,
-    searching_for_instruments: ["saxophone", "drums"]
-  )
+band2 = Band.create!(
+  title: 'Jazz Vibes',
+  description: 'A smooth jazz ensemble with a blend of contemporary and classic styles.',
+  address: 'Berlin',
+  genre: 'Jazz',
+  leader_id: john.id,
+  searching_for_instruments: ["saxophone", "drums"]
+)
 
-  john.update(band_id: band2.id)
+john.update(band_id: band2.id)
 
-  band2.photo.attach(
-    io: File.open(Rails.root.join("app", "assets", "images", "jazz-band.jpg")),
-    filename: "jazz-band.jpg",
-    content_type: "image/jpg"
-  )
+band2.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "jazz-band.jpg")),
+  filename: "jazz-band.jpg",
+  content_type: "image/jpg"
+)
 
-puts 'Seeding completed!'
+puts 'Bands created successfully!'
 
 BandSession.create!(
   title: 'The Echoes first session',
@@ -196,3 +114,4 @@ BandSession.create!(
 )
 
 puts 'Band sessions created successfully!'
+puts 'Seeding completed!'
