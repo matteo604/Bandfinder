@@ -26,7 +26,7 @@ john.photo.attach(
 if john.save
   puts "Created John as a user!"
 else
-  puts "Failed to create John: #{john.errors.full_messages.join(", ")}"
+  puts "Failed to create John: #{john.errors.full_messages.join(',')}"
 end
 
 jane = User.new(
@@ -46,12 +46,10 @@ jane.photo.attach(
   content_type: "image/jpg"
 )
 
-
-
 if jane.save
   puts "Created Jane as a user!"
 else
-  puts "Failed to create Jane: #{jane.errors.full_messages.join(", ")}"
+  puts "Failed to create Jane: #{jane.errors.full_messages.join(',')}"
 end
 
 # Check if users are created successfully
@@ -158,7 +156,6 @@ jane.update(band_id: band1.id)
   content_type: "image/jpg"
   )
 
-
   band2 = Band.create!(
     title: 'Jazz Vibes',
     description: 'A smooth jazz ensemble with a blend of contemporary and classic styles.',
@@ -178,7 +175,7 @@ jane.update(band_id: band1.id)
 
 puts 'Seeding completed!'
 
-band_session = BandSession.create!(
+BandSession.create!(
   title: 'The Echoes first session',
   description: 'A rock band known for their energetic performances and catchy tunes.',
   address: '17 Lydden Rd, London SW18 4LT',
