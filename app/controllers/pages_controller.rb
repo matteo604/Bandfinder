@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :home, :user_search, :band_search ]
+  skip_before_action :authenticate_user!, only: [ :home,:search ]
 
   def home
     @users = User.all
@@ -20,20 +20,30 @@ class PagesController < ApplicationController
     end
   end
 
-  def user_search
-    first_name = params[:first_name]
-    last_name = params[:last_name]
-    address = params[:address]
-    instruments = params[:instruments]
-    status = params[:status]
+  def search
+    # Set button states based on incoming parameters
+    @button_status = params[:status] == "on" ? "map-view" : "list-view"
     @button_state = params[:state] == "on"
+
+    case params[:form_type]
+    when "user_search"
+      handle_user_search
+    when "band_search"
+      handle_band_search
+    else
+      @users = []
+      @bands = []
+    end
+    render :home
+  end
+
+  private
+
+  def handle_user_search
     @users = User.all
-    @bands = Band.all
-    @users = @users.where("first_name ILIKE ?", "%#{first_name}%") if first_name.present?
-    @users = @users.where("last_name ILIKE ?", "%#{last_name}%") if last_name.present?
-    @users = @users.where("address ILIKE ?", "%#{address}%") if address.present?
-    @users = @users.where("instruments ILIKE ?", "%#{instruments}%") if instruments.present?
-    @users = @users.where("status ILIKE ?", "%#{status}%") if status.present?
+    filter_user_search
+
+    # Generate markers only if there are users found
     @user_markers = @users.geocoded.map do |user|
       {
         lat: user.latitude,
@@ -41,21 +51,28 @@ class PagesController < ApplicationController
         marker_html: "<i class='fas fa-map-marker-alt' style='color: black; font-size: 30px;'></i>"
       }
     end
-    render :home
+    @bands = Band.all
   end
 
-
-
-  def band_search
+  def filter_user_search
+    first_name = params[:first_name]
+    last_name = params[:last_name]
     address = params[:address]
-    genre = params[:genre]
-    searching_for_instruments = params[:searching_for_instruments]
+    @instruments = params[:instruments]
+    status = params[:status]
 
+    @users = @users.where("first_name ILIKE ?", "%#{first_name}%") if first_name.present?
+    @users = @users.where("last_name ILIKE ?", "%#{last_name}%") if last_name.present?
+    @users = @users.where("address ILIKE ?", "%#{address}%") if address.present?
+    @users = @users.where("instruments @@ ?", "%#{@instruments}%") if @instruments.present?
+    @users = @users.where("status ILIKE ?", "%#{status}%") if status.present?
+  end
+
+  def handle_band_search
     @bands = Band.all
-    @users = User.all
-    @bands = @bands.where("address ILIKE ?", "%#{address}%") if address.present?
-    @bands = @bands.where("genre ILIKE ?", "%#{genre}%") if genre.present?
-    @bands = @bands.where("searching_for_instruments ILIKE ?", "%#{searching_for_instruments}%") if searching_for_instruments.present?
+    filter_band_search
+
+    # Generate markers only if there are bands found
     @band_markers = @bands.geocoded.map do |band|
       {
         lat: band.latitude,
@@ -63,7 +80,19 @@ class PagesController < ApplicationController
         marker_html: "<i class='fas fa-map-marker-alt' style='color: black; font-size: 30px;'></i>"
       }
     end
-    render :home
+    @users = User.all
+  end
+
+  def filter_band_search
+    address = params[:band_address]
+    genre = params[:genre]
+    @search_instruments = params[:search_instruments]
+    @bands = @bands.where("address ILIKE ?", "%#{address}%") if address.present?
+    @bands = @bands.where("genre ILIKE ?", "%#{genre}%") if genre.present?
+    @bands = @bands.where("searching_for_instruments @@ ?", "%#{@search_instruments}%") if @search_instruments.present?
+  end
+
+  def about
   end
 
 end

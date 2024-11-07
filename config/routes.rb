@@ -14,10 +14,10 @@ Rails.application.routes.draw do
   resources :bands do
     resources :chats, only: [:new, :create]
     resources :reviews, only: [:new, :create, :index]
-    resources :band_sessions, only: [:index, :new, :create, :edit, :update]
+    resources :band_sessions, only: [:index, :show, :new, :create, :edit, :update]
   end
 
-  resources :band_sessions, only: [:show] do
+  resources :band_sessions, only: [:show]  do # do we need this lonly route without the band id?? to be checked
     resources :applications, only: [:create]
   end
 
@@ -36,4 +36,5 @@ Rails.application.routes.draw do
   resources :reviews, only: [:destroy]
 
   get "search", to: 'pages#search'
+  get "about", to: 'pages#about'
 end

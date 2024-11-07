@@ -15,6 +15,7 @@ class MessagesController < ApplicationController
         format.html { redirect_to chat_path(@chat), notice: 'Message was successfully sent.' }
         format.json { render json: { success: true, message: @message } }
       end
+      redirect_to chat_messages_path(@chat)
     else
       respond_to do |format|
         format.html { render :new }
@@ -61,8 +62,6 @@ class MessagesController < ApplicationController
     }
   end
 
-
-  private
 
   def set_chat
     @chat = Chat.find(params[:chat_id])

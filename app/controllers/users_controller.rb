@@ -6,7 +6,8 @@ class UsersController < ApplicationController
   end
 
   def show
-
+    @band = Band.find_by(leader_id:current_user.id)
+    @bands = Band.all
   end
 
   def edit

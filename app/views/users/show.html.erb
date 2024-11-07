@@ -1,78 +1,77 @@
 <div class="container">
+  <!-- Banner Section -->
   <div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(<%= asset_path('profile-banner.jpg') %>);"></div>
 
   <div>
-
+    <!-- Profile Banner -->
     <div class="container profile_banner">
       <div class="mb-3">
-        <!-- Optional: Check if there's a photo attached to the user, and only display if available -->
         <% if @user.photo.attached? %>
-          <%= image_tag @user.photo, alt: "#{@user.first_name} #{@user.last_name}", class:"profile_image" %>
+          <%= image_tag @user.photo, alt: "#{@user.first_name} #{@user.last_name}", class: "profile_image" %>
         <% else %>
-          <%= image_tag "fake-profile-image.jpg", alt: "default profile image", class:"profile_image" %>
+          <%= image_tag "default-profile-image.jpg", alt: "default profile image", class: "profile_image" %>
         <% end %>
       </div>
 
+      <!-- User Info Row -->
       <div class="row border solid">
         <div class="col-3">
           <h2 class="m-3"><%= @user.first_name %> <%= @user.last_name %></h2>
         </div>
-
         <div class="col-9 text-end">
-          <h4 class="m-3"> Member since : <%= @user.created_at.strftime("%b %d, %Y") %></h4>
+          <h4 class="m-3">Member since: <%= @user.created_at.strftime("%b %d, %Y") %></h4>
         </div>
       </div>
     </div>
 
-
-
-    <div class="row mt-4">
-
-      <div class="col-5 gap-5">
-        <div class="user_details_card fs-4">
-
-          <h2>Personal Details</h2>
-          <ul class="fs-4 mt-2">
-            <li>Phone : <%= @user.telephone_number %></li>
-            <li>Address : <%= @user.address %></li></li>
-            <li>Band leader : <%= @user.leader %></li>
-            <li>Email : <%= @user.email %></li>
-          </ul>
-
-          <div class="edit-icon">
-            <i class="fa-solid fa-pencil fs-4"></i>
+    <!-- User Details Section -->
+    <div class="row mt-4 d-flex justify-content-center">
+      <div class="gap-5">
+        <div class="user_details_card fs-4 d-flex flex-column">
+          <h2>My Details</h2>
+          <div class="p-2 border-top"><i class="fa-solid fa-phone"></i> <%= @user.telephone_number %></div>
+          <div class="p-2"><i class="fa-solid fa-location-dot"></i> <%= @user.address %></div>
+          <div class="p-2"><i class="fa-regular fa-envelope"></i> <%= @user.email %></div>
+          <div class="p-2 border-bottom">
+            <i class="fa-solid fa-drum fs-3"></i>
+            <% instruments = @user.instruments
+            begin
+              formatted_instruments = JSON.parse(instruments).map(&:downcase).join(", ")
+            rescue JSON::ParserError
+              formatted_instruments = instruments
+            end %>
+            <%= formatted_instruments %>
           </div>
 
+          <!-- Edit Icon -->
+          <div class="edit-icon">
+            <%= link_to edit_user_path(@user) do %>
+              <i class="fa-solid fa-pencil fs-4"></i>
+            <% end %>
+          </div>
         </div>
       </div>
-
-
     </div>
   </div>
-</div>
 
-
-
-
-<div class="user-info">
-
-  <!-- Add a button to start or continue a chat with the user -->
-  <% if @user.id != current_user.id %>
-    <% existing_chat = Chat.find_by(user_id: current_user.id, band_leader_id: @user.id) %>
-    <% if existing_chat %>
-      <%= link_to 'Continue Chat', chat_path(existing_chat), class: 'btn btn-primary continue-chat-button' %>
-    <% else %>
-      <!-- Assuming the band ID is accessible -->
-      <% band_id = current_user.band&.id %>
-      <% if band_id %>
-        <%= form_with url: band_chats_path(band_id), method: :post, local: true do %>
-          <%= hidden_field_tag :user_id, current_user.id %>
-          <%= hidden_field_tag :band_leader_id, @user.id %>
-          <%= submit_tag "Start Chat", class: "btn btn-primary create-chat-button" %>
-        <% end %>
+  <!-- User Interaction Section -->
+  <div class="user-info mt-3">
+    <% if @user.id != current_user.id %>
+      <% existing_chat = Chat.find_by(user_id: current_user.id, band_leader_id: @user.id) %>
+      <% if existing_chat %>
+        <%= link_to 'Continue Chat', chat_path(existing_chat), class: 'btn btn-primary continue-chat-button' %>
       <% else %>
-        <p>You need to belong to a band to start a chat with this user.</p>
+        <% band_id = current_user.band&.id %>
+        <% if band_id %>
+          <%= form_with url: band_chats_path(band_id), method: :post, local: true do %>
+            <%= hidden_field_tag :user_id, current_user.id %>
+            <%= hidden_field_tag :band_leader_id, @user.id %>
+            <%= submit_tag "Start Chat", class: "btn btn-primary create-chat-button" %>
+          <% end %>
+        <% else %>
+          <p>You need to belong to a band to start a chat with this user.</p>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
+  </div>
 </div>
