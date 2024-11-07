@@ -3,17 +3,93 @@
   <div>
     <div class="container profile_banner">
         <div class="mb-3">
-        <% if @band.photo.attached? %>
-          <%= image_tag @band.photo, alt: "#{@band.title}", class:"profile_image" %>
-        <% else %>
-          <%= image_tag "default-profile-image.jpg", alt: "default profile image", class:"profile_image" %>
-        <% end %>
-      </div>
+          <% if @band.photo.attached? %>
+            <%= image_tag @band.photo, alt: "#{@band.title}", class:"profile_image" %>
+          <% else %>
+            <%= image_tag "default-profile-image.jpg", alt: "default profile image", class:"profile_image" %>
+          <% end %>
+        </div>
       <div class="row border solid">
         <div class="col-3">
           <h2 class="m-3"><%= @band.title %></h2>
         </div>
-        
+
+<<<<<<<<< Temporary merge branch 1
+        <div class="col-9 text-end">
+          <h4 class="m-3"> Created : <%= @band.created_at.strftime("%b %d, %Y") %> by <%= @band.leader.first_name %> <%= @band.leader.last_name %></h4>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+
+      <div class="gap-5">
+        <div class="band_details_card fs-4 d-flex flex-column mb-4">
+
+          <h2>Band Details</h2>
+          <div class="p-2"><i class="fa-solid fa-location-dot"></i> <%= @band.address %></div>
+          <div class="p-2"><i class="fa-solid fa-music"></i> <%= @band.genre %></div>
+          <div class="p-2"><i class="fa-solid fa-circle-info"></i> <%= @band.description %></div>
+          <div class="p-2">
+            <i class="fa-solid fa-drum fs-3"></i>
+            We are looking for:
+            <% instruments = @band.searching_for_instruments %>
+            <% formatted_instruments = begin
+              JSON.parse(instruments).map(&:downcase).join(", ")
+              rescue JSON::ParserError
+              instruments
+            end %>
+            <%= formatted_instruments = instruments %>
+          </div>
+
+        </div>
+        <div class="band_details_card fs-4 d-flex flex-column">
+          <h2>Members</h2>
+          <% @members.each do |member| %>
+            <%= link_to user_path(member) do %>
+              <%= member.first_name %> <%= member.last_name %>
+              ( <% instruments = member.instruments %>
+                <% formatted_instruments = begin
+                  JSON.parse(instruments).map(&:downcase).join(", ")
+                  rescue JSON::ParserError
+                  instruments
+                end %>
+                <%= formatted_instruments = instruments %>
+              )
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="user-info mt-3">
+    <% if @band.leader_id != current_user.id %>
+      <% is_member_of_band = @band.members.exists?(current_user.id) %>
+      <% if !is_member_of_band %>
+        <% existing_chat = Chat.find_by(user_id: current_user.id, band_leader_id: @band.leader_id) %>
+
+        <% if existing_chat %>
+          <%= link_to 'Continue Chat', chat_path(existing_chat), class: 'btn btn-primary continue-chat-button' %>
+        <% else %>
+          <%= form_with url: band_chats_path(@band.id), method: :post, local: true do |form| %>
+          <%= form.hidden_field :user_id, value: current_user.id %>
+          <%= form.hidden_field :band_leader_id, value: @band.leader_id %>
+          <%= form.submit "Start Chat", class: "btn btn-primary create-chat-button" %>
+          <% end %>
+        <% end %>
+      <% else %>
+        <p></p>
+      <% end %>
+    <% else %>
+      <p></p>
+    <% end %>
+
+  </div>
+=========
+  <!-- Button to message the band leader, only shown if current user is not the band leader -->
+  <% if current_user != @band.leader %>
+    <%= link_to 'Message the Band Leader', new_band_chat_path(@band), class: 'btn btn-primary mt-3' %>
+  <% else %>
+
     <!-- HUGO'S CODE -->
 
     <!-- Button trigger modal -->
@@ -43,72 +119,5 @@
     <!-- END OF HUGO'S CODE -->
 
   <% end %>
-        <div class="col-9 text-end">
-          <h4 class="m-3"> Created : <%= @band.created_at.strftime("%b %d, %Y") %> by <%= @band.leader.first_name %> <%= @band.leader.last_name %></h4>
-        </div>
-      </div>
-    </div>
-    <div class="row mt-4">
-
-      <div class="gap-5">
-        <div class="band_details_card fs-4 d-flex flex-column mb-4">
-
-          <h2>Band Details</h2>
-          <div class="p-2"><i class="fa-solid fa-location-dot"></i> <%= @band.address %></div>
-          <div class="p-2"><i class="fa-solid fa-music"></i> <%= @band.genre %></div>
-          <div class="p-2"><i class="fa-solid fa-circle-info"></i> <%= @band.description %></div>
-          <div class="p-2">
-            <i class="fa-solid fa-drum fs-3"></i>
-            We are looking for:
-            <% instruments = @band.searching_for_instruments
-            begin
-              formatted_instruments = JSON.parse(instruments).map(&:downcase).join(", ")
-            rescue JSON::ParserError
-              formatted_instruments = instruments
-            end %>
-            <%= formatted_instruments %>
-          </div>
-
-        </div>
-        <div class="band_details_card fs-4 d-flex flex-column">
-          <h2>Members</h2>
-          <% @members.each do |member| %>
-            <%= link_to user_path(member) do %>
-            <%= member.first_name %> <%= member.last_name %>
-            (  <% instruments = member.instruments
-               begin
-                formatted_instruments = JSON.parse(instruments).map(&:downcase).join(", ")
-              rescue JSON::ParserError
-                formatted_instruments = instruments
-              end %>
-              <%= formatted_instruments %>
-            )
-            <% end %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="user-info mt-3">
-    <% if @band.leader_id != current_user.id %>
-      <% is_member_of_band = @band.members.exists?(current_user.id) %>
-      <% if !is_member_of_band %>
-        <% existing_chat = Chat.find_by(user_id: current_user.id, band_leader_id: @band.leader_id) %>
-
-        <% if existing_chat %>
-          <%= link_to 'Continue Chat', chat_path(existing_chat), class: 'btn btn-primary continue-chat-button' %>
-        <% else %>
-          <%= form_with url: band_chats_path(@band.id), method: :post, local: true do |form| %>
-          <%= form.hidden_field :user_id, value: current_user.id %>
-          <%= form.hidden_field :band_leader_id, value: @band.leader_id %>
-          <%= form.submit "Start Chat", class: "btn btn-primary create-chat-button" %>
-          <% end %>
-        <% end %>
-      <% else %>
-        <p></p>
-      <% end %>
-    <% else %>
-      <p></p>
-    <% end %>
-  </div>
+>>>>>>>>> Temporary merge branch 2
 </div>

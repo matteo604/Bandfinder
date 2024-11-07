@@ -88,8 +88,6 @@
 
 
 
-  <div class="user-info">
-
 
 <div class="user-info mt-3">
   <!-- Add a button to start or continue a chat with the user -->
@@ -106,6 +104,13 @@
           <%= hidden_field_tag :band_leader_id, @user.id %>
           <%= submit_tag "Start Chat", class: "btn btn-primary create-chat-button" %>
         <% end %>
+=========
+    <!-- Add a button to start or continue a chat with the user -->
+    <% if @user.id != current_user.id %>
+      <% existing_chat = Chat.find_by(user_id: current_user.id, band_leader_id: @user.id) %>
+      <% if existing_chat %>
+        <%= link_to 'Continue Chat', chat_path(existing_chat), class: 'btn btn-primary continue-chat-button' %>
+>>>>>>>>> Temporary merge branch 2
       <% else %>
         <!-- Assuming the band ID is accessible -->
         <% band_id = current_user.band&.id %>
@@ -123,4 +128,6 @@
   <% end %>
 </div>
 </div>
-
+=========
+  </div>
+>>>>>>>>> Temporary merge branch 2
