@@ -32,4 +32,5 @@ Rails.application.routes.draw do
   resources :reviews, only: [:destroy]
 
   get "search", to: 'pages#search'
+  get "about", to: 'pages#about'
 end

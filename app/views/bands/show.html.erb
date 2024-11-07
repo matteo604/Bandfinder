@@ -14,6 +14,7 @@
           <h2 class="m-3"><%= @band.title %></h2>
         </div>
 
+<<<<<<<<< Temporary merge branch 1
         <div class="col-9 text-end">
           <h4 class="m-3"> Created : <%= @band.created_at.strftime("%b %d, %Y") %> by <%= @band.leader.first_name %> <%= @band.leader.last_name %></h4>
         </div>
@@ -83,7 +84,8 @@
     <% end %>
 
   </div>
-    <!-- Button to message the band leader, only shown if current user is not the band leader -->
+=========
+  <!-- Button to message the band leader, only shown if current user is not the band leader -->
   <% if current_user != @band.leader %>
     <%= link_to 'Message the Band Leader', new_band_chat_path(@band), class: 'btn btn-primary mt-3' %>
   <% else %>
@@ -117,4 +119,5 @@
     <!-- END OF HUGO'S CODE -->
 
   <% end %>
+>>>>>>>>> Temporary merge branch 2
 </div>
