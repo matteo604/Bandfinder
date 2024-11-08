@@ -88,6 +88,36 @@ class ChatsController < ApplicationController
     end
   end
 
+  def unread_count
+    unread_count = Chat.joins(:messages)
+                      .where("(chats.user_id = :user_id OR chats.band_leader_id = :user_id) AND messages.read = false AND messages.user_id != :user_id", user_id: current_user.id)
+                      .count
+    render json: { unread_count: unread_count }
+  end
+
+  def unread_count_per_chat
+    # Calculates the unread messages per chat for the current user
+    unread_counts = Chat.joins(:messages)
+                        .where("(chats.user_id = :user_id OR chats.band_leader_id = :user_id) AND messages.read = false AND messages.user_id != :user_id", user_id: current_user.id)
+                        .group("chats.id")
+                        .count("messages.id")
+
+    render json: unread_counts
+  rescue => e
+    render json: { error: e.message }, status: :internal_server_error
+  end
+
+  # Mark all messages in all chats as read for the current user
+  def mark_all_as_read
+    Chat.where("user_id = :user_id OR band_leader_id = :user_id", user_id: current_user.id).each do |chat|
+      chat.messages.where(read: false).where.not(user_id: current_user.id).update_all(read: true)
+    end
+
+    render json: { success: true }
+  rescue ActiveRecord::RecordNotFound
+    render json: { success: false, error: "Chat not found" }, status: :not_found
+  end
+
   private
 
   def set_chat

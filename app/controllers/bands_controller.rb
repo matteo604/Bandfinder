@@ -19,6 +19,15 @@ class BandsController < ApplicationController
     @members = @band.members
   end
 
+  def my_band
+    #@band = current_user.band
+    @band = Band.find(params[:band_id])
+    @band_sessions = @band.band_sessions
+    @band_session = BandSession.new
+    #@band_session.user = current_user
+    @members = @band.members
+  end
+
   def create
     @band = Band.new(band_params)
 

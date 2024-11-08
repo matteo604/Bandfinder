@@ -9,13 +9,15 @@ export default class extends Controller {
     const checkOutInput = document.querySelector("#check-out");
 
     flatpickr(checkInInput, {
-      // dateFormat: "d-m-Y",
+      enableTime: true,
+      dateFormat: "d/m/Y H:i",
+      time_24hr: true,
       minDate: "today",
       onChange: (selectedDates) => {
         if (selectedDates.length > 0) {
           const startDate = selectedDates[0];
           const endDate = new Date(startDate);
-          endDate.setDate(startDate.getDate() + 1);
+          endDate.setDate(startDate.getDate());
           if (checkOutInput._flatpickr) {
             checkOutInput._flatpickr.set("minDate", endDate);
           }
@@ -24,8 +26,22 @@ export default class extends Controller {
     });
 
     flatpickr(checkOutInput, {
-      // dateFormat: "Y-m-d",
-      minDate: new Date().setDate(new Date().getDate() + 1)
+      enableTime: true,
+      dateFormat: "d/m/Y H:i",
+      time_24hr: true,
+      minDate: new Date().setDate(new Date().getDate())
     });
+
+    // form.addEventListener("submit", function(event) {
+    //   const startDate = new Date(document.getElementById('band_session_start_date').value);
+    //   const endDate = new Date(document.getElementById('band_session_end_date').value);
+    //   console.log(document.getElementById('band_session_start_date'));
+
+    //   const duration = (endDate - startDate) / 1000 / 60 / 60;
+    //   if (duration < 1) {
+    //     alert("The session must last at least 1 hour.");
+    //     event.preventDefault();
+    //   }
+    // });
   }
 }
