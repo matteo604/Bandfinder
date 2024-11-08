@@ -1,0 +1,85 @@
+
+<div class="container d-flex w-100">
+  <div class="container">
+
+    <!-- Band Details Section -->
+    <div class="d-block row mt-4">
+      <div class="gap-5">
+        <!-- Band Details Card -->
+        <div class="band_details_card fs-4 d-flex flex-column mb-4">
+          <h2>Band Details</h2>
+          <div class="p-2"><i class="fa-solid fa-location-dot"></i> <%= @band.address %></div>
+          <div class="p-2"><i class="fa-solid fa-music"></i> <%= @band.genre %></div>
+          <div class="p-2"><i class="fa-solid fa-circle-info"></i> <%= @band.description %></div>
+          <div class="p-2">
+            <i class="fa-solid fa-drum fs-3"></i> We are looking for:
+            <% instruments = @band.searching_for_instruments
+            begin
+              formatted_instruments = JSON.parse(instruments).map(&:downcase).join(", ")
+            rescue JSON::ParserError
+              formatted_instruments = instruments
+            end %>
+            <%= formatted_instruments %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Members Card -->
+    <div class="band_details_card d-block fs-4 d-flex flex-column">
+      <h2>Members</h2>
+      <% @members.each do |member| %>
+        <%= link_to user_path(member) do %>
+          <%= member.first_name %> <%= member.last_name %> : <br>
+          (<%= member.instruments.join(", ") %> )
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="container">
+
+    <!-- My Sessions Card -->
+    <div class="band_details_card fs-4 d-flex flex-column mt-4 w-100">
+      <h2>Band sessions</h2>
+      <% @band_sessions.each do |band_session| %>
+        <div class="user_details_card fs-4 mx-2">
+          <ul class="fs-4 mb-1">
+            <li>Band session: <%= band_session.start_date.strftime('%d/%m/%Y %H:%M') %> - <%= band_session.end_date.strftime('%d/%m/%Y %H:%M') %></li>
+          </ul>
+        </div>
+      <% end %>
+
+      <!-- User Interaction Section -->
+      <div class="user-info mt-3">
+        <% if current_user == @band.leader %>
+          <!-- Book Session Button and Modal -->
+          <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Book session
+          </button>
+
+          <!-- Modal Structure -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Book session</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" style="background: orange;">
+                  <%= simple_form_for [@band, @band_session], data: { controller: 'datepicker' } do |f| %>
+                    <%= f.input :start_date, as: :string, input_html: { type: "datetime_local", data: { flatpickr_target: "startDate" }, id: 'check-in' } %>
+                    <%= f.input :end_date, as: :string, input_html: { type: "datetime_local", data: { flatpickr_target: "endDate" }, id: 'check-out' } %>
+                    <%= f.submit 'Schedule your band session' %>
+                  <% end %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+
+    </div>
+  </div>
+</div>

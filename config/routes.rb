@@ -7,11 +7,11 @@ Rails.application.routes.draw do
 
   # users routes
   resources :users, only: [:index, :show, :edit, :update, :destroy] do
-    get 'my_band', to: "bands#my_band"
   end
 
   # bands routes
   resources :bands do
+    get 'my_band', to: "bands#my_band", as: :my_band
     resources :chats, only: [:new, :create]
     resources :reviews, only: [:new, :create, :index]
     resources :band_sessions, only: [:index, :show, :new, :create, :edit, :update]
