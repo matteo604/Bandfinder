@@ -16,25 +16,20 @@ class UsersController < ApplicationController
   def update
     if params[:user][:photo].present?
       uploaded_file = params[:user][:photo]
-      upload_result = Cloudinary::Uploader.upload(uploaded_file.tempfile.path)
+      Cloudinary::Uploader.upload(uploaded_file.tempfile.path)
     end
-    # Debug: verifica che params[:user] sia presente e abbia la chiave :instruments
     Rails.logger.debug("User params: #{params[:user].inspect}")
 
-    # Assicurati che instruments sia un array e manipola i dati
     if params[:user][:instruments].is_a?(Array)
       Rails.logger.debug("Initial instruments array: #{params[:user][:instruments].inspect}")
 
-      # Rimuovi valori vuoti e spazi bianchi
       non_blank_instruments = params[:user][:instruments].reject(&:blank?).map(&:strip)
       Rails.logger.debug("Non-blank instruments array after strip: #{non_blank_instruments.inspect}")
 
-      # Unisci gli strumenti in una stringa
       params[:user][:instruments] = non_blank_instruments.join(", ")
       Rails.logger.debug("Final instruments string: #{params[:user][:instruments]}")
     end
 
-    # Verifica se l'aggiornamento del user va a buon fine
     if @user.update(user_params)
       redirect_to @user, notice: 'User was successfully updated.'
     else
