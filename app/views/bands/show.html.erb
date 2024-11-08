@@ -62,31 +62,8 @@
 
   <!-- User Interaction Section -->
   <div class="user-info mt-3">
-  <% if current_user != @band.leader %>
-    <%= button_to 'Message Band Leader', chats_path(chat: { band_leader_id: @band.leader.id }), method: :post, class: "btn btn-primary" %>
-  <% end %>
-    <!-- Book Session Button and Modal -->
-    <button type="button" class="btn btn-primary mt-3" data-bs-toggle="modal" data-bs-target="#exampleModal">
-      Book session
-    </button>
-
-    <!-- Modal Structure -->
-    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Book session</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body" style="background: orange;">
-            <%= simple_form_for [@band, @band_session], data: { controller: 'datepicker' } do |f| %>
-              <%= f.input :start_date, as: :string, input_html: { data: { flatpickr_target: "startDate" }, id: 'check-in' } %>
-              <%= f.input :end_date, as: :string, input_html: { data: { flatpickr_target: "endDate" }, id: 'check-out' } %>
-              <%= f.submit 'Schedule your band session' %>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
+    <% if current_user != @band.leader %>
+      <%= button_to 'Message Band Leader', chats_path(chat: { band_leader_id: @band.leader.id }), method: :post, class: "btn btn-primary" %>
+    <% end %>
   </div>
 </div>
