@@ -3,7 +3,6 @@
 
   <div class="container profile_banner">
     <div class="mb-3">
-      <!-- Optional: Check if there's a photo attached to the user, and only display if available -->
       <% if @user.photo.attached? %>
         <%= image_tag @user.photo, alt: "#{@user.first_name} #{@user.last_name}", class: "profile_image" %>
       <% else %>
@@ -23,30 +22,26 @@
   </div>
 
   <div class="row mt-4 d-flex justify-content-center">
-    <div class="gap-5">
-      <div class="user_details_card fs-4 d-flex flex-column">
+   <div class="gap-5">
+    <div class="user_details_card fs-4 d-flex flex-column">
+      <div class="d-flex justify-content-between align-items-center">
         <h2>My Details</h2>
-
-        <div class="p-2 border-top"><i class="fa-solid fa-phone"></i> <%= @user.telephone_number %></div>
-        <div class="p-2"><i class="fa-solid fa-location-dot"></i> <%= @user.address %></div>
-        <div class="p-2"><i class="fa-regular fa-envelope"></i> <%= @user.email %></div>
-
-        <div class="p-2 border-bottom">
-          <i class="fa-solid fa-drum fs-3"></i>
-          <%= @user.instruments.join(", ") %>
-        </div>
-        <% if @user && current_user && @user.id == current_user.id %>
-          <%= "User IDs are the same!" %> <!-- Debug output -->
-          <div class="edit-icon">
-            <%= link_to edit_user_path(@user) do %>
-              <i class="fa-solid fa-pencil fs-4"></i>
-            <% end %>
-          </div>
-        <% else %>
-          <%= "Condition not met." %> <!-- Debug output -->
+        <%= link_to edit_user_path(@user), class: "ms-auto" do %>
+          <i class="fa-solid fa-pencil fs-4"></i>
         <% end %>
       </div>
+
+      <div class="p-2 border-top"><i class="fa-solid fa-phone"></i> <%= @user.telephone_number %></div>
+      <div class="p-2"><i class="fa-solid fa-location-dot"></i> <%= @user.address %></div>
+      <div class="p-2"><i class="fa-regular fa-envelope"></i> <%= @user.email %></div>
+
+      <div class="p-2 border-bottom">
+        <i class="fa-solid fa-drum fs-3"></i>
+        <%= @user.instruments.join(", ") %>
+      </div>
     </div>
+   </div>
+
   </div>
 
   <div class="user-info mt-3">

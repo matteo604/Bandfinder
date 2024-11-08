@@ -14,6 +14,10 @@ class UsersController < ApplicationController
   end
 
   def update
+    if params[:user][:photo].present?
+      uploaded_file = params[:user][:photo]
+      upload_result = Cloudinary::Uploader.upload(uploaded_file.tempfile.path)
+    end
     # Debug: verifica che params[:user] sia presente e abbia la chiave :instruments
     Rails.logger.debug("User params: #{params[:user].inspect}")
 
@@ -48,6 +52,19 @@ class UsersController < ApplicationController
     end
   end
 
+  def delete_photo
+    @user = User.find(params[:id])
+
+    if @user.photo.present?
+      @user.photo.purge
+      flash[:notice] = "Photo deleted successfully."
+    else
+      flash[:alert] = "No photo to delete."
+    end
+
+    redirect_to edit_user_path(@user)
+  end
+
   private
   def set_user
     @user = User.find(params[:id])
@@ -56,7 +73,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :telephone_number, :address, :instruments)
+    params.require(:user).permit(:first_name, :last_name, :email, :telephone_number, :address, :instruments, :photo)
   end
 
 end
