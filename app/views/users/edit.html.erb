@@ -21,14 +21,33 @@
           <%= f.label :telephone_number, class: "col-form-label-lg" %>
           <%= f.text_field :telephone_number, class: "form-control" %>
         </div>
-
         <div class="form-group">
-          <%= f.label :instruments, class: "col-form-label-lg" %>
-          <%= f.select :instruments,
-              options_for_select(["Guitar", "Piano", "Violin", "Drums", "Bass", "Flute"],
-              @user.instruments&.split(", ")),
-              {}, { multiple: true, class: "form-control" } %>
+          <%= f.label :instruments, class: "col-form-label-lg" %> <br>
+          <div class="instrument-dropdown" id="instruments-filter">
+            <button type="button" class="instrument-dropbtn" onclick="toggleDropdown()">Select Instruments</button>
+            <div class="instrument-dropdown-content" id="instrument-dropdown-content">
+              <% ["Accordion", "Agogo", "Alto Saxophone", "Autoharp", "Bagpipes", "Banjo", "Bass",
+                  "Bass Clarinet", "Bass Drum", "Bassoon", "Cajon", "Castanets", "Cello",
+                  "Clarinet", "Claves", "Conga", "Cornet", "Cowbell", "Djembe", "Didgeridoo",
+                  "Drum Machine", "Drums", "Duduk", "Electric Bass", "Electric Guitar",
+                  "Electric Keyboard", "English Horn", "Erhu", "Flute", "French Horn",
+                  "Glockenspiel", "Guitar", "Guiro", "Harp", "Hurdy Gurdy", "Jew's Harp",
+                  "Kazoo", "Koto", "Kalimba", "Mandolin", "Maracas", "Marimba", "Melodica",
+                  "Mountain Dulcimer", "Oboe", "Piano", "Pan Flute", "Percussion", "Piccolo",
+                  "Recorder", "Saxophone", "Saxophone (Baritone)", "Saxophone (Tenor)",
+                  "Shakuhachi", "Steel Drum", "Sitar", "Synthesizer (Analog)", "Synthesizer (Digital)",
+                  "Tambourine", "Timpani", "Triangle", "Trumpet", "Trombone", "Tuba",
+                  "Ukulele", "Vibraphone", "Viola", "Violin", "Wooden Flute", "Xylophone", "Zither"].each do |instrument| %>
+                <label>
+                  <input type="checkbox" name="user[instruments][]" value="<%= instrument %>"
+                        <%= 'checked' if @user.instruments&.include?(instrument) %> >
+                  <%= instrument %>
+                </label>
+              <% end %>
+            </div>
+          </div>
         </div>
+
         <div class="form-group">
           <%= f.label :address, class: "col-form-label-lg" %>
           <%= f.text_field :address, class: "form-control" %>
@@ -44,3 +63,19 @@
     </div>
   </div>
 </div>
+
+<script>
+  function toggleDropdown() {
+    var dropdown = document.getElementById("instrument-dropdown-content");
+    dropdown.style.display = dropdown.style.display === "none" || dropdown.style.display === "" ? "block" : "none";
+  }
+
+  window.onclick = function(event) {
+    if (!event.target.closest('.instrument-dropdown')) {
+      var dropdown = document.getElementById("instrument-dropdown-content");
+      if (dropdown.style.display === "block") {
+        dropdown.style.display = "none";
+      }
+    }
+  };
+</script>
