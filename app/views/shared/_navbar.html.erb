@@ -19,9 +19,14 @@
 
           <li class="nav-item">
             <%= link_to "Home", root_path, class: "nav-link" %>
-          </li>
           <li class="nav-item">
             <%= link_to "About us", about_path, class: "nav-link" %>
+          </li>
+          <% if current_user && !current_user.band_id %>
+            <li class="nav-item">
+              <%= link_to "Create your band", new_band_path, class: "nav-link"  %>
+            </li>
+          <% end %>
           </li>
           <li class="nav-item">
             <%= link_to chats_path, class: "nav-link position-relative message-icon-container" do %>
@@ -42,7 +47,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "My account", user_path(current_user), class: "dropdown-item" %>
-              <% if current_user && current_user.band_id %>
+              <% if current_user && Band.find_by(leader_id: current_user.id) %>
                 <%= link_to "My band", band_my_band_path(current_user.band), class: "dropdown-item" %>
               <% end %>
               <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %>

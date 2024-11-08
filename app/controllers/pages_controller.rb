@@ -64,7 +64,7 @@ class PagesController < ApplicationController
     @users = @users.where("first_name ILIKE ?", "%#{first_name}%") if first_name.present?
     @users = @users.where("last_name ILIKE ?", "%#{last_name}%") if last_name.present?
     @users = @users.where("address ILIKE ?", "%#{address}%") if address.present?
-    @users = @users.where("instruments @@ ?", "%#{@instruments}%") if @instruments.present?
+    @users = @users.where("instruments @> ARRAY[?]::varchar[]", @instruments) if @instruments.present?
     @users = @users.where("status ILIKE ?", "%#{status}%") if status.present?
   end
 

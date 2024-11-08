@@ -16,27 +16,20 @@
     <div class="mb-3">
       <%= f.input :address, input_html: { class: 'form-control', placeholder: 'Location' }, label_html: { class: 'form-label' } %>
     </div>
+
     <div class="mb-3">
-      <%= f.input :searching_for_instruments, as: :select,
-                  collection: [
-                    'Guitar', 'Bass', 'Violin', 'Viola', 'Cello', 'Double Bass', 'Harp', 'Mandolin', 'Banjo', 'Ukulele',
-                    'Flute', 'Clarinet', 'Oboe', 'Bassoon', 'Piccolo', 'English Horn', 'Saxophone (Alto)',
-                    'Saxophone (Tenor)', 'Saxophone (Baritone)', 'Recorder', 'Bass Clarinet',
-                    'Trumpet', 'Trombone', 'French Horn', 'Tuba', 'Euphonium', 'Cornet', 'Baritone Horn',
-                    'Drums', 'Snare Drum', 'Bass Drum', 'Cymbals', 'Timpani', 'Bongos', 'Conga', 'Djembe',
-                    'Marimba', 'Xylophone', 'Vibraphone', 'Glockenspiel', 'Tambourine', 'Triangle', 'Castanets',
-                    'Piano', 'Electric Keyboard', 'Synthesizer', 'Organ', 'Harpsichord', 'Accordion',
-                    'Electric Guitar', 'Electric Bass', 'Theremin', 'Drum Machine', 'Samplers', 'Synthesizer (Analog)',
-                    'Synthesizer (Digital)', 'Modular Synthesizer',
-                    'Vocals (Soprano)', 'Vocals (Alto)', 'Vocals (Tenor)', 'Vocals (Baritone)', 'Vocals (Bass)',
-                    'Sitar', 'Tabla', 'Dhol', 'Didgeridoo', 'Bagpipes', 'Shakuhachi', 'Kalimba', 'Erhu', 'Koto',
-                    'Balalaika', 'Bouzouki', 'Steel Drum', 'Pan Flute', 'Duduk', 'Cimbalom', 'Ocarina', 'Guqin',
-                    'Hurdy Gurdy', 'Jew\'s Harp', 'Zither', 'Autoharp', 'Hammered Dulcimer', 'Mountain Dulcimer',
-                    'Kazoo', 'Melodica', 'Maracas', 'Claves', 'Cowbell', 'Guiro', 'Agogo'
-                  ],
-                  prompt: "Select an instrument",
-                  input_html: { class: 'form-select'},
-                  label_html: { class: 'form-label' } %>
+      <%= f.input :searching_for_instruments,
+            input_html: {
+              class: 'form-control',
+              placeholder: 'The instruments you are searching for',
+              value: @band.searching_for_instruments.to_s
+            },
+            label_html: { class: 'form-label' } %>
+    </div>
+
+    <div class="mb-3">
+      <%= f.label :photo, class: "col-form-label-lg" %>
+      <%= f.file_field :photo, class: "form-control" %>
     </div>
 
     <div class="text-center">

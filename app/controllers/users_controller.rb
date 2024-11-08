@@ -18,16 +18,11 @@ class UsersController < ApplicationController
       uploaded_file = params[:user][:photo]
       Cloudinary::Uploader.upload(uploaded_file.tempfile.path)
     end
-    Rails.logger.debug("User params: #{params[:user].inspect}")
 
     if params[:user][:instruments].is_a?(Array)
-      Rails.logger.debug("Initial instruments array: #{params[:user][:instruments].inspect}")
-
       non_blank_instruments = params[:user][:instruments].reject(&:blank?).map(&:strip)
-      Rails.logger.debug("Non-blank instruments array after strip: #{non_blank_instruments.inspect}")
-
-      params[:user][:instruments] = non_blank_instruments.join(", ")
-      Rails.logger.debug("Final instruments string: #{params[:user][:instruments]}")
+      params[:user][:instruments] = non_blank_instruments
+      # Rails.logger.debug("Final instruments string: #{params[:user][:instruments]}")
     end
 
     if @user.update(user_params)
@@ -68,7 +63,7 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :telephone_number, :address, :instruments, :photo)
+    params.require(:user).permit(:first_name, :last_name, :email, :telephone_number, :address, :photo, instruments: [])
   end
 
 end
