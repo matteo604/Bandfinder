@@ -33,14 +33,18 @@
 
         <div class="p-2 border-bottom">
           <i class="fa-solid fa-drum fs-3"></i>
-          <%= @user.instruments.join(", ")%>
+          <%= @user.instruments.join(", ") %>
         </div>
-
-        <div class="edit-icon">
-          <%= link_to edit_user_path(@user) do %>
-            <i class="fa-solid fa-pencil fs-4"></i>
-          <% end %>
-        </div>
+        <% if @user && current_user && @user.id == current_user.id %>
+          <%= "User IDs are the same!" %> <!-- Debug output -->
+          <div class="edit-icon">
+            <%= link_to edit_user_path(@user) do %>
+              <i class="fa-solid fa-pencil fs-4"></i>
+            <% end %>
+          </div>
+        <% else %>
+          <%= "Condition not met." %> <!-- Debug output -->
+        <% end %>
       </div>
     </div>
   </div>

@@ -51,13 +51,7 @@
           <% @members.each do |member| %>
             <%= link_to user_path(member) do %>
               <%= member.first_name %> <%= member.last_name %>
-              ( <% instruments = member.instruments
-              begin
-                formatted_instruments = JSON.parse(instruments).map(&:downcase).join(", ")
-              rescue JSON::ParserError
-                formatted_instruments = instruments
-              end %>
-              <%= formatted_instruments %> )
+              ( <%= member.instruments.join(", ") %> )
             <% end %>
           <% end %>
         </div>
