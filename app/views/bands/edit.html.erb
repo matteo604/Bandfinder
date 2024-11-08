@@ -1,47 +1,46 @@
 <h1>Edit your Band</h1>
 
 <%= form_with(model: @band) do |form| %>
-  <p>
+  <div class="mb-3">
     <%= form.label :title, "Band Title" %><br>
     <%= form.text_field :title %>
-  </p>
+  </div>
 
-  <p>
+  <div class="mb-3">
     <%= form.label :address, "Address" %><br>
     <%= form.text_field :address %>
-  </p>
+  </div>
 
-  <p>
-    <%= form.label :genre, "Genre" %><br>
-    <%= form.text_field :genre %>
-  </p>
-
-  <p>
-    <%= form.label :min_member, "Minimum Members" %><br>
-    <%= form.number_field :min_member %>
-  </p>
-
-  <p>
+  <div class="mb-3">
+      <%= f.input :genre, as: :select, collection: [
+            ['Acapella', 'acapella'], ['Alternative', 'alternative'], ['Blues', 'blues'],
+            ['Classical', 'classical'], ['Country', 'country'], ['Dance', 'dance'],
+            ['Disco', 'disco'], ['Electronic', 'electronic'], ['Folk', 'folk'],
+            ['Gospel', 'gospel'], ['Hip Hop', 'hip-hop'], ['Indie', 'indie'],
+            ['Jazz', 'jazz'], ['Latin', 'latin'], ['Metal', 'metal'],
+            ['Pop', 'pop'], ['Punk', 'punk'], ['Rap', 'rap'],
+            ['Reggae', 'reggae'], ['Rock', 'rock'], ['R&B', 'r&b'],
+            ['Soul', 'soul'], ['Techno', 'techno'], ['Trance', 'trance'],
+            ['World', 'world'], ['Swing', 'swing'], ['Hard Rock', 'hard rock'],
+            ['Progressive Rock', 'progressive rock'], ['New Age', 'new age'],
+            ['House', 'house'], ['Grunge', 'grunge'], ['Ska', 'ska'],
+            ['Emo', 'emo'], ['Industrial', 'industrial'], ['Soundtrack', 'soundtrack'],
+            ['Dubstep', 'dubstep'], ['Lo-fi', 'lo-fi'], ['Vocal', 'vocal']
+          ],
+          prompt: "Select a Genre",
+          input_html: { class: 'form-control' },
+          label_html: { class: 'form-label' } %>
+    </div>
+  <div class="mb-3">
     <%= form.label :description, "Description" %><br>
     <%= form.text_area :description %>
-  </p>
+  </div>
 
-  <%# i am not sure about this forms with latitude and longitude %>
-  <p>
-    <%= form.label :latitude, "Latitude" %><br>
-    <%= form.number_field :latitude, step: 0.000001 %>
-  </p>
-
-  <p>
-    <%= form.label :longitude, "Longitude" %><br>
-    <%= form.number_field :longitude, step: 0.000001 %>
-  </p>
-
-  <p>
+  <div class="mb-3">
     <%= form.submit "Save Changes" %>
-  </p>
+  </div>
 <% end %>
 
 <p>
   <%= link_to 'Back to Bands List', bands_path %>
-</p>
+<p>

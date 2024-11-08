@@ -11,16 +11,24 @@ class UsersController < ApplicationController
   end
 
   def edit
-
   end
 
   def update
-    if params[:user][:instruments].present?
-      @user.instruments = params[:user][:instruments].split(',').map(&:strip) # Convert comma-separated string into an array
+    if params[:user][:photo].present?
+      uploaded_file = params[:user][:photo]
+      Cloudinary::Uploader.upload(uploaded_file.tempfile.path)
     end
+
+    if params[:user][:instruments].is_a?(Array)
+      non_blank_instruments = params[:user][:instruments].reject(&:blank?).map(&:strip)
+      params[:user][:instruments] = non_blank_instruments
+      # Rails.logger.debug("Final instruments string: #{params[:user][:instruments]}")
+    end
+
     if @user.update(user_params)
       redirect_to @user, notice: 'User was successfully updated.'
     else
+      Rails.logger.debug("User update failed: #{@user.errors.full_messages.inspect}")
       render :edit
     end
   end
@@ -34,13 +42,28 @@ class UsersController < ApplicationController
     end
   end
 
+  def delete_photo
+    @user = User.find(params[:id])
+
+    if @user.photo.present?
+      @user.photo.purge
+      flash[:notice] = "Photo deleted successfully."
+    else
+      flash[:alert] = "No photo to delete."
+    end
+
+    redirect_to edit_user_path(@user)
+  end
+
   private
   def set_user
     @user = User.find(params[:id])
   end
 
+  private
+
   def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :telephone_number, :address, instruments: [])
+    params.require(:user).permit(:first_name, :last_name, :email, :telephone_number, :address, :photo, instruments: [])
   end
 
 end

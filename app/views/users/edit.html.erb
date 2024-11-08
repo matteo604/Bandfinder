@@ -1,7 +1,7 @@
 <div class="container">
   <div class="d-flex justify-content-center p-5">
     <div class="form-row border solid p-4 edit_card">
-      <%= form_with model: @user do |f| %>
+      <%= form_with model: @user, local: true do |f| %>
         <div class="row">
           <div class="form-group col-md-6">
             <%= f.label :first_name, class: "col-form-label-lg" %>
@@ -21,17 +21,41 @@
           <%= f.label :telephone_number, class: "col-form-label-lg" %>
           <%= f.text_field :telephone_number, class: "form-control" %>
         </div>
-
         <div class="form-group">
-          <%= f.label :instruments, class: "col-form-label-lg" %>
-         <%= f.text_area :instruments, class: "form-control", placeholder: "Enter instruments separated by commas" %>
+          <%= f.label :instruments, class: "col-form-label-lg" %> <br>
+          <div class="instrument-dropdown" id="instruments-filter">
+            <button type="button" class="instrument-dropbtn" onclick="toggleDropdown()">Select Instruments</button>
+            <div class="instrument-dropdown-content" id="instrument-dropdown-content">
+              <% ["Accordion", "Agogo", "Alto Saxophone", "Autoharp", "Bagpipes", "Banjo", "Bass",
+                  "Bass Clarinet", "Bass Drum", "Bassoon", "Cajon", "Castanets", "Cello",
+                  "Clarinet", "Claves", "Conga", "Cornet", "Cowbell", "Djembe", "Didgeridoo",
+                  "Drum Machine", "Drums", "Duduk", "Electric Bass", "Electric Guitar",
+                  "Electric Keyboard", "English Horn", "Erhu", "Flute", "French Horn",
+                  "Glockenspiel", "Guitar", "Guiro", "Harp", "Hurdy Gurdy", "Jew's Harp",
+                  "Kazoo", "Koto", "Kalimba", "Mandolin", "Maracas", "Marimba", "Melodica",
+                  "Mountain Dulcimer", "Oboe", "Piano", "Pan Flute", "Percussion", "Piccolo",
+                  "Recorder", "Saxophone", "Saxophone (Baritone)", "Saxophone (Tenor)",
+                  "Shakuhachi", "Steel Drum", "Sitar", "Synthesizer (Analog)", "Synthesizer (Digital)",
+                  "Tambourine", "Timpani", "Triangle", "Trumpet", "Trombone", "Tuba",
+                  "Ukulele", "Vibraphone", "Viola", "Violin", "Wooden Flute", "Xylophone", "Zither"].each do |instrument| %>
+                <label>
+                  <input type="checkbox" name="user[instruments][]" value="<%= instrument %>"
+                        <%= 'checked' if @user.instruments&.include?(instrument) %> >
+                  <%= instrument %>
+                </label>
+              <% end %>
+            </div>
+          </div>
         </div>
 
         <div class="form-group">
           <%= f.label :address, class: "col-form-label-lg" %>
           <%= f.text_field :address, class: "form-control" %>
         </div>
-
+        <div class="form-group">
+          <%= f.label :photo, class: "col-form-label-lg" %>
+          <%= f.file_field :photo, class: "form-control" %>
+        </div>
         <div class="form-group justify-content-center mt-3">
           <%= f.submit "Update my details", class: "btn btn-primary" %>
         </div>
@@ -39,3 +63,19 @@
     </div>
   </div>
 </div>
+
+<script>
+  function toggleDropdown() {
+    var dropdown = document.getElementById("instrument-dropdown-content");
+    dropdown.style.display = dropdown.style.display === "none" || dropdown.style.display === "" ? "block" : "none";
+  }
+
+  window.onclick = function(event) {
+    if (!event.target.closest('.instrument-dropdown')) {
+      var dropdown = document.getElementById("instrument-dropdown-content");
+      if (dropdown.style.display === "block") {
+        dropdown.style.display = "none";
+      }
+    }
+  };
+</script>

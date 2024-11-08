@@ -1,0 +1,45 @@
+.instrument-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.instrument-dropbtn {
+  padding: 4px;
+  height: 32px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 500px;
+  text-align: left;
+}
+
+.instrument-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  min-width: 200px;
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.instrument-dropdown-content label {
+  padding: 8px 16px;
+  display: block;
+  color: #333;
+  font-size: 14px;
+}
+
+.instrument-dropdown-content label:hover {
+  background-color: #e0e0e0;
+}
+
+.instrument-dropdown-content input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.instrument-dropdown:hover .dropdown-content {
+  display: block;
+}
