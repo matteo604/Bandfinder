@@ -8,14 +8,16 @@ class PagesController < ApplicationController
       {
         lat: band.latitude,
         lng: band.longitude,
-        marker_html: "<i class='fas fa-map-marker-alt' style='color: black; font-size: 30px;'></i>"
+        info_window: render_to_string(partial: "bands/band_popup", locals: { band: band}),
+        marker_html: "<i class='fa-duotone fa-solid fa-people-group' style='color: black; font-size: 30px;'></i>"
       }
     end
     @user_markers = @users.geocoded.map do |user|
       {
         lat: user.latitude,
         lng: user.longitude,
-        marker_html: "<i class='fas fa-map-marker-alt' style='color: black; font-size: 30px;'></i>"
+        info_window: render_to_string(partial: "users/user_popup", locals: { user: user }),
+        marker_html: "<i class='fa-solid fa-person' style='color: black; font-size: 30px;'></i>"
       }
     end
   end
@@ -48,7 +50,8 @@ class PagesController < ApplicationController
       {
         lat: user.latitude,
         lng: user.longitude,
-        marker_html: "<i class='fas fa-map-marker-alt' style='color: black; font-size: 30px;'></i>"
+        info_window: render_to_string(partial: "users/user_popup", locals: { user: user }),
+        marker_html: "<i class='fa-solid fa-person' style='color: black; font-size: 30px;'></i>"
       }
     end
     @bands = Band.all
@@ -77,7 +80,8 @@ class PagesController < ApplicationController
       {
         lat: band.latitude,
         lng: band.longitude,
-        marker_html: "<i class='fas fa-map-marker-alt' style='color: black; font-size: 30px;'></i>"
+        info_window: render_to_string(partial: "bands/band_popup", locals: { band: band }),
+       marker_html: "<i class='fa-duotone fa-solid fa-people-group' style='color: black; font-size: 30px;'></i>"
       }
     end
     @users = User.all
