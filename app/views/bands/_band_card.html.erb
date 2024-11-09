@@ -25,13 +25,7 @@
         <i class="fa-solid fa-drum fs-3 m-1"></i>
         Looking for: <br>
         <div class="text-center">
-          <% instruments = band.searching_for_instruments
-          begin
-            formatted_instruments = JSON.parse(instruments).map(&:downcase).join(", ")
-          rescue JSON::ParserError
-            formatted_instruments = instruments
-          end %>
-          <%= formatted_instruments %>
+            <%= band.searching_for_instruments.join(", ") %>
         </div>
       </div>
     </div>

@@ -34,17 +34,15 @@
           input_html: { class: 'form-control' },
           label_html: { class: 'form-label' } %>
     </div>
-
     <div class="mb-3">
       <%= f.input :searching_for_instruments,
-            input_html: {
-              class: 'form-control',
-              placeholder: 'The instruments you are searching for',
-              value: @band.searching_for_instruments.to_s
-            },
-            label_html: { class: 'form-label' } %>
+        input_html: {
+          class: 'form-control',
+          placeholder: 'The instruments you are searching for',
+            value: @band.searching_for_instruments.join(', ')
+        },
+        label_html: { class: 'form-label' } %>
     </div>
-
     <div class="mb-3">
       <%= f.label :photo, class: "col-form-label-lg" %>
       <%= f.file_field :photo, class: "form-control" %>
