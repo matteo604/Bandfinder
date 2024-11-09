@@ -58,7 +58,9 @@
           <% @members.each do |member| %>
             <%= link_to user_path(member) do %>
               <%= member.first_name %> <%= member.last_name %>
-              (<%= member.instruments.join(", ") %> )
+              <% if !member.instruments.empty? %>
+                (<%= member.instruments.join(", ") %> )
+              <% end %>
             <% end %>
           <% end %>
         </div>
