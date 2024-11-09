@@ -63,8 +63,9 @@ class BandsController < ApplicationController
 
   def destroy
     @band = Band.find(params[:id])
+    @band.members.update_all(band_id: nil)
     @band.destroy
-    redirect_to bands_path, notice: 'Band was successfully deleted.'
+   redirect_to controller: 'pages', action: 'home', notice: 'Band was successfully deleted.'
   end
 
   private
@@ -72,6 +73,4 @@ class BandsController < ApplicationController
   def band_params
     params.require(:band).permit(:title, :description, :address, :genre, :photo, searching_for_instruments: [])
   end
-
-
 end
