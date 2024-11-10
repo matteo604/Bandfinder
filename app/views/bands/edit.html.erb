@@ -1,60 +1,62 @@
-<div class="container mt-5">
+<div class="container mt-5 d-flex flex-column align-items-center">
   <h1 class="text-center mb-4">Edit <%= @band.title %></h1>
-  <%= simple_form_for(@band, html: { class: 'needs-validation' }) do |f| %>
+  <div class="form-container d-flex justify-content-center">
+    <%= simple_form_for(@band, html: { class: 'needs-validation' }) do |f| %>
 
-    <div class="mb-3">
-      <%= f.input :title, input_html: { class: 'form-control', placeholder: 'Band Title' }, label_html: { class: 'form-label' } %>
-      <%= f.error :title, class: 'text-danger' %>
-    </div>
+      <div class="mb-3">
+        <%= f.input :title, input_html: { class: 'form-control edit-band-form', placeholder: 'Band Title' }, label_html: { class: 'form-label' } %>
+        <%= f.error :title, class: 'text-danger' %>
+      </div>
 
-    <div class="mb-3">
-      <%= f.input :description, as: :text, input_html: { class: 'form-control', rows: 4, placeholder: 'Description of the band' }, label_html: { class: 'form-label' } %>
-      <%= f.error :description, class: 'text-danger' %>
-    </div>
+      <div class="mb-3">
+        <%= f.input :description, as: :text, input_html: { class: 'form-control edit-band-form', rows: 4, placeholder: 'Description of the band' }, label_html: { class: 'form-label' } %>
+        <%= f.error :description, class: 'text-danger' %>
+      </div>
 
-    <div class="mb-3">
-      <%= f.input :address, input_html: { class: 'form-control', placeholder: 'Location' }, label_html: { class: 'form-label' } %>
-      <%= f.error :address, class: 'text-danger' %>
-    </div>
+      <div class="mb-3">
+        <%= f.input :address, input_html: { class: 'form-control edit-band-form', placeholder: 'Location' }, label_html: { class: 'form-label' } %>
+        <%= f.error :address, class: 'text-danger' %>
+      </div>
 
-    <div class="mb-3">
-      <%= f.input :genre, as: :select, collection: [
-            ['Acapella', 'acapella'], ['Alternative', 'alternative'], ['Blues', 'blues'],
-            ['Classical', 'classical'], ['Country', 'country'], ['Dance', 'dance'],
-            ['Disco', 'disco'], ['Electronic', 'electronic'], ['Folk', 'folk'],
-            ['Gospel', 'gospel'], ['Hip Hop', 'hip-hop'], ['Indie', 'indie'],
-            ['Jazz', 'jazz'], ['Latin', 'latin'], ['Metal', 'metal'],
-            ['Pop', 'pop'], ['Punk', 'punk'], ['Rap', 'rap'],
-            ['Reggae', 'reggae'], ['Rock', 'rock'], ['R&B', 'r&b'],
-            ['Soul', 'soul'], ['Techno', 'techno'], ['Trance', 'trance'],
-            ['World', 'world'], ['Swing', 'swing'], ['Hard Rock', 'hard rock'],
-            ['Progressive Rock', 'progressive rock'], ['New Age', 'new age'],
-            ['House', 'house'], ['Grunge', 'grunge'], ['Ska', 'ska'],
-            ['Emo', 'emo'], ['Industrial', 'industrial'], ['Soundtrack', 'soundtrack'],
-            ['Dubstep', 'dubstep'], ['Lo-fi', 'lo-fi'], ['Vocal', 'vocal']
-          ],
-          prompt: "Select a Genre",
-          input_html: { class: 'form-control' },
+      <div class="mb-3">
+        <%= f.input :genre, as: :select, collection: [
+              ['Acapella', 'acapella'], ['Alternative', 'alternative'], ['Blues', 'blues'],
+              ['Classical', 'classical'], ['Country', 'country'], ['Dance', 'dance'],
+              ['Disco', 'disco'], ['Electronic', 'electronic'], ['Folk', 'folk'],
+              ['Gospel', 'gospel'], ['Hip Hop', 'hip-hop'], ['Indie', 'indie'],
+              ['Jazz', 'jazz'], ['Latin', 'latin'], ['Metal', 'metal'],
+              ['Pop', 'pop'], ['Punk', 'punk'], ['Rap', 'rap'],
+              ['Reggae', 'reggae'], ['Rock', 'rock'], ['R&B', 'r&b'],
+              ['Soul', 'soul'], ['Techno', 'techno'], ['Trance', 'trance'],
+              ['World', 'world'], ['Swing', 'swing'], ['Hard Rock', 'hard rock'],
+              ['Progressive Rock', 'progressive rock'], ['New Age', 'new age'],
+              ['House', 'house'], ['Grunge', 'grunge'], ['Ska', 'ska'],
+              ['Emo', 'emo'], ['Industrial', 'industrial'], ['Soundtrack', 'soundtrack'],
+              ['Dubstep', 'dubstep'], ['Lo-fi', 'lo-fi'], ['Vocal', 'vocal']
+            ],
+            prompt: "Select a Genre",
+            input_html: { class: 'form-control edit-band-form' },
+            label_html: { class: 'form-label' } %>
+        <%= f.error :genre, class: 'text-danger' %>
+      </div>
+
+      <div class="mb-3">
+    <%= f.input :searching_for_instruments, as: :select, collection: ['Piano', 'Guitar', 'Drums', 'Bass'],
+          input_html: { multiple: true, class: 'form-control edit-band-form' },
           label_html: { class: 'form-label' } %>
-      <%= f.error :genre, class: 'text-danger' %>
-    </div>
+    <%= f.error :searching_for_instruments, class: 'text-danger' %>
+  </div>
 
-    <div class="mb-3">
-  <%= f.input :searching_for_instruments, as: :select, collection: ['Piano', 'Guitar', 'Drums', 'Bass'],
-        input_html: { multiple: true, class: 'form-control' },
-        label_html: { class: 'form-label' } %>
-  <%= f.error :searching_for_instruments, class: 'text-danger' %>
-</div>
+      <div class="mb-3">
+        <%= f.label :photo, class: "col-form-label-lg" %>
+        <%= f.file_field :photo, class: "form-control edit-band-form" %>
+        <%= f.error :photo, class: 'text-danger' %>
+      </div>
 
-    <div class="mb-3">
-      <%= f.label :photo, class: "col-form-label-lg" %>
-      <%= f.file_field :photo, class: "form-control" %>
-      <%= f.error :photo, class: 'text-danger' %>
-    </div>
+      <div class="text-center">
+        <%= f.submit "Update the band", class: "btn btn-lg mt-3 band-btn" %>
+      </div>
 
-    <div class="text-center">
-      <%= f.submit "Update the band", class: "btn btn-primary btn-lg mt-3" %>
-    </div>
-
-  <% end %>
+    <% end %>
+  </div>
 </div>
