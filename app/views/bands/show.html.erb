@@ -55,12 +55,14 @@
         <!-- Members Card -->
         <div class="band_details_card fs-4 d-flex flex-column">
           <h2>Members</h2>
-          <% @members.each do |member| %>
-            <%= link_to user_path(member) do %>
-              <%= member.first_name %> <%= member.last_name %>
+         <% @members.each do |member| %>
+          <%= link_to user_path(member), class: "member-link" do %>
+            <%= member.first_name %> <%= member.last_name %>
+            <% if !member.instruments.empty? %>
               (<%= member.instruments.join(", ") %> )
             <% end %>
           <% end %>
+        <% end %>
         </div>
       </div>
     </div>

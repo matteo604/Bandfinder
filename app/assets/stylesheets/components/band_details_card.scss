@@ -5,3 +5,13 @@
   padding: 2rem;
   position: relative;
 }
+
+.member-link {
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.member-link:hover {
+  color: #3498db;
+}
