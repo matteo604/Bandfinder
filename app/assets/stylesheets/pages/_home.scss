@@ -11,7 +11,7 @@ body{
  color: white;
 }
 .photo-container {
-  height: 480px;
+  height: 500px;
   background-image: url(asset_path('male-band-playing-on-outdoor-600nw-2504988701.webp'));
   background-size: cover;
   background-position: center 20%;
@@ -19,19 +19,29 @@ body{
   padding: 20px;
   color: white;
   position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   text-align: center;
   background-blend-mode: overlay;
-  background-color: rgba(0, 0, 0, 0.3);
-  filter: brightness(0.8) contrast(1.2);
+  background-color: rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+.photo-container h1, .photo-container .motto {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .photo-container h1 {
-  font-size: 2.5em;
+  font-size: 3em;
   font-weight: bold;
-  text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.7);
+  top: 40%;
+}
+
+.photo-container .motto {
+  font-size: 1.5em;
+  margin-top: 10px;
+  font-style: italic;
+  top: 55%;
 }
 
 .footer-border{
