@@ -14,8 +14,11 @@
   <body>
     <%= render "shared/navbar" %>
     <%= render "shared/flashes" %>
-    <%= yield %>
+    <div class="content-wrapper">
+      <%= yield %>
+    </div>
     <!-- JavaScript to remove alerts after 10 seconds -->
+    <%= render 'shared/footer' %>
     <script>
       document.addEventListener("DOMContentLoaded", function() {
         setTimeout(function() {
@@ -28,6 +31,5 @@
         }, 5000); // 5000 ms = 5 seconds
       });
     </script>
-    <%= render 'shared/footer' %>
   </body>
 </html>
