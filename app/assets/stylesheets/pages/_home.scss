@@ -5,11 +5,16 @@ html, body, #map-container {
   padding: 0;
 }
 
+html, body {
+  display: flex;
+  flex-direction: column;
+}
+
 body{
- flex-direction: column;
  background-color: rgb(240, 159, 8);
  color: white;
 }
+
 .photo-container {
   height: 500px;
   background-image: url(asset_path('male-band-playing-on-outdoor-600nw-2504988701.webp'));
@@ -42,6 +47,18 @@ body{
   margin-top: 10px;
   font-style: italic;
   top: 55%;
+}
+
+.content-wrapper {
+  flex: 1;
+}
+
+.footer {
+  flex-shrink: 0;
+  padding: 10px 0;
+  text-align: center;
+  width: 100%;
+  height: 150px;
 }
 
 .footer-border{
