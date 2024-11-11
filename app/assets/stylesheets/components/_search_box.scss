@@ -1,0 +1,22 @@
+.search_box{
+  position: relative;
+}
+
+.search_box:hover input{
+  width: 350px;
+  background: #3b3640;
+  border-radius: 10px;
+}
+.search_box i{
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translate(-50%,-50%);
+  font-size: 26px;
+  color: #ffd52d;
+  transition: .2s;
+}
+.search_box:hover i{
+  opacity: 0;
+  z-index: -1;
+}
