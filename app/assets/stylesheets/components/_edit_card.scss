@@ -5,3 +5,27 @@
   padding: 2rem;
   position: relative;
 }
+.edit-user-form {
+  border-color: orange !important;
+}
+
+.edit-user-button{
+  border-color: orange;
+}
+
+.user-btn {
+  border: 2px solid orange;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center !important;
+}
+
+.user-btn:hover {
+  background-color: orange;
+  color: white;
+  border-color: white;
+  transform: scale(1.05);
+  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.3);
+}
