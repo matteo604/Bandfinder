@@ -6,11 +6,11 @@
           <% if band.photo.attached? %>
             <%= image_tag band.photo, alt: "#{band.title}", class: "band-image" %>
           <% else %>
-            <%= image_tag "default-profile-image.jpg", alt: "default profile image", class: "band-image" %>
+            <%= image_tag "placeholder_band.jpg", alt: "default profile image", class: "band-image placeholder-image-band" %>
           <% end %>
 
           <!-- Info Icon mit Tooltip -->
-          <div class="info-icon">
+          <div class="info-icon-band">
             <i class="fa fa-info-circle"></i>
             <div class="info-tooltip">
               <p><strong>Genre:</strong> <%= band.genre %></p>
@@ -19,7 +19,9 @@
             </div>
           </div>
         </div>
-        <div class="card-body">
+
+        <!-- Band Card Body mit Titel und Standort -->
+        <div class="band-card-body">
           <h5 class="band-title"><%= band.title %></h5>
           <p class="band-location"><%= band.city_and_country %></p>
         </div>

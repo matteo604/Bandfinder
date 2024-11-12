@@ -1,35 +1,42 @@
+/* Basic styling for the band card */
 .band-card {
   font-family: -apple-system, BlinkMacSystemFont, "Apple Color Emoji", "SF Pro", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: rgba(12, 74, 209, 0.7);
+  background-color: rgba(183, 65, 14, 0.8);
   border-radius: 5px;
   width: 200px;
   height: 230px;
-  transition: background-color 0.3s;
+  transition: background-color 1s;
   margin-right: 10px;
   margin-top: 10px;
   position: relative;
+  overflow: hidden; /* Ensures content does not overflow outside the card */
 }
 
-.band-card:hover {
-  background-color: rgba(7, 44, 126, 0.9);
-}
-
+/* Container for the image */
 .image-container {
-  position: relative;
-  overflow: hidden;
-}
-
-.image-container img {
-  display: block;
   width: 100%;
-  height: auto;
+  height: 100% /* Ensures the image fills the entire card height */;
+  overflow: hidden;
+  position: relative;
 }
 
-/* Vignettierung */
-.band-card:hover .image-container::after {
-  opacity: 1;
+/* Image styling for both band photo and placeholder */
+.band-image, .placeholder-image-band {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image fills the container without stretching */
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: filter 0.3s; /* Smooth transition for brightness effect on hover */
 }
 
+/* Brightness effect on hover for the band image */
+.band-card:hover .band-image {
+  filter: brightness(1.1); /* Slightly increase brightness on hover */
+}
+
+/* Vignette effect on the image */
 .image-container::after {
   content: "";
   position: absolute;
@@ -37,70 +44,99 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(circle, transparent 50%, rgba(7, 44, 126, 0.4) 100%);
+  background: radial-gradient(circle, transparent 40%, rgba(183, 65, 14, 0.8) 100%); /* Strong vignette effect */
   pointer-events: none;
   transition: opacity 0.5s ease;
-  opacity: 0;
+  opacity: 0; /* Hidden by default */
 }
 
-.band-image {
+/* Show vignette on hover */
+.band-card:hover .image-container::after {
+  opacity: 0.7;
+}
+
+/* Styling for the bottom text area (band card body) */
+.band-card-body {
+  height: 50px;
+  background-color: rgba(183, 65, 14, 1); /* Slightly opaque background */
+  color: #fff;
+  padding: 8px;
+  padding-top: 3px;
+  position: absolute;
+  bottom: 0;
   width: 100%;
-  border-radius: 3px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start; /* Align content to the top */
+  transition: background-color 0.3s; /* Smooth transition */
+  overflow: hidden; /* Ensures content does not exceed the container */
 }
 
+/* Make the card body more transparent on hover */
+.band-card:hover .band-card-body {
+  background-color: rgba(255, 255, 255, 0); /* Increased transparency */
+}
+
+/* Styling for the band title */
 .band-title {
   font-size: 15px;
-  text-align: left;
   color: #fff;
-  margin-top: 5px;
-  margin-left: 5px;
-  font-weight: bold;
+  margin: 3px 0; /* Adds top margin of 3px */
+  white-space: nowrap; /* Prevents the title from wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Adds "..." if title overflows */
 }
 
-/* Info Icon */
-.info-icon {
+/* Styling for the band location */
+.band-location {
+  font-size: 12px;
+  color: #ffffff;
+  margin: 0;
+  white-space: nowrap; /* Prevents text wrapping */
+  overflow: hidden; /* Ensures content does not exceed the container */
+  text-overflow: ellipsis; /* Adds "..." when text overflows */
+  flex-grow: 1;
+}
+
+/* Tooltip icon styling */
+.info-icon-band {
   position: absolute;
   top: 8px;
   left: 8px;
   font-size: 18px;
-  color: rgba(0, 0, 0, 0.8);
+  color: rgba(183, 65, 14, 1);
   cursor: pointer;
   transition: color 0.3s;
 }
 
-.info-icon:hover {
+/* Darkens the info icon color on hover */
+.info-icon-band:hover {
   color: #000000;
 }
 
+/* Tooltip styling */
 .info-tooltip {
   display: none;
   position: absolute;
   top: 30px;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(183, 65, 14, 0.8);
   color: white;
   padding: 8px;
   border-radius: 5px;
   font-size: 12px;
   width: 150px;
-  z-index: 10;
+  z-index: 10; /* Ensures tooltip is displayed above other elements */
 }
 
-/* Tooltip beim Hover anzeigen */
-.info-icon:hover .info-tooltip {
+/* Display tooltip when hovering over the info icon */
+.info-icon-band:hover .info-tooltip {
   display: block;
 }
 
-.cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
-}
-
-.band-location {
-  font-size: 12px;
-  text-align: left;
-  color: #ffffff;
-  margin-top: 5px;
-  margin-left: 5px;
+/* Placeholder image specific styling */
+.placeholder-image-band {
+  width: 100%;
+  height: 180px; /* Fixed height for the placeholder image */
+  object-fit: cover; /* Ensures the placeholder image fits within the specified height */
 }

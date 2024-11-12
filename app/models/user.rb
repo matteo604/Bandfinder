@@ -12,4 +12,9 @@ class User < ApplicationRecord
   validates :email, uniqueness: true
   geocoded_by :address
   after_validation :geocode, if: :will_save_change_to_address?
+
+  # Method to check if the user is a band leader
+  def band_leader?
+    leader == true
+  end
 end

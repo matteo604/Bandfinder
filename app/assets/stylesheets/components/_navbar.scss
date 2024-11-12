@@ -33,8 +33,11 @@
 }
 
 .navbar-logo {
-  max-width: 120px;
+  max-width: 200px;
   height: auto;
+  z-index: 2;
+  position: absolute;
+  top: 10%;
 }
 
 .navbar-user-info {
@@ -59,6 +62,7 @@
 
 .navbar {
   position: relative;
+  z-index: 1;
 }
 
 .navbar-text i {

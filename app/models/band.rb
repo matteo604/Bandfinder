@@ -11,9 +11,8 @@ class Band < ApplicationRecord
 
   def city_and_country
     if address.present?
-      # Teile die Adresse auf und nimm nur die letzten beiden Elemente (vermutlich Stadt und Land)
       parts = address.split(',')
-      parts = parts.last(2).map(&:strip) # Nimm die letzten zwei Teile und entferne Leerzeichen
+      parts = parts.last(2).map(&:strip)
       parts.join(', ')
     else
       "Address not available"
