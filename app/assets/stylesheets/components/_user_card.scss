@@ -1,30 +1,142 @@
-.users-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  padding: 10px;
-}
-
+/* Basic styling for the user card */
 .user-card {
-  background-color: #f0f0f0;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  width: 240px;
-  flex: 0 1 auto;
-  padding: 15px;
-  transition: transform 0.3s;
-  color: black;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple Color Emoji", "SF Pro", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: rgba(25, 70, 85, 0.8);
+  border-radius: 5px;
+  width: 200px;
+  height: 230px;
+  transition: background-color 1s;
+  margin-right: 10px;
+  margin-top: 10px;
+  position: relative;
+  overflow: hidden; /* Ensures content does not overflow outside the card */
 }
 
-
-a {
-  color: inherit;
-  text-decoration: none;
+/* Container for the image */
+.image-container {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
 }
 
+/* Image styling for both user photo and placeholder */
+.user-image, .placeholder-image-user {
+  width: 100%;
+  height: 100%; /* Ensures the image fills the entire card height */
+  object-fit: cover; /* Ensures the image fills the container without stretching */
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: filter 0.5s; /* Smooth transition for brightness effect on hover */
+}
 
-.user-card:hover {
-  transform: scale(1.05);
+/* Brightness effect on hover for the user image */
+.user-card:hover .user-image {
+  filter: brightness(1.1); /* Slightly increase brightness on hover */
+}
+
+/* Vignette effect on the image */
+.image-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle, transparent 40%, rgba(0, 0, 0, 0.8) 100%); /* Strong vignette effect */
+  pointer-events: none;
+  transition: opacity 0.5s ease;
+  opacity: 0; /* Hidden by default */
+}
+
+/* Show vignette on hover */
+.user-card:hover .image-container::after {
+  opacity: 0.7;
+}
+
+/* Styling for the bottom text area (user card body) */
+.user-card-body {
+  height: 50px;
+  background-color: rgba(25, 70, 85, 1); /* Slightly opaque background */
+  color: #fff;
+  padding: 8px;
+  padding-top: 3px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start; /* Align content to the top */
+  transition: background-color 0.3s; /* Smooth transition */
+  overflow: hidden; /* Ensures content does not exceed the container */
+}
+
+/* Make the card body more transparent on hover */
+.user-card:hover .user-card-body {
+  background-color: rgba(255, 255, 255, 0); /* Increased transparency */
+}
+
+/* Styling for the user title (name) */
+.user-title {
+  font-size: 15px;
+  color: #fff;
+  margin: 3px 0; /* Adds top margin of 3px */
+  white-space: nowrap; /* Prevents the title from wrapping */
+  overflow: hidden;
+  text-overflow: ellipsis; /* Adds "..." if title overflows */
+}
+
+/* Styling for the user instruments (instrument list) */
+.user-instruments {
+  font-size: 12px;
+  color: #ffffff;
+  margin: 0;
+  white-space: nowrap; /* Prevents text wrapping */
+  overflow: hidden; /* Ensures content does not exceed the container */
+  text-overflow: ellipsis; /* Adds "..." when text overflows */
+  flex-grow: 1; /* Allows instruments to take up remaining space */
+}
+
+/* Styling for the info icon (tooltip icon) */
+.info-icon-user {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  font-size: 18px;
+  color: rgba(25, 70, 85, 1);
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+/* Darkens the info icon color on hover */
+.info-icon-user:hover {
+  color: #000000;
+}
+
+/* Tooltip styling */
+.info-tooltip {
+  display: none;
+  position: absolute;
+  top: 30px;
+  left: 0;
+  background-color: rgba(25, 70, 85, 0.8);
+  color: white;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 12px;
+  width: 150px;
+  z-index: 10; /* Ensures tooltip is displayed above other elements */
+}
+
+/* Display tooltip when hovering over the info icon */
+.info-icon-user:hover .info-tooltip {
+  display: block;
+}
+
+/* Placeholder image specific styling */
+.placeholder-image-user {
+  width: 100%;
+  height: 180px; /* Fixed height for the placeholder image */
+  object-fit: cover; /* Ensures the placeholder image fits within the specified height */
 }

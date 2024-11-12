@@ -8,4 +8,14 @@ class Band < ApplicationRecord
   after_validation :geocode, if: :will_save_change_to_address?
   has_one_attached :photo
   has_many :band_sessions, dependent: :destroy
+
+  def city_and_country
+    if address.present?
+      parts = address.split(',')
+      parts = parts.last(2).map(&:strip)
+      parts.join(', ')
+    else
+      "Address not available"
+    end
+  end
 end
