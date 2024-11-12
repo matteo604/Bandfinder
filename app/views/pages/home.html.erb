@@ -1,27 +1,16 @@
 <div class="photo-container text-center">
+<<<<<<< HEAD
   <h1>BandFinder</h1>
   <p class="motto">Discover the rhythm of your soul, one band at a time.</p>
+=======
+  <h1>BandFinder - Discover all the bands</h1>
+>>>>>>> b8547dc69337f9bf54a3126d0e4cab849736ca3a
 </div>
 
 <div class="container" data-controller="toggleswitch">
-  <h2 class="text-center mt-3">Discover all the bands</h2>
 
-  <div class="switch-container mt-3 d-flex justify-content-center align-items-center" style="gap: 10px;">
-      <span class="label-left" data-toggleswitch-target="labelLeft">Musician looking for a band</span>
-      <label class="switch">
-      <input type="checkbox" data-toggleswitch-target="toggleSwitch" data-action="change->toggleswitch#toggleContent" <%= "checked" if @button_state %>>
-          <span class="slider round" data-toggleswitch-target="slider"></span>
-      </label>
-      <span class="label-right" data-toggleswitch-target="labelRight">Band looking for a musician</span>
-      <button class="h-25 btn btn-secondary"
-          data-toggleswitch-target="changeViewButton"
-          data-action="click->toggleswitch#changeStatus">
-          List View
-      </button>
-  </div>
-
-
-  <div class="row mt-4">
+  <!-- Search bar and toggle in one line -->
+  <div class="d-flex justify-content-between align-items-center">
     <div class="filter-container mb-4">
       <%= form_with url: search_path, method: :get, local: true, class: "d-flex align-items-center w-100" do |form| %>
         <% if @button_state %>
@@ -258,13 +247,30 @@
       <% end %>
     </div>
 
+    <!-- Toggle Section -->
+    <div class="switch-container d-flex justify-content-center align-items-center" style="gap: 10px;">
+      <span class="label-left" data-toggleswitch-target="labelLeft">Musician looking for a band</span>
+      <label class="switch">
+      <input type="checkbox" data-toggleswitch-target="toggleSwitch" data-action="change->toggleswitch#toggleContent">
+          <span class="slider round" data-toggleswitch-target="slider"></span>
+      </label>
+      <span class="label-right" data-toggleswitch-target="labelRight">Band looking for a musician</span>
+      <button class="h-25 btn btn-secondary map-list-button"
+              data-toggleswitch-target="changeViewButton"
+              data-action="click->toggleswitch#changeStatus">
+        List View
+      </button>
+
+    </div>
+  </div>
+
+  <div class="row mt-4">
     <div data-toggleswitch-target="indexArea" class="d-flex flex-wrap d-none">
       <div data-toggleswitch-target="bandIndex" class="container">
 
-        <h2 class=" text-center mb-4">Band List</h2>
+        <h2 class="text-center mb-4">Band List</h2>
         <% @bands.each do |band| %>
           <%= link_to band_path(band) do %>
-
             <div class="row mb-3">
               <div class="col-2 d-flex">
                 <div class="p-2 justify-content-center">
@@ -275,7 +281,6 @@
                   <% end %>
                 </div>
               </div>
-
               <div class="col-8 p-3 d-flex ">
                 <div class="card shadow-sm fixed-width-card">
                   <div class="card-body">
@@ -294,9 +299,8 @@
 
       <div data-toggleswitch-target="userIndex" class="d-none container">
         <h2 class="text-center mb-4">User List</h2>
-       <% @users.each do |user| %>
+      <% @users.each do |user| %>
           <%= link_to user_path(user) do %>
-
             <div class="row mb-3">
               <div class="col-2 d-flex">
                 <div class="p-2 justify-content-center">
@@ -307,26 +311,21 @@
                   <% end %>
                 </div>
               </div>
-
               <div class="col-8 p-3 d-flex ">
                 <div class="card shadow-sm fixed-width-card">
                   <div class="card-body">
-
                     <h5 class="card-title text-primary"><%= user.first_name %> <%= user.last_name %></h5>
                     <p class="card-text">
                       <strong>Address:</strong> <%= user.address %><br>
-                     <strong>Instruments:</strong>
-                     <%= user.instruments.join(", ")%>
+                    <strong>Instruments:</strong>
+                    <%= user.instruments.join(", ")%>
                     </p>
-
                   </div>
-
                 </div>
               </div>
             </div>
           <% end %>
       <% end %>
-
       </div>
     </div>
 
@@ -341,15 +340,12 @@
           </div>
 
           <!-- User Cards -->
-          <div data-toggleswitch-target="userCard" class="card-group container <%= "d-none" if !@button_state %>">
-            <div class="row w-100">
-              <% @users.each do |user| %>
-                <div class="col-4 p-4">
-                  <%= render partial: "users/user_card", locals: { user: user } %>
-                </div>
-              <% end %>
-            </div>
+          <div data-toggleswitch-target="userCard" class="card-group <%= "d-none" if !@button_state %>">
+            <% @users.each do |user| %>
+              <%= render partial: "users/user_card", locals: { user: user } %>
+            <% end %>
           </div>
+
         </div>
       </div>
 

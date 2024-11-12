@@ -1,8 +1,11 @@
 // Specific CSS for your home-page
 html, body, #map-container {
-  height: 100%;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to bottom right, rgb(240, 159, 8), rgba(240, 140, 8, 0.6), rgba(240, 120, 8, 0.3));
 }
 
 html, body {
@@ -11,29 +14,30 @@ html, body {
 }
 
 body{
- background-color: rgb(240, 159, 8);
- color: white;
+  flex-direction: column;
+  background-color: rgb(240, 159, 8);
+  color: white;
+  background: linear-gradient(to bottom right, rgb(240, 159, 8), rgba(240, 140, 8, 0.6), rgba(240, 120, 8, 0.3));
+  min-height: 100%;
+  margin: 0;
+  display: flex;
 }
 
 .photo-container {
-  height: 500px;
-  background-image: url(asset_path('male-band-playing-on-outdoor-600nw-2504988701.webp'));
+  min-height: 280px;
+  height: 280px;
+  background-image: url(asset_path('main-banner.jpg'));
   background-size: cover;
-  background-position: center 20%;
+  background-position: center top;
   background-repeat: no-repeat;
   padding: 20px;
   color: white;
   position: relative;
   text-align: center;
   background-blend-mode: overlay;
-  background-color: rgba(0, 0, 0, 0.4);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-}
-
-.photo-container h1, .photo-container .motto {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  background-color: rgba(0, 0, 0, 0.3);
+  filter: brightness(1.0) contrast(1.2);
+  background-position: center 70%;
 }
 
 .photo-container h1 {
@@ -69,4 +73,33 @@ body{
 .footer_item{
   font-size: 2rem;
   margin: 1rem;
+}
+
+html {
+  height: 100%;
+  background: linear-gradient(to bottom right, rgb(240, 159, 8), rgba(240, 140, 8, 0.6), rgba(240, 120, 8, 0.3));
+}
+
+.container, .row, .cards-container {
+  background: transparent;
+}
+
+footer {
+  bottom: 0;
+  width: 100%;
+  background: transparent;
+  color: white;
+}
+
+.col-4[data-toggleswitch-target="myMarker"] {
+  position: sticky;
+  top: 20px;
+}
+
+.d-flex.justify-content-between.align-items-center {
+  gap: 20px; /* Passe den Wert an für größeren Abstand */
+}
+
+* {
+  user-select: none;
 }

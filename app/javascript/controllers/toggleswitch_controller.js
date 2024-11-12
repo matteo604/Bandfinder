@@ -65,14 +65,14 @@ export default class extends Controller {
       this.changedAreaTarget.classList.add("d-block")
       this.changedAreaTarget.classList.remove("d-none")
       this.changeViewButtonTarget.status = "list-view"
-      this.changeViewButtonTarget.innerHTML = "list view"
+      this.changeViewButtonTarget.innerHTML = "List View"
       this.indexAreaTarget.classList.add("d-none")
     } else {
       this.changedAreaTarget.classList.add("d-none")
       this.changeViewButtonTarget.status = "map-view"
       this.changedAreaTarget.classList.remove("d-block")
       this.indexAreaTarget.classList.remove("d-none")
-      this.changeViewButtonTarget.innerHTML = "map view"
+      this.changeViewButtonTarget.innerHTML = "Map View"
     }
   }
 }
