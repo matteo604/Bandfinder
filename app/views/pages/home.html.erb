@@ -6,8 +6,26 @@
 <div class="container" data-controller="toggleswitch">
 
   <!-- Search bar and toggle in one line -->
-  <div class="d-flex justify-content-between align-items-center">
-    <div class="filter-container mb-4">
+  <div class="d-flex flex-column">
+
+    <!-- Toggle Section -->
+    <div class="switch-container d-flex justify-content-center align-items-center mt-4" style="gap: 10px;">
+      <span class="label-left" data-toggleswitch-target="labelLeft">Musician looking for a band</span>
+      <label class="switch">
+      <input type="checkbox" data-toggleswitch-target="toggleSwitch" data-action="change->toggleswitch#toggleContent">
+          <span class="slider round" data-toggleswitch-target="slider"></span>
+      </label>
+      <span class="label-right" data-toggleswitch-target="labelRight">Band looking for a musician</span>
+      <button class="h-25 btn btn-secondary map-list-button"
+              data-toggleswitch-target="changeViewButton"
+              data-action="click->toggleswitch#changeStatus">
+        List View
+      </button>
+
+    </div>
+
+    <!-- Search bar Section -->
+    <div class="filter-container">
       <%= form_with url: search_path, method: :get, local: true, class: "d-flex align-items-center w-100" do |form| %>
         <% if @button_state %>
           <%= hidden_field_tag :form_type, "user_search", data: { toggleswitch_target: "formStatus" } %>
@@ -158,7 +176,7 @@
           <div class="search-input">
             <input type="text" id="location-filter" name="address" placeholder="Location" class="form-control filter-input">
           </div>
-           <div class="search-input">
+          <div class="search-input">
             <div class="dropdown" name="instruments" id="instruments-filter">
               <button class="dropbtn">Select Instruments</button>
               <div class="dropdown-content" id="dropdown-content">
@@ -243,21 +261,7 @@
       <% end %>
     </div>
 
-    <!-- Toggle Section -->
-    <div class="switch-container d-flex justify-content-center align-items-center" style="gap: 10px;">
-      <span class="label-left" data-toggleswitch-target="labelLeft">Musician looking for a band</span>
-      <label class="switch">
-      <input type="checkbox" data-toggleswitch-target="toggleSwitch" data-action="change->toggleswitch#toggleContent">
-          <span class="slider round" data-toggleswitch-target="slider"></span>
-      </label>
-      <span class="label-right" data-toggleswitch-target="labelRight">Band looking for a musician</span>
-      <button class="h-25 btn btn-secondary map-list-button"
-              data-toggleswitch-target="changeViewButton"
-              data-action="click->toggleswitch#changeStatus">
-        List View
-      </button>
 
-    </div>
   </div>
 
   <div class="row mt-4">
