@@ -42,7 +42,7 @@
               <% if current_user.photo.attached? %>
                 <%= image_tag current_user.photo, alt: "dropdown menu", class:"avatar" %>
               <% else %>
-                <%= image_tag "default-profile-image.jpg", alt: "default profile image", class:"rounded-image" %>
+                <%= image_tag "default-profile-image.jpg", alt: "default profile image", class:"avatar" %>
               <% end %>
             </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
