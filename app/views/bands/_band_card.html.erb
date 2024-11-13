@@ -1,35 +1,31 @@
-<div class="band-card">
-  <%= link_to band_path(band) do %>
+<div class="row g-3">
+  <div class="col-md-4">
+    <div class="band-card">
+      <%= link_to band_path(band) do %>
+        <div class="image-container">
+          <% if band.photo.attached? %>
+            <%= image_tag band.photo, alt: "#{band.title}", class: "band-image" %>
+          <% else %>
+            <%= image_tag "placeholder_band.jpg", alt: "default profile image", class: "band-image placeholder-image-band" %>
+          <% end %>
 
-    <div class="d-flex justify-content-center">
-      <% if band.photo.attached? %>
-        <%= image_tag band.photo, alt: "#{band.title}", class:"rounded-image" %>
-      <% else %>
-        <%= image_tag "default-profile-image.jpg", alt: "default profile image", class:"rounded-image" %>
+          <!-- Info Icon mit Tooltip -->
+          <div class="info-icon-band">
+            <i class="fa fa-info-circle"></i>
+            <div class="info-tooltip">
+              <p><strong>Genre:</strong> <%= band.genre %></p>
+              <p><strong>Members:</strong> <%= band.members.count %></p>
+              <p><strong>Band Leader:</strong> <%= band.leader.first_name %> <%= band.leader.last_name %></p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Band Card Body mit Titel und Standort -->
+        <div class="band-card-body">
+          <h5 class="band-title"><%= band.title %></h5>
+          <p class="band-location"><%= band.city_and_country %></p>
+        </div>
       <% end %>
     </div>
-
-
-    <div class="card-body mt-3">
-
-      <h5 class="text-center"><%= band.title %></h5>
-      <div>
-        <i class="fa-solid fa-music fs-3 m-2"></i>
-        <%= band.genre %>
-      </div>
-      <div>
-        <i class="fa-solid fa-location-dot fs-3 m-2"></i>
-        <%= band.address %>
-      </div>
-      <div>
-        <i class="fa-solid fa-drum fs-3 m-1"></i>
-        Looking for: <br>
-        <div class="text-center">
-            <%= band.searching_for_instruments.join(", ") %>
-        </div>
-      </div>
-    </div>
-
-  <% end %>
-
+  </div>
 </div>

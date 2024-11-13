@@ -1,26 +1,49 @@
-<div class="user-card"> <%# /user-card j-content flex-wrap %>
-  <%= link_to user_path(user) do %>
+<div class="row g-3">
+  <div class="col-md-4">
+    <div class="user-card">
+      <%= link_to user_path(user) do %>
+        <div class="image-container">
+          <% if user.photo.attached? %>
+            <%= image_tag user.photo, alt: "#{user.first_name} #{user.last_name}", class: "user-image" %>
+          <% else %>
+            <%= image_tag "default-profile-image.jpg", alt: "default profile image", class: "placeholder-image-user" %>
+          <% end %>
 
-    <div class="d-flex justify-content-center">
-      <% if user.photo.attached? %>
-        <%= image_tag user.photo, alt: "#{user.first_name} #{user.last_name}", class:"rounded-image" %>
-      <% else %>
-        <%= image_tag "default-profile-image.jpg", alt: "default profile image", class:"rounded-image" %>
+          <!-- Info Icon with Tooltip -->
+          <div class="info-icon-user">
+            <i class="fa fa-info-circle"></i>
+            <div class="info-tooltip">
+              <%# Display up to 3 instruments %>
+              <p><strong>Instruments:</strong>
+                <%= user.instruments.first(3).join(", ") %>
+                <% if user.instruments.size > 3 %>
+                  and more...
+                <% end %>
+              </p>
+
+              <!-- Display only the city name from the address -->
+              <p><strong>Location:</strong> <%= user.address.split(',').last %></p>
+
+              <!-- Check if the user is a band leader and display band name -->
+              <% if user.band_leader? %>
+                <p><strong>Band Leader:</strong> Yes</p>
+                <p><strong>Band:</strong> <%= user.band.name if user.band %></p>
+              <% end %>
+
+              <!-- Display band membership if user is associated with a band -->
+              <% if user.band %>
+                <p><strong>Member of:</strong> <%= user.band.title %></p>
+              <% end %>
+            </div>
+          </div>
+        </div>
+
+        <!-- User Card Body with Title and Instruments -->
+        <div class="user-card-body">
+          <h5 class="user-title"><%= user.first_name %> <%= user.last_name %></h5>
+          <p class="user-instruments"><%= user.instruments.join(", ") %></p>
+        </div>
       <% end %>
     </div>
-
-
-    <div class="card-body mt-3">
-
-      <h5 class="text-center"><%= user.first_name %> <%= user.last_name %></h5>
-      <div>
-        <i class="fa-solid fa-drum fs-3 m-2"></i>
-        <%=user.instruments.join(", ") %>
-      </div>
-      <div>
-        <i class="fa-solid fa-location-dot fs-3 m-2"></i>
-        <%= user.address %>
-      </div>
-    </div>
-  <% end %>
+  </div>
 </div>
