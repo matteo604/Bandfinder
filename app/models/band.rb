@@ -8,6 +8,7 @@ class Band < ApplicationRecord
   after_validation :geocode, if: :will_save_change_to_address?
   has_one_attached :photo
   has_many :band_sessions, dependent: :destroy
+  has_many :join_requests
 
   def city_and_country
     if address.present?

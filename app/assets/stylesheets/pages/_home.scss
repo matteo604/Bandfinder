@@ -16,10 +16,10 @@ body {
 
 .photo-container {
   min-height: 280px;
-  height: 280px;
+  height: 500px;
   background-image: url(asset_path('main-banner.jpg'));
   background-size: cover;
-  background-position: center top;
+  background-position: center 70%;
   background-repeat: no-repeat;
   padding: 20px;
   color: white;
@@ -41,14 +41,13 @@ body {
 .photo-container h1 {
   font-size: 3em;
   font-weight: bold;
-  top: 40%;
+  margin: 0;
 }
 
 .photo-container .motto {
   font-size: 1.5em;
   margin-top: 10px;
   font-style: italic;
-  top: 55%;
 }
 
 .content-wrapper {
