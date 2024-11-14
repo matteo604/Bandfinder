@@ -3,7 +3,7 @@
     <div class="band-nav">
       <div class="container d-flex justify-content-between">
         <h2 class="band-session-band-title"><%= @band.title %></h2>
-        <a class="btn btn-primary mt-3 ms-5" href="#" role="button">My band</a>
+        <a class="btn btn-primary mt-3 ms-5" href="<%= band_my_band_path(current_user.band)%>" role="button">My band</a>
       </div>
       <% @band_sessions.each do |band_session| %>
         <div class="band_sessions_details_card fs-4 mx-2">
