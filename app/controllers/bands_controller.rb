@@ -26,7 +26,7 @@ class BandsController < ApplicationController
     @band_session = BandSession.new
     #@band_session.user = current_user
     @members = @band.members
-    @join_requests = @band.join_requests.where(status: "pending")
+    @join_requests = @band.join_requests.where(status: "pending", join_type: "user_to_band")
   end
 
   def create

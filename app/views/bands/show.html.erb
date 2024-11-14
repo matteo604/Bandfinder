@@ -75,7 +75,7 @@
 
     <%# improve this part %>
 
-    <% if !@band.members.include?(current_user) %>
+    <% if !@band.members.include?(current_user) && !current_user.band_id %>
       <% if current_user.join_requests.where(band_id: @band.id).length > 0 %>
         <p> Request already sent: status: </p> <%= current_user.join_requests.where(band_id: @band.id)[0].status %>
       <% else %>
