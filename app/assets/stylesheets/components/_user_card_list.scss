@@ -1,0 +1,156 @@
+.user-list-card {
+  background-color: rgba(247, 231, 206, 0.8);
+  border-radius: 5px;
+  position: relative;
+  overflow: visible;
+  width: 50%;
+  height: 175px;
+  margin: 10px auto;
+  color: #fff;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-decoration: none;
+  box-sizing: border-box;
+}
+
+.user-list-title {
+  color: rgb(54, 69, 79);
+  font-size: 18px;
+  text-align: left;
+  margin-top: 3px;
+  text-decoration: none;
+  line-height: 1.4;
+  font-weight: bold;
+}
+
+.user-list-instruments, .user-list-address, .user-status {
+  color: rgb(54, 69, 79);
+  font-size: 14px;
+  text-align: left;
+  margin: 5px 0;
+  margin-right: 10px;
+  text-decoration: none;
+  line-height: 1.4;
+}
+
+.user-list-instruments {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 3em;
+  line-clamp: 2;
+}
+
+.list-image-container {
+  width: 150px;
+  height: 150px;
+  overflow: visible;
+  border-radius: 5px;
+  position: absolute;
+  left: -115px;
+  top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  opacity: 0.95;
+}
+
+.user-list-image, .placeholder-image-user-list {
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease;
+  object-fit: cover;
+}
+
+.list-image-container:hover .user-list-image, .list-image-container:hover .placeholder-image-user-list {
+  transform: scale(1.2);
+}
+
+.user-list-card-body {
+  background-color: rgba(247, 231, 206, 1);
+  padding: 12px 12px 12px 65px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 1;
+  overflow: hidden;
+  border-radius: 5px;
+}
+
+.user-card-footer {
+  background-color: rgba(247, 231, 206, 1);
+  color: #ffffff;
+  text-align: left;
+  font-size: 14px;
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  padding-top: 8px;
+  margin-top: auto;
+}
+
+.user-card-footer .separator {
+  margin: auto 10px;
+}
+
+.user-card-footer small {
+  margin-right: 5px;
+}
+
+.users-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.user-list-card {
+  flex: 0 1 calc(50% - 10px);
+  min-width: 300px;
+  max-width: 480px;
+}
+
+@media (max-width: 768px) {
+  .user-list-card {
+    flex: 0 1 100%;
+  }
+}
+
+.user-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.more-icon-user {
+  position: absolute;
+  font-size: 1.5rem;
+  color: rgb(54, 69, 79);
+  margin-left: 10px;
+  margin-right: 20px;
+  right: 0;
+}
+
+.user-list-card:hover .more-icon-user,
+.more-icon-user:hover {
+  transform: scale(1.2); /* Vergrößert den Pfeil */
+  color: rgb(96, 130, 182);
+  transition: transform 0.8s ease, color 0.3s ease;
+}
+
+.band-leader {
+  font-size: 14px;
+}
+
+.band-members-count {
+  font-size: 14px;
+}

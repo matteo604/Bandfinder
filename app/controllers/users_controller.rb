@@ -38,7 +38,7 @@ class UsersController < ApplicationController
       @user.destroy
       redirect_to 'bands#index', notice: 'Your account was successfully deleted.'
     else
-       redirect_to 'bands#index', alert: 'You are not able to delete this account.'
+      redirect_to 'bands#index', alert: 'You are not able to delete this account.'
     end
   end
 

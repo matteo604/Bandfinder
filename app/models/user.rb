@@ -18,4 +18,8 @@ class User < ApplicationRecord
   def band_leader?
     leader == true
   end
+
+  def leads_band?
+    Band.exists?(leader_id: self.id)
+  end
 end
