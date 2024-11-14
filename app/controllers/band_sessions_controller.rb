@@ -3,6 +3,7 @@ class BandSessionsController < ApplicationController
 
   def index
     @band_sessions = BandSession.all
+    @band = Band.find(params[:band_id])
   end
 
   def show
