@@ -72,5 +72,15 @@
     <% if current_user != @band.leader %>
       <%= button_to 'Message Band Leader', chats_path(chat: { band_leader_id: @band.leader.id }), method: :post, class: "btn btn-primary" %>
     <% end %>
+
+    <%# improve this part %>
+
+    <% if !@band.members.include?(current_user) && !current_user.band_id %>
+      <% if current_user.join_requests.where(band_id: @band.id).length > 0 %>
+        <p> Request already sent: status: </p> <%= current_user.join_requests.where(band_id: @band.id)[0].status %>
+      <% else %>
+        <%= button_to "Request to join #{@band.title}", band_join_requests_path(band_id: @band.id, join_request: { join_type: "user_to_band" }), method: :post, class: "btn btn-primary mt-3" %>
+      <% end %>
+    <% end %>
   </div>
 </div>

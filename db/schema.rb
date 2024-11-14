@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_11_09_113555) do
+ActiveRecord::Schema[7.1].define(version: 2024_11_13_203626) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -93,6 +93,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_09_113555) do
     t.index ["user_id"], name: "index_chats_on_user_id"
   end
 
+  create_table "join_requests", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id", null: false
+    t.bigint "band_id", null: false
+    t.string "status", default: "pending"
+    t.string "join_type", null: false
+    t.index ["band_id"], name: "index_join_requests_on_band_id"
+    t.index ["user_id"], name: "index_join_requests_on_user_id"
+  end
+
   create_table "messages", force: :cascade do |t|
     t.text "content"
     t.bigint "user_id", null: false
@@ -149,6 +160,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_11_09_113555) do
   add_foreign_key "bands", "users", column: "leader_id"
   add_foreign_key "chats", "users"
   add_foreign_key "chats", "users", column: "band_leader_id"
+  add_foreign_key "join_requests", "bands"
+  add_foreign_key "join_requests", "users"
   add_foreign_key "messages", "chats"
   add_foreign_key "messages", "users"
   add_foreign_key "reviews", "bands"

@@ -51,5 +51,39 @@
     <% if current_user != @user %>
       <%= button_to 'Message this user', chats_path(chat: { band_leader_id: @user.id }), method: :post, class: "btn btn-primary" %>
     <% end %>
+
+    <% if current_user != @user && current_user.band_id %>
+      <% if current_user.band.join_requests.where(user_id: @user.id).length > 0 %>
+        <p> Request already sent: status: </p><%= current_user.band.join_requests.where(user_id: @user.id)[0].status %>
+      <% else %>
+        <%= button_to "Ask #{@user.first_name} to join my band", user_join_requests_path(user_id: @user.id, join_request: { join_type: "band_to_user" }), method: :post, class: "btn btn-primary mt-3" %>
+      <% end %>
+    <% end %>
   </div>
+  <% if current_user == @user %>
+    <h3>Pending Join Requests</h3>
+    <% if @join_requests.any? %>
+      <% @join_requests.each do |request| %>
+        <div class="card mb-3 shadow-sm">
+          <div class="card-body d-flex justify-content-between align-items-center">
+            <div>
+              <h5 class="card-title mb-1"><%= request.user.first_name %> <%= request.user.last_name %></h5>
+              <p class="mb-0 text-muted">Requested to join on <%= request.created_at.strftime("%B %d, %Y") %></p>
+            </div>
+            <div class="btn-group">
+              <!-- Pulsante per accettare la richiesta di partecipazione -->
+              <%= button_to 'Accept Request', accept_user_join_request_path(user_id: @user.id, id: request.id),
+                            method: :patch, class: "btn btn-success", data: { confirm: 'Are you sure you want to accept this request?' } %>
+
+              <!-- Pulsante per rifiutare la richiesta di partecipazione -->
+              <%= button_to 'Decline Request', decline_user_join_request_path(user_id: @user.id, id: request.id),
+                            method: :patch, class: "btn btn-danger", data: { confirm: 'Are you sure you want to decline this request?' } %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <p class="text-muted">No pending requests at the moment.</p>
+    <% end %>
+  <% end %>
 </div>

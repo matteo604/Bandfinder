@@ -1,9 +1,6 @@
 <div class="container">
-
   <div class="d-flex justify-content-center">
-
     <div class="col-md-7 align-items-center m-5 p-4">
-
       <h2>Sign up</h2>
 
       <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -14,27 +11,51 @@
           <%= f.input :email,
                       required: true,
                       autofocus: true,
-                      input_html: { autocomplete: "email" }%>
+                      input_html: { autocomplete: "email" } %>
           <%= f.input :first_name,
                       required: true,
                       autofocus: true,
-                      input_html: { autocomplete: "first_name" }%>
+                      input_html: { autocomplete: "first_name" } %>
           <%= f.input :last_name,
                       required: true,
                       autofocus: true,
-                      input_html: { autocomplete: "last_name" }%>
+                      input_html: { autocomplete: "last_name" } %>
           <%= f.input :address,
                       required: true,
                       autofocus: true,
-                      input_html: { autocomplete: "address" }%>
-          <%= f.input :instruments,
-                      required: true,
-                      autofocus: true,
-                      input_html: { autocomplete: "instruments" }%>
+                      input_html: { autocomplete: "address" } %>
+
+          <!-- Instruments Selection -->
+          <%= f.label :instruments, class: "col-form-label-lg" %><br>
+          <div class="instrument-dropdown edit-user-form" id="instruments-filter">
+            <button type="button" class="instrument-dropbtn edit-user-btn" onclick="toggleDropdown()">Select Instruments</button>
+            <div class="instrument-dropdown-content" id="instrument-dropdown-content">
+              <% ["Accordion", "Agogo", "Alto Saxophone", "Autoharp", "Bagpipes", "Banjo", "Bass",
+                  "Bass Clarinet", "Bass Drum", "Bassoon", "Cajon", "Castanets", "Cello",
+                  "Clarinet", "Claves", "Conga", "Cornet", "Cowbell", "Djembe", "Didgeridoo",
+                  "Drum Machine", "Drums", "Duduk", "Electric Bass", "Electric Guitar",
+                  "Electric Keyboard", "English Horn", "Erhu", "Flute", "French Horn",
+                  "Glockenspiel", "Guitar", "Guiro", "Harp", "Hurdy Gurdy", "Jew's Harp",
+                  "Kazoo", "Koto", "Kalimba", "Mandolin", "Maracas", "Marimba", "Melodica",
+                  "Mountain Dulcimer", "Oboe", "Piano", "Pan Flute", "Percussion", "Piccolo",
+                  "Recorder", "Saxophone", "Saxophone (Baritone)", "Saxophone (Tenor)",
+                  "Shakuhachi", "Steel Drum", "Sitar", "Synthesizer (Analog)", "Synthesizer (Digital)",
+                  "Tambourine", "Timpani", "Triangle", "Trumpet", "Trombone", "Tuba",
+                  "Ukulele", "Vibraphone", "Viola", "Violin", "Wooden Flute", "Xylophone", "Zither"].each do |instrument| %>
+                <label>
+                  <input type="checkbox" name="user[instruments][]" value="<%= instrument %>"
+                         <%= 'checked' if @user&.instruments&.include?(instrument) %> >
+                  <%= instrument %>
+                </label>
+              <% end %>
+            </div>
+          </div>
+          <!-- End Instruments Selection -->
+
           <%= f.input :telephone_number,
                       required: true,
                       autofocus: true,
-                      input_html: { autocomplete: "telephone_number" }%>
+                      input_html: { autocomplete: "telephone_number" } %>
           <%= f.input :password,
                       required: true,
                       hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
@@ -50,7 +71,22 @@
       <% end %>
 
       <%= render "devise/shared/links" %>
-
     </div>
   </div>
 </div>
+
+<script>
+  function toggleDropdown() {
+    var dropdown = document.getElementById("instrument-dropdown-content");
+    dropdown.style.display = dropdown.style.display === "none" || dropdown.style.display === "" ? "block" : "none";
+  }
+
+  window.onclick = function(event) {
+    if (!event.target.closest('.instrument-dropdown')) {
+      var dropdown = document.getElementById("instrument-dropdown-content");
+      if (dropdown.style.display === "block") {
+        dropdown.style.display = "none";
+      }
+    }
+  };
+</script>
