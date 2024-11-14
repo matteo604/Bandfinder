@@ -7,13 +7,23 @@ Rails.application.routes.draw do
 
   # users routes
   resources :users, only: [:index, :show, :edit, :update, :destroy] do
-    resources :join_requests, only: [:create, :accept, :decline]
+    resources :join_requests, except: [:edit, :update] do
+      member do
+        patch 'accept'   # route per accettare una richiesta
+        patch 'decline'  # route per rifiutare una richiesta
+      end
+    end
   end
 
   # bands routes
   resources :bands do
     get 'my_band', to: "bands#my_band", as: :my_band
-    resources :join_requests, only: [:create, :accept, :decline]
+    resources :join_requests, except: [:edit, :update] do
+      member do
+        patch 'accept'   # route per accettare una richiesta
+        patch 'decline'  # route per rifiutare una richiesta
+      end
+    end
     resources :chats, only: [:new, :create]
     resources :reviews, only: [:new, :create, :index]
     resources :band_sessions, only: [:index, :show, :new, :create, :edit, :update]

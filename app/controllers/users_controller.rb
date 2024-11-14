@@ -8,7 +8,7 @@ class UsersController < ApplicationController
   def show
     @band = Band.find_by(leader_id:current_user.id)
     @bands = Band.all
-    @join_requests = @user.join_requests
+    @join_requests = @user.join_requests.where(status: "pending")
   end
 
   def edit

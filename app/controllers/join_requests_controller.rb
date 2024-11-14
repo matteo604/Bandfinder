@@ -24,19 +24,20 @@ class JoinRequestsController < ApplicationController
 
   def accept
     @join_request = JoinRequest.find(params[:id])
-
-    if @join_request.update(status: "accepted")
+    @join_request.update(status: "accepted")
+    if @join_request.save
       add_member(@join_request.user_id)
-      redirect_to join_requests_path, notice: 'Join request accepted.'
+      redirect_to user_join_requests_path(@join_request.user), notice: 'Join request accepted.'
     else
-      redirect_to join_requests_path, alert: 'Unable to accept request.'
+      redirect_to band_join_requests_path(@join_request.band), alert: 'Unable to accept request.'
     end
   end
 
   def decline
     @join_request = JoinRequest.find(params[:id])
 
-    if @join_request.update(status: "declined")
+    @join_request.update(status: "declined")
+    if @join_request.save
       redirect_to join_requests_path, notice: 'Join request declined.'
     else
       redirect_to join_requests_path, alert: 'Unable to decline request.'
