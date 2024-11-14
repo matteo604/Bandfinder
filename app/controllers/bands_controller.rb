@@ -47,6 +47,11 @@ class BandsController < ApplicationController
   end
 
   def update
+    @band = Band.find(params[:id])
+    if params[:band][:searching_for_instruments].is_a?(Array)
+      non_blank_instruments = params[:band][:searching_for_instruments].reject(&:blank?).map(&:strip)
+      params[:band][:searching_for_instruments] = non_blank_instruments
+    end
     if @band.update(band_params)
       redirect_to @band, notice: 'Band was successfully updated.'
     else
@@ -54,16 +59,18 @@ class BandsController < ApplicationController
     end
   end
 
+
+
   def destroy
     @band = Band.find(params[:id])
+    @band.members.update_all(band_id: nil)
     @band.destroy
-    redirect_to bands_path, notice: 'Band was successfully deleted.'
+   redirect_to controller: 'pages', action: 'home', notice: 'Band was successfully deleted.'
   end
 
   private
 
   def band_params
-    params.require(:band).permit(:title, :description, :address, :genre, :photo, :searching_for_instruments)
+    params.require(:band).permit(:title, :description, :address, :genre, :photo, searching_for_instruments: [])
   end
-
 end

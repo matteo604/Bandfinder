@@ -13,18 +13,7 @@
           <div class="p-2"><i class="fa-solid fa-circle-info"></i> <%= @band.description %></div>
           <div class="p-2">
             <i class="fa-solid fa-drum fs-3"></i> We are looking for:
-            <% instruments = @band.searching_for_instruments %>
-            <% if instruments.present? %>
-              <% begin %>
-                <% formatted_instruments = JSON.parse(instruments).map(&:downcase).join(", ") %>
-              <% rescue JSON::ParserError %>
-                <% formatted_instruments = instruments %>
-              <% end %>
-              <p><%= formatted_instruments %></p>
-            <% else %>
-              <p>No instruments specified</p>
-            <% end %>
-
+            <%= @band.searching_for_instruments.join(", ") %>
           </div>
         </div>
       </div>

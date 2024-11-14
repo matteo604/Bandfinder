@@ -1,5 +1,5 @@
 <div class="photo-container text-center">
-  <h1>BandFinder - Discover all the bands</h1>
+  <h1 class="banner-text">BandFinder - Discover all the bands</h1>
 </div>
 
 <div class="container" data-controller="toggleswitch">
@@ -157,7 +157,7 @@
           <div class="search-input">
             <input type="text" id="location-filter" name="address" placeholder="Location" class="form-control filter-input">
           </div>
-           <div class="search-input">
+          <div class="search-input">
             <div class="dropdown" name="instruments" id="instruments-filter">
               <button class="dropbtn">Select Instruments</button>
               <div class="dropdown-content" id="dropdown-content">
@@ -262,67 +262,79 @@
   <div class="row mt-4">
     <div data-toggleswitch-target="indexArea" class="d-flex flex-wrap d-none">
       <div data-toggleswitch-target="bandIndex" class="container">
-
-        <h2 class="text-center mb-4">Band List</h2>
-        <% @bands.each do |band| %>
-          <%= link_to band_path(band) do %>
-            <div class="row mb-3">
-              <div class="col-2 d-flex">
-                <div class="p-2 justify-content-center">
-                  <% if band.photo.attached? %>
-                    <%= image_tag band.photo, alt: "#{band.title}", class:"rounded-image" %>
-                  <% else %>
-                    <%= image_tag "default-profile-image.jpg", alt: "default profile image", class:"rounded-image" %>
-                  <% end %>
+        <h2 class="section-title text-center mb-4">Band List</h2>
+        <div class="bands-grid">
+          <% @bands.each do |band| %>
+            <%= link_to band_path(band), class: "band-list-card" do %>
+              <div class="list-image-container">
+                <% if band.photo.attached? %>
+                  <%= image_tag band.photo, alt: "#{band.title}", class: "band-list-image" %>
+                <% else %>
+                  <%= image_tag "default-profile-image.jpg", alt: "default profile image", class: "placeholder-image-band-list" %>
+                <% end %>
+              </div>
+              <div class="band-list-card-body">
+                <div class="band-title-container">
+                  <h5 class="band-list-title"><%= band.title %></h5>
+                  <i class="fas fa-arrow-right more-icon-band"></i>
+                </div>
+                <p class="band-list-description"><%= band.description %></p>
+                <div class="card-footer">
+                  <small class="band-list-genre">Genre: <%= band.genre %></small>
+                  <span class="separator"> | </span>
+                  <small class="band-leader">Leader: <%= band.leader.first_name %> </small>
+                  <span class="separator"> | </span>
+                  <small class="band-members-count">Members: <%= band.members.count %></small>
                 </div>
               </div>
-              <div class="col-8 p-3 d-flex ">
-                <div class="card shadow-sm fixed-width-card">
-                  <div class="card-body">
-                    <h5 class="card-title text-primary"><%= band.title %></h5>
-                    <p class="card-text"><%= band.description %></p>
-                  </div>
-                  <div class="card-footer text-muted">
-                    <small>Genre: <%= band.genre %></small>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
 
-      <div data-toggleswitch-target="userIndex" class="d-none container">
-        <h2 class="text-center mb-4">User List</h2>
-      <% @users.each do |user| %>
-          <%= link_to user_path(user) do %>
-            <div class="row mb-3">
-              <div class="col-2 d-flex">
-                <div class="p-2 justify-content-center">
+      <div data-toggleswitch-target="userIndexArea" class="d-flex flex-wrap">
+        <div data-toggleswitch-target="userIndex" class="container">
+          <h2 class="section-title text-center mb-4">User List</h2>
+          <div class="users-grid">
+            <% @users.each do |user| %>
+              <%= link_to user_path(user), class: "user-list-card" do %>
+                <div class="list-image-container">
                   <% if user.photo.attached? %>
-                    <%= image_tag user.photo, alt: "#{user.first_name}", class:"rounded-image" %>
+                    <%= image_tag user.photo, alt: "#{user.first_name}", class: "user-list-image" %>
                   <% else %>
-                    <%= image_tag "default-profile-image.jpg", alt: "default profile image", class:"rounded-image" %>
+                    <%= image_tag "default-profile-image.jpg", alt: "default profile image", class: "placeholder-image-user-list" %>
                   <% end %>
                 </div>
-              </div>
-              <div class="col-8 p-3 d-flex ">
-                <div class="card shadow-sm fixed-width-card">
-                  <div class="card-body">
-                    <h5 class="card-title text-primary"><%= user.first_name %> <%= user.last_name %></h5>
-                    <p class="card-text">
-                      <strong>Address:</strong> <%= user.address %><br>
-                    <strong>Instruments:</strong>
-                    <%= user.instruments.join(", ")%>
-                    </p>
+                <div class="user-list-card-body">
+                  <div class="user-title-container">
+                    <h5 class="user-list-title"><%= user.first_name %> <%= user.last_name %></h5>
+                    <i class="fas fa-arrow-right more-icon-user"></i>
+                  </div>
+                  <p class="user-list-instruments">
+                    Role: <%= user.instruments.join(", ") %>
+                  </p>
+                  <div class="card-footer">
+                    <small class="user-list-address"><i class="fas fa-map-marker-alt"></i> <%= user.address.split(',').last %></small>
+                    <span class="separator"> | </span>
+                    <% if user.band.present? %>
+                      <small class="band-leader">
+                        <%= user.leads_band? ? "Band Leader" : "Band Member" %>
+                      </small>
+                      <span class="separator"> | </span>
+                      <small class="band-members-count">Band: <%= user.band.title %></small>
+                    <% else %>
+                      <small class="band-leader">No Band</small>
+                    <% end %>
                   </div>
                 </div>
-              </div>
-            </div>
-          <% end %>
-      <% end %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
       </div>
-    </div>
+
+</div>
+
 
     <div data-toggleswitch-target="changedArea" class="d-flex flex-wrap">
       <div class="col-8">
@@ -346,7 +358,7 @@
 
       <!-- Map Section -->
       <div class="col-4" data-toggleswitch-target="myMarker">
-        <div style="width: 600px; height: 100%; border-radius: 5px"
+        <div style="width: 540px; height: 100vh; border-radius: 5px"
           data-controller="map"
           data-toggleswitch-target="mapContainer"
           data-map-usermarkers-value="<%= @user_markers.to_json %>"

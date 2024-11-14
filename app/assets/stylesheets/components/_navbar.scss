@@ -33,7 +33,7 @@
 }
 
 .navbar-logo {
-  max-width: 200px;
+  max-width: 175px;
   height: auto;
   z-index: 2;
   position: absolute;
@@ -54,8 +54,9 @@
 .avatar {
   width: 40px;
   height: 40px;
+  object-fit: cover;
   border-radius: 50%;
-  margin-left: 1rem;
+  margin-left: 2rem;
   vertical-align: middle;
   margin-right: 3rem;
 }
@@ -71,4 +72,19 @@
 
 .navbar-text strong {
   margin-left: 0.25rem; /* space between "Welcome" and the user's name */
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  border-radius: 5px;
+  color: rgb(0, 0, 0);
+}
+
+.dropdown-item:hover {
+  background-color: #00000062; /* Hintergrundfarbe beim Hover */
+}
+
+.dropdown-menu {
+  border-radius: 5px;
 }

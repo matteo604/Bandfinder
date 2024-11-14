@@ -27,6 +27,6 @@ export default class extends Controller {
       .catch(error => {
         console.error("Error fetching total unread count:", error);
       });
-    }, 5000);
+    }, 1000);
   }
 }

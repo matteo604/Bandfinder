@@ -22,7 +22,6 @@ class UsersController < ApplicationController
     if params[:user][:instruments].is_a?(Array)
       non_blank_instruments = params[:user][:instruments].reject(&:blank?).map(&:strip)
       params[:user][:instruments] = non_blank_instruments
-      # Rails.logger.debug("Final instruments string: #{params[:user][:instruments]}")
     end
 
     if @user.update(user_params)
@@ -38,7 +37,7 @@ class UsersController < ApplicationController
       @user.destroy
       redirect_to 'bands#index', notice: 'Your account was successfully deleted.'
     else
-       redirect_to 'bands#index', alert: 'You are not able to delete this account.'
+      redirect_to 'bands#index', alert: 'You are not able to delete this account.'
     end
   end
 

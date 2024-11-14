@@ -66,7 +66,7 @@ class ChatsController < ApplicationController
       # find or initialize a chat between the current user and the other user
       @chat = Chat.find_or_initialize_by(user_id: [current_user.id, @user.id].min, band_leader_id: [current_user.id, @user.id].max)
     else
-      # if neither band_leader_id nor user_id is provided
+      # if neither band_leader_id or user_id is provided
       redirect_to chats_path, alert: 'Unable to create chat. Missing required parameters.'
       return
     end
