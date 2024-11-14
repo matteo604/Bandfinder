@@ -175,7 +175,7 @@ export default class extends Controller {
       .catch(error => {
         console.error("Error during polling:", error);
       });
-    }, 5000);
+    }, 1000);
   }
 
   updateMessages(updatedMessages) {
