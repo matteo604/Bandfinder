@@ -1,7 +1,7 @@
 /* Basic styling for the user card */
 .user-card {
   font-family: -apple-system, BlinkMacSystemFont, "Apple Color Emoji", "SF Pro", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  background-color: rgba(25, 70, 85, 0.8);
+  background-color: rgba( 247, 231, 206, 0.8);
   border-radius: 5px;
   width: 200px;
   height: 230px;
@@ -58,7 +58,7 @@
 /* Styling for the bottom text area (user card body) */
 .user-card-body {
   height: 50px;
-  background-color: rgba(25, 70, 85, 1); /* Slightly opaque background */
+  background-color: rgba( 247, 231, 206, 1); /* Slightly opaque background */
   color: #fff;
   padding: 8px;
   padding-top: 3px;
@@ -80,7 +80,7 @@
 /* Styling for the user title (name) */
 .user-title {
   font-size: 15px;
-  color: #fff;
+  color: rgb(54, 69, 79);
   margin: 3px 0; /* Adds top margin of 3px */
   white-space: nowrap; /* Prevents the title from wrapping */
   overflow: hidden;
@@ -90,12 +90,17 @@
 /* Styling for the user instruments (instrument list) */
 .user-instruments {
   font-size: 12px;
-  color: #ffffff;
+  color: rgb(54, 69, 79);
   margin: 0;
   white-space: nowrap; /* Prevents text wrapping */
   overflow: hidden; /* Ensures content does not exceed the container */
   text-overflow: ellipsis; /* Adds "..." when text overflows */
   flex-grow: 1; /* Allows instruments to take up remaining space */
+}
+.user-card:hover .user-title,
+.user-card:hover .user-instruments {
+  color: rgb(247, 231, 206);
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.9); /* adds a subtle shadow for readability */
 }
 
 /* Styling for the info icon (tooltip icon) */
@@ -104,7 +109,7 @@
   top: 8px;
   left: 8px;
   font-size: 18px;
-  color: rgba(25, 70, 85, 1);
+  color: rgba( 247, 231, 206, 1);
   cursor: pointer;
   transition: color 0.3s;
 }
@@ -120,8 +125,8 @@
   position: absolute;
   top: 30px;
   left: 0;
-  background-color: rgba(25, 70, 85, 0.8);
-  color: white;
+  background-color: rgba(0, 0, 0, 0.8);
+  color: rgba( 247, 231, 206, 1);
   padding: 8px;
   border-radius: 5px;
   font-size: 12px;

@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def show
     @band = Band.find_by(leader_id:current_user.id)
     @bands = Band.all
+    @join_requests = @user.join_requests.where(status: "pending", join_type: "band_to_user")
   end
 
   def edit
@@ -37,7 +38,7 @@ class UsersController < ApplicationController
       @user.destroy
       redirect_to 'bands#index', notice: 'Your account was successfully deleted.'
     else
-       redirect_to 'bands#index', alert: 'You are not able to delete this account.'
+      redirect_to 'bands#index', alert: 'You are not able to delete this account.'
     end
   end
 

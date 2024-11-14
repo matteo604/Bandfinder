@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :messages, dependent: :destroy
   has_many :reviews, dependent: :destroy
   has_one_attached :photo
+  has_many :join_requests
 
   devise :database_authenticatable, :registerable,
         :recoverable, :rememberable, :validatable
@@ -16,5 +17,9 @@ class User < ApplicationRecord
   # Method to check if the user is a band leader
   def band_leader?
     leader == true
+  end
+
+  def leads_band?
+    Band.exists?(leader_id: self.id)
   end
 end

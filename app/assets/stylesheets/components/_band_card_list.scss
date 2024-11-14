@@ -1,0 +1,171 @@
+.band-list-card {
+  background-color: rgba(247, 231, 206, 0.8);
+  border-radius: 5px; /* Rounds the corners */
+  position: relative;
+  overflow: visible; /* Allows image to extend beyond the card */
+  width: 50%; /* Card width */
+  height: 175px; /* Fixed card height */
+  margin: 10px auto; /* Centers the card horizontally */
+  color: #fff; /* Text color set to white */
+  padding: 0; /* Removes padding */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns content to the left inside the card */
+  text-decoration: none; /* Removes underline for links */
+  box-sizing: border-box; /* Ensures padding doesn’t affect width */
+}
+
+
+.band-list-title {
+  color: rgb(54, 69, 79);;
+  font-size: 18px; /* Larger font size for title */
+  text-align: left;
+  margin-top: 3px;
+  text-decoration: none; /* Removes underline */
+  line-height: 1.4; /* Improves readability */
+  font-weight: bold; /* Makes the title bold */
+}
+
+.band-list-description, .band-list-genre, .band-leader, .band-members-count {
+  color: rgb(54, 69, 79);
+  font-size: 14px; /* Consistent font size for readability */
+  text-align: left;
+  margin: 5px 0; /* Adds spacing between elements */
+  margin-right: 10px;
+  text-decoration: none; /* Removes underline */
+  line-height: 1.4; /* Improves readability */
+}
+
+/* Description styling for a maximum of two lines */
+.band-list-description {
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* Limits to two lines */
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis; /* Adds " ..." at the end */
+  max-height: 3em; /* Approximate height for two lines */
+  line-clamp: 3; /* Standard line-clamp property for future compatibility */
+}
+
+/* Container for the band image */
+.list-image-container {
+  width: 150px;
+  height: 150px;
+  overflow: visible;
+  border-radius: 5px;
+  position: absolute;
+  left: -115px; /* Moves image to the left */
+  top: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  opacity: 0.95;
+}
+
+/* Image styling */
+.band-list-image, .placeholder-image-band-list {
+  border-radius: 5px;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.3s ease; /* Smooth transition for scaling */
+}
+
+/* Hover effect to enlarge the image */
+.list-image-container:hover .band-list-image, .list-image-container:hover .placeholder-image-band-list {
+  transform: scale(1.2); /* Scales the image to 110% */
+}
+
+/* Card body styling */
+.band-list-card-body {
+  background-color: rgba(247, 231, 206, 1); /* Matches card background */
+  padding: 12px 12px 12px 65px; /* Adds left padding to align content */
+  width: 100%; /* Full width */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-grow: 1; /* Ensures the content takes up available space */
+  overflow: hidden; /* Keeps content within the card body */
+  border-radius: 5px; /* Rounds the corners */
+}
+
+/* Footer styling */
+.card-footer {
+  background-color: rgba(247, 231, 206, 1); /* Matches card background */
+  color: #ffffff; /* Sets footer text color to white */
+  text-align: left;
+  font-size: 14px;
+}
+
+/* Full width link styling */
+.band-list-card a {
+  display: inline-block;
+  width: 100%; /* Takes full width of the parent element */
+  text-decoration: none; /* Removes underline */
+  color: inherit; /* Inherits text color from the parent */
+}
+
+/* "More" text styling */
+.more-text {
+  color: #007bff; /* Color for "more" text */
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.card-footer {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between; /* Aligns items to the left and right */
+  padding-top: 8px;
+  margin-top: auto;
+}
+
+.card-footer .separator {
+  margin: auto 10px;
+}
+
+.card-footer small {
+  margin-right: 5px;
+}
+
+.bands-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+.band-list-card {
+  flex: 0 1 calc(50% - 10px); /* 50% width minus half of the gap */
+  min-width: 300px; /* Minimum width to prevent cards from getting too small */
+  max-width: 480px; /* Maximum width to maintain readability */
+}
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .band-list-card {
+    flex: 0 1 100%; /* Full width on mobile */
+  }
+}
+
+.band-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.more-icon-band {
+  position: absolute;
+  font-size: 1.5rem;
+  color: rgb(54, 69, 79);
+  margin-left: 10px;
+  margin-right: 20px;
+  right: 0;
+}
+
+.band-list-card:hover .more-icon-band,
+.more-icon-band:hover {
+  transform: scale(1.2);
+  color: rgb(96, 130, 182);
+  transition: transform 0.8s ease, color 0.3s ease;
+}

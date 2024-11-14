@@ -1,18 +1,38 @@
- <footer class="footer mt-auto">
-    <div class="d-flex justify-content-between align-items-center mx-4 footer-border">
-      <div>
-        <ul class="list-group list-group-horizontal fs-5">
-          <li class="list-group p-3"><p>&copy; <%= Time.current.year %> BandFinder</p></li>
-          <li class="list-group p-3"><span><%= link_to "About the authors", about_path %></span></li>
-        </ul>
-      </div>
-      <div>
-        <ul class="list-group list-group-horizontal">
-          <li class="footer_item list-group"><i class="fa-brands fa-github"></i></li>
-          <li class="footer_item list-group"><i class="fa-brands fa-facebook"></i></li>
-          <li class="footer_item list-group"><i class="fa-brands fa-x-twitter"></i></li>
-          <li class="footer_item list-group"><i class="fa-brands fa-instagram"></i></li>
-        </ul>
-      </div>
+<div class="footer mt-auto">
+  <div class="d-flex justify-content-between align-items-center mx-4 footer-border">
+    <div>
+      <ul class="list-group list-group-horizontal fs-5">
+        <li class="list-group p-3">
+          <p>&copy; <%= Time.current.year %> BandFinder</p>
+        </li>
+        <li class="list-group p-3">
+          <%= link_to "About the authors", about_path, class: "footer-link" %>
+        </li>
+      </ul>
     </div>
-  </footer>
+    <div>
+      <ul class="list-group list-group-horizontal">
+        <li class="footer_item list-group">
+          <a href="#" target="_blank" class="footer-icon">
+            <i class="fa-brands fa-github"></i>
+          </a>
+        </li>
+        <li class="footer_item list-group">
+          <a href="#" target="_blank" class="footer-icon">
+            <i class="fa-brands fa-facebook"></i>
+          </a>
+        </li>
+        <li class="footer_item list-group">
+          <a href="#" target="_blank" class="footer-icon">
+            <i class="fa-brands fa-twitter"></i>
+          </a>
+        </li>
+        <li class="footer_item list-group">
+          <a href="#" target="_blank" class="footer-icon">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
