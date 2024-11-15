@@ -47,7 +47,7 @@ html, body, #map-container {
   font-style: italic;
 }
 .content-wrapper {
-  min-height: 100vh;
+  min-height: calc(100vh - 175px);
   padding-bottom: 3rem;
   background : linear-gradient(to bottom right, rgb(235, 156, 10), rgba(240, 140, 8, 0.6), rgba(240, 120, 8, 0.3));
 }
