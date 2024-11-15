@@ -649,6 +649,7 @@ band9 = Band.create!(
 
 ivy.update!(band_id: band9.id)
 alessandro.update!(band_id: band9.id)
+ana.update!(band_id: band9.id)
 
 band9.photo.attach(
   io: File.open(Rails.root.join("app", "assets", "images", "band9.jpg")),
