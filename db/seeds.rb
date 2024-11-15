@@ -435,10 +435,10 @@ joao.photo.attach(
   content_type: "image/jpg"
 )
 
-antonio = User.create!(
-  first_name: "Antonio",
-  email: "antonio.martins@example.com",
-  last_name: "Martins",
+aditya = User.create!(
+  first_name: "aditya",
+  email: "aditya.sharma@example.com",
+  last_name: "Sharma",
   address: "Lisbon, Portugal",
   instruments: ["keyboard", "drums"],
   password: common_password,
@@ -446,7 +446,7 @@ antonio = User.create!(
   password_confirmation: common_password
 )
 
-antonio.photo.attach(
+aditya.photo.attach(
   io: File.open(Rails.root.join("app", "assets", "images", "user24M.jpg")),
   filename: "user24M.jpg",
   content_type: "image/jpg"

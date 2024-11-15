@@ -37,7 +37,7 @@
                   "Recorder", "Saxophone", "Saxophone (Baritone)", "Saxophone (Tenor)",
                   "Shakuhachi", "Steel Drum", "Sitar", "Synthesizer", "Synthesizer (Digital)",
                   "Tambourine", "Timpani", "Triangle", "Trumpet", "Trombone", "Tuba",
-                  "Ukulele", "Vibraphone", "Viola", "Violin", "Vocal" "Wooden Flute", "Xylophone", "Zither"].each do |instrument| %>
+                  "Ukulele", "Vibraphone", "Viola", "Violin", "Vocal", "Wooden Flute", "Xylophone", "Zither"].each do |instrument| %>
                 <label>
                   <input type="checkbox" name="user[instruments][]" value="<%= instrument %>"
                         <%= 'checked' if @user.instruments&.include?(instrument) %> >
