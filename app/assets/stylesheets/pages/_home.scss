@@ -25,6 +25,7 @@ html, body, #map-container {
   color: white;
   position: relative;
   text-align: center;
+  align-items: center;
   background-blend-mode: overlay;
   filter: brightness(1.0) contrast(1.2);
   background-position: center 70%;
@@ -40,6 +41,8 @@ html, body, #map-container {
   font-size: 3em;
   font-weight: bold;
   margin: 0;
+  text-align: center;
+  align-items: center;
 }
 .photo-container .motto {
   font-size: 1.5em;
