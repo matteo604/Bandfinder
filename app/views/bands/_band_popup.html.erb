@@ -1,5 +1,5 @@
 <div class="popup-container">
-    <h1 style="color: black"><%= band.title %></h1>
+    <h1 style="color: black; text-decoration: none;"><%= link_to "#{band.title}", band_path(band) %></h1>
     <% if band.photo.attached? %>
       <%= image_tag band.photo, alt: "#{band.title}", class: "popup-image" %>
     <% else %>

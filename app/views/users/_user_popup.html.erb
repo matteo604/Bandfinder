@@ -1,5 +1,5 @@
 <div class="popup-container">
-    <h1 style="color: black"><%= user.first_name %> <%= user.last_name %></h1>
+    <h1 style="color: black; text-decoration: none;"><%= link_to "#{user.first_name} #{user.last_name}", user_path(user) %></h1>
     <% if user.photo.attached? %>
       <%= image_tag user.photo, class: "popup-image" %>
     <% else %>
