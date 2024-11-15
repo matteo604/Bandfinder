@@ -39,7 +39,7 @@
       <% @band_sessions.each do |band_session| %>
         <div class="user_details_card fs-4 mx-2">
           <ul class="fs-4 mb-1">
-            <li>Band session: <%= band_session.start_date.strftime('%d/%m/%Y %H:%M') %> - <%= band_session.end_date.strftime('%d/%m/%Y %H:%M') %></li>
+            <%= band_session.start_date.strftime('%d/%m') %> | <%= band_session.start_date.strftime('%H:%M') %> - <%= band_session.end_date.strftime('%H:%M') %>
           </ul>
         </div>
       <% end %>
