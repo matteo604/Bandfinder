@@ -38,9 +38,9 @@ class JoinRequestsController < ApplicationController
 
     @join_request.update(status: "declined")
     if @join_request.save
-      redirect_to join_requests_path, notice: 'Join request declined.'
+      redirect_to user_join_requests_path(@join_request.user), notice: 'Join request declined.'
     else
-      redirect_to join_requests_path, alert: 'Unable to decline request.'
+      redirect_to user_join_requests_path(@join_request.user), alert: 'Unable to decline request.'
     end
   end
 
