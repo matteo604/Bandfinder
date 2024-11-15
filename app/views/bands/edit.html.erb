@@ -13,30 +13,6 @@
         <%= f.error :description, class: 'text-danger' %>
       </div>
 
-<<<<<<< HEAD
-  <div class="mb-3">
-
-    <%= form.label :genre, "Genre", class: 'form-label' %>
-    <%= form.select :genre, options_for_select([
-          ['Acapella', 'acapella'], ['Alternative', 'alternative'], ['Blues', 'blues'],
-          ['Classical', 'classical'], ['Country', 'country'], ['Dance', 'dance'],
-          ['Disco', 'disco'], ['Electronic', 'electronic'], ['Folk', 'folk'],
-          ['Gospel', 'gospel'], ['Hip Hop', 'hip-hop'], ['Indie', 'indie'],
-          ['Jazz', 'jazz'], ['Latin', 'latin'], ['Metal', 'metal'],
-          ['Pop', 'pop'], ['Punk', 'punk'], ['Rap', 'rap'],
-          ['Reggae', 'reggae'], ['Rock', 'rock'], ['R&B', 'r&b'],
-          ['Soul', 'soul'], ['Techno', 'techno'], ['Trance', 'trance'],
-          ['World', 'world'], ['Swing', 'swing'], ['Hard Rock', 'hard rock'],
-          ['Progressive Rock', 'progressive rock'], ['New Age', 'new age'],
-          ['House', 'house'], ['Grunge', 'grunge'], ['Ska', 'ska'],
-          ['Emo', 'emo'], ['Industrial', 'industrial'], ['Soundtrack', 'soundtrack'],
-          ['Dubstep', 'dubstep'], ['Lo-fi', 'lo-fi'], ['Vocal', 'vocal']
-        ]), { prompt: "Select a Genre" }, class: 'form-control' %>
-  </div>
-  <div class="mb-3">
-    <%= form.label :description, "Description" %><br>
-    <%= form.text_area :description %>
-=======
       <div class="mb-3">
         <%= f.input :address, input_html: { class: 'form-control edit-band-form', placeholder: 'Location' }, label_html: { class: 'form-label' } %>
         <%= f.error :address, class: 'text-danger' %>
@@ -69,7 +45,6 @@
           input_html: { multiple: true, class: 'form-control edit-band-form' },
           label_html: { class: 'form-label' } %>
     <%= f.error :searching_for_instruments, class: 'text-danger' %>
->>>>>>> aa624a1810987b07ccfb61491b3027dbb7695a9a
   </div>
 
       <div class="mb-3">

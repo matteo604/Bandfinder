@@ -214,6 +214,278 @@ jack.photo.attach(
   content_type: "image/jpg"
 )
 
+camille = User.create!(
+  first_name: "Camille",
+  email: "camille.dupont@example.com",
+  last_name: "Dupont",
+  address: "Paris, France",
+  instruments: ["piano", "vocals"],
+  password: common_password,
+  telephone_number: '3423456789',
+  password_confirmation: common_password
+)
+
+camille.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "user31F.jpg")),
+  filename: "user31F.jpg",
+  content_type: "image/jpg"
+)
+
+isabel = User.create!(
+  first_name: "Isabel",
+  email: "isabel.martinez@example.com",
+  last_name: "Martínez",
+  address: "Madrid, Spain",
+  instruments: ["guitar", "vocals"],
+  password: common_password,
+  telephone_number: '3423345678',
+  password_confirmation: common_password
+)
+
+isabel.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "user13F.jpg")),
+  filename: "user13F.jpg",
+  content_type: "image/jpg"
+)
+
+giulia = User.create!(
+  first_name: "Giulia",
+  email: "giulia.rossi@example.com",
+  last_name: "Rossi",
+  address: "Rome, Italy",
+  instruments: ["bass guitar", "violin"],
+  password: common_password,
+  telephone_number: '3412345678',
+  password_confirmation: common_password
+)
+
+giulia.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "user19F.jpg")),
+  filename: "user19F.jpg",
+  content_type: "image/jpg"
+)
+
+ana = User.create!(
+  first_name: "Ana",
+  email: "ana.silva@example.com",
+  last_name: "Silva",
+  address: "Lisbon, Portugal",
+  instruments: ["keyboard", "vocals"],
+  password: common_password,
+  telephone_number: '3287654321',
+  password_confirmation: common_password
+)
+
+ana.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "user20F.jpg")),
+  filename: "user20F.jpg",
+  content_type: "image/jpg"
+)
+
+clara = User.create!(
+  first_name: "Clara",
+  email: "clara.schmidt@example.com",
+  last_name: "Schmidt",
+  address: "Berlin, Germany",
+  instruments: ["violin", "flute"],
+  password: common_password,
+  telephone_number: '3409876543',
+  password_confirmation: common_password
+)
+
+clara.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "user28F.jpg")),
+  filename: "user28F.jpg",
+  content_type: "image/jpg"
+)
+
+louis = User.create!(
+  first_name: "Louis",
+  email: "louis.benoit@example.com",
+  last_name: "Benoit",
+  address: "Paris, France",
+  instruments: ["guitar", "piano"],
+  password: common_password,
+  telephone_number: '3423456789',
+  password_confirmation: common_password
+)
+
+louis.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "user14M.jpg")),
+  filename: "user14M.jpg",
+  content_type: "image/jpg"
+)
+
+jose = User.create!(
+  first_name: "José",
+  email: "jose.martinez@example.com",
+  last_name: "Martínez",
+  address: "Barcelona, Spain",
+  instruments: ["guitar", "drums"],
+  password: common_password,
+  telephone_number: '3498765432',
+  password_confirmation: common_password
+)
+
+jose.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "user15M.jpg")),
+  filename: "user15M.jpg",
+  content_type: "image/jpg"
+)
+
+alessandro = User.create!(
+  first_name: "Alessandro",
+  email: "alessandro.rossi@example.com",
+  last_name: "Rossi",
+  address: "Milan, Italy",
+  instruments: ["keyboard", "bass"],
+  password: common_password,
+  telephone_number: '3412345678',
+  password_confirmation: common_password
+)
+
+alessandro.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "user16m.jpg")),
+  filename: "user16m.jpg",
+  content_type: "image/jpg"
+)
+
+miguel = User.create!(
+  first_name: "Miguel",
+  email: "miguel.silva@example.com",
+  last_name: "Silva",
+  address: "Porto, Portugal",
+  instruments: ["violin", "saxophone"],
+  password: common_password,
+  telephone_number: '3287654321',
+  password_confirmation: common_password
+)
+
+miguel.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "user17M.jpg")),
+  filename: "user17M.jpg",
+  content_type: "image/jpg"
+)
+
+lukas = User.create!(
+  first_name: "Lukas",
+  email: "lukas.schmidt@example.com",
+  last_name: "Schmidt",
+  address: "Berlin, Germany",
+  instruments: ["guitar", "drums"],
+  password: common_password,
+  telephone_number: '3412345678',
+  password_confirmation: common_password
+)
+
+lukas.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "user18M.jpg")),
+  filename: "user18M.jpg",
+  content_type: "image/jpg"
+)
+
+maximilian = User.create!(
+  first_name: "Maximilian",
+  email: "maximilian.mueller@example.com",
+  last_name: "Müller",
+  address: "Munich, Germany",
+  instruments: ["drums", "bass"],
+  password: common_password,
+  telephone_number: '3402345678',
+  password_confirmation: common_password
+)
+
+maximilian.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "user21M.jpg")),
+  filename: "user21M.jpg",
+  content_type: "image/jpg"
+)
+
+peter = User.create!(
+  first_name: "Peter",
+  email: "peter.schulz@example.com",
+  last_name: "Schulz",
+  address: "Berlin, Germany",
+  instruments: ["guitar", "bass"],
+  password: common_password,
+  telephone_number: '3487654321',
+  password_confirmation: common_password
+)
+
+peter.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "user22M.jpg")),
+  filename: "user22M.jpg",
+  content_type: "image/jpg"
+)
+
+joao = User.create!(
+  first_name: "João",
+  email: "joao.silva@example.com",
+  last_name: "Silva",
+  address: "Lisbon, Portugal",
+  instruments: ["bass", "guitar"],
+  password: common_password,
+  telephone_number: '3298765432',
+  password_confirmation: common_password
+)
+
+joao.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "user23M.jpg")),
+  filename: "user23M.jpg",
+  content_type: "image/jpg"
+)
+
+antonio = User.create!(
+  first_name: "Antonio",
+  email: "antonio.martins@example.com",
+  last_name: "Martins",
+  address: "Lisbon, Portugal",
+  instruments: ["keyboard", "drums"],
+  password: common_password,
+  telephone_number: '3287654321',
+  password_confirmation: common_password
+)
+
+antonio.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "user24M.jpg")),
+  filename: "user24M.jpg",
+  content_type: "image/jpg"
+)
+
+roberto = User.create!(
+  first_name: "Roberto",
+  email: "roberto.bianchi@example.com",
+  last_name: "Bianchi",
+  address: "Milan, Italy",
+  instruments: ["bass guitar", "synthesizer"],
+  password: common_password,
+  telephone_number: '3412345678',
+  password_confirmation: common_password
+)
+
+roberto.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "user25M.jpg")),
+  filename: "user25M.jpg",
+  content_type: "image/jpg"
+)
+
+david = User.create!(
+  first_name: "David",
+  email: "david.johnson@example.com",
+  last_name: "Johnson",
+  address: "London, UK",
+  instruments: ["guitar", "bass"],
+  password: common_password,
+  telephone_number: '3423345678',
+  password_confirmation: common_password
+)
+
+david.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "user26M.jpg")),
+  filename: "user26M.jpg",
+  content_type: "image/jpg"
+)
+
 puts 'Creating bands...'
 
 band1 = Band.create!(
@@ -227,11 +499,6 @@ band1 = Band.create!(
 
 jane.update(band_id: band1.id)
 
-alice.photo.attach(
-  io: File.open(Rails.root.join("app", "assets", "images", "user3F.jpg")),
-  filename: "user3F.jpg",
-  content_type: "image/jpg"
-)
 
 band1.photo.attach(
   io: File.open(Rails.root.join("app", "assets", "images", "bandfinder.jpg")),
