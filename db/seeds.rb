@@ -498,6 +498,8 @@ band1 = Band.create!(
 )
 
 jane.update(band_id: band1.id)
+jose.update!(band_id: band1.id)
+louis.update!(band_id: band1.id)
 
 
 band1.photo.attach(
@@ -516,6 +518,8 @@ band2 = Band.create!(
 )
 
 john.update(band_id: band2.id)
+maximilian.update!(band_id: band2.id)
+miguel.update!(band_id: band2.id)
 
 band2.photo.attach(
   io: File.open(Rails.root.join("app", "assets", "images", "jazz-band.jpg")),
@@ -533,6 +537,8 @@ band3 = Band.create!(
 )
 
 charlie.update!(band_id: band3.id)
+peter.update!(band_id: band3.id)
+joao.update!(band_id: band3.id)
 
 band3.photo.attach(
   io: File.open(Rails.root.join("app", "assets", "images", "band3.jpg")),
@@ -550,6 +556,10 @@ band4 = Band.create!(
 )
 
 diana.update!(band_id: band4.id)
+david.update!(band_id: band4.id)
+roberto.update!(band_id: band4.id)
+aditya.update!(band_id: band4.id)
+
 
 band4.photo.attach(
   io: File.open(Rails.root.join("app", "assets", "images", "band4.jpg")),
@@ -566,6 +576,7 @@ band5 = Band.create!(
   searching_for_instruments: ["harmonica", "drums"]
 )
 eve.update!(band_id: band5.id)
+giulia.update!(band_id: band5.id)
 
 band5.photo.attach(
   io: File.open(Rails.root.join("app", "assets", "images", "band5.jpg")),
@@ -583,6 +594,7 @@ band6 = Band.create!(
 )
 
 frank.update!(band_id: band6.id)
+isabel.update!(band_id: band6.id)
 
 band6.photo.attach(
   io: File.open(Rails.root.join("app", "assets", "images", "band6.jpg")),
@@ -600,6 +612,7 @@ band7 = Band.create!(
 )
 
 grace.update!(band_id: band7.id)
+clara.update!(band_id: band7.id)
 
 band7.photo.attach(
   io: File.open(Rails.root.join("app", "assets", "images", "band7.jpg")),
@@ -617,6 +630,7 @@ band8 = Band.create!(
 )
 
 hank.update!(band_id: band8.id)
+camille.update!(band_id: band8.id)
 
 band8.photo.attach(
   io: File.open(Rails.root.join("app", "assets", "images", "band8.jpg")),
@@ -634,6 +648,7 @@ band9 = Band.create!(
 )
 
 ivy.update!(band_id: band9.id)
+alessandro.update!(band_id: band9.id)
 
 band9.photo.attach(
   io: File.open(Rails.root.join("app", "assets", "images", "band9.jpg")),
@@ -651,6 +666,7 @@ band10 = Band.create!(
 )
 
 jack.update!(band_id: band10.id)
+bob.update!(band_id: band10.id)
 
 band10.photo.attach(
   io: File.open(Rails.root.join("app", "assets", "images", "band10.jpg")),

@@ -1,21 +1,19 @@
 // Specific CSS for your home-page
 html, body, #map-container {
- height: 100%;
- margin: 0;
- padding: 0;
- display: flex;
- flex-direction: column;
- background : linear-gradient(to bottom right, rgb(235, 156, 10), rgba(240, 140, 8, 0.6), rgba(240, 120, 8, 0.3));
-}
-
-.container, .row, .cards-container {
-  background: transparent;
-}
-
-body {
-  color: white;
   margin: 0;
-}
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+ }
+ .container, .row, .cards-container {
+   background: transparent;
+ }
+ body {
+   background: linear-gradient(to bottom right, rgb(235, 156, 10), rgba(240, 140, 8, 0.6), rgba(240, 120, 8, 0.3));
+   color: white;
+   margin: 0;
+ }
+
 .photo-container {
   min-height: 280px;
   height: 500px;
@@ -49,8 +47,8 @@ body {
   font-style: italic;
 }
 .content-wrapper {
-  background : linear-gradient(to bottom right, rgb(235, 156, 10), rgba(240, 140, 8, 0.6), rgba(240, 120, 8, 0.3));
   padding-bottom: 3rem;
+  background : linear-gradient(to bottom right, rgb(235, 156, 10), rgba(240, 140, 8, 0.6), rgba(240, 120, 8, 0.3));
 }
 .footer {
   background-color: black;
