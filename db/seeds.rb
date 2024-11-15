@@ -35,7 +35,7 @@ jane = User.create!(
   last_name: 'Smith',
   address: 'Hauptstrasse, Berlin',
   telephone_number: '5557654321',
-  instruments: ['Saxophone', 'Vocals']
+  instruments: ['Saxophone', 'vocal']
 )
 
 jane.photo.attach(
@@ -49,7 +49,7 @@ alice = User.create!(
   email: "alice.dupont@example.com",
   last_name: "Dupont",
   address: "Paris, France",
-  instruments: ["guitar", "vocals"],
+  instruments: ["guitar", "vocal"],
   password: common_password,
   telephone_number: '3223233223',
   password_confirmation: common_password
@@ -152,7 +152,7 @@ grace = User.create!(
   last_name: "Rodríguez",
   address: "Barcelona, Spain",
   telephone_number: '32423423423',
-  instruments: ["vocals", "ukulele"],
+  instruments: ["vocal", "ukulele"],
   password: common_password,
   password_confirmation: common_password
 )
@@ -219,7 +219,7 @@ camille = User.create!(
   email: "camille.dupont@example.com",
   last_name: "Dupont",
   address: "Paris, France",
-  instruments: ["piano", "vocals"],
+  instruments: ["piano", "vocal"],
   password: common_password,
   telephone_number: '3423456789',
   password_confirmation: common_password
@@ -236,7 +236,7 @@ isabel = User.create!(
   email: "isabel.martinez@example.com",
   last_name: "Martínez",
   address: "Madrid, Spain",
-  instruments: ["guitar", "vocals"],
+  instruments: ["guitar", "vocal"],
   password: common_password,
   telephone_number: '3423345678',
   password_confirmation: common_password
@@ -270,7 +270,7 @@ ana = User.create!(
   email: "ana.silva@example.com",
   last_name: "Silva",
   address: "Lisbon, Portugal",
-  instruments: ["keyboard", "vocals"],
+  instruments: ["keyboard", "vocal"],
   password: common_password,
   telephone_number: '3287654321',
   password_confirmation: common_password
@@ -546,7 +546,7 @@ band4 = Band.create!(
   address: 'Paris',
   genre: 'Pop',
   leader_id: diana.id,
-  searching_for_instruments: ["keyboard", "vocals"]
+  searching_for_instruments: ["keyboard", "vocal"]
 )
 
 diana.update!(band_id: band4.id)
@@ -655,6 +655,40 @@ jack.update!(band_id: band10.id)
 band10.photo.attach(
   io: File.open(Rails.root.join("app", "assets", "images", "band10.jpg")),
   filename: "band10.jpg",
+  content_type: "image/jpg"
+)
+
+band11 = Band.create!(
+  title: 'Lo-Fi creator',
+  description: 'An old Lo-Fi band.',
+  address: 'Seville',
+  genre: 'Lo-fi',
+  leader_id: lukas.id,
+  searching_for_instruments: ["drums", "bass"]
+)
+
+lukas.update!(band_id: band11.id)
+
+band11.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "band11.jpg")),
+  filename: "band11.jpg",
+  content_type: "image/jpg"
+)
+
+band12 = Band.create!(
+  title: 'R&B in Italy',
+  description: 'An italian band playing good R&B.',
+  address: 'Naples',
+  genre: 'R&B',
+  leader_id: alice.id,
+  searching_for_instruments: ["drums", "bass"]
+)
+
+alice.update!(band_id: band12.id)
+
+band12.photo.attach(
+  io: File.open(Rails.root.join("app", "assets", "images", "band12.jpg")),
+  filename: "band12.jpg",
   content_type: "image/jpg"
 )
 
