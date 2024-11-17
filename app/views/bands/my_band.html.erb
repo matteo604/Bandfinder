@@ -6,18 +6,20 @@
     <div class="d-block row mt-4">
       <div class="gap-5">
         <!-- Band Details Card -->
-        <div class="band_details_card fs-4 d-flex flex-column mb-4">
-          <h2>Band Details</h2>
-          <div class="p-2"><i class="fa-solid fa-location-dot"></i> <%= @band.address %></div>
-          <div class="p-2"><i class="fa-solid fa-music"></i> <%= @band.genre %></div>
-          <div class="p-2"><i class="fa-solid fa-circle-info"></i> <%= @band.description %></div>
-          <div class="p-2">
-            <i class="fa-solid fa-drum fs-3"></i> We are looking for:
+        <div class="band_details_card d-flex flex-column mb-4">
+          <h2 class="band-details-title">Band Details</h2>
+          <div class="band-detail-item"><i class="fa-solid fa-location-dot band-icon"></i> <%= @band.address %></div>
+          <div class="band-detail-item"><i class="fa-solid fa-music band-icon"></i> <%= @band.genre %></div>
+          <div class="band-detail-item"><i class="fa-solid fa-circle-info band-icon"></i> <%= @band.description %></div>
+          <div class="band-detail-item">
+            <i class="fa-solid fa-drum band-icon"></i> We are looking for:
             <%= @band.searching_for_instruments.join(", ") %>
           </div>
+
         </div>
       </div>
     </div>
+
 
     <!-- Members Card -->
     <div class="band_details_card d-block fs-4 d-flex flex-column">
@@ -60,13 +62,22 @@
                   <h5 class="modal-title" id="exampleModalLabel">Book session</h5>
                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body" style="background: orange;">
+                <div class="modal-body custom-modal-body">
                   <%= simple_form_for [@band, @band_session], data: { controller: 'datepicker' } do |f| %>
-                    <%= f.input :start_date, as: :string, input_html: { type: "datetime_local", data: { flatpickr_target: "startDate" }, id: 'check-in' } %>
-                    <%= f.input :end_date, as: :string, input_html: { type: "datetime_local", data: { flatpickr_target: "endDate" }, id: 'check-out' } %>
-                    <%= f.submit 'Schedule your band session' %>
+                    <div class="form-group">
+                      <%= f.label :start_date, "Start Date", class: "form-label" %>
+                      <%= f.input :start_date, label: false, as: :string, input_html: { class: "form-control custom-input", type: "datetime-local", data: { flatpickr_target: "startDate" }, id: 'check-in' } %>
+                    </div>
+
+                    <div class="form-group">
+                      <%= f.label :end_date, "End Date", class: "form-label" %>
+                      <%= f.input :end_date, label: false, as: :string, input_html: { class: "form-control custom-input", type: "datetime-local", data: { flatpickr_target: "endDate" }, id: 'check-out' } %>
+                    </div>
+
+                    <%= f.submit 'Schedule your band session', class: "btn custom-submit-button" %>
                   <% end %>
                 </div>
+
               </div>
             </div>
           </div>
@@ -74,8 +85,8 @@
       </div>
 
     </div>
-    <div class="container my-4">
-      <h3>Pending Join Requests</h3>
+    <div class="container my-4 band-show-request-card">
+      <h3 class="simple-heading">Pending Join Requests</h3>
       <% if @join_requests.any? %>
         <% @join_requests.each do |request| %>
           <div class="card mb-3 shadow-sm">
@@ -85,14 +96,10 @@
                 <p class="mb-0 text-muted">Requested to join on <%= request.created_at.strftime("%B %d, %Y") %></p>
               </div>
               <div class="btn-group">
-                <!-- Pulsante per accettare la richiesta di partecipazione -->
                 <%= button_to 'Accept Request', accept_band_join_request_path(band_id: @band.id, id: request.id),
                               method: :patch, class: "btn btn-success", data: { confirm: 'Are you sure you want to accept this request?' } %>
-
-                <!-- Pulsante per rifiutare la richiesta di partecipazione -->
                 <%= button_to 'Decline Request', decline_band_join_request_path(band_id: @band.id, id: request.id),
                               method: :patch, class: "btn btn-danger", data: { confirm: 'Are you sure you want to decline this request?' } %>
-
               </div>
             </div>
           </div>
@@ -101,5 +108,6 @@
         <p class="text-muted">No pending requests at the moment.</p>
       <% end %>
     </div>
+
   </div>
 </div>

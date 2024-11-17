@@ -15,3 +15,74 @@
 .band-session-band-title{
   margin-left: 25px;
 }
+
+.band_details_card ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.band_details_card li {
+  background-color: rgba(247, 231, 206, 0.8);
+  border-radius: 5px;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  font-size: 16px;
+  color: rgb(54, 69, 79);
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal body style */
+.custom-modal-body {
+  background-color: rgba(247, 231, 206, 1);
+  padding: 20px;
+  border-radius: 5px;
+}
+
+/* Input field style */
+.custom-input {
+  border: 1px solid #60606E;
+  padding: 8px;
+  font-size: 16px;
+  border-radius: 4px;
+  width: 100%;
+  margin-bottom: 15px;
+  background-color: white;
+}
+
+/* Label style */
+.form-label {
+  font-weight: bold;
+  font-size: 14px;
+  color: #363C46;
+}
+
+/* Submit button style */
+.custom-submit-button {
+  background-color: rgb(96, 130, 182);
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.custom-submit-button:hover {
+  background-color: rgb(54, 69, 79);
+}
+
+.modal-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: rgb(54, 69, 79);
+}
+
+.modal-dialog {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh; /* Volle Höhe des Bildschirms für vertikale Zentrierung */
+  margin: auto; /* Zentriert das Modal horizontal */
+}

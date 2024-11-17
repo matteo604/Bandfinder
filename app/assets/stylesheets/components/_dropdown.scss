@@ -1,45 +1,217 @@
+/* Dropdown Container */
 .dropdown {
   position: relative;
   display: inline-block;
 }
 
-.dropbtn {
-  padding: 4px;
+/* Dropdown Button for Select Genre */
+.dropbtn-genre {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Aligns text to the left */
+  background-color: rgba(247, 231, 206, 1) !important;
+  color: rgb(54, 69, 79) !important;
+  padding: 0 10px;
   height: 32px;
   font-size: 16px;
   border: none;
   cursor: pointer;
-  width: 200px;
+  width: 175px;
   text-align: left;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: white;
-  min-width: 200px;
-  max-height: 200px;
-  overflow-y: auto;
-  overflow-x: hidden;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  z-index: 1;
-}
-
-.dropdown-content label {
-  padding: 8px 16px;
-  display: block;
-  color: #333;
-  font-size: 14px;
-}
-
-.dropdown-content label:hover {
-  background-color: #e0e0e0;
-}
-
-.dropdown-content input[type="checkbox"] {
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
   margin-right: 10px;
 }
 
+/* Dropdown Button for Select Instrument */
+.dropbtn-instrument {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Aligns text to the left */
+  background-color: rgba(247, 231, 206, 1) !important;
+  color: rgb(54, 69, 79) !important;
+  padding: 0 10px;
+  height: 32px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 175px;
+  text-align: left;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+/* Hover effect for drop buttons */
+.dropbtn-genre:hover, .dropbtn-instrument:hover {
+  background-color: rgba(247, 231, 206, 0.9) !important;
+}
+
+
+.dropdown-content {
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  background-color: rgba(247, 231, 206, 1) !important;
+  min-width: 200px;
+  max-height: 220px;
+  overflow-y: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.3);
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  border-radius: 5px;
+  padding: 5px;
+  z-index: 9999;
+  margin-top: 2px;
+}
+
+/* Dropdown labels */
+.dropdown-content label {
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  color: #333;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+}
+
+/* Label hover effect */
+.dropdown-content label:hover {
+  background-color: rgba(96, 130, 182, 0.8);
+  border-radius: 4px;
+}
+
+/* Content visibility on hover */
 .dropdown:hover .dropdown-content {
-  display: block;
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Checkbox margin inside dropdowns */
+.dropdown-content input[type="checkbox"] {
+  margin-right: 8px;
+}
+
+/* Search input styling */
+#address-filter {
+  background-color: rgba(247, 231, 206, 1);
+  color: rgb(54, 69, 79);
+  font-size: 14.4px;
+  padding: 0 10px;
+  height: 32px;
+  border: none;
+  border-radius: 5px;
+  width: 175px;
+  transition: background-color 0.3s ease;
+  margin-right: 10px; /* Adjusts spacing between Search Location and other dropdowns */
+}
+
+/* Hover effect for search input */
+#address-filter:hover {
+  background-color: rgba(247, 231, 206, 0.9);
+}
+
+/* Filter container for spacing */
+.filter-container {
+  display: flex;
+  gap: 10px; /* Sets the space between fields */
+  align-items: center; /* Vertically centers the fields */
+}
+
+/* General button styling */
+button {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Apple Color Emoji", "SF Pro", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-size: 14.4px !important;
+  background-color: rgba(247, 231, 206, 1);
+  color: rgb(96, 130, 182);
+  padding: 5px;
+  border: none !important;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Hover effect for general buttons */
+button:hover {
+  background-color: rgba(247, 231, 206, 0.9);
+  color: rgb(54, 69, 79);
+}
+
+/* Banner styling for band page */
+.band-banner {
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+/* Band details card styling */
+.band_details_card, .members_list_card {
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Consistent spacing between items */
+  padding: 20px;
+  background-color: rgba(247, 231, 206, 1); /* Same background across cards */
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+  margin-bottom: 20px;
+}
+
+#location-filter {
+  background-color: rgba(247, 231, 206, 1);
+  color: rgb(54, 69, 79);
+  font-size: 14.4px;
+  padding: 0 10px;
+  height: 32px;
+  border: none;
+  border-radius: 5px;
+  width: 175px;
+  transition: background-color 0.3s ease;
+  margin-right: 5px; /* Adjusts spacing between Search Location and other dropdowns */
+}
+
+/* Hover effect for search input */
+#location-filter:hover {
+  background-color: rgba(247, 231, 206, 0.9);
+}
+
+#last-name-filter {
+  background-color: rgba(247, 231, 206, 1);
+  color: rgb(54, 69, 79);
+  font-size: 14.4px;
+  padding: 0 10px;
+  height: 32px;
+  border: none;
+  border-radius: 5px;
+  width: 175px;
+  transition: background-color 0.3s ease;
+  margin-right: 5px; /* Adjusts spacing between Search Location and other dropdowns */
+}
+
+/* Hover effect for search input */
+#last-name-filter:hover {
+  background-color: rgba(247, 231, 206, 0.9);
+}
+
+#first-name-filter {
+  background-color: rgba(247, 231, 206, 1);
+  color: rgb(54, 69, 79);
+  font-size: 14.4px;
+  padding: 0 10px;
+  height: 32px;
+  border: none;
+  border-radius: 5px;
+  width: 175px;
+  transition: background-color 0.3s ease;
+  margin-right: 5px; /* Adjusts spacing between Search Location and other dropdowns */
+}
+
+/* Hover effect for search input */
+#first-name-filter:hover {
+  background-color: rgba(247, 231, 206, 0.9);
 }
