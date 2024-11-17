@@ -1,11 +1,47 @@
 button {
-  font-family: -apple-system, BlinkMacSystemFont, "Apple Color Emoji", "SF Pro", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14.4px;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Apple Color Emoji", "SF Pro", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-size: 14.4px !important;
+  background-color: rgb(96, 130, 182) !important;
+  color: rgba(247, 231, 206, 1) !important;
+  padding: 5px !important;
+  border: none !important;
+  border-radius: 4px !important;
+  text-align: center !important;
+  cursor: pointer !important;
+  transition: background-color 0.3s !important;
+
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+}
+
+button:hover {
+  color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(29, 50, 79, 0.8) !important;
+  transition: color background-color 0.3s ease !important;
+}
+
+.map-list-button, .filter-button {
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Apple Color Emoji", "SF Pro", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-size: 14.4px !important;
+  width: 90px !important;
+  background-color: rgba(247, 231, 206, 1);
+  color: rgb(96, 130, 182);
+  padding: 5px ;
+  border: none !important;
+  border-radius: 4px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 
-.map-list-button {
-  font-family: -apple-system, BlinkMacSystemFont, "Apple Color Emoji", "SF Pro", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14.4px !important;
-  width: 110px !important; /* adjust width as needed */
+.map-list-button:hover, .filter-button:hover {
+  background-color: rgb(96, 130, 182);
+  color: rgba(247, 231, 206, 1);
+  transition: background-color 0.3s ease;
 }

@@ -1,0 +1,191 @@
+/* banner styling */
+.user-show-banner {
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  width: 100%; /* Full width of the container */
+  border-radius: 5px;
+  margin-bottom: 20px;
+  margin-top: 1.5rem;
+}
+
+/* profile container styling to enable floating */
+.user-show-profile-container {
+  position: relative; /* Allows child element (image) to be positioned absolutely */
+  z-index: 2;
+  margin-bottom: 20px;
+}
+
+/* profile image styling with slight overlap */
+.user-show-profile-image {
+  width: 250px;
+  height: 250px;
+  border-radius: 5px;
+  object-fit: cover;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  position: absolute; /* Position image absolutely within the container */
+  top: 50%; /* Centers the image vertically */
+  left: 100px; /* Moves the image further to the right */
+  transform: translate(-40%, -50%); /* Adjusts horizontal alignment */
+  margin-top: 25px;
+}
+
+/* user details container for full-width layout, matching banner width */
+.user-show-details-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center; /* Stretch items to match the tallest element */
+  width: 100%; /* Expands to full width */
+  margin: 0; /* Removes side margins */
+  margin-bottom: 20px;
+  margin-top: 1.5rem;
+  position: relative; /* Ensures image is layered correctly over the card */
+}
+
+/* user details card with reduced width and height */
+.user-show-details-card-my-page {
+  flex: none; /* Prevents card from stretching */
+  min-width: 45%; /* Sets the card to be 60% of the container width; adjust as needed */
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Reduces the gap between items */
+  padding: 55px; /* Reduces padding */
+  padding-left: 100px;
+  background-color: rgba(247, 231, 206, 1);
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative; /* Ensures layering for the image */
+  margin-right: 15px; /* Adds space between details and pending requests */
+  margin-left: 125px;
+  margin-top: 30px;
+  height: 325px; /* Reduces height to 75% of original */
+  z-index: 1; /* Positions card below the profile image */
+  overflow: hidden;
+}
+
+/* "member since" positioned in the lower right corner inside the card */
+.member-since {
+  font-size: 16px;
+  color: rgb(54, 69, 79);
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+}
+
+/* title and header section with improved spacing */
+.user-show-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px; /* Reduces space below the header */
+  min-height: 30px; /* Reduces height */
+  padding: 5px 5px;
+}
+
+.user-show-details-card-my-page h2 {
+  color: rgb(54, 69, 79);
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* details text with increased line height for readability */
+.user-show-detail-item {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Reduces the gap for compact display */
+  font-size: 18px;
+  color: rgb(54, 69, 79);
+  padding: 5px 0; /* Reduces padding */
+  line-height: 1.4; /* Adjusts line height slightly */
+  white-space: nowrap; /* Prevents line breaks for long text */
+  overflow: hidden; /* Keeps text within the card */
+  text-overflow: ellipsis; /* Adds "..." if text is too long */
+}
+
+/* compact row styling */
+.user-show-compact-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px; /* Reduced gap for compact layout */
+}
+
+/* icon styling with hover effect */
+.user-show-icon {
+  font-size: 18px;
+  color: rgb(96, 130, 182);
+  transition: color 0.3s ease;
+  scale: 1.05;
+}
+
+.user-show-icon:hover {
+  color: rgb(120, 160, 200);
+}
+
+/* button styling */
+.user-show-btn-primary {
+  background-color: rgb(96, 130, 182);
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.user-show-btn-primary:hover {
+  background-color: rgb(54, 69, 79);
+}
+
+/* pending requests container aligned to the right, with reduced height */
+.user-show-pending-requests {
+  flex: 0.8; /* Sets pending requests container to take less width */
+  background-color: rgba(247, 231, 206, 1);
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px; /* Reduces padding */
+  align-self: stretch; /* Matches the height of the details card */
+  min-height: 150px; /* Reduces height to 75% of original */
+  margin-top: 30px;
+  min-width: 175px;
+}
+
+.user-show-pending-requests p.text-muted {
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(247, 231, 206, 1);
+  line-height: 24px;
+  margin: 0 0 16px;
+  word-wrap: break-word; /* Breaks long words if necessary */
+  overflow: hidden; /* Ensures content stays within card */
+  text-overflow: ellipsis; /* Adds "..." if text is too long */
+}
+
+.simple-heading {
+  font-size: 24px;
+  font-weight: bold;
+  color: rgb(96, 130, 182);
+  margin-bottom: 15px;
+}
+
+.card-title {
+  background-color: rgba(247, 231, 206, 1);
+}
+
+.card-body {
+  background-color: rgba(247, 231, 206, 1);
+}
+
+.user-show-btn-success {
+  margin-right: 10px; /* Adds space between buttons */
+}
+
+.user-show-btn-success:hover {
+  color: rgba(1, 218, 1, 0.8) !important;
+  background-color: rgba(96, 130, 182, 0.9) !important;
+  transition: background-color 0.3s ease;
+  transition: color 0.3s ease;
+}
+
+.user-show-btn-danger:hover {
+  color: rgba(255, 0, 0, 0.694) !important;
+  background-color: rgba(96, 130, 182, 0.9) !important;
+  transition: background-color 0.3s ease;
+  transition: color 0.3s ease;
+}

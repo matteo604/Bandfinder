@@ -1,0 +1,181 @@
+/* Edit page banner styling */
+.edit-page-banner {
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  margin-top: 1.5rem;
+}
+
+/* Profile container styling on edit page */
+.edit-page-profile-container {
+  position: relative;
+  z-index: 2;
+  margin-bottom: 20px;
+}
+
+/* Profile image styling on edit page */
+.edit-page-profile-image {
+  width: 250px;
+  height: 250px;
+  border-radius: 5px;
+  object-fit: cover;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 50%;
+  left: 100px;
+  transform: translate(-40%, -50%);
+  margin-top: 25px;
+}
+
+/* Details container on edit page */
+.edit-page-details-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin: 0;
+  margin-bottom: 20px;
+  margin-top: 1.5rem;
+  position: relative;
+}
+
+/* Edit details card */
+.edit-page-details-card {
+  min-width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 55px;
+  padding-left: 100px;
+  background-color: rgba(247, 231, 206, 1);
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  margin-right: 15px;
+  margin-left: 125px;
+  margin-top: 30px;
+  height: 325px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+/* Member since section on edit page */
+.edit-page-member-since {
+  font-size: 16px;
+  color: rgb(54, 69, 79);
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+}
+
+/* Title and header on edit page */
+.edit-page-details-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+  min-height: 30px;
+  padding: 5px 5px;
+}
+
+.edit-page-details-card h2 {
+  color: rgb(54, 69, 79);
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* Details text on edit page */
+.edit-page-detail-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 18px;
+  color: rgb(54, 69, 79);
+  padding: 5px 0;
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Button styling on edit page */
+.edit-page-btn-primary {
+  background-color: rgb(96, 130, 182);
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.edit-page-btn-primary:hover {
+  background-color: rgb(54, 69, 79);
+}
+
+/* Pending requests container on edit page */
+.edit-page-pending-requests {
+  flex: 0.8;
+  background-color: rgba(247, 231, 206, 1);
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  align-self: stretch;
+  min-height: 150px;
+  margin-top: 30px;
+  min-width: 175px;
+}
+
+.edit-page-pending-requests p.text-muted {
+  font-size: 18px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.75);
+  background-color: rgba(247, 231, 206, 1);
+  line-height: 24px;
+  margin: 0 0 16px;
+  word-wrap: break-word;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.edit-page-container {
+  max-height: 80vh; /* Begrenzung der maximalen Höhe des Containers */
+  overflow-y: auto; /* Fügt Scrollen hinzu, falls der Inhalt größer ist */
+  padding: 20px;
+  background-color: rgba(247, 231, 206, 1); /* Anpassung an deinen Stil */
+  border-radius: 5px;
+}
+
+.edit-page-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+.col-form-label-lg {
+  color: rgb(54, 69, 79); /* Dunklerer Farbton für bessere Lesbarkeit */
+  font-size: 16px; /* Angepasste Schriftgröße */
+  margin-top: 10px;
+}
+
+.instrument-dropdown {
+  width: 100%; /* Stellt sicher, dass der Container volle Breite hat */
+}
+
+.instrument-dropbtn {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Aligns text to the left */
+  background-color: rgb(96, 130, 182);
+  color: rgba(247, 231, 206, 1);
+  padding: 0 10px;
+  height: 32px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  transition: background-color 0.3s ease;
+  border-radius: 5px;
+  margin-right: 10px;
+}

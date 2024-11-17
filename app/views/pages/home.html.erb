@@ -1,5 +1,6 @@
-<div class="photo-container text-center" style="align-item:center;">
-  <h1 class="banner-text mb-3" style="font-size: 70px;">BandFinder </h1> <br> <h1 class="motto mt-5" style="font-size:34px;"> Discover all the bands </h1>
+<div class="photo-container text-center">
+  <h1 class="banner-text">BandFinder</h1>
+  <h2 class="banner-subtext">Discover all the bands</h2>
 </div>
 <div class="container" data-controller="toggleswitch">
 
@@ -36,51 +37,52 @@
           <div class="search-input">
             <input type="text" id="address-filter" name="band_address" placeholder="Search location" class="form-control filter-input">
           </div>
-          <div class="search-input">
-              <select id="genre-filter" name="genre" class="form-control filter-input">
-                  <option value="">Select a Genre</option>
-                  <option value="acapella">Acapella</option>
-                  <option value="alternative">Alternative</option>
-                  <option value="blues">Blues</option>
-                  <option value="classical">Classical</option>
-                  <option value="country">Country</option>
-                  <option value="dance">Dance</option>
-                  <option value="disco">Disco</option>
-                  <option value="electronic">Electronic</option>
-                  <option value="folk">Folk</option>
-                  <option value="gospel">Gospel</option>
-                  <option value="hip-hop">Hip Hop</option>
-                  <option value="indie">Indie</option>
-                  <option value="jazz">Jazz</option>
-                  <option value="latin">Latin</option>
-                  <option value="metal">Metal</option>
-                  <option value="pop">Pop</option>
-                  <option value="punk">Punk</option>
-                  <option value="rap">Rap</option>
-                  <option value="reggae">Reggae</option>
-                  <option value="rock">Rock</option>
-                  <option value="r&b">R&B</option>
-                  <option value="soul">Soul</option>
-                  <option value="techno">Techno</option>
-                  <option value="trance">Trance</option>
-                  <option value="world">World</option>
-                  <option value="swing">Swing</option>
-                  <option value="hard rock">Hard Rock</option>
-                  <option value="progressive rock">Progressive Rock</option>
-                  <option value="new age">New Age</option>
-                  <option value="house">House</option>
-                  <option value="grunge">Grunge</option>
-                  <option value="ska">Ska</option>
-                  <option value="emo">Emo</option>
-                  <option value="industrial">Industrial</option>
-                  <option value="soundtrack">Soundtrack</option>
-                  <option value="dubstep">Dubstep</option>
-                  <option value="lo-fi">Lo-fi</option>
-              </select>
+          <div class="dropdown" id="genre-filter">
+            <button class="dropbtn-genre">Select Genre</button>
+            <div class="dropdown-content">
+              <label><input type="checkbox" name="genre[]" value="Acapella"> Acapella</label>
+              <label><input type="checkbox" name="genre[]" value="Alternative"> Alternative</label>
+              <label><input type="checkbox" name="genre[]" value="Blues"> Blues</label>
+              <label><input type="checkbox" name="genre[]" value="Classical"> Classical</label>
+              <label><input type="checkbox" name="genre[]" value="Country"> Country</label>
+              <label><input type="checkbox" name="genre[]" value="Dance"> Dance</label>
+              <label><input type="checkbox" name="genre[]" value="Disco"> Disco</label>
+              <label><input type="checkbox" name="genre[]" value="Electronic"> Electronic</label>
+              <label><input type="checkbox" name="genre[]" value="Folk"> Folk</label>
+              <label><input type="checkbox" name="genre[]" value="Gospel"> Gospel</label>
+              <label><input type="checkbox" name="genre[]" value="Hip Hop"> Hip Hop</label>
+              <label><input type="checkbox" name="genre[]" value="Indie"> Indie</label>
+              <label><input type="checkbox" name="genre[]" value="Jazz"> Jazz</label>
+              <label><input type="checkbox" name="genre[]" value="Latin"> Latin</label>
+              <label><input type="checkbox" name="genre[]" value="Metal"> Metal</label>
+              <label><input type="checkbox" name="genre[]" value="Pop"> Pop</label>
+              <label><input type="checkbox" name="genre[]" value="Punk"> Punk</label>
+              <label><input type="checkbox" name="genre[]" value="Rap"> Rap</label>
+              <label><input type="checkbox" name="genre[]" value="Reggae"> Reggae</label>
+              <label><input type="checkbox" name="genre[]" value="Rock"> Rock</label>
+              <label><input type="checkbox" name="genre[]" value="R&B"> R&B</label>
+              <label><input type="checkbox" name="genre[]" value="Soul"> Soul</label>
+              <label><input type="checkbox" name="genre[]" value="Techno"> Techno</label>
+              <label><input type="checkbox" name="genre[]" value="Trance"> Trance</label>
+              <label><input type="checkbox" name="genre[]" value="World"> World</label>
+              <label><input type="checkbox" name="genre[]" value="Swing"> Swing</label>
+              <label><input type="checkbox" name="genre[]" value="Hard Rock"> Hard Rock</label>
+              <label><input type="checkbox" name="genre[]" value="Progressive Rock"> Progressive Rock</label>
+              <label><input type="checkbox" name="genre[]" value="New Age"> New Age</label>
+              <label><input type="checkbox" name="genre[]" value="House"> House</label>
+              <label><input type="checkbox" name="genre[]" value="Grunge"> Grunge</label>
+              <label><input type="checkbox" name="genre[]" value="Ska"> Ska</label>
+              <label><input type="checkbox" name="genre[]" value="Emo"> Emo</label>
+              <label><input type="checkbox" name="genre[]" value="Industrial"> Industrial</label>
+              <label><input type="checkbox" name="genre[]" value="Soundtrack"> Soundtrack</label>
+              <label><input type="checkbox" name="genre[]" value="Dubstep"> Dubstep</label>
+              <label><input type="checkbox" name="genre[]" value="Lo-fi"> Lo-fi</label>
+            </div>
           </div>
+
           <div class="search-input">
             <div class="dropdown" name="searching_for_instruments" id="instruments-filter">
-              <button class="dropbtn">Select Instruments</button>
+              <button class="dropbtn-instrument">Select Instruments</button>
               <div class="dropdown-content" id="dropdown-content">
                       <label><input type="checkbox" name="search_instruments[]" value="Accordion"> Accordion</label>
                       <label><input type="checkbox" name="search_instruments[]" value="Agogo"> Agogo</label>
@@ -176,7 +178,7 @@
           </div>
           <div class="search-input">
             <div class="dropdown" name="instruments" id="instruments-filter">
-              <button class="dropbtn">Select Instruments</button>
+              <button  class="dropbtn-instrument">Select Instruments</button>
               <div class="dropdown-content" id="dropdown-content">
                 <label><input type="checkbox" name="instruments[]" value="Accordion"> Accordion</label>
                 <label><input type="checkbox" name="instruments[]" value="Agogo"> Agogo</label>

@@ -1,5 +1,3 @@
-<!-- HUGO'S CODE -->
-
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
   Book session
@@ -7,7 +5,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
+  <div class="modal-dialog modal-dialog-centered" style="display: flex; align-items: center; min-height: 100vh;">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" style="color:black" id="exampleModalLabel">Book session</h5>
@@ -15,15 +13,12 @@
       </div>
       <div class="modal-body" style="background: orange;">
         <%= simple_form_for [@band, @band_session], data: { controller: 'datepicker' } do |f| %>
-          <%= f.input :start_date, as: :date, input_html: { data: { flatpickr_target: "startDate" }, id: 'check-in' } %>A
+          <%= f.input :start_date, as: :date, input_html: { data: { flatpickr_target: "startDate" }, id: 'check-in' } %>
           <%= f.input :end_date, as: :date, input_html: { data: { flatpickr_target: "endDate" }, id: 'check-out' } %>
           <%= f.submit 'Schedule your band session' %>
         <% end %>
         <button type="button" class="btn btn-secondary mt-3" data-bs-dismiss="modal">Close</button>
       </div>
-
     </div>
   </div>
 </div>
-
-<!-- END OF HUGO'S CODE -->
