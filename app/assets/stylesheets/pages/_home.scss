@@ -27,6 +27,7 @@ body {
   color: white;
   position: relative;
   text-align: center;
+  align-items: center;
   background-blend-mode: overlay;
   filter: brightness(1.0) contrast(1.2);
   background-position: center 70%;
@@ -44,6 +45,8 @@ body {
   font-size: 3em;
   font-weight: bold;
   margin: 0;
+  text-align: center;
+  align-items: center;
 }
 
 .photo-container .motto {
