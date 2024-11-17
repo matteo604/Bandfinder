@@ -12,33 +12,31 @@
 .band_details_card, .members_list_card {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* consistent spacing between items */
+  gap: 15px;
   padding: 20px;
-  background-color: rgba(247, 231, 206, 1); /* same background across cards */
+  background-color: rgba(247, 231, 206, 1);
   border-radius: 5px;
-  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* subtle shadow for depth */
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
   width: 85%;
   margin: 0 auto;
 }
 
-/* title styling for band cards */
 .band_details_card h2,
 .members_list_card h2 {
   color: rgb(54, 69, 79);
-  font-size: 24px; /* consistent title font size */
+  font-size: 24px;
   font-weight: bold;
 }
 
-/* detail item styling for band cards */
 .band-detail-item,
 .member-detail-item {
   display: flex;
   align-items: center;
-  gap: px; /* spacing between icon and text */
-  font-size: 18px; /* consistent content font size */
+  gap: px;
+  font-size: 18px;
   color: rgb(54, 69, 79);
-  padding: 8px 0; /* consistent vertical padding */
+  padding: 8px 0;
 }
 
 /* member link styling */
@@ -64,11 +62,11 @@
 
 /* icon styling */
 .band-icon {
-  color: rgb(96, 130, 182); /* consistent icon color */
-  margin-right: 15px; /* spacing between icon and text */
+  color: rgb(96, 130, 182);
+  margin-right: 15px;
 }
 
-/* primary button styling */
+
 .band-btn-primary {
   background-color: rgb(96, 130, 182);
   border: none;
@@ -76,10 +74,10 @@
 }
 
 .band-btn-primary:hover {
-  background-color: rgb(54, 69, 79); /* darker color on hover */
+  background-color: rgb(54, 69, 79);
 }
 
-/* join request section for band */
+
 .band-pending-requests {
   margin-top: 20px;
 }
@@ -90,13 +88,13 @@
   margin-bottom: 10px;
 }
 
-/* request card styling for band */
+
 .band-pending-requests .band-request-card {
   background-color: rgba(247, 231, 206, 1);
   border-radius: 5px;
 }
 
-/* success and danger button styling for band requests */
+
 .band-pending-requests .band-btn-success,
 .band-pending-requests .band-btn-danger {
   font-size: 14px;

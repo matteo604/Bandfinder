@@ -1,81 +1,85 @@
 <div class="container">
-  <div class="user-show-banner" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(<%= asset_path('profile-banner.jpg') %>);"></div>
+  <!-- Banner Section -->
+  <div class="band-banner" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(<%= asset_path('band-banner.jpg') %>);"></div>
 
-  <div class="user-show-details-container">
-    <% if @user.photo.attached? %>
-      <%= image_tag @user.photo, alt: "#{@user.first_name} #{@user.last_name}", class: "user-show-profile-image" %>
-    <% else %>
-      <%= image_tag "default-profile-image.jpg", alt: "default profile image", class: "user-show-profile-image" %>
-    <% end %>
-
-    <div class="user-show-details-card">
-      <div class="user-show-details-header">
-        <h2>My Details</h2>
-        <% if current_user == @user %>
-          <%= link_to edit_user_path(@user), class: "ms-auto" do %>
-            <i class="fa-solid fa-pencil fs-4 user-show-icon"></i>
-          <% end %>
+  <div>
+    <!-- Profile Banner -->
+    <div class="container profile_banner">
+      <div class="mb-3">
+        <% if @band.photo.attached? %>
+          <%= image_tag @band.photo, alt: "#{@band.title}", class: "profile_image" %>
+        <% else %>
+          <%= image_tag "default-profile-image.jpg", alt: "default profile image", class: "profile_image" %>
         <% end %>
       </div>
 
-      <!-- Address Section -->
-      <div class="user-show-detail-item">
-        <i class="fa-solid fa-location-dot user-show-icon"></i> <%= @user.address %>
-      </div>
-
-      <!-- Phone and Email in a Row -->
-      <div class="user-show-compact-row">
-        <div class="user-show-detail-item">
-          <i class="fa-solid fa-phone user-show-icon"></i> <%= @user.telephone_number %>
+      <!-- Band Info Row -->
+      <div class="row band-compact-row border solid">
+        <div class="col-3">
+          <h2 class="m-3"><%= @band.title %></h2>
         </div>
-        <div class="user-show-detail-item">
-          <i class="fa-regular fa-envelope user-show-icon"></i> <%= @user.email %>
+        <div class="col-9 text-end">
+          <h4 class="m-3">Created: <%= @band.created_at.strftime("%b %d, %Y") %> by <%= @band.leader.first_name %> <%= @band.leader.last_name %></h4>
         </div>
       </div>
+    </div> <!-- End Profile Banner -->
 
-      <!-- Instruments Section -->
-      <div class="user-show-detail-item border-top pt-2">
-        <i class="fa-solid fa-drum fs-3 user-show-icon"></i>
-        <%= @user.instruments.join(", ") %>
-      </div>
-    </div>
-  </div>
-
-  <div class="user-info text-center mt-3">
-    <% if current_user != @user %>
-      <%= button_to "Message #{@user.first_name}", chats_path(chat: { band_leader_id: @user.id }), method: :post, class: "btn user-show-btn-primary" %>
-    <% end %>
-
-    <% if current_user != @user && current_user.band_id %>
-      <% if current_user.band.join_requests.where(user_id: @user.id).length > 0 %>
-        <p class="mt-3">Request already sent</p>
-      <% else %>
-        <%= button_to "Ask #{@user.first_name} to join my band", user_join_requests_path(user_id: @user.id, join_request: { join_type: "band_to_user" }), method: :post, class: "btn user-show-btn-primary mt-3" %>
-      <% end %>
-    <% end %>
-  </div>
-
-  <% if current_user == @user %>
-    <div class="user-show-pending-requests">
-      <h3>Pending Join Requests</h3>
-      <% if @join_requests.any? %>
-        <% @join_requests.each do |request| %>
-          <div class="card mb-3 shadow-sm user-show-request-card">
-            <div class="card-body d-flex justify-content-between align-items-center">
-              <div>
-                <h5 class="card-title mb-1"><%= request.user.first_name %> <%= request.user.last_name %></h5>
-                <p class="mb-0 text-muted">Requested to join on <%= request.created_at.strftime("%B %d, %Y") %></p>
-              </div>
-              <div class="btn-group">
-                <%= button_to 'Accept Request', accept_user_join_request_path(user_id: @user.id, id: request.id), method: :patch, class: "btn user-show-btn-success", data: { confirm: 'Are you sure you want to accept this request?' } %>
-                <%= button_to 'Decline Request', decline_user_join_request_path(user_id: @user.id, id: request.id), method: :patch, class: "btn user-show-btn-danger", data: { confirm: 'Are you sure you want to decline this request?' } %>
-              </div>
+    <!-- Band Details Section -->
+    <div class="row mt-4 d-flex justify-content-center">
+      <div class="gap-5">
+        <!-- Band Details Card -->
+        <div class="band_details_card">
+          <div class="d-flex justify-content-between align-items-center">
+            <h2 class="mb-0">Band Details</h2>
+            <div class="d-flex gap-3 ms-auto">
+              <% if current_user == @band.leader %>
+                <%= link_to edit_band_path(@band), class: "edit-band-icon" do %>
+                  <i class="fa-solid fa-pencil band-icon"></i>
+                <% end %>
+                <%= link_to band_path(@band), data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to delete this band?" }, class: "delete-icon" do %>
+                  <i class="fa-solid fa-trash band-icon text-danger"></i>
+                <% end %>
+              <% end %>
             </div>
           </div>
-        <% end %>
-      <% else %>
-        <p class="text-muted">No pending requests at the moment.</p>
-      <% end %>
+          <div class="band-detail-item"><i class="fa-solid fa-location-dot band-icon"></i> <%= @band.address %></div>
+          <div class="band-detail-item"><i class="fa-solid fa-music band-icon"></i> <%= @band.genre %></div>
+          <div class="band-detail-item"><i class="fa-solid fa-circle-info band-icon"></i> <%= @band.description %></div>
+          <div class="band-detail-item">
+            <i class="fa-solid fa-drum band-icon"></i> We are looking for:
+            <%= @band.searching_for_instruments.join(", ") %>
+          </div>
+        </div> <!-- End Band Details Card -->
+
+        <!-- Members Card -->
+        <div class="members_list_card">
+          <h2>Members</h2>
+          <% @members.each do |member| %>
+            <%= link_to user_path(member), class: "member-link" do %>
+              <%= member.first_name %> <%= member.last_name %>
+              <% if !member.instruments.empty? %>
+                (<%= member.instruments.join(", ") %>)
+              <% end %>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
     </div>
-  <% end %>
+  </div>
+
+  <div class="user-info mt-3 btn-group text-center">
+    <% if current_user != @band.leader %>
+      <%= button_to 'Message Band Leader', chats_path(chat: { band_leader_id: @band.leader.id }), method: :post, class: "btn band-btn-primary mb-3" %>
+    <% end %>
+
+    <% if !@band.members.include?(current_user) && !current_user.band_id %>
+      <% if current_user.join_requests.where(band_id: @band.id).length > 0 %>
+        <p class="mt-3">Request already sent</p>
+      <% else %>
+        <%= button_to "Request to join #{@band.title}",
+                      band_join_requests_path(band_id: @band.id, join_request: { join_type: "user_to_band" }),
+                      method: :post, class: "btn band-btn-primary mt-3" %>
+      <% end %>
+    <% end %>
+  </div>
 </div>
