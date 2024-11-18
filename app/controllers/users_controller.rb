@@ -9,6 +9,14 @@ class UsersController < ApplicationController
     @band = Band.find_by(leader_id:current_user.id)
     @bands = Band.all
     @join_requests = @user.join_requests.where(status: "pending", join_type: "band_to_user")
+    @markers = [
+      {
+        lat: @user.latitude,
+        lng: @user.longitude,
+        info_window: render_to_string(partial: "users/user_popup", locals: {user: @user}),
+        marker_html: "<i class='fa-solid fa-person' style='color: black; font-size: 30px;'></i>"
+      }
+    ]
   end
 
   def edit

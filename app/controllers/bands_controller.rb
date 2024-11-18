@@ -17,6 +17,14 @@ class BandsController < ApplicationController
     @band = Band.find(params[:id])
     @band_session = BandSession.new
     @members = @band.members
+    @markers = [
+      {
+        lat: @band.latitude,
+        lng: @band.longitude,
+        info_window: render_to_string(partial: "bands/band_popup", locals: { band: @band}),
+        marker_html: "<i class='fa-duotone fa-solid fa-people-group' style='color: black; font-size: 30px;'></i>"
+      }
+    ]
   end
 
   def my_band
