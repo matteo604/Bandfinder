@@ -124,12 +124,18 @@
 /* button styling */
 .user-show-btn-primary {
   background-color: rgb(96, 130, 182);
+  color: white;
+  padding: 0.5rem 1rem;
   border: none;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
+  margin-right: 1rem;
+  display: inline-block;
+  justify-content: flex-end;
 }
 
 .user-show-btn-primary:hover {
   background-color: rgb(54, 69, 79);
+  margin-right: 0.5rem;
 }
 
 /* pending requests container aligned to the right, with reduced height */
@@ -173,7 +179,11 @@
 }
 
 .user-show-btn-success {
-  margin-right: 10px; /* Adds space between buttons */
+  margin-right: 10px !important; /* Adds space between buttons */
+}
+
+.user-shown-btn-danger {
+  margin-left: 10px; /* Adds space between buttons */
 }
 
 .user-show-btn-success:hover {
@@ -188,4 +198,9 @@
   background-color: rgba(96, 130, 182, 0.9) !important;
   transition: background-color 0.3s ease;
   transition: color 0.3s ease;
+}
+
+.invisible-placeholder {
+  visibility: hidden;
+  height: 150px; /* Gleiche Höhe wie `user-show-pending-requests` */
 }
