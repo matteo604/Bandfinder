@@ -1,9 +1,10 @@
 class BandSessionsController < ApplicationController
-  before_action :set_band_session, only: %i[show edit update]
+  before_action :set_band_session, only: %i[show edit update destroy]
 
   def index
     @band_sessions = BandSession.all
     @band = Band.find(params[:band_id])
+    @band_session = @band.band_sessions
   end
 
   def show
@@ -41,9 +42,15 @@ class BandSessionsController < ApplicationController
     end
   end
 
+  def destroy
+    @band_session.destroy
+    redirect_to band_band_sessions_path, status: :see_other
+  end
+
   private
 
   def set_band_session
+    @band = Band.find(params[:band_id])
     @band_session = BandSession.find(params[:id])
   end
 
