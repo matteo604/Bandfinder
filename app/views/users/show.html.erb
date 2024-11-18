@@ -81,8 +81,8 @@
       <%= button_to "Message #{@user.first_name}", chats_path(chat: { band_leader_id: @user.id }), method: :post, class: "btn user-show-btn-primary" %>
     <% end %>
 
-    <% if current_user != @user && !@user.band_id %>
-      <% if current_user.band.join_requests.where(user_id: @user.id).length > 0 %>
+    <% if current_user != @user && !@user.band_id && current_user.band_id %>
+      <% if current_user.join_requests.where(user_id: @user.id).length > 0 %>
         <p class="mt-3">Request already sent</p>
       <% else %>
         <%= button_to "Ask #{@user.first_name} to join my band", user_join_requests_path(user_id: @user.id, join_request: { join_type: "band_to_user" }), method: :post, class: "btn user-show-btn-primary mt-3" %>

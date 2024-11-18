@@ -22,7 +22,7 @@
           <% if @band.photo.attached? %>
             <%= image_tag @band.photo, alt: "#{@band.title}", class: "band-show-profile-image" %>
           <% else %>
-            <%= image_tag "default-band-image.jpg", alt: "default band image", class: "band-show-profile-image" %>
+            <%= image_tag "placeholder_band.jpg", alt: "default band image", class: "band-show-profile-image" %>
           <% end %>
         </div>
         <!-- Band Details Card -->
