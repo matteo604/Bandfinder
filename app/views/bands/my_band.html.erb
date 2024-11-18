@@ -1,4 +1,3 @@
-
 <div class="container d-flex w-100">
   <div class="container">
 
@@ -6,26 +5,25 @@
     <div class="d-block row mt-4">
       <div class="gap-5">
         <!-- Band Details Card -->
-        <div class="band_details_card d-flex flex-column mb-4">
-          <h2 class="band-details-title">Band Details</h2>
-          <div class="band-detail-item"><i class="fa-solid fa-location-dot band-icon"></i> <%= @band.address %></div>
-          <div class="band-detail-item"><i class="fa-solid fa-music band-icon"></i> <%= @band.genre %></div>
-          <div class="band-detail-item"><i class="fa-solid fa-circle-info band-icon"></i> <%= @band.description %></div>
-          <div class="band-detail-item">
+        <div class="my-band_details_card d-flex flex-column mb-4">
+          <h2 class="my-band-details-title">My Band Details</h2>
+          <div class="my-band-detail-item"><i class="fa-solid fa-location-dot band-icon"></i> <%= @band.address %></div>
+          <div class="my-band-detail-item"><i class="fa-solid fa-music band-icon"></i> <%= @band.genre %></div>
+          <div class="my-band-detail-item"><i class="fa-solid fa-circle-info band-icon"></i> <%= @band.description %></div>
+          <div class="my-band-detail-item">
             <i class="fa-solid fa-drum band-icon"></i> We are looking for:
             <%= @band.searching_for_instruments.join(", ") %>
           </div>
-
         </div>
       </div>
     </div>
 
 
     <!-- Members Card -->
-    <div class="band_details_card d-block fs-4 d-flex flex-column">
+    <div class="my-band_details_card d-block fs-4 d-flex flex-column">
       <h2>Members</h2>
       <% @members.each do |member| %>
-        <%= link_to user_path(member), class: "member-link"  do %>
+        <%= link_to user_path(member), class: "my-band-member-link"  do %>
           <%= member.first_name %> <%= member.last_name %>:
           ( <%= member.instruments.join(", ") %> )
         <% end %>
