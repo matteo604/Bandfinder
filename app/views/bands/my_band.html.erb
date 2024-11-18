@@ -7,7 +7,10 @@
         <!-- Band Details Card -->
         <div class="my-band_details_card d-flex flex-column mb-4">
           <h2 class="my-band-details-title">My Band Details</h2>
-          <div class="my-band-detail-item"><i class="fa-solid fa-location-dot band-icon"></i> <%= @band.address %></div>
+          <%= link_to edit_band_path(@band), class: "ms-auto edit-icon-details" do %>
+            <i class="fa-solid fa-pencil user-show-icon"></i>
+          <% end %>
+          <div class="my-band-detail-item mt-3"><i class="fa-solid fa-location-dot band-icon"></i> <%= @band.address %></div>
           <div class="my-band-detail-item"><i class="fa-solid fa-music band-icon"></i> <%= @band.genre %></div>
           <div class="my-band-detail-item"><i class="fa-solid fa-circle-info band-icon"></i> <%= @band.description %></div>
           <div class="my-band-detail-item">

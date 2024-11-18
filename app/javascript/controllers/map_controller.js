@@ -11,7 +11,6 @@ export default class extends Controller {
 
   connect() {
     mapboxgl.accessToken = this.apiKeyValue;
-
     this.map = new mapboxgl.Map({
       container: this.element,
       style: "mapbox://styles/mapbox/streets-v12",
@@ -20,9 +19,9 @@ export default class extends Controller {
       }
     });
     this.markerInstances = [];
-    if (window.location.href.includes("user_search")){
+    if (window.location.href.includes("user_search") || window.location.href.includes("users")){
       this.mapHasBandMarkers = false
-    } else if (window.location.href.includes("band_search")) {
+    } else if (window.location.href.includes("band_search") || window.location.href.includes("bands")) {
       this.mapHasBandMarkers = true
     } else {
       this.mapHasBandMarkers = true
