@@ -71,7 +71,7 @@
         <% end %>
       </div>
     <% else %>
-     <div class="map" style="width: 100%; height: 100%;" data-controller="map" data-map-usermarkers-value="<%= @markers.to_json %>" data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+      <div class="map" style="width: 100%; height: 107%; margin-top: 85px;" data-controller="map" data-map-usermarkers-value="<%= @markers.to_json %>" data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
     <% end %>
   </div>
 
