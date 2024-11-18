@@ -14,11 +14,6 @@
     <div class="user-show-details-card-my-page">
       <div class="user-show-details-header">
         <h2>My Details</h2>
-        <% if current_user == @user %>
-          <%= link_to edit_user_path(@user), class: "ms-auto" do %>
-            <i class="fa-solid fa-pencil user-show-icon"></i>
-          <% end %>
-        <% end %>
       </div>
 
       <!-- Address section -->
