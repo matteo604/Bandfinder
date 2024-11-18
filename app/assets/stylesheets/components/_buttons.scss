@@ -3,16 +3,21 @@ button {
   font-size: 14.4px !important;
   background-color: rgb(96, 130, 182) !important;
   color: rgba(247, 231, 206, 1) !important;
-  padding: 5px !important;
+  padding: 5px 10px;
   border: none !important;
   border-radius: 4px !important;
   text-align: center !important;
   cursor: pointer !important;
   transition: background-color 0.3s !important;
 
-  display: flex !important;
+  display: inline-flex !important;
   justify-content: center !important;
   align-items: center !important;
+}
+
+.btn-group {
+  display: flex;
+  gap: 1rem; /* This adds space between buttons */
 }
 
 button:hover {
