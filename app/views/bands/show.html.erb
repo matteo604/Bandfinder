@@ -1,6 +1,6 @@
 <div class="container">
   <!-- Banner Section -->
-  <div class="band-show-banner"
+  <div class="band-show-banner mt-4"
        style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(<%= asset_path('band-banner.jpg') %>);
               height: 300px;
               width: 100%;
@@ -71,7 +71,7 @@
         <% end %>
       </div>
     </div> <!-- End Flexbox Area -->
-    <div class="map" style="width: 100%; height:100%;" data-controller="map" data-map-bandmarkers-value="<%= @markers.to_json %>" data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
+    <div class="map" style="width:55vh; height:100%; margin-right: -20px;" data-controller="map" data-map-bandmarkers-value="<%= @markers.to_json %>" data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 
   </div> <!-- End Main Content -->
     <!-- Button Section -->
