@@ -43,7 +43,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
               <%= link_to "My account", user_path(current_user), class: "dropdown-item" %>
-              <% if current_user && Band.find_by(leader_id: current_user.id) %>
+              <% if current_user && current_user.band && Band.find_by(leader_id: current_user.id) %>
                 <%= link_to "My band", band_my_band_path(current_user.band), class: "dropdown-item" %>
               <% end %>
               <%= link_to "Log out", destroy_user_session_path, data: { turbo_method: :delete }, class: "dropdown-item" %>

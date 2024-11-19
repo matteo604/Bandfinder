@@ -18,7 +18,7 @@ john = User.create!(
   last_name: 'Doe',
   address: 'Madrid',
   telephone_number: '5557654321',
-  instruments: ['Guitar', 'Piano']
+  instruments: ['guitar', 'piano']
 )
 
 john.photo.attach(
@@ -35,7 +35,7 @@ jane = User.create!(
   last_name: 'Smith',
   address: 'Hauptstrasse, Berlin',
   telephone_number: '5557654321',
-  instruments: ['Saxophone', 'vocal']
+  instruments: ['saxophone', 'vocal']
 )
 
 jane.photo.attach(

@@ -40,121 +40,122 @@
           <div class="dropdown" id="genre-filter">
             <button class="dropbtn-genre">Select Genre</button>
             <div class="dropdown-content">
-              <label><input type="checkbox" name="genre[]" value="Acapella"> Acapella</label>
-              <label><input type="checkbox" name="genre[]" value="Alternative"> Alternative</label>
-              <label><input type="checkbox" name="genre[]" value="Blues"> Blues</label>
-              <label><input type="checkbox" name="genre[]" value="Classical"> Classical</label>
-              <label><input type="checkbox" name="genre[]" value="Country"> Country</label>
-              <label><input type="checkbox" name="genre[]" value="Dance"> Dance</label>
-              <label><input type="checkbox" name="genre[]" value="Disco"> Disco</label>
-              <label><input type="checkbox" name="genre[]" value="Electronic"> Electronic</label>
-              <label><input type="checkbox" name="genre[]" value="Folk"> Folk</label>
-              <label><input type="checkbox" name="genre[]" value="Gospel"> Gospel</label>
-              <label><input type="checkbox" name="genre[]" value="Hip Hop"> Hip Hop</label>
-              <label><input type="checkbox" name="genre[]" value="Indie"> Indie</label>
-              <label><input type="checkbox" name="genre[]" value="Jazz"> Jazz</label>
-              <label><input type="checkbox" name="genre[]" value="Latin"> Latin</label>
-              <label><input type="checkbox" name="genre[]" value="Metal"> Metal</label>
-              <label><input type="checkbox" name="genre[]" value="Pop"> Pop</label>
-              <label><input type="checkbox" name="genre[]" value="Punk"> Punk</label>
-              <label><input type="checkbox" name="genre[]" value="Rap"> Rap</label>
-              <label><input type="checkbox" name="genre[]" value="Reggae"> Reggae</label>
-              <label><input type="checkbox" name="genre[]" value="Rock"> Rock</label>
-              <label><input type="checkbox" name="genre[]" value="R&B"> R&B</label>
-              <label><input type="checkbox" name="genre[]" value="Soul"> Soul</label>
-              <label><input type="checkbox" name="genre[]" value="Techno"> Techno</label>
-              <label><input type="checkbox" name="genre[]" value="Trance"> Trance</label>
-              <label><input type="checkbox" name="genre[]" value="World"> World</label>
-              <label><input type="checkbox" name="genre[]" value="Swing"> Swing</label>
-              <label><input type="checkbox" name="genre[]" value="Hard Rock"> Hard Rock</label>
-              <label><input type="checkbox" name="genre[]" value="Progressive Rock"> Progressive Rock</label>
-              <label><input type="checkbox" name="genre[]" value="New Age"> New Age</label>
-              <label><input type="checkbox" name="genre[]" value="House"> House</label>
-              <label><input type="checkbox" name="genre[]" value="Grunge"> Grunge</label>
-              <label><input type="checkbox" name="genre[]" value="Ska"> Ska</label>
-              <label><input type="checkbox" name="genre[]" value="Emo"> Emo</label>
-              <label><input type="checkbox" name="genre[]" value="Industrial"> Industrial</label>
-              <label><input type="checkbox" name="genre[]" value="Soundtrack"> Soundtrack</label>
-              <label><input type="checkbox" name="genre[]" value="Dubstep"> Dubstep</label>
-              <label><input type="checkbox" name="genre[]" value="Lo-fi"> Lo-fi</label>
+              <label><input type="checkbox" name="genre" value="Acapella"> Acapella</label>
+              <label><input type="checkbox" name="genre" value="Alternative"> Alternative</label>
+              <label><input type="checkbox" name="genre" value="Blues"> Blues</label>
+              <label><input type="checkbox" name="genre" value="Classical"> Classical</label>
+              <label><input type="checkbox" name="genre" value="Country"> Country</label>
+              <label><input type="checkbox" name="genre" value="Dance"> Dance</label>
+              <label><input type="checkbox" name="genre" value="Disco"> Disco</label>
+              <label><input type="checkbox" name="genre" value="Electronic"> Electronic</label>
+              <label><input type="checkbox" name="genre" value="Folk"> Folk</label>
+              <label><input type="checkbox" name="genre" value="Gospel"> Gospel</label>
+              <label><input type="checkbox" name="genre" value="Hip Hop"> Hip Hop</label>
+              <label><input type="checkbox" name="genre" value="Indie"> Indie</label>
+              <label><input type="checkbox" name="genre" value="Jazz"> Jazz</label>
+              <label><input type="checkbox" name="genre" value="Latin"> Latin</label>
+              <label><input type="checkbox" name="genre" value="Metal"> Metal</label>
+              <label><input type="checkbox" name="genre" value="Pop"> Pop</label>
+              <label><input type="checkbox" name="genre" value="Punk"> Punk</label>
+              <label><input type="checkbox" name="genre" value="Rap"> Rap</label>
+              <label><input type="checkbox" name="genre" value="Reggae"> Reggae</label>
+              <label><input type="checkbox" name="genre" value="Rock"> Rock</label>
+              <label><input type="checkbox" name="genre" value="R&B"> R&B</label>
+              <label><input type="checkbox" name="genre" value="Soul"> Soul</label>
+              <label><input type="checkbox" name="genre" value="Techno"> Techno</label>
+              <label><input type="checkbox" name="genre" value="Trance"> Trance</label>
+              <label><input type="checkbox" name="genre" value="World"> World</label>
+              <label><input type="checkbox" name="genre" value="Swing"> Swing</label>
+              <label><input type="checkbox" name="genre" value="Hard Rock"> Hard Rock</label>
+              <label><input type="checkbox" name="genre" value="Progressive Rock"> Progressive Rock</label>
+              <label><input type="checkbox" name="genre" value="New Age"> New Age</label>
+              <label><input type="checkbox" name="genre" value="House"> House</label>
+              <label><input type="checkbox" name="genre" value="Grunge"> Grunge</label>
+              <label><input type="checkbox" name="genre" value="Ska"> Ska</label>
+              <label><input type="checkbox" name="genre" value="Emo"> Emo</label>
+              <label><input type="checkbox" name="genre" value="Industrial"> Industrial</label>
+              <label><input type="checkbox" name="genre" value="Soundtrack"> Soundtrack</label>
+              <label><input type="checkbox" name="genre" value="Dubstep"> Dubstep</label>
+              <label><input type="checkbox" name="genre" value="Lo-fi"> Lo-fi</label>
             </div>
           </div>
 
           <div class="search-input">
-            <div class="dropdown" name="searching_for_instruments" id="instruments-filter">
+            <div class="dropdown" name="search_instruments[]" id="instruments-filter-band">
               <button class="dropbtn-instrument">Select Instruments</button>
               <div class="dropdown-content" id="dropdown-content">
-                      <label><input type="checkbox" name="search_instruments[]" value="Accordion"> Accordion</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Agogo"> Agogo</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Alto Saxophone"> Saxophone (Alto)</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Autoharp"> Autoharp</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Bagpipes"> Bagpipes</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Banjos"> Banjo</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Bass"> Bass</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Bass Clarinet"> Bass Clarinet</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Bass Drum"> Bass Drum</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Bassoon"> Bassoon</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Cajon"> Cajon</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Castanets"> Castanets</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Cello"> Cello</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Clarinet"> Clarinet</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Claves"> Claves</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Conga"> Conga</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Cornet"> Cornet</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Cowbell"> Cowbell</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Djembe"> Djembe</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Didgeridoo"> Didgeridoo</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Drum Machine"> Drum Machine</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Drums"> Drums</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Duduk"> Duduk</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Electric Bass"> Electric Bass</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Electric Guitar"> Electric Guitar</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Electric Keyboard"> Electric Keyboard</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="English Horn"> English Horn</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Erhu"> Erhu</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Flute"> Flute</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="French Horn"> French Horn</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Glockenspiel"> Glockenspiel</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Guitar"> Guitar</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Guiro"> Guiro</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Harp"> Harp</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Hurdy Gurdy"> Hurdy Gurdy</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Jew's Harp"> Jew's Harp</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Kazoo"> Kazoo</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Koto"> Koto</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Kalimba"> Kalimba</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Mandolin"> Mandolin</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Maracas"> Maracas</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Marimba"> Marimba</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Melodica"> Melodica</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Mountain Dulcimer"> Mountain Dulcimer</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Oboe"> Oboe</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Piano"> Piano</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Pan Flute"> Pan Flute</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Percussion"> Percussion</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Piccolo"> Piccolo</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Recorder"> Recorder</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Saxophone"> Saxophone</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Saxophone (Baritone)"> Saxophone (Baritone)</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Saxophone (Tenor)"> Saxophone (Tenor)</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Shakuhachi"> Shakuhachi</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Steel Drum"> Steel Drum</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Sitar"> Sitar</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Synthesizer (Analog)"> Synthesizer (Analog)</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Synthesizer (Digital)"> Synthesizer (Digital)</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Tambourine"> Tambourine</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Timpani"> Timpani</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Triangle"> Triangle</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Trumpet"> Trumpet</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Trombone"> Trombone</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Tuba"> Tuba</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Ukulele"> Ukulele</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Vibraphone"> Vibraphone</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Viola"> Viola</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Violin"> Violin</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Wooden Flute"> Wooden Flute</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Xylophone"> Xylophone</label>
-                      <label><input type="checkbox" name="search_instruments[]" value="Zither"> Zither</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="accordion"> Accordion</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="agogo"> Agogo</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="alto saxophone"> Saxophone (Alto)</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="autoharp"> Autoharp</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="bagpipes"> Bagpipes</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="banjos"> Banjo</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="bass"> Bass </label>
+                      <label><input type="checkbox" name="search_instruments[]" value="bass clarinet"> Bass Clarinet</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="bass drum"> Bass Drum</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="bass guitar"> Bass Guitar</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="bassoon"> Bassoon</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="cajon"> Cajon</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="castanets"> Castanets</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="cello"> Cello</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="clarinet"> Clarinet</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="claves"> Claves</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="conga"> Conga</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="cornet"> Cornet</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="cowbell"> Cowbell</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="djembe"> Djembe</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="didgeridoo"> Didgeridoo</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="drum Machine"> Drum Machine</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="drums"> Drums</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="duduk"> Duduk</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="electric Bass"> Electric Bass</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="electric Guitar"> Electric Guitar</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="electric Keyboard"> Electric Keyboard</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="english Horn"> English Horn</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="erhu"> Erhu</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="flute"> Flute</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="french Horn"> French Horn</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="glockenspiel"> Glockenspiel</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="guitar"> Guitar</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="guiro"> Guiro</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="harp"> Harp</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="hurdy Gurdy"> Hurdy Gurdy</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="jew's Harp"> Jew's Harp</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="kazoo"> Kazoo</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="koto"> Koto</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="kalimba"> Kalimba</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="mandolin"> Mandolin</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="maracas"> Maracas</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="marimba"> Marimba</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="melodica"> Melodica</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="mountain Dulcimer"> Mountain Dulcimer</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="oboe"> Oboe</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="piano"> Piano</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="pan Flute"> Pan Flute</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="percussion"> Percussion</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="piccolo"> Piccolo</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="recorder"> Recorder</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="saxophone"> Saxophone</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="saxophone (Baritone)"> Saxophone (Baritone)</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="saxophone (Tenor)"> Saxophone (Tenor)</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="shakuhachi"> Shakuhachi</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="steel Drum"> Steel Drum</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="sitar"> Sitar</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="synthesizer (analog)"> Synthesizer (Analog)</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="synthesizer (digital)"> Synthesizer (Digital)</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="tambourine"> Tambourine</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="timpani"> Timpani</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="triangle"> Triangle</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="trumpet"> Trumpet</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="trombone"> Trombone</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="tuba"> Tuba</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="ukulele"> Ukulele</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="vibraphone"> Vibraphone</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="viola"> Viola</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="violin"> Violin</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="wooden Flute"> Wooden Flute</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="xylophone"> Xylophone</label>
+                      <label><input type="checkbox" name="search_instruments[]" value="zither"> Zither</label>
 
                   </div>
               </div>
@@ -177,80 +178,82 @@
             <input type="text" id="location-filter" name="address" placeholder="Location" class="form-control filter-input">
           </div>
           <div class="search-input">
-            <div class="dropdown" name="instruments" id="instruments-filter">
+            <div class="dropdown" name="instruments" id="instruments-filter-band">
               <button  class="dropbtn-instrument">Select Instruments</button>
               <div class="dropdown-content" id="dropdown-content">
-                <label><input type="checkbox" name="instruments[]" value="Accordion"> Accordion</label>
-                <label><input type="checkbox" name="instruments[]" value="Agogo"> Agogo</label>
-                <label><input type="checkbox" name="instruments[]" value="Alto Saxophone"> Saxophone (Alto)</label>
-                <label><input type="checkbox" name="instruments[]" value="Autoharp"> Autoharp</label>
-                <label><input type="checkbox" name="instruments[]" value="Bagpipes"> Bagpipes</label>
-                <label><input type="checkbox" name="instruments[]" value="Banjos"> Banjo</label>
-                <label><input type="checkbox" name="instruments[]" value="Bass"> Bass</label>
-                <label><input type="checkbox" name="instruments[]" value="Bass Clarinet"> Bass Clarinet</label>
-                <label><input type="checkbox" name="instruments[]" value="Bass Drum"> Bass Drum</label>
-                <label><input type="checkbox" name="instruments[]" value="Bassoon"> Bassoon</label>
-                <label><input type="checkbox" name="instruments[]" value="Cajon"> Cajon</label>
-                <label><input type="checkbox" name="instruments[]" value="Castanets"> Castanets</label>
-                <label><input type="checkbox" name="instruments[]" value="Cello"> Cello</label>
-                <label><input type="checkbox" name="instruments[]" value="Clarinet"> Clarinet</label>
-                <label><input type="checkbox" name="instruments[]" value="Claves"> Claves</label>
-                <label><input type="checkbox" name="instruments[]" value="Conga"> Conga</label>
-                <label><input type="checkbox" name="instruments[]" value="Cornet"> Cornet</label>
-                <label><input type="checkbox" name="instruments[]" value="Cowbell"> Cowbell</label>
-                <label><input type="checkbox" name="instruments[]" value="Djembe"> Djembe</label>
-                <label><input type="checkbox" name="instruments[]" value="Didgeridoo"> Didgeridoo</label>
-                <label><input type="checkbox" name="instruments[]" value="Drum Machine"> Drum Machine</label>
-                <label><input type="checkbox" name="instruments[]" value="Drums"> Drums</label>
-                <label><input type="checkbox" name="instruments[]" value="Duduk"> Duduk</label>
-                <label><input type="checkbox" name="instruments[]" value="Electric Bass"> Electric Bass</label>
-                <label><input type="checkbox" name="instruments[]" value="Electric Guitar"> Electric Guitar</label>
-                <label><input type="checkbox" name="instruments[]" value="Electric Keyboard"> Electric Keyboard</label>
-                <label><input type="checkbox" name="instruments[]" value="English Horn"> English Horn</label>
-                <label><input type="checkbox" name="instruments[]" value="Erhu"> Erhu</label>
-                <label><input type="checkbox" name="instruments[]" value="Flute"> Flute</label>
-                <label><input type="checkbox" name="instruments[]" value="French Horn"> French Horn</label>
-                <label><input type="checkbox" name="instruments[]" value="Glockenspiel"> Glockenspiel</label>
-                <label><input type="checkbox" name="instruments[]" value="Guitar"> Guitar</label>
-                <label><input type="checkbox" name="instruments[]" value="Guiro"> Guiro</label>
-                <label><input type="checkbox" name="instruments[]" value="Harp"> Harp</label>
-                <label><input type="checkbox" name="instruments[]" value="Hurdy Gurdy"> Hurdy Gurdy</label>
-                <label><input type="checkbox" name="instruments[]" value="Jew's Harp"> Jew's Harp</label>
-                <label><input type="checkbox" name="instruments[]" value="Kazoo"> Kazoo</label>
-                <label><input type="checkbox" name="instruments[]" value="Koto"> Koto</label>
-                <label><input type="checkbox" name="instruments[]" value="Kalimba"> Kalimba</label>
-                <label><input type="checkbox" name="instruments[]" value="Mandolin"> Mandolin</label>
-                <label><input type="checkbox" name="instruments[]" value="Maracas"> Maracas</label>
-                <label><input type="checkbox" name="instruments[]" value="Marimba"> Marimba</label>
-                <label><input type="checkbox" name="instruments[]" value="Melodica"> Melodica</label>
-                <label><input type="checkbox" name="instruments[]" value="Mountain Dulcimer"> Mountain Dulcimer</label>
-                <label><input type="checkbox" name="instruments[]" value="Oboe"> Oboe</label>
-                <label><input type="checkbox" name="instruments[]" value="Piano"> Piano</label>
-                <label><input type="checkbox" name="instruments[]" value="Pan Flute"> Pan Flute</label>
-                <label><input type="checkbox" name="instruments[]" value="Percussion"> Percussion</label>
-                <label><input type="checkbox" name="instruments[]" value="Piccolo"> Piccolo</label>
-                <label><input type="checkbox" name="instruments[]" value="Recorder"> Recorder</label>
-                <label><input type="checkbox" name="search_instruments[]" value="Saxophone"> Saxophone</label>
-                <label><input type="checkbox" name="instruments[]" value="Saxophone (Baritone)"> Saxophone (Baritone)</label>
-                <label><input type="checkbox" name="instruments[]" value="Saxophone (Tenor)"> Saxophone (Tenor)</label>
-                <label><input type="checkbox" name="instruments[]" value="Shakuhachi"> Shakuhachi</label>
-                <label><input type="checkbox" name="instruments[]" value="Steel Drum"> Steel Drum</label>
-                <label><input type="checkbox" name="instruments[]" value="Sitar"> Sitar</label>
-                <label><input type="checkbox" name="instruments[]" value="Synthesizer (Analog)"> Synthesizer (Analog)</label>
-                <label><input type="checkbox" name="instruments[]" value="Synthesizer (Digital)"> Synthesizer (Digital)</label>
-                <label><input type="checkbox" name="instruments[]" value="Tambourine"> Tambourine</label>
-                <label><input type="checkbox" name="instruments[]" value="Timpani"> Timpani</label>
-                <label><input type="checkbox" name="instruments[]" value="Triangle"> Triangle</label>
-                <label><input type="checkbox" name="instruments[]" value="Trumpet"> Trumpet</label>
-                <label><input type="checkbox" name="instruments[]" value="Trombone"> Trombone</label>
-                <label><input type="checkbox" name="instruments[]" value="Tuba"> Tuba</label>
-                <label><input type="checkbox" name="instruments[]" value="Ukulele"> Ukulele</label>
-                <label><input type="checkbox" name="instruments[]" value="Vibraphone"> Vibraphone</label>
-                <label><input type="checkbox" name="instruments[]" value="Viola"> Viola</label>
-                <label><input type="checkbox" name="instruments[]" value="Violin"> Violin</label>
-                <label><input type="checkbox" name="instruments[]" value="Wooden Flute"> Wooden Flute</label>
-                <label><input type="checkbox" name="instruments[]" value="Xylophone"> Xylophone</label>
-                <label><input type="checkbox" name="instruments[]" value="Zither"> Zither</label>
+                <label><input type="checkbox" name="instruments[]" value="accordion"> Accordion</label>
+                <label><input type="checkbox" name="instruments[]" value="agogo"> Agogo</label>
+                <label><input type="checkbox" name="instruments[]" value="alto saxophone"> Saxophone (Alto)</label>
+                <label><input type="checkbox" name="instruments[]" value="autoharp"> Autoharp</label>
+                <label><input type="checkbox" name="instruments[]" value="bagpipes"> Bagpipes</label>
+                <label><input type="checkbox" name="instruments[]" value="banjos"> Banjo</label>
+                <label><input type="checkbox" name="instruments[]" value="bass"> Bass </label>
+                <label><input type="checkbox" name="instruments[]" value="bass clarinet"> Bass Clarinet</label>
+                <label><input type="checkbox" name="instruments[]" value="bass drum"> Bass Drum</label>
+                <label><input type="checkbox" name="instruments[]" value="bass guitar"> Bass Guitar</label>
+                <label><input type="checkbox" name="instruments[]" value="bassoon"> Bassoon</label>
+                <label><input type="checkbox" name="instruments[]" value="cajon"> Cajon</label>
+                <label><input type="checkbox" name="instruments[]" value="castanets"> Castanets</label>
+                <label><input type="checkbox" name="instruments[]" value="cello"> Cello</label>
+                <label><input type="checkbox" name="instruments[]" value="clarinet"> Clarinet</label>
+                <label><input type="checkbox" name="instruments[]" value="claves"> Claves</label>
+                <label><input type="checkbox" name="instruments[]" value="conga"> Conga</label>
+                <label><input type="checkbox" name="instruments[]" value="cornet"> Cornet</label>
+                <label><input type="checkbox" name="instruments[]" value="cowbell"> Cowbell</label>
+                <label><input type="checkbox" name="instruments[]" value="djembe"> Djembe</label>
+                <label><input type="checkbox" name="instruments[]" value="didgeridoo"> Didgeridoo</label>
+                <label><input type="checkbox" name="instruments[]" value="drum Machine"> Drum Machine</label>
+                <label><input type="checkbox" name="instruments[]" value="drums"> Drums</label>
+                <label><input type="checkbox" name="instruments[]" value="duduk"> Duduk</label>
+                <label><input type="checkbox" name="instruments[]" value="electric Bass"> Electric Bass</label>
+                <label><input type="checkbox" name="instruments[]" value="electric Guitar"> Electric Guitar</label>
+                <label><input type="checkbox" name="instruments[]" value="electric Keyboard"> Electric Keyboard</label>
+                <label><input type="checkbox" name="instruments[]" value="english Horn"> English Horn</label>
+                <label><input type="checkbox" name="instruments[]" value="erhu"> Erhu</label>
+                <label><input type="checkbox" name="instruments[]" value="flute"> Flute</label>
+                <label><input type="checkbox" name="instruments[]" value="french Horn"> French Horn</label>
+                <label><input type="checkbox" name="instruments[]" value="glockenspiel"> Glockenspiel</label>
+                <label><input type="checkbox" name="instruments[]" value="guitar"> Guitar</label>
+                <label><input type="checkbox" name="instruments[]" value="guiro"> Guiro</label>
+                <label><input type="checkbox" name="instruments[]" value="harp"> Harp</label>
+                <label><input type="checkbox" name="instruments[]" value="hurdy Gurdy"> Hurdy Gurdy</label>
+                <label><input type="checkbox" name="instruments[]" value="jew's Harp"> Jew's Harp</label>
+                <label><input type="checkbox" name="instruments[]" value="kazoo"> Kazoo</label>
+                <label><input type="checkbox" name="instruments[]" value="koto"> Koto</label>
+                <label><input type="checkbox" name="instruments[]" value="kalimba"> Kalimba</label>
+                <label><input type="checkbox" name="instruments[]" value="mandolin"> Mandolin</label>
+                <label><input type="checkbox" name="instruments[]" value="maracas"> Maracas</label>
+                <label><input type="checkbox" name="instruments[]" value="marimba"> Marimba</label>
+                <label><input type="checkbox" name="instruments[]" value="melodica"> Melodica</label>
+                <label><input type="checkbox" name="instruments[]" value="mountain Dulcimer"> Mountain Dulcimer</label>
+                <label><input type="checkbox" name="instruments[]" value="oboe"> Oboe</label>
+                <label><input type="checkbox" name="instruments[]" value="piano"> Piano</label>
+                <label><input type="checkbox" name="instruments[]" value="pan Flute"> Pan Flute</label>
+                <label><input type="checkbox" name="instruments[]" value="percussion"> Percussion</label>
+                <label><input type="checkbox" name="instruments[]" value="piccolo"> Piccolo</label>
+                <label><input type="checkbox" name="instruments[]" value="recorder"> Recorder</label>
+                <label><input type="checkbox" name="instruments[]" value="saxophone"> Saxophone</label>
+                <label><input type="checkbox" name="instruments[]" value="saxophone (Baritone)"> Saxophone (Baritone)</label>
+                <label><input type="checkbox" name="instruments[]" value="saxophone (Tenor)"> Saxophone (Tenor)</label>
+                <label><input type="checkbox" name="instruments[]" value="shakuhachi"> Shakuhachi</label>
+                <label><input type="checkbox" name="instruments[]" value="steel Drum"> Steel Drum</label>
+                <label><input type="checkbox" name="instruments[]" value="sitar"> Sitar</label>
+                <label><input type="checkbox" name="instruments[]" value="synthesizer (analog)"> Synthesizer (Analog)</label>
+                <label><input type="checkbox" name="instruments[]" value="synthesizer (digital)"> Synthesizer (Digital)</label>
+                <label><input type="checkbox" name="instruments[]" value="tambourine"> Tambourine</label>
+                <label><input type="checkbox" name="instruments[]" value="timpani"> Timpani</label>
+                <label><input type="checkbox" name="instruments[]" value="triangle"> Triangle</label>
+                <label><input type="checkbox" name="instruments[]" value="trumpet"> Trumpet</label>
+                <label><input type="checkbox" name="instruments[]" value="trombone"> Trombone</label>
+                <label><input type="checkbox" name="instruments[]" value="tuba"> Tuba</label>
+                <label><input type="checkbox" name="instruments[]" value="ukulele"> Ukulele</label>
+                <label><input type="checkbox" name="instruments[]" value="vibraphone"> Vibraphone</label>
+                <label><input type="checkbox" name="instruments[]" value="viola"> Viola</label>
+                <label><input type="checkbox" name="instruments[]" value="violin"> Violin</label>
+                <label><input type="checkbox" name="instruments[]" value="wooden Flute"> Wooden Flute</label>
+                <label><input type="checkbox" name="instruments[]" value="xylophone"> Xylophone</label>
+                <label><input type="checkbox" name="instruments[]" value="zither"> Zither</label>
+
               </div>
             </div>
           </div>
