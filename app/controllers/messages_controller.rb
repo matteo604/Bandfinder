@@ -53,8 +53,19 @@ class MessagesController < ApplicationController
   end
 
   def check_updates
-    @new_messages = @chat.messages.where('created_at > ?', 10.seconds.ago)
-    @updated_messages = @chat.messages.where('updated_at > ?', 10.seconds.ago)
+    last_poll = Time.zone.parse(params[:last_poll]) rescue 5.seconds.ago
+
+    @new_messages = @chat.messages
+      .where('created_at > ?', last_poll)
+      .order(created_at: :asc)
+      .distinct
+
+    @updated_messages = @chat.messages
+      .where('updated_at > ?', last_poll)
+      .where('updated_at != created_at')
+      .order(updated_at: :asc)
+      .distinct
+
     render json: {
       new_messages: @new_messages.as_json(only: [:id, :content, :created_at, :user_id], methods: :user_name),
       updated_messages: @updated_messages.as_json(only: [:id, :content], methods: :edited?)
