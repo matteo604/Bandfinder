@@ -7,7 +7,10 @@
         <!-- Band Details Card -->
         <div class="my-band_details_card d-flex flex-column mb-4">
           <h2 class="my-band-details-title">My Band Details</h2>
-          <div class="my-band-detail-item"><i class="fa-solid fa-location-dot band-icon"></i> <%= @band.address %></div>
+          <%= link_to edit_band_path(@band), class: "ms-auto edit-icon-details" do %>
+            <i class="fa-solid fa-pencil user-show-icon"></i>
+          <% end %>
+          <div class="my-band-detail-item mt-3"><i class="fa-solid fa-location-dot band-icon"></i> <%= @band.address %></div>
           <div class="my-band-detail-item"><i class="fa-solid fa-music band-icon"></i> <%= @band.genre %></div>
           <div class="my-band-detail-item"><i class="fa-solid fa-circle-info band-icon"></i> <%= @band.description %></div>
           <div class="my-band-detail-item">
@@ -34,15 +37,11 @@
   <div class="container">
 
     <!-- My Sessions Card -->
-    <div class="my-band_details_card fs-4 d-flex flex-column mt-4 w-100">
-      <h2>Band sessions</h2>
-      <% @band_sessions.each do |band_session| %>
+    <div class="band_details_card fs-4 d-flex flex-column mt-4 w-100">
+      <h2> <%= link_to "Band Sessions", band_band_sessions_path(current_user.band) %></h2>
         <div class="user_details_card fs-4 mx-2">
-          <ul class="fs-4 mb-1 band-session-time">
-            <%= band_session.start_date.strftime('%A, %d %B %Y, %H:%M') %> - <%= band_session.end_date.strftime('%H:%M') %>
-          </ul>
+          <%= @band_sessions.last.start_date.strftime('%d/%m') %> | <%= @band_sessions.last.start_date.strftime('%H:%M') %> - <%= @band_sessions.last.end_date.strftime('%H:%M') %>
         </div>
-      <% end %>
 
       <!-- User Interaction Section -->
       <div class="user-info mt-3">
