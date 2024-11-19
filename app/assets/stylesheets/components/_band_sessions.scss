@@ -1,11 +1,17 @@
 .band_sessions_details_card{
-  border-radius: 1rem;
-  background-color: #b7410e;
-  color: white;
-  padding: 2rem;
-  position: relative;
-  margin-bottom: 10px;
-  margin-top: 10px;
+  background-color: #f7e7ce;
+    border-radius: 5px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+    width: 100%;
+    height: 115px;
+    color: #36454f;
+}
+
+.pipe{
+  font-size: 60px;
+  font-weight: 1;
+  margin-left: -650px;
 }
 
 .page-header{

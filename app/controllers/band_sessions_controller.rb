@@ -36,7 +36,7 @@ class BandSessionsController < ApplicationController
 
   def update
     if @band_session.update(band_session_params)
-      redirect_to @band_session, notice: 'Session was successfully updated.'
+      redirect_to band_band_sessions_path, notice: 'Session was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end

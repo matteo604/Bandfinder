@@ -1,4 +1,4 @@
-<div class="container justify-content-between">
+<div class="container justify-content-between" style="max-width:1000px">
   <div class="page-header">
     <div class="band-nav">
       <div class="container d-flex justify-content-between">
@@ -9,37 +9,39 @@
         <a class="btn btn-primary mt-3 ms-5" href="<%= band_my_band_path(current_user.band)%>" role="button">My band</a>
       </div>
 
-
-
       <div class="container">
         <% @band_sessions.each do |band_session| %>
           <div class="band_sessions_details_card d-flex justify-content-between fs-4 mx-2">
             <div class="container date">
               <ul class="fs-4 mt-2">
-                <%= band_session.start_date.strftime('%d/%m') %>
+                <%= band_session.start_date.strftime('%b') %>
+                <p style="font-size:35px"><%= band_session.start_date.strftime('%d') %></p>
               </ul>
             </div>
-            <div class="container details_group">
+            <div class="pipe">|</div>
+            <div class="details_group">
               <div class="container d-flex justify-content-between">
                 <div class="container session_info">
                   <ul class="fs-4 mt-2">
                     <i class="fa-solid fa-clock" style="color: #0c0d0d;"></i> <%= band_session.start_date.strftime('%H:%M') %> - <%= band_session.end_date.strftime('%H:%M') %>
                   </ul>
+                </div>
+                <div class="container session_status">
                   <div class="container session_members">
                     <ul class="fs-4 mt-2">
                       <i class="fa-solid fa-users" style="color: #0c0d0d;"></i> Members
                     </ul>
                   </div>
                 </div>
-                <div class="container session_status">
-                  <i class="fa-solid fa-spinner" style="color: #0c0d0d;" ></i> Pending
-                </div>
                 <div class="container session_adjust">
-                  <div class="container adjust-only">
-                    <a class="btn mt-3 d-block p-1 bg-white w-50" href="<%= edit_band_band_session_path(@band, band_session) %>" role="button">
+                  <div class="adjust-only">
+                    <a class="btn mt-3 d-block p-1 bg-white w-100" href="<%= edit_band_band_session_path(@band, band_session) %>" role="button">
                       <i class="fa-solid fa-pen-to-square" style="color: #0c0d0d;"></i> Edit
                     </a>
-                    <a class="btn mt-3 d-block p-1 bg-white w-50" href="#" role="button">
+                    <a class="btn mt-3 d-block p-1 bg-white w-100 text-decoration-none"
+                      href="<%= band_band_session_path(@band, band_session) %>"
+                      data-turbo-method="delete"
+                      data-turbo-confirm="Are you sure?">
                       <i class="fa-solid fa-circle-xmark" style="color: #0c0d0d;"></i></i> Cancel
                     </a>
                   </div>
