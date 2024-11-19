@@ -1,30 +1,36 @@
+<<<<<<< HEAD
 
 <div class="container page-header d-flex w-100">
+=======
+<div class="container d-flex w-100">
+>>>>>>> 36e8a49327692bd678ca5fcf847b31671cfc03c0
   <div class="container">
 
     <!-- Band Details Section -->
     <div class="d-block row mt-4">
       <div class="gap-5">
         <!-- Band Details Card -->
-        <div class="band_details_card d-flex flex-column mb-4">
-          <h2 class="band-details-title">Band Details</h2>
-          <div class="band-detail-item"><i class="fa-solid fa-location-dot band-icon"></i> <%= @band.address %></div>
-          <div class="band-detail-item"><i class="fa-solid fa-music band-icon"></i> <%= @band.genre %></div>
-          <div class="band-detail-item"><i class="fa-solid fa-circle-info band-icon"></i> <%= @band.description %></div>
-          <div class="band-detail-item">
+        <div class="my-band_details_card d-flex flex-column mb-4">
+          <h2 class="my-band-details-title">My Band Details</h2>
+          <%= link_to edit_band_path(@band), class: "ms-auto edit-icon-details" do %>
+            <i class="fa-solid fa-pencil user-show-icon"></i>
+          <% end %>
+          <div class="my-band-detail-item mt-3"><i class="fa-solid fa-location-dot band-icon"></i> <%= @band.address %></div>
+          <div class="my-band-detail-item"><i class="fa-solid fa-music band-icon"></i> <%= @band.genre %></div>
+          <div class="my-band-detail-item"><i class="fa-solid fa-circle-info band-icon"></i> <%= @band.description %></div>
+          <div class="my-band-detail-item">
             <i class="fa-solid fa-drum band-icon"></i> We are looking for:
             <%= @band.searching_for_instruments.join(", ") %>
           </div>
-
         </div>
       </div>
     </div>
 
     <!-- Members Card -->
-    <div class="band_details_card d-block fs-4 d-flex flex-column">
+    <div class="my-band_details_card d-block fs-4 d-flex flex-column">
       <h2>Members</h2>
       <% @members.each do |member| %>
-        <%= link_to user_path(member), class: "member-link"  do %>
+        <%= link_to user_path(member), class: "my-band-member-link"  do %>
           <%= member.first_name %> <%= member.last_name %>:
           ( <%= member.instruments.join(", ") %> )
         <% end %>
@@ -37,10 +43,11 @@
     <!-- My Sessions Card -->
     <div class="band_details_card fs-4 d-flex flex-column mt-4 w-100">
       <h2> <%= link_to "Band Sessions", band_band_sessions_path(current_user.band) %></h2>
+      <% if @band_sessions.last %>
         <div class="user_details_card fs-4 mx-2">
           <%= @band_sessions.last.start_date.strftime('%d/%m') %> | <%= @band_sessions.last.start_date.strftime('%H:%M') %> - <%= @band_sessions.last.end_date.strftime('%H:%M') %>
         </div>
-
+      <% end %>
       <!-- User Interaction Section -->
       <div class="user-info mt-3">
         <% if current_user == @band.leader %>

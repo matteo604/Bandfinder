@@ -41,11 +41,15 @@
       </div>
 
       <div class="mb-3">
-    <%= f.input :searching_for_instruments, as: :select, collection: ['Piano', 'Guitar', 'Drums', 'Bass'],
-          input_html: { multiple: true, class: 'form-control edit-band-form' },
+        <%= f.input :searching_for_instruments,
+          input_html: {
+            class: 'form-control new-band-form',
+            placeholder: 'The instruments you are searching for',
+              value: @band.searching_for_instruments.join(', ')
+          },
           label_html: { class: 'form-label' } %>
-    <%= f.error :searching_for_instruments, class: 'text-danger' %>
-  </div>
+      </div>
+      <div class="mb-3">
 
       <div class="mb-3">
         <%= f.label :photo, class: "col-form-label-lg" %>
@@ -54,7 +58,7 @@
       </div>
 
       <div class="text-center">
-        <%= f.submit "Update the band", class: "btn btn-lg mt-3 band-btn" %>
+        <%= f.submit "Update the band", class: "btn-lg mt-3 band-btn" %>
       </div>
 
     <% end %>

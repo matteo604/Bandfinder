@@ -1,0 +1,159 @@
+/* Banner styling for my_band page */
+.my-band-banner {
+  background-size: cover;
+  background-position: center;
+  height: 300px;
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+/* my_band details card styling */
+.my-band_details_card, .my-band_members_list_card {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  background-color: rgba(247, 231, 206, 1);
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  width: 85%;
+  margin: 0 auto;
+}
+
+.my-band_details_card h2,
+.my-band_members_list_card h2 {
+  color: rgb(54, 69, 79);
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.my-band-detail-item,
+.my-band-member-detail-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  color: rgb(54, 69, 79);
+  padding: 8px 0;
+}
+
+/* Member link styling */
+.my-band-member-link {
+  color: rgb(96, 130, 182);
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.3s ease, font-weight 0.3s ease;
+}
+
+.my-band-member-link:hover {
+  color: rgb(54, 69, 79);
+  font-weight: 600;
+}
+
+/* Compact row styling */
+.my-band-compact-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+/* Icon styling */
+.my-band-icon {
+  color: rgb(96, 130, 182);
+  margin-right: 15px;
+}
+
+/* Primary button styling for my_band */
+.my-band-btn-primary {
+  background-color: rgb(96, 130, 182);
+  border: none;
+  transition: background-color 0.3s ease;
+}
+
+.my-band-btn-primary:hover {
+  background-color: rgb(54, 69, 79);
+}
+
+/* Pending requests styling */
+.my-band-pending-requests {
+  margin-top: 20px;
+}
+
+.my-band-pending-requests h3 {
+  font-size: 20px;
+  color: rgb(54, 69, 79);
+  margin-bottom: 10px;
+}
+
+.my-band-pending-requests .my-band-request-card {
+  background-color: rgba(247, 231, 206, 1);
+  border-radius: 5px;
+}
+
+/* Request card styling for my_band */
+.my-band-show-request-card {
+  background-color: rgba(247, 231, 206, 1);
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+/* Success and danger button styling */
+.my-band-pending-requests .my-band-btn-success,
+.my-band-pending-requests .my-band-btn-danger {
+  font-size: 14px;
+}
+
+.band-session-time {
+  font-size: 18px !important;
+  color: rgb(54, 69, 79);
+  padding: 8px 0;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user_details_card ul {
+  text-align: center;
+  margin: 0 auto; /* Falls nötig, zentriert das <ul> zusätzlich */
+}
+
+/* Styling für die band-show-request-card, passend zu den anderen Karten */
+.band-show-request-card {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  padding: 20px;
+  background-color: rgba(247, 231, 206, 1);
+  border-radius: 5px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  font-size: 18px;
+  color: rgb(54, 69, 79);
+}
+
+.band-show-request-card h3 {
+  font-size: 24px;
+  font-weight: bold;
+  color: rgb(54, 69, 79);
+  margin-bottom: 10px;
+}
+
+.band-show-request-card .card-body {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+}
+
+.band-show-request-card .btn-group .btn {
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.edit-icon-details{
+  margin-top: -50px;
+}

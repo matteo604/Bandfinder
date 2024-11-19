@@ -9,7 +9,6 @@ export default class extends Controller {
     "formStatus"
   ];
   connect(){
-    // Initial state setup based on server-side @button_state
     if (this.formStatusTarget.value === "user_search") {
       this.setUserView();
     } else {
@@ -37,7 +36,6 @@ export default class extends Controller {
     this.bandIndexTarget.classList.add("d-none");
     this.userIndexTarget.classList.remove("d-none");
 
-    // Change label classes for active/inactive states
     this.labelLeftTarget.classList.add('label-inactive');
     this.labelLeftTarget.classList.remove('label-active');
     this.labelRightTarget.classList.add('label-active');

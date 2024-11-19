@@ -1,198 +1,229 @@
 /* Chat Container */
 .chat-container {
   max-width: 800px;
-  margin: 0 auto;
+  margin-top: 50px;
+  margin-left: auto;
+  margin-right: auto;
   padding: 20px;
+  background: linear-gradient(to bottom right, rgba(247, 231, 206, 1), rgba(247, 231, 206, 0.8));
+  border-radius: 5px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 /* Chat Title */
 .chat-title {
-  font-size: 2em;
+  font-size: 2.2em;
   text-align: center;
-  margin-top: 30px;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-/* Messages Title Icon Alignment */
-.messages-title {
-  font-size: 1.2em;
-  margin-bottom: 10px;
-  margin-top: 10px;
-  color: #000000;
-  text-align: center;
-  position: relative;
-}
-
-.messages-title i {
-  position: absolute;
-  top: 0;
-  left: -35px; /* Adjusts the icon position to the left */
-}
-
-/* Send Message Title Icon Alignment */
-.send-message-title {
-  font-size: 1.2em;
-  color: #000000;
-  margin-top: 50px;
-  text-align: center;
-  position: relative;
-}
-
-.send-message-title i {
-  position: absolute;
-  top: 0;
-  left: -35px; /* Adjusts the icon position to the left */
+  margin: 30px 0;
+  margin-top: 15px;
+  color: rgb(54, 69, 79);
+  font-weight: 700;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
 }
 
 /* Messages Container */
 .messages-container {
-  max-height: 400px;
+  max-height: 300px;
   overflow-y: auto;
-  padding: 15px;
-  background-color: #f9f9f9;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.9);
   border-radius: 5px;
-  border: 1px solid #ddd;
-  box-shadow: 0 2px 3px 10px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+  border: 1px solid rgba(96, 130, 182, 0.2);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  scrollbar-width: thin;
+  scrollbar-color: rgb(96, 130, 182) rgba(247, 231, 206, 0.5);
+}
+
+.messages-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.messages-container::-webkit-scrollbar-track {
+  background: rgba(247, 231, 206, 0.5);
+  border-radius: 4px;
+}
+
+.messages-container::-webkit-scrollbar-thumb {
+  background-color: rgb(96, 130, 182);
+  border-radius: 4px;
 }
 
 /* Message Cards */
 .message-card {
-  position: relative;
-  padding: 10px 15px;
+  padding: 12px 18px;
   border-radius: 5px;
   word-wrap: break-word;
-  max-width: 70%;
+  max-width: 75%;
   min-width: 250px;
-  display: inline-block;
+  margin-bottom: 15px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  transition: transform 0.2s ease;
 }
 
-/* Current user's message aligned to the right */
+.message-card:hover {
+  transform: translateY(-1px);
+}
+
 .message-card.current-user {
-  background-color: #d1e7dd;
+  background: linear-gradient(135deg, rgb(96, 130, 182), rgba(96, 130, 182, 0.9));
+  color: rgba(247, 231, 206, 1);
   margin-left: auto;
   text-align: right;
 }
 
-/* Other user's message aligned to the left */
 .message-card.other-user {
-  background-color: #f8d7da;
+  background: linear-gradient(135deg, rgb(54, 69, 79), rgba(54, 69, 79, 0.9));
+  color: rgba(247, 231, 206, 1);
   margin-right: auto;
   text-align: left;
 }
 
-/* Message Content Styling */
+/* Message Content */
 .message-content {
-  font-size: 1rem;
-  color: #333;
-  margin-bottom: 10px;
+  color: rgba(247, 231, 206, 1);
+  font-size: 1.1rem;
+  line-height: 1.5;
+  margin-bottom: 8px;
 }
 
-/* Footer of the message (for timestamp and actions) */
+/* Message Footer */
 .message-footer {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  margin-top: 10px;
+  align-items: center;
+  margin-top: 8px;
+  font-size: 0.85rem;
+  opacity: 0.9;
 }
 
-/* Timestamp styling */
+/* Timestamp */
 .message-timestamp {
   font-size: 0.8rem;
-  color: #666;
-  text-align: right;
+  color: rgba(247, 231, 206, 1);
 }
 
-/* Edit and Delete Icons */
+/* Message Actions */
 .message-actions {
   display: flex;
-  gap: 8px;
+  gap: 12px;
 }
 
-.message-actions .edit-message {
-  color: #007bff;
-  text-decoration: none;
-  cursor: pointer;
-}
-
-.message-actions .delete-message {
-  color: #dc3545;
-  text-decoration: none;
-  cursor: pointer;
+.message-actions a {
+  color: rgba(247, 231, 206, 1);
+  transition: color 0.2s ease;
 }
 
 .message-actions a:hover {
-  opacity: 0.8;
+  color: rgba(247, 231, 206, 0.8);
 }
 
-/* Send Message Section */
-.send-message-section {
-  margin-top: 20px;
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-}
-
-/* Input box for typing new messages */
+/* Input Area */
 .message-input {
   width: 100%;
-  height: 60px;
+  min-height: 80px;
+  padding: 15px;
+  border: 2px solid rgba(96, 130, 182, 0.3);
   border-radius: 5px;
-  padding: 10px;
-  resize: none;
-  font-size: 1rem;
-  box-shadow: 0 2px 3px 10px rgba(0, 0, 0, 0.1);
+  background: white;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  margin-bottom: 15px;
+  resize: vertical;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
 }
 
-/* Send Button */
+.message-input:focus {
+  border-color: rgb(96, 130, 182);
+  box-shadow: 0 0 0 3px rgba(96, 130, 182, 0.2);
+  outline: none;
+}
+
+.send-message-title {
+  font-size: 1.2rem;
+  color: rgb(54, 69, 79);
+  font-weight: 700;
+}
+
+.messages-title {
+  font-size: 1.2rem;
+  color: rgb(54, 69, 79);
+  font-weight: 700;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+/* Buttons */
+.send-button, .btn-secondary {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  border: none;
+}
+
 .send-button {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  font-size: 1rem;
-  padding: 8px 15px;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  background: linear-gradient(135deg, rgb(96, 130, 182), rgba(96, 130, 182, 0.9));
+  color: rgba(247, 231, 206, 1);
 }
 
-.send-button i {
-  margin-right: 5px;
-}
-
-/* Hover effect for Send Button */
 .send-button:hover {
-  background-color: #0056b3;
+  background: linear-gradient(135deg, rgba(96, 130, 182, 0.9), rgb(96, 130, 182));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-/* Back Button Styling */
 .btn-secondary {
-  display: flex;
-  align-items: center;
-  font-size: 1rem;
-  padding: 8px 15px;
-  border-radius: 5px;
-  background-color: #6c757d;
-  color: #fff;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  background: linear-gradient(135deg, rgb(54, 69, 79), rgba(54, 69, 79, 0.9));
+  color: rgba(247, 231, 206, 1);
 }
 
-.btn-secondary i {
-  margin-right: 5px;
-}
-
-/* Hover effect for Back Button */
 .btn-secondary:hover {
-  background-color: #5a6268;
+  background: linear-gradient(135deg, rgba(54, 69, 79, 0.9), rgb(54, 69, 79));
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Icons */
+.fas, .far {
+  font-size: 1.1rem;
+}
+
+/* Edited indicator */
+.edited-indicator {
+  font-size: 0.8rem;
+  color: rgba(247, 231, 206, 0.8);
+  font-style: italic;
+}
+
+/* No messages placeholder */
+.no-messages {
+  text-align: center;
+  color: rgb(54, 69, 79);
+  font-style: italic;
+}
+
+.send-message-section {
+  font-size: 1.2rem;
+  color: rgb(54, 69, 79);
+  font-weight: 700;
+  margin-bottom: 15px;
+  margin-top: 15px;
+}
+
+.edited-indicator {
+  font-size: 0.8rem;
+  color: rgba(247, 231, 206, 0.8) !important;
+  font-style: italic;
+}
+
+.back-to-chats {
+  font-size: 14.4px;
+  color: rgba(247, 231, 206, 1);
+  font-weight: 700;
+  margin-top: 15px;
+  margin-bottom: 15px;
 }
