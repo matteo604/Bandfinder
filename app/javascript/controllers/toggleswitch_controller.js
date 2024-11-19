@@ -17,8 +17,6 @@ export default class extends Controller {
   }
 
   toggleContent() {
-    console.log(this.statusTarget.value);
-
     if (this.toggleSwitchTarget.checked) {
       this.toggleMarkersTarget.click()
       this.setUserView();

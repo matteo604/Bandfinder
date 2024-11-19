@@ -28,7 +28,6 @@ class BandsController < ApplicationController
   end
 
   def my_band
-    #@band = current_user.band
     @band = Band.find(params[:band_id])
     @band_sessions = @band.band_sessions
     @band_session = BandSession.new
@@ -38,8 +37,9 @@ class BandsController < ApplicationController
   end
 
   def create
+    @instruments_array = params[:band][:searching_for_instruments].downcase.split(", ")
     @band = Band.new(band_params)
-
+    @band.searching_for_instruments = @instruments_array
     # Set the current user as the leader of the band
     @band.leader = current_user
     if @band.save
@@ -57,11 +57,9 @@ class BandsController < ApplicationController
 
   def update
     @band = Band.find(params[:id])
-    if params[:band][:searching_for_instruments].is_a?(Array)
-      non_blank_instruments = params[:band][:searching_for_instruments].reject(&:blank?).map(&:strip)
-      params[:band][:searching_for_instruments] = non_blank_instruments
-    end
+    @instruments_array = params[:band][:searching_for_instruments].downcase.split(", ")
     if @band.update(band_params)
+      @band.update(searching_for_instruments: @instruments_array)
       redirect_to @band, notice: 'Band was successfully updated.'
     else
       render :edit, alert: 'Band was not updated.'
@@ -80,6 +78,6 @@ class BandsController < ApplicationController
   private
 
   def band_params
-    params.require(:band).permit(:title, :description, :address, :genre, :photo, searching_for_instruments: [])
+    params.require(:band).permit(:title, :description, :address, :genre, :photo, :searching_for_instruments)
   end
 end

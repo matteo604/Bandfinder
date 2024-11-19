@@ -63,7 +63,6 @@ class PagesController < ApplicationController
     address = params[:address]
     @instruments = params[:instruments]
     status = params[:status]
-
     @users = @users.where("first_name ILIKE ?", "%#{first_name}%") if first_name.present?
     @users = @users.where("last_name ILIKE ?", "%#{last_name}%") if last_name.present?
     @users = @users.where("address ILIKE ?", "%#{address}%") if address.present?
@@ -93,7 +92,7 @@ class PagesController < ApplicationController
     @search_instruments = params[:search_instruments]
     @bands = @bands.where("address ILIKE ?", "%#{address}%") if address.present?
     @bands = @bands.where("genre ILIKE ?", "%#{genre}%") if genre.present?
-    @bands = @bands.where("searching_for_instruments @@ ?", "%#{@search_instruments}%") if @search_instruments.present?
+    @bands = @bands.where("searching_for_instruments @> ARRAY[?]::varchar[]", @search_instruments) if @search_instruments.present?
   end
 
   def about
