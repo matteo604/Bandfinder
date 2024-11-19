@@ -31,7 +31,6 @@ class BandsController < ApplicationController
     @band = Band.find(params[:band_id])
     @band_sessions = @band.band_sessions
     @band_session = BandSession.new
-    #@band_session.user = current_user
     @members = @band.members
     @join_requests = @band.join_requests.where(status: "pending", join_type: "user_to_band")
   end

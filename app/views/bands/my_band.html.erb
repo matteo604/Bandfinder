@@ -39,10 +39,11 @@
     <!-- My Sessions Card -->
     <div class="band_details_card fs-4 d-flex flex-column mt-4 w-100">
       <h2> <%= link_to "Band Sessions", band_band_sessions_path(current_user.band) %></h2>
+      <% if @band_sessions.last %>
         <div class="user_details_card fs-4 mx-2">
           <%= @band_sessions.last.start_date.strftime('%d/%m') %> | <%= @band_sessions.last.start_date.strftime('%H:%M') %> - <%= @band_sessions.last.end_date.strftime('%H:%M') %>
         </div>
-
+      <% end %>
       <!-- User Interaction Section -->
       <div class="user-info mt-3">
         <% if current_user == @band.leader %>

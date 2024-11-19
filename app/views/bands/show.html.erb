@@ -27,8 +27,9 @@
         </div>
         <!-- Band Details Card -->
         <div class="band-show-details-card">
-          <div class="band-show-details-header">
-            <h2>Band Details</h2>
+          <div class="band-show-details-header d-flex justify-content-between">
+            <h2><%= @band.title %></h2>
+            <span class="created-at">Created: <%= @band.created_at.strftime("%b %d, %Y") %></span>
             <% if current_user == @band.leader %>
               <%= link_to edit_band_path(@band), class: "ms-auto" do %>
                 <i class="fa-solid fa-pencil band-show-icon"></i>
