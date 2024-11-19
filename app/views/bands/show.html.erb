@@ -1,22 +1,30 @@
 <div class="container">
   <!-- Banner Section -->
-  <div class="band-show-banner" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(<%= asset_path('band-banner.jpg') %>); height: 300px; width: 100%; border-radius: 5px; margin-bottom: 20px;"></div>
+  <div class="band-show-banner"
+       style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url(<%= asset_path('band-banner.jpg') %>);
+              height: 300px;
+              width: 100%;
+              border-radius: 5px;
+              margin-bottom: 20px;">
+  </div>
 
-  <!-- Main Content Container with Flexbox for two columns -->
-  <div class="main-content" style="display: flex; gap: 40px; flex-direction: column; padding: 20px;">
+  <!-- Main Content Container -->
+  <div class="main-content" style="display: grid; grid-template-columns: 8fr 4fr; padding: 20px;">
 
-    <div style="display: flex; gap: 40px; width: 100%;">
-      <!-- Left Column: Band Image and Details -->
+    <!-- Flexbox Area: Left and Right Sections -->
+    <div style="width: 100%;">
+
+      <!-- Left Section: Band Image and Details -->
       <div class="left-section" style="flex: 65%;">
+
         <!-- Band Profile Image -->
         <div class="band-show-profile-image-container" style="width: 250px; margin-bottom: 20px;">
           <% if @band.photo.attached? %>
             <%= image_tag @band.photo, alt: "#{@band.title}", class: "band-show-profile-image" %>
           <% else %>
-            <%= image_tag "default-band-image.jpg", alt: "default band image", class: "band-show-profile-image" %>
+            <%= image_tag "placeholder_band.jpg", alt: "default band image", class: "band-show-profile-image" %>
           <% end %>
         </div>
-
         <!-- Band Details Card -->
         <div class="band-show-details-card">
           <div class="band-show-details-header">
@@ -27,25 +35,28 @@
               <% end %>
             <% end %>
           </div>
+
+          <!-- Band Details Items -->
           <div class="band-show-detail-item">
-            <i class="fa-solid fa-location-dot band-show-icon"></i> <%= @band.address %>
+            <i class="fa-solid fa-location-dot band-show-icon"></i>
+            <%= @band.address %>
           </div>
           <div class="band-show-detail-item">
-            <i class="fa-solid fa-music band-show-icon"></i> <%= @band.genre %>
+            <i class="fa-solid fa-music band-show-icon"></i>
+            <%= @band.genre %>
           </div>
           <div class="band-show-detail-item">
-            <i class="fa-solid fa-circle-info band-show-icon"></i> <%= @band.description %>
+            <i class="fa-solid fa-circle-info band-show-icon"></i>
+            <%= @band.description %>
           </div>
           <div class="band-show-detail-item border-top pt-2">
             <i class="fa-solid fa-drum band-show-icon"></i>
             We are looking for: <%= @band.searching_for_instruments.join(", ") %>
           </div>
         </div>
-      </div>
-    </div> <!-- End Profile Banner -->
+      </div> <!-- End Left Section -->
 
-      <!-- Right Column: Members Card -->
-      <div class="band-show-members-card" style="flex: 35%;">
+      <div class="band-show-members-card mt-5">
         <h2 class="band-show-members-h2">Members</h2>
         <% @members.each do |member| %>
           <div class="band-show-member-item">
@@ -59,21 +70,24 @@
           </div>
         <% end %>
       </div>
-    </div>
+    </div> <!-- End Flexbox Area -->
+    <div class="map" style="width:65vh; height:115%; margin-right:-19px;" data-controller="map" data-map-bandmarkers-value="<%= @markers.to_json %>" data-map-api-key-value="<%= ENV['MAPBOX_API_KEY'] %>"></div>
 
-    <!-- Button Section: Positioned Below Members Card and Right-Aligned -->
-    <div class="button-section">
+  </div> <!-- End Main Content -->
+    <!-- Button Section -->
+    <div class="button-section" style="margin-top: 20px; text-align: right;">
       <% if current_user != @band.leader %>
         <%= button_to 'Message Band Leader', chats_path(chat: { band_leader_id: @band.leader.id }), method: :post, class: "btn btn-primary" %>
       <% end %>
-
       <% if !@band.members.include?(current_user) && !current_user.band_id %>
-        <% if current_user.join_requests.where(band_id: @band.id).length > 0 %>
+        <% if current_user.join_requests.where(band_id: @band.id).exists? %>
           <p>Request already sent</p>
         <% else %>
-          <%= button_to "Request to join #{@band.title}", band_join_requests_path(band_id: @band.id, join_request: { join_type: "user_to_band" }), method: :post, class: "btn btn-primary" %>
+          <%= button_to "Request to join #{@band.title}",
+                        band_join_requests_path(band_id: @band.id, join_request: { join_type: "user_to_band" }),
+                        method: :post,
+                        class: "btn btn-primary" %>
         <% end %>
       <% end %>
     </div>
-  </div>
-</div>
+</div> <!-- End Container -->

@@ -117,29 +117,6 @@
   align-items: center; /* Vertically centers the fields */
 }
 
-/* General button styling */
-button {
-  font-family: Inter, -apple-system, BlinkMacSystemFont, "Apple Color Emoji", "SF Pro", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
-  font-size: 14.4px !important;
-  background-color: rgba(247, 231, 206, 1);
-  color: rgb(96, 130, 182);
-  padding: 5px;
-  border: none !important;
-  border-radius: 4px;
-  text-align: center;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Hover effect for general buttons */
-button:hover {
-  background-color: rgba(247, 231, 206, 0.9);
-  color: rgb(54, 69, 79);
-}
-
 /* Banner styling for band page */
 .band-banner {
   background-size: cover;

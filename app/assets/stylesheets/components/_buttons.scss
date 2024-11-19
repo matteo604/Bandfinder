@@ -29,13 +29,15 @@ button:hover {
 .map-list-button, .filter-button {
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Apple Color Emoji", "SF Pro", "SF Pro Icons", "Helvetica Neue", Helvetica, Arial, sans-serif !important;
   font-size: 14.4px !important;
+  font-weight: normal !important;
   width: 90px !important;
-  background-color: rgba(247, 231, 206, 1);
-  color: rgb(96, 130, 182);
-  padding: 5px ;
+  background-color: rgb(96, 130, 182) !important;
+  color: rgb(247, 231, 206) !important;
+  padding: 5px;
   border: none !important;
   border-radius: 4px;
   text-align: center;
+  height: 32px !important;
   cursor: pointer;
   transition: background-color 0.3s;
 
@@ -46,7 +48,7 @@ button:hover {
 
 
 .map-list-button:hover, .filter-button:hover {
-  background-color: rgb(96, 130, 182);
-  color: rgba(247, 231, 206, 1);
-  transition: background-color 0.3s ease;
+  background-color: rgba(29, 50, 79, 0.8) !important;
+  color: rgba(255, 255, 255, 0.8) !important;
+  transition: color background-color 0.3s ease !important;
 }
