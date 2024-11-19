@@ -202,3 +202,13 @@
 .invisible-placeholder {
   height: 100%;
 }
+
+.edit-details-btn {
+  color: rgb(96, 130, 182);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.edit-details-btn:hover {
+  color: rgb(54, 69, 79);
+}
