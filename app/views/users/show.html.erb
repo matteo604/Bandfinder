@@ -13,7 +13,7 @@
 
     <div class="user-show-details-card-my-page">
       <div class="user-show-details-header">
-        <h2>My Details</h2>
+        <h2><%= @user.first_name %> <%= @user.last_name %></h2>
         <% if current_user == @user %>
            <%= link_to edit_user_path(@user), class: "ms-auto mt-0" do %>
             <i class="fa-solid fa-pencil user-show-icon"></i>
