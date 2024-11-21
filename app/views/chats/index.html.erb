@@ -3,7 +3,7 @@
 
   <% if @chats.any? %>
     <div class="chat-cards-container">
-      <% @chats.uniq(&:band_leader_id).each do |chat| %>
+      <% @chats.each do |chat| %>
         <% if chat.messages.any? %>
           <div class="chat-card compact-card d-flex justify-content-between align-items-center" data-chat-id="<%= chat.id %>">
             <div class="chat-info">
@@ -13,7 +13,13 @@
                 <p><strong>Band:</strong> Not available</p>
               <% end %>
 
-              <p><strong>Band Leader:</strong> <%= "#{chat.band_leader.first_name} #{chat.band_leader.last_name}" %></p>
+              <p><strong>Chat Partner:</strong>
+              <% if current_user.id == chat.band_leader_id %>
+                <%= "#{chat.user.first_name} #{chat.user.last_name}" %>
+              <% else %>
+                <%= "#{chat.band_leader.first_name} #{chat.band_leader.last_name}" %>
+              <% end %>
+            </p>
 
               <p><strong>Last Activity:</strong>
                 <%= chat.messages.order(:created_at).last.created_at.strftime("%d %b %Y %H:%M") %>

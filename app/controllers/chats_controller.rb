@@ -54,7 +54,7 @@ class ChatsController < ApplicationController
       end
 
       # find or initialize a chat between the current user and the band leader
-      @chat = Chat.find_or_initialize_by(user_id: [current_user.id, @band_leader.id].min, band_leader_id: [current_user.id, @band_leader.id].max)
+      @chat = Chat.find_or_initialize_by(user_id: current_user.id, band_leader_id: params[:chat][:band_leader_id].to_i, chat_id: generate_chat_id(params[:chat][:band_leader_id], params[:chat][:user_id]))
 
     elsif params[:chat].present? && params[:chat][:user_id].present?
       @user = User.find_by(id: params[:chat][:user_id]) # find the user based on the user_id parameter
@@ -64,7 +64,7 @@ class ChatsController < ApplicationController
       end
 
       # find or initialize a chat between the current user and the other user
-      @chat = Chat.find_or_initialize_by(user_id: [current_user.id, @user.id].min, band_leader_id: [current_user.id, @user.id].max)
+      @chat = Chat.find_or_initialize_by(user_id: current_user.id, band_leader_id: params[:chat][:band_leader_id].to_i, chat_id: generate_chat_id(params[:chat][:band_leader_id], params[:chat][:user_id]))
     else
       # if neither band_leader_id or user_id is provided
       redirect_to chats_path, alert: 'Unable to create chat. Missing required parameters.'
@@ -120,9 +120,14 @@ class ChatsController < ApplicationController
 
   private
 
+  def generate_chat_id(user_id1, user_id2)
+    return "#{[user_id1.to_i, user_id2.to_i].min}-#{[user_id1.to_i, user_id2.to_i].max}"
+  end
+
   def set_chat
     @chat = Chat.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     redirect_to chats_path, alert: 'Chat does not exist.'
   end
+
 end
