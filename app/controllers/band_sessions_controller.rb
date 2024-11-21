@@ -5,6 +5,8 @@ class BandSessionsController < ApplicationController
     @band_sessions = BandSession.all
     @band = Band.find(params[:band_id])
     @band_session = @band.band_sessions
+    @band = current_user.band
+    @members = @band.members
   end
 
   def show

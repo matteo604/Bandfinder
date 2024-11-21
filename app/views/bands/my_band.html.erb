@@ -38,10 +38,11 @@
 
     <!-- My Sessions Card -->
     <div class="band_details_card fs-4 d-flex flex-column mt-4 w-100">
-      <h2><%= link_to "Band Sessions", band_band_sessions_path(current_user.band) %></h2>
+      <h2><%= link_to "Band Sessions", band_band_sessions_path(current_user.band), style:"text-decoration: none; color: #36454f; font-size: 24px; font-weight: bold;" %></h2>
       <% if @band_sessions.last %>
-        <div class="user_details_card fs-4 mx-2">
-          <%= @band_sessions.last.start_date.strftime('%d/%m') %> | <%= @band_sessions.last.start_date.strftime('%H:%M') %> - <%= @band_sessions.last.end_date.strftime('%H:%M') %>
+        <div class="user_details_card fs-4 mx-2" style="color: #36454f">
+          <i class="fa-regular fa-calendar-check" style="color: #36454f"></i>
+          <%= @band_sessions.last.start_date.strftime('%d/%b') %> | <%= @band_sessions.last.start_date.strftime('%H:%M %#p') %> - <%= @band_sessions.last.end_date.strftime('%H:%M %#p') %>
         </div>
       <% end %>
       <!-- User Interaction Section -->
