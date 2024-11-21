@@ -92,7 +92,7 @@
 }
 
 /* Search input styling */
-#address-filter {
+#address-filter, #title-filter {
   background-color: rgba(247, 231, 206, 1);
   color: rgb(54, 69, 79);
   font-size: 14.4px;
@@ -106,7 +106,7 @@
 }
 
 /* Hover effect for search input */
-#address-filter:hover {
+#address-filter:hover, #title-filter:hover {
   background-color: rgba(247, 231, 206, 0.9);
 }
 

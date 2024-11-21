@@ -35,6 +35,9 @@
         <!-- Band Form Section -->
         <div data-toggleswitch-target="bandForm" class="d-flex align-items-center <%= "d-none" if @button_state %>" style="gap: 10px;">
           <div class="search-input">
+            <input type="text" id="title-filter" name="title" placeholder="Search name" class="form-control filter-input">
+          </div>
+          <div class="search-input">
             <input type="text" id="address-filter" name="band_address" placeholder="Search location" class="form-control filter-input">
           </div>
           <div class="dropdown" id="genre-filter">

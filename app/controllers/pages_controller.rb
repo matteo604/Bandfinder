@@ -87,9 +87,11 @@ class PagesController < ApplicationController
   end
 
   def filter_band_search
+    title = params[:title]
     address = params[:band_address]
     genre = params[:genre]
     @search_instruments = params[:search_instruments]
+    @bands = @bands.where("title ILIKE ?", "%#{title}%") if title.present?
     @bands = @bands.where("address ILIKE ?", "%#{address}%") if address.present?
     @bands = @bands.where("genre ILIKE ?", "%#{genre}%") if genre.present?
     @bands = @bands.where("searching_for_instruments @> ARRAY[?]::varchar[]", @search_instruments) if @search_instruments.present?
