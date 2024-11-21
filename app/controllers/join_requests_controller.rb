@@ -28,6 +28,7 @@ class JoinRequestsController < ApplicationController
     if @join_request.save
       add_member(@join_request.user_id)
       redirect_to user_join_requests_path(@join_request.user), notice: 'Join request accepted.'
+      @join_request.user.join_requests.where(status: "pending").destroy_all
     else
       redirect_to band_join_requests_path(@join_request.band), alert: 'Unable to accept request.'
     end

@@ -148,6 +148,8 @@
   min-height: 150px; /* Reduces height to 75% of original */
   margin-top: 30px;
   min-width: 175px;
+  max-height: 325px;
+  overflow-y: auto;
 }
 
 .user-show-pending-requests p.text-muted {
