@@ -491,7 +491,7 @@ puts 'Creating bands...'
 band1 = Band.create!(
   title: 'Metal Band',
   description: 'A metal band.',
-  address: 'Paris',
+  address: 'Rue de Rivoli, Paris',
   genre: 'Metal',
   leader_id: jane.id,
   searching_for_instruments: ["guitar", "piano"]
@@ -587,7 +587,7 @@ band5.photo.attach(
 band6 = Band.create!(
   title: 'Folk Harmonies',
   description: 'A folk band with rich harmonies.',
-  address: 'New York',
+  address: 'Avenue des Champs-Élysées, Paris',
   genre: 'Folk',
   leader_id: frank.id,
   searching_for_instruments: ["acoustic guitar", "banjo"]
@@ -623,7 +623,7 @@ band7.photo.attach(
 band8 = Band.create!(
   title: 'Hip Hop Crew',
   description: 'A hip hop and rap group.',
-  address: 'Lisbon',
+  address: 'Rue Montmartre, Paris',
   genre: 'Hip Hop',
   leader_id: hank.id,
   searching_for_instruments: ["turntables", "microphone"]
@@ -641,7 +641,7 @@ band8.photo.attach(
 band9 = Band.create!(
   title: 'Classical Ensemble',
   description: 'A classical music group.',
-  address: 'Vienna',
+  address: 'Boulevard Saint-Germain, Paris',
   genre: 'Classical',
   leader_id: ivy.id,
   searching_for_instruments: ["violin", "cello"]
@@ -678,7 +678,7 @@ band10.photo.attach(
 band11 = Band.create!(
   title: 'Lo-Fi creator',
   description: 'An old Lo-Fi band.',
-  address: 'Seville',
+  address: 'Rue du Faubourg Saint-Antoine, Paris',
   genre: 'Lo-fi',
   leader_id: lukas.id,
   searching_for_instruments: ["drums", "bass"]
