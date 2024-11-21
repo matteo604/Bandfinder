@@ -1,13 +1,15 @@
-<%= simple_form_for [@band, @band_session], data: { controller: 'datepicker' } do |f| %>
-  <div class="form-group">
-    <%= f.label :start_date, "Start Date", class: "form-label" %>
-    <%= f.input :start_date, label: false, as: :string, input_html: { class: "form-control custom-input", type: "datetime-local", data: { flatpickr_target: "startDate" }, id: 'check-in' } %>
-  </div>
+<div class="my-band_details_card" style="margin-top: 70px; width:30%">
+  <%= simple_form_for [@band, @band_session], data: { controller: 'datepicker' } do |f| %>
+    <div class="form-group">
+      <%= f.label :start_date, "Start Date", class: "form-label" %>
+      <%= f.input :start_date, label: false, as: :string, input_html: { class: "form-control custom-input", type: "datetime-local", data: { flatpickr_target: "startDate" }, id: 'check-in' } %>
+    </div>
 
-  <div class="form-group">
-    <%= f.label :end_date, "End Date", class: "form-label" %>
-    <%= f.input :end_date, label: false, as: :string, input_html: { class: "form-control custom-input", type: "datetime-local", data: { flatpickr_target: "endDate" }, id: 'check-out' } %>
-  </div>
+    <div class="form-group">
+      <%= f.label :end_date, "End Date", class: "form-label" %>
+      <%= f.input :end_date, label: false, as: :string, input_html: { class: "form-control custom-input", type: "datetime-local", data: { flatpickr_target: "endDate" }, id: 'check-out' } %>
+    </div>
 
-  <%= f.submit 'Schedule your band session', class: "btn custom-submit-button" %>
-<% end %>
+    <%= f.submit 'Schedule your band session', class: "btn custom-submit-button" %>
+  <% end %>
+</div>
