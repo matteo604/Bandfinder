@@ -26,10 +26,7 @@
                 <% if message.user_id == current_user.id %>
                   Me:
                 <% else %>
-                  <%= message.user.first_name %> <!-- Display sender's first name -->
-                  <% if message.user.band.present? %>
-                    (<%= message.user.band.title %>) <!-- Display band title if available -->
-                  <% end %>:
+                  <%= message.user.first_name %> <!-- Display sender's first name -->:
                 <% end %>
               </strong>
 
