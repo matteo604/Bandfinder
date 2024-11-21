@@ -37,10 +37,17 @@
       </div>
 
       <!-- Instruments section -->
-      <div class="user-show-detail-item border-top pt-2">
+      <div class="user-show-detail-item <%= "border-top" if !@user.band_id%>">
         <i class="fa-solid fa-drum user-show-icon"></i>
-        <%= @user.instruments.join(", ") %>
+        <%= @user.instruments.join(", ")%>
       </div>
+
+        <%if @user.band_id %>  <!-- member -->
+        <div class="user-show-detail-item border-top pt-2">
+          <i class="fa-duotone fa-solid fa-people-group user-show-icon"></i>
+          Member of: <%= link_to "#{@user.band.title}", band_path(@user.band), class: "band-show-member-link"  %>
+        </div>
+        <% end %>
 
       <!-- "Member since" text positioned at the bottom right inside the card -->
       <span class="member-since">Member since: <%= @user.created_at.strftime("%b %d, %Y") %></span>
