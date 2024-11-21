@@ -1,3 +1,4 @@
+<div class="container page-header d-flex w-100">
 <div class="container d-flex w-100">
   <div class="container">
 
@@ -20,7 +21,6 @@
         </div>
       </div>
     </div>
-
 
     <!-- Members Card -->
     <div class="my-band_details_card d-block fs-4 d-flex flex-column">
@@ -83,6 +83,8 @@
       </div>
 
     </div>
+
+    <!-- Join requests Card -->
     <div class="container my-4 band-show-request-card">
       <h3 class="simple-heading">Pending Join Requests</h3>
       <% if @join_requests.any? %>
@@ -106,6 +108,5 @@
         <p class="text-muted">No pending requests at the moment.</p>
       <% end %>
     </div>
-
   </div>
 </div>

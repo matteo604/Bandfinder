@@ -26,10 +26,10 @@ Rails.application.routes.draw do
     end
     resources :chats, only: [:new, :create]
     resources :reviews, only: [:new, :create, :index]
-    resources :band_sessions, only: [:index, :show, :new, :create, :edit, :update]
+    resources :band_sessions, only: [:index, :show, :new, :create, :edit, :update, :destroy]
   end
 
-  resources :band_sessions, only: [:show, :destroy]  do # do we need this lonly route without the band id?? to be checked
+  resources :band_sessions, only: [:show]  do # do we need this lonly route without the band id?? to be checked
     resources :applications, only: [:create]
   end
 
