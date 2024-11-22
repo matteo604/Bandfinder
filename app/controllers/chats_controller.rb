@@ -13,7 +13,7 @@ class ChatsController < ApplicationController
                                         .order('updated_at DESC')
 
     # combine both lists to display chats with unread messages first, followed by the rest
-    @chats = @chats_with_unread_messages + @chats_without_unread_messages
+    @chats = (@chats_with_unread_messages + @chats_without_unread_messages).uniq
   end
 
   def show
